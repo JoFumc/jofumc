@@ -27,7 +27,7 @@ CSSOBJS=$(CSSSRCS:%.css.in=%.css)
 JSSRCS=$(wildcard *.js.in)
 JSOBJS=$(JSSRCS:%.js.in=%.js)
 
-IMAGES=$(wildcard *.gif) $(wildcard *.png) $(wildcard *.jpg)
+IMAGES=$(wildcard *.gif) $(wildcard *.png) $(wildcard *.jpg) $(wildcard *.ico)
 
 OBJS=$(PHPOBJS) $(JSOBJS) $(HTMLOBJS) $(CSSOBJS)
 
