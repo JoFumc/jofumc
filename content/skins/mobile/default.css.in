@@ -1,9 +1,11 @@
+/* This is a comment */
 body {
   font-family:sans-serif;
   font-size:11pt;
   background: #FFFFFF url('/skins/default/gradient.png') repeat-x;
   padding:0px;
   margin:0px;
+flob:dflkj
 }
 
 #skin-default-header {
