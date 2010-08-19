@@ -1,0 +1,6 @@
+<?php
+if (isset($_COOKIE["jof-skin"]))
+    require("skins/".$_COOKIE["jof-skin"]."/block-header.php");
+else
+    require("skins/default/block-header.php");
+?>

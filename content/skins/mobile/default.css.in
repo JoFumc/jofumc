@@ -1,0 +1,13 @@
+body {
+  font-family:sans-serif;
+  font-size:11pt;
+  background: #FFFFFF url('/skins/default/gradient.png') repeat-x;
+  padding:0px;
+  margin:0px;
+}
+
+#skin-default-header {
+display:block;
+width:100%;
+border-bottom: 1px solid white;
+}

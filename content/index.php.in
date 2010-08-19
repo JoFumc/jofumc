@@ -1,0 +1,18 @@
+<?php
+require("blocks/core/block-html-head.php");
+require("blocks/core/block-header.php");
+require("blocks/core/block-nav.php");
+if (!isset($_COOKIE["jof-session-id"]))
+{
+  require("blocks/core/block-login.php");
+}
+else
+{
+  require("blocks/core/block-content.php");
+}
+require("blocks/core/block-footer.php");
+require("blocks/core/block-html-foot.php");
+?>
+  </body>
+</html>
+
