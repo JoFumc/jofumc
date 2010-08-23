@@ -1,7 +1,15 @@
 <div id="top-nav-div">
 <ul class="top-nav">
-  <li class="top-nav"><a class="top-nav" href="/">Refresh</a></li>
-  <li class="top-nav"><a class="top-nav" href="/">Upload</a></li>
-  <li class="top-nav"><a class="top-nav" href="/">Help</a></li>
+<li class="top-nav"><a class="top-nav" href="/">Home</a></li>
+<li class="top-nav"><a class="top-nav" href="/about.php">About Us</a></li>
+<li class="top-nav"><a class="top-nav" href="/vision.php">Our Vision</a></li>
+<li class="top-nav"><a class="top-nav" href="/programs.php">Programs</a></li>
+<li class="top-nav"><a class="top-nav" href="/worship.php">Worship</a></li>
+<?php
+if (!isset($_COOKIE["jof-session-id"]))
+{
+   print '<li class="top-nav"><a class="top-nav" href="/login.php">Login</a></li>';
+}
+?>
 </ul>
 </div>

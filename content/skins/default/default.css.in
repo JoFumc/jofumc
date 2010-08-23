@@ -1,7 +1,7 @@
 body {
 font-family:sans-serif;
 font-size:11pt;
-background: #FFFFFF url('/skins/default/gradient.png') repeat-x;
+background: #FFFFFF url('/skins/default/gradient_navy.png') repeat-x;
 padding:0px 0px 0px 0px;
 margin:0px 0px 0px 0px;
 }
@@ -58,13 +58,15 @@ a.top-nav {
 padding-left: 4px;
 padding-right: 4px;
 color:#FFF;
-background-color:#FE4110;
+/*background-color:#FE4110;*/
+      background-color:#F00;
 text-decoration: none;
 height: 16px;
 }
 
 a.top-nav:hover, li.top-nav:hover {
-color:#FE4110;
+/*color:#FE4110;*/
+color:#F00;
 background-color:#FFF;
 text-decoration: none;
 }
