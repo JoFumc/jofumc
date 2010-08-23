@@ -9,7 +9,7 @@
 firstrule: all
 PROJECT=jofrr
 PROJECT_ROOT=../..
-SUBDIRS=rmn umc.org
+SUBDIRS=rmn umc.org misc
 
 ##
 ## Section 2: includes
