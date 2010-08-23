@@ -5,16 +5,17 @@ if (isset($_COOKIE["jof-skin"]))
 else
     include("skins/default/block-footer-pre.php");
 ?>
-<div id="footer-div">
+<div id="footer-div" class="content-wide-div">
 <ul class="footer-nav">
 <!-- Reference links -->
-<li class="footer-nav-ref"><a class="footer-nav" href="http://www.rmnetwork.org"><img class="frameless" src="/external/rmn/RMNIcon_32.png"/></a></li>
+<li class="footer-nav-ref"><a class="footer-nav" href="http://www.rmnetwork.org"><img class="frameless" src="/external/rmn/RMNIcon_32x32_white.png"/></a></li>
+<li class="footer-nav-ref"><a class="footer-nav" href="http://www.umc.org"><img class="frameless" src="/external/umc.org/cross_and_flame_32x32.png"/></a></li>
 <!-- External links -->
 <li class="footer-nav-extern"><a class="footer-nav" href="http://www.facebook.com/group.php?gid=59128008383"><img class="frameless" src="/external/misc/Facebook_32x32.png"/></a></li>
 <li class="footer-nav-extern"><a class="footer-nav" href="http://www.twitter.com/JOFUMC"><img class="frameless" src="/external/misc/Twitter_32x32.png"/></a></li>
 </ul>
 </div>
-<div id="copyright-div"><span class="footer-text">Copyright &copy; 2010 Journey Of Faith UMC</span></div>
+<div id="copyright-div" class="content-wide-div"><span class="footer-text">Copyright &copy; 2010 Journey Of Faith UMC</span></div>
 <?php
 // If the skin has post-content setup, include it here.
 if (isset($_COOKIE["jof-skin"]))
