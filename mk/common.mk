@@ -123,7 +123,14 @@ endif
 # Tool for installing to a local filesystem
 # Usage: TOOL_INSTALL <object> <octal permissions> <dir>
 define TOOL_INSTALL
-        (command_line="if [ ! -d $(3) ] ; then mkdir -p $(3) ; fi; cp $(1) $(3)/`basename $(1)` ; chmod $(2) $(3)/`basename $(1)`" ; echo "[ INSTALL ] `basename $(1)` --> $(notdir $(3))" $(SUPPRESS_TAG) ; echo "$$command_line" $(SUPPRESS_RUN) ; sh -c "$$command_line" $(SUPRESS_RUN));
+        (command_line="if [ ! -d $(3) ] ; then mkdir -p $(3) ; fi; cmp -s $(1) $(3)/`basename $(1)` || cp $(1) $(3)/`basename $(1)` ; chmod $(2) $(3)/`basename $(1)`" ; echo "[ INSTALL ] `basename $(1)` --> $(notdir $(3))" $(SUPPRESS_TAG) ; echo "$$command_line" $(SUPPRESS_RUN) ; sh -c "$$command_line" $(SUPRESS_RUN));
+endef
+
+# Tool for publishsing to a remote filesystem
+# NOTE: Target DIR _must_ exist
+# Usage: TOOL_PUBLISH <object> <published_object>
+define TOOL_PUBLISH
+        (command_line="if [ ! -d $(dir $(2)) ] ; then mkdir -p $(dir $(2)) ; fi ; if [ \"$(1)\" -nt \"$(2)\" ] ; then cp \"$(1)\" \"$(2)\" ; touch \"$(2)\" ; echo '+'; fi" ; echo "[ PUBLISH ] `basename $(1)` --> $(dir $(2))" $(SUPPRESS_TAG) ; echo "$$command_line" $(SUPPRESS_RUN) ; sh -c "$$command_line" $(SUPRESS_RUN));
 endef
 
 ##

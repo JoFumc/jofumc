@@ -46,8 +46,8 @@ showcfg::
 	$(DESCEND)
 
 publish::
-	$(SAY_IT) "[PUBLISH]" $(PUBLISH_ROOT)
-	$(DO_IT) cp -auxv $(STAGING_ROOT)/content/* "$(PUBLISH_ROOT)"
+	$(SAY_IT) "[ PUBLISH ] JOFRR staged content --> $(PUBLISH_ROOT)"
+	@$(foreach pub,$(shell find staging/content/ -type f),$(call TOOL_PUBLISH,$(pub),$(PUBLISH_ROOT)/$(subst staging/content/,,$(pub))))
 
 ##
 ## Section 4: Local rules
