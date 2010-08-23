@@ -15,4 +15,3 @@ require("blocks/core/block-html-foot.php");
 ?>
   </body>
 </html>
-

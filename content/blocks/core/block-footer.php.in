@@ -1,3 +1,22 @@
 <?php
-
+// If the skin has pre-content setup, include it here.
+if (isset($_COOKIE["jof-skin"]))
+    include("skins/".$_COOKIE["jof-skin"]."/block-footer-pre.php");
+else
+    include("skins/default/block-footer-pre.php");
+?>
+<div id="footer-div">
+<ul class="footer-nav">
+<!-- External links -->
+<li class="footer-nav-extern"><a class="footer-nav" href="http://www.rmnetwork.org"><img class="frameless" src="/external/rmn/RMNIcon_32.png"/></a></li>
+<!-- Internal links -->
+<li class="footer-nav"><span class="footer-text">Copyright &copy; 2010 Journey Of Faith UMC</span></li>
+</ul>
+</div>
+<?php
+// If the skin has post-content setup, include it here.
+if (isset($_COOKIE["jof-skin"]))
+    include("skins/".$_COOKIE["jof-skin"]."/block-footer-post.php");
+else
+    include("skins/default/block-footer-post.php");
 ?>
