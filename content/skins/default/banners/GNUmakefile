@@ -8,8 +8,8 @@
 ##
 firstrule: all
 PROJECT=jofrr
-PROJECT_ROOT=../../..
-SUBDIRS=banners
+PROJECT_ROOT=../../../..
+SUBDIRS=
 
 ##
 ## Section 2: includes

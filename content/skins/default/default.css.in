@@ -23,7 +23,7 @@ padding:0px;
 display:block;
 width:850px;
 height:100px;
-background: #FFF url('/skins/default/header_bg.png') no-repeat;
+/*background: #FFF url('/skins/default/header_bg.png') no-repeat; */
 margin: 10px auto 0px auto;
 border: 1px solid black;
 }
