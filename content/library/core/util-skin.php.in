@@ -3,11 +3,6 @@
  * util-skin.php -- Skin support functions
  ***************************************************************************/
 /**
- *
- */
-$_Ronfig["skin-path"]="skins";
-
-/**
  * skin_getName() -- Return the name of the currently-selected skin
  */
 function skin_getName()
@@ -32,8 +27,6 @@ function skin_include($filename)
 {
   /* Step 1: build filepath */
   $_skin_inc_file="skins/".skin_getName()."/".$filename;
-
-echo "$_skin_inc_file";
 
   /* Step 2: Include if readable */
   if (is_readable($_skin_inc_file)) {
