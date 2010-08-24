@@ -1,0 +1,19 @@
+<?php
+// If the skin has pre-content setup, include it here.
+require_once("library/core/util-skin.php");
+skin_include("block-partner-nav-pre.php");
+?>
+<div id="partner-div">
+<ul class="partner-nav">
+<!-- Reference links -->
+<li class="partner-nav-ref"><a class="partner-nav" href="http://www.rmnetwork.org"><img class="frameless" src="/external/rmn/RMNIcon_32x32_white.png"/></a></li>
+<li class="partner-nav-ref"><a class="partner-nav" href="http://www.umc.org"><img class="frameless" src="/external/umc.org/cross_and_flame_32x32.png"/></a></li>
+<!-- External links -->
+<li class="partner-nav-extern"><a class="partner-nav" href="http://www.facebook.com/group.php?gid=59128008383"><img class="frameless" src="/external/misc/Facebook_32x32.png"/></a></li>
+<li class="partner-nav-extern"><a class="partner-nav" href="http://www.twitter.com/JOFUMC"><img class="frameless" src="/external/misc/Twitter_32x32.png"/></a></li>
+</ul>
+</div>
+<?php
+// If the skin has post-content setup, include it here.
+skin_include("block-partner-nav-post.php");
+?>
