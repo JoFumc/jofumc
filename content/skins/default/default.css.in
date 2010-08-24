@@ -112,7 +112,15 @@ height: 36px;
 margin: 0px auto 0px auto;
 }
 
-ul.footer-nav {
+/* PARTNER block */
+#partner-div {
+width:850px;
+height: 36px;
+margin: 0px auto 0px auto;
+}
+
+
+ul.partner-nav {
 list-style-type: none;
 list-style-image: none;
 font-weight: normal;
@@ -123,7 +131,7 @@ padding:0px;
 height: 36px;
 }
 
-li.footer-nav-extern {
+li.partner-nav-extern {
 float: right;
 border: 0px;
 margin-left: 1px;
@@ -132,12 +140,21 @@ padding-top: 2px;
 height: 36px;
 }
 
-li.footer-nav-ref {
+li.partner-nav-ref {
 float: left;
 border: 0px;
 margin-left: 4px;
 margin-right: 4px;
 padding-top: 2px;
+height: 36px;
+}
+
+a.partner-nav {
+padding: 0px;
+border: 0px;
+margin: 0px;
+overflow:hidden;
+text-decoration: none;
 height: 36px;
 }
 
@@ -151,11 +168,3 @@ padding:0px;
 text-align: center;
 }
 
-a.footer-nav {
-padding: 0px;
-border: 0px;
-margin: 0px;
-overflow:hidden;
-text-decoration: none;
-height: 36px;
-}
