@@ -8,8 +8,8 @@
 ##
 firstrule: all
 PROJECT=jofrr
-PROJECT_ROOT=../..
-SUBDIRS=common default jofbook mobile
+PROJECT_ROOT=../../..
+SUBDIRS=
 
 ##
 ## Section 2: includes
@@ -20,7 +20,16 @@ include $(PROJECT_ROOT)/mk/common.mk
 ##
 ## Section 2: Objects/targets
 ##
-OBJS=
+PHPSRCS=$(wildcard *.php.in)
+PHPOBJS=$(PHPSRCS:%.php.in=%.php)
+CSSSRCS=$(wildcard *.css.in)
+CSSOBJS=$(CSSSRCS:%.css.in=%.css)
+JSSRCS=$(wildcard *.js.in)
+JSOBJS=$(JSSRCS:%.js.in=%.js)
+
+IMAGES=$(wildcard *.gif) $(wildcard *.png) $(wildcard *.jpg)
+
+OBJS=$(PHPOBJS) $(JSOBJS) $(HTMLOBJS) $(CSSOBJS)
 
 ##
 ## Section 3: Common rules
@@ -42,6 +51,7 @@ clobber:: local-clobber
 install: all
 	$(call TOOL_MKDIR,$(STAGING_ROOT)/$(PROJECT_SUBDIR),0755)
 	@$(foreach obj,$(OBJS),$(call TOOL_INSTALL,$(obj),0644,$(STAGING_ROOT)/$(PROJECT_SUBDIR)))
+	@$(foreach img,$(IMAGES),$(call TOOL_INSTALL,$(img),0644,$(STAGING_ROOT)/$(PROJECT_SUBDIR)))
 	$(DESCEND)
 
 showcfg::
