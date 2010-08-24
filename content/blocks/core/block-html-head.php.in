@@ -6,10 +6,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
     <meta name="robots" content="index,follow" /> 
 <?php
-if (isset($_COOKIE["jof-skin"]))
-    require("skins/".$_COOKIE["jof-skin"]."/block-html-head.php");
-else
-    require("skins/default/block-html-head.php");
+/* Import skinning utilities and per-skin HTML header lines */
+require_once("library/core/util-skin.php");
+skin_include("block-html-head.php");
 ?>
   </head>
   <body>

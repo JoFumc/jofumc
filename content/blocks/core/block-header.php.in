@@ -1,6 +1,5 @@
 <?php
-if (isset($_COOKIE["jof-skin"]))
-    require("skins/".$_COOKIE["jof-skin"]."/block-header.php");
-else
-    require("skins/default/block-header.php");
+/* Headers are entirely skin-dependent */
+require_once("library/core/util-skin.php");
+skin_include("block-header.php");
 ?>

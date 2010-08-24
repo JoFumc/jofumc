@@ -9,7 +9,7 @@
 firstrule: all
 PROJECT=jofrr
 PROJECT_ROOT=..
-SUBDIRS=blocks skins external
+SUBDIRS=library blocks skins external
 
 ##
 ## Section 2: includes
