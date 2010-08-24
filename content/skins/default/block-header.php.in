@@ -1,5 +1,5 @@
 <div id="skin-default-header">
-<img src="/skin/common/logo-jof.png"/>
+<a href="/"><img src="/skin/common/logo-jof.png" class="frameless"/></a>
 </div>
 <script type="text/javascript">
 <?php
