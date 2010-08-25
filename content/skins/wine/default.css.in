@@ -3,9 +3,10 @@
 #define WINESKIN_LIGHT_RED #A84B69
 #define WINESKIN_LIGHTER_RED #B85B79
 #define WINESKIN_BORDER #333
-#define WIDTH_FULL 981px
-#define WIDTH_LEFT 179px
-#define WIDTH_RIGHT 800px;
+#define WIDTH_FULL 880px
+#define WIDTH_LEFT 180px
+#define WIDTH_RIGHT 700px
+#define HEIGHT_CONTENT 400px
 
 /* SECTION 2: The bits */
 body {
@@ -53,7 +54,7 @@ padding:0px;
 #top-nav-div {
 position:relative;
 left:90px;
-margin: 0px auto 0px auto;
+margin: 0px auto -1px auto;
 border-left: 1px solid WINESKIN_BORDER;
 border-right: 1px solid WINESKIN_BORDER;
 border-top: 1px solid WINESKIN_BORDER;
@@ -171,3 +172,32 @@ padding:0px;
 text-align: center;
 }
 
+/* CONTENT PANES */
+.content-wide-div {
+display:block;
+width:WIDTH_FULL;
+margin: 0px auto 0px auto;
+min-height:HEIGHT_CONTENT;
+}
+
+#sidebar-div {
+float:left;
+display:block;
+width:WIDTH_LEFT;
+min-height:HEIGHT_CONTENT;
+border:0px;
+margin:0px;
+padding:0px;
+}
+
+#workarea-div {
+float:right;
+display:block:
+position:static;
+width:WIDTH_RIGHT;
+min-height:HEIGHT_CONTENT;
+border:1px solid WINESKIN_BORDER;
+border-top:0px;
+margin:0px -1px -1px -1px;
+padding:0px;
+}
