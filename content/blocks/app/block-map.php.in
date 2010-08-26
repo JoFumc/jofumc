@@ -1,0 +1,25 @@
+<?php
+// If the skin has pre-content setup, include it here.
+require_once("library/core/util-skin.php");
+skin_include("block-map-pre.php");
+?>
+<div id="block-map-div" class="block-outer-div block-div">
+<div id="block-map-nav-div">
+<ul class="block-nav">
+<li class="block-nav block-nav-selected">Google</li>
+<li class="block-nav">MapQuest</li>
+<li class="block-nav">Yahoo!</li>
+</ul>
+</div>
+<div id="block-map-maps-div">
+<?php
+require_once("blocks/app/block-map-google.php");
+require_once("blocks/app/block-map-mapquest.php");
+require_once("blocks/app/block-map-yahoo.php");
+?>
+</div>
+</div>
+<?php
+// If the skin has post-content setup, include it here.
+skin_include("block-map-post.php");
+?>

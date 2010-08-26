@@ -8,8 +8,8 @@
 ##
 firstrule: all
 PROJECT=jofrr
-PROJECT_ROOT=../..
-SUBDIRS=core app
+PROJECT_ROOT=../../..
+SUBDIRS=
 
 ##
 ## Section 2: includes
