@@ -1,3 +1,8 @@
+<?php
+// If the skin has pre-content setup, include it here.
+require_once("library/core/util-skin.php");
+skin_include("block-nav-pre.php");
+?>
 <div id="top-nav-div">
 <ul class="top-nav">
 <?php
@@ -13,3 +18,7 @@ if (!isset($_COOKIE["jof-session-id"]))
 <li class="top-nav"><a class="top-nav" href="/worship.php">Worship</a></li>
 </ul>
 </div>
+<?php
+// If the skin has post-content setup, include it here.
+skin_include("block-nav-post.php");
+?>
