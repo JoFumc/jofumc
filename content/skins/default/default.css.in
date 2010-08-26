@@ -4,6 +4,9 @@
 #define CONTENT_HEIGHT 400px
 #define JOF_RED #C82020
 
+#define MAP_HEIGHT 350px
+#define MAP_WIDTH  350px
+
 body {
 font-family:sans-serif;
 font-size:11pt;
@@ -19,7 +22,7 @@ display:block;
 width:FULL_WIDTH;
 }
 
-.content-wide-div {
+#content-div {
 display:block;
 width:FULL_WIDTH;
 min-height: CONTENT_HEIGHT;
@@ -204,4 +207,10 @@ margin-top:0px;
 margin-bottom:0px;
 margin-right:0px;
 margin-left: -1px;
+}
+
+/* Maps */
+.embedded-map {
+height:MAP_HEIGHT;
+width:MAP_WIDTH;
 }

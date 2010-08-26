@@ -8,6 +8,9 @@
 #define WIDTH_RIGHT 700px
 #define HEIGHT_CONTENT 400px
 
+#define MAP_HEIGHT 500px
+#define MAP_WIDTH  500px
+
 /* SECTION 2: The bits */
 body {
 color: #333;
@@ -171,7 +174,7 @@ text-align: center;
 }
 
 /* CONTENT PANES */
-.content-wide-div {
+#content-div {
 display:block;
 width:WIDTH_FULL;
 margin: 0px auto 0px auto;
@@ -200,4 +203,10 @@ border-left:1px solid WINESKIN_BORDER;
 border-top:0px;
 margin:0px -1px -1px -1px;
 padding:0px;
+}
+
+/* Maps */
+.embedded-map {
+height:MAP_HEIGHT;
+width:MAP_WIDTH;
 }

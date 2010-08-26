@@ -22,12 +22,16 @@ include $(PROJECT_ROOT)/mk/common.mk
 ##
 PHPSRCS=$(wildcard *.php.page)
 PHPOBJS=$(PHPSRCS:%.php.page=%.php)
+TEMPLATES=$(wildcard *.tmpl)
 
 OBJS=$(PHPOBJS) $(JSOBJS) $(HTMLOBJS)
 
 ##
 ## Section 3: Common rules
 ##
+
+$(OBJS): $(TEMPLATES)
+
 all: $(OBJS)
 	$(DESCEND)
 
