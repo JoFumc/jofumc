@@ -155,7 +155,7 @@ fresh: clean all
 
 %.php.in: %.php.page
 	$(SAY_IT) "[PAGEFRAG]" $@
-	$(DO_IT)cat pre.tmpl $^ post.tmpl > $@
+	$(DO_IT)cat pre.php.tmpl $^ post.php.tmpl > $@
 
 # Pass through preprocessors
 %.html: %.html.in
