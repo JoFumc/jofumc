@@ -48,12 +48,16 @@ padding:0px;
 /* NAV section */
 #top-nav-div {
 float:right;
-margin:0;
-border:1px solid WINESKIN_BORDER;
+border-top:1px solid WINESKIN_BORDER;
+border-left:1px solid WINESKIN_BORDER;
+border-right:1px solid WINESKIN_BORDER;
 border-bottom:0;
-margin:-1px;
+margin-top:-1px;
+margin-left:-1px;
+margin-right:-1px;
 margin-bottom:0;
 background-color:WINESKIN_LIGHT_RED;
+color:white;
 height: 32px;
 width:WIDTH_RIGHT;
 }
@@ -90,7 +94,7 @@ padding-right: 10px;
 padding-top: 8px;
 overflow:hidden;
 color:#FFF;
-/*background-color:WINESKIN_LIGHT_RED;*/
+background-color:WINESKIN_LIGHT_RED;
 text-decoration: none;
 height: 22px;
 display:inline-block;
@@ -186,11 +190,13 @@ padding:0px;
 
 #workarea-div {
 float:right;
-display:block:
+display:block;
 position:static;
 width:WIDTH_RIGHT;
 min-height:HEIGHT_CONTENT;
-border:1px solid WINESKIN_BORDER;
+border-right:1px solid WINESKIN_BORDER;
+border-bottom:1px solid WINESKIN_BORDER;
+border-left:1px solid WINESKIN_BORDER;
 border-top:0px;
 margin:0px -1px -1px -1px;
 padding:0px;

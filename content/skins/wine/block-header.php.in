@@ -11,4 +11,4 @@
 ?>
 <div id="red-bar-spacer"></div>
 <div id="red-bar-content">
-<div id="red-bar-logo"><a href="/"><img class="frameless" src="/skins/wine/logo_header_white.png" style="padding-top:10px;"/></a></div>
+<div id="red-bar-logo"><a href="/" title="Journey of Faith home"><img class="frameless" src="/skins/wine/logo_header_white.png" alt="Journey of Faith home" style="padding-top:10px;"/></a></div>

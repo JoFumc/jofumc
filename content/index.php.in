@@ -7,5 +7,3 @@ require("blocks/core/block-partner-nav.php");
 require("blocks/core/block-footer.php");
 require("blocks/core/block-html-foot.php");
 ?>
-  </body>
-</html>
