@@ -16,24 +16,6 @@ padding:0px 0px 0px 0px;
 margin:0px 0px 0px 0px;
 }
 
-/* Generic content divs */
-.wide-div {
-display:block;
-width:FULL_WIDTH;
-}
-
-#content-div {
-display:block;
-width:FULL_WIDTH;
-min-height: CONTENT_HEIGHT;
-border-left: 1px solid black;
-border-right: 1px solid black;
-border-bottom: 1px solid black;
-border-top: 0;
-margin: 0px auto 0px auto;
-background-color: #FFF;
-color:black;
-}
 
 /* Special images */
 img.frameless {
@@ -183,6 +165,18 @@ text-align: center;
 }
 
 /* toplevel content areas */
+#content-div {
+display:block;
+width:FULL_WIDTH;
+min-height: CONTENT_HEIGHT;
+border-left: 1px solid black;
+border-right: 1px solid black;
+border-bottom: 1px solid black;
+border-top: 0;
+margin: 0px auto 0px auto;
+background-color: #FFF;
+color:black;
+}
 #sidebar-div {
 float:left;
 display:block;
@@ -208,6 +202,16 @@ margin-bottom:0px;
 margin-right:0px;
 margin-left: -1px;
 }
+
+/* Div to force closure of a container div 
+ * with floated children 
+ */
+#content-closure-div {
+clear:right;
+line-height:0;
+height:0;
+}
+
 
 /* Maps */
 .embedded-map {

@@ -177,8 +177,9 @@ text-align: center;
 #content-div {
 display:block;
 width:WIDTH_FULL;
-margin: 0px auto 0px auto;
+margin: 0px auto auto auto;
 min-height:HEIGHT_CONTENT;
+height:auto;
 }
 
 #sidebar-div {
@@ -189,6 +190,7 @@ min-height:HEIGHT_CONTENT;
 border:0px;
 margin:0px;
 padding:0px;
+height:600px;
 }
 
 #workarea-div {
@@ -203,6 +205,15 @@ border-left:1px solid WINESKIN_BORDER;
 border-top:0px;
 margin:0px -1px -1px -1px;
 padding:0px;
+}
+
+/* Div to force closure of a container div 
+ * with floated children 
+ */
+#content-closure-div {
+clear:right;
+line-height:0;
+height:0;
 }
 
 /* Maps */
