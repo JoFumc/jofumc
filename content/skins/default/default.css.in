@@ -2,6 +2,7 @@
 #define SIDEBAR_WIDTH 210px
 #define WORKAREA_WIDTH 640px
 #define CONTENT_HEIGHT 400px
+#define JOF_RED #C82020
 
 body {
 font-family:sans-serif;
@@ -60,7 +61,7 @@ border-left: 1px solid black;
 border-right: 1px solid black;
 border-bottom: 1px solid black;
 /*background-color: #FE4110;*/
-background-color: #F00;
+background-color: JOF_RED;
 height: 16px;
 }
 
@@ -99,14 +100,14 @@ display:inline-block;
 overflow:hidden;
 color:#FFF;
 /*background-color:#FE4110;*/
-background-color:#F00;
+background-color:JOF_RED;
 text-decoration: none;
 height: 16px;
 }
 
 a.top-nav:hover, li.top-nav:hover {
 /*color:#FE4110;*/
-color:#F00;
+color:JOF_RED;
 background-color:#FFF;
 text-decoration: none;
 }
