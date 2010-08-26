@@ -1,0 +1,33 @@
+<div id="map-div">
+
+<!-- Start Mapquest embed -->
+
+<div id="map-div-mapquest">
+<iframe class="embedded-map" marginheight="0" marginwidth="0" scrolling="no" src="http://www.mapquest.com/embed#b/maps/m:map:8:30.559539:-97.605795::::::1:1:::::::::/l::7301+County+Road+110:Round+Rock:TX:78665-7445:US:30.559404:-97.604839:address::1:::/e" frameborder="0"></iframe>
+</div>
+
+<!-- Start Google maps embed -->
+
+<div id="map-div-google">
+<iframe class="embedded-map" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=7301+County+Road+110,+Round+Rock,+TX&amp;sll=37.0625,-95.677068&amp;sspn=52.020054,80.419922&amp;ie=UTF8&amp;hq=&amp;hnear=7301+County+Road+110,+Hutto,+Williamson,+Texas+78634&amp;ll=30.559668,-97.603961&amp;spn=0.051736,0.072956&amp;z=13&amp;iwloc=A&amp;output=embed"></iframe>
+</div>
+
+<!-- Start  Yahoo! maps (API-based) embed -->
+<div id="map-div-yahoo">
+<script type="text/javascript" src="http://api.maps.yahoo.com/ajaxymap?v=3.8&appid=lGTCDzPV34EfbUFG16mcITHnJK.jVKiq8gxWho9zYj8b.hWP2eXBDQukuQ--"></script>
+<div class="embedded-map" id="map-div-yahoo-embed"></div>
+<script type="text/javascript">
+var yloc=new YGeoPoint(30.560,-97.604);
+var ymap=new YMap(document.getElementById('map-div-yahoo-embed'));
+var jofmark=new YMarker(yloc);
+ymap.addTypeControl();
+ymap.addZoomLong();
+ymap.setMapType(YAHOO_MAP_REG);
+ymap.drawZoomAndCenter(yloc,4);
+jofmark.addAutoExpand("Journey of Faith");
+ymap.addOverlay(jofmark);
+</script>
+</div>
+
+
+</div>
