@@ -8,8 +8,8 @@
 ##
 firstrule: all
 PROJECT=jofrr
-PROJECT_ROOT=..
-SUBDIRS=library blocks skins external pages
+PROJECT_ROOT=../../..
+SUBDIRS=
 
 ##
 ## Section 2: includes
@@ -20,8 +20,8 @@ include $(PROJECT_ROOT)/mk/common.mk
 ##
 ## Section 2: Objects/targets
 ##
-PHPSRCS=$(wildcard *.php.in)
-PHPOBJS=$(PHPSRCS:%.php.in=%.php)
+PHPSRCS=$(wildcard *.php.page)
+PHPOBJS=$(PHPSRCS:%.php.page=%.php)
 
 OBJS=$(PHPOBJS) $(JSOBJS) $(HTMLOBJS)
 
@@ -31,20 +31,20 @@ OBJS=$(PHPOBJS) $(JSOBJS) $(HTMLOBJS)
 all: $(OBJS)
 	$(DESCEND)
 
-clean:: local-clean
-	$(DESCEND)
-
 local-clean::
 	@$(foreach cleanee,$(OBJS),$(call TOOL_CLEAN,$(cleanee)))
 
-clobber:: local-clobber
+clean: local-clean
 	$(DESCEND)
 
 local-clobber: local-clean
 
+clobber:: local-clobber
+	$(DESCEND)
+
 install: all
-	$(call TOOL_MKDIR,$(STAGING_ROOT)/$(PROJECT_SUBDIR),0755)
-	@$(foreach obj,$(OBJS),$(call TOOL_INSTALL,$(obj),0644,$(STAGING_ROOT)/$(PROJECT_SUBDIR)))
+	$(call TOOL_MKDIR,$(CONTENT_ROOT),0755)
+	@$(foreach obj,$(OBJS),$(call TOOL_INSTALL,$(obj),0644,$(CONTENT_ROOT)))
 	$(DESCEND)
 
 showcfg::

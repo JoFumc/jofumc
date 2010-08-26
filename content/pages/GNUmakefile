@@ -8,8 +8,8 @@
 ##
 firstrule: all
 PROJECT=jofrr
-PROJECT_ROOT=..
-SUBDIRS=library blocks skins external pages
+PROJECT_ROOT=../..
+SUBDIRS=full
 
 ##
 ## Section 2: includes
@@ -31,16 +31,16 @@ OBJS=$(PHPOBJS) $(JSOBJS) $(HTMLOBJS)
 all: $(OBJS)
 	$(DESCEND)
 
-clean:: local-clean
-	$(DESCEND)
-
 local-clean::
 	@$(foreach cleanee,$(OBJS),$(call TOOL_CLEAN,$(cleanee)))
 
-clobber:: local-clobber
+clean: local-clean
 	$(DESCEND)
 
 local-clobber: local-clean
+
+clobber:: local-clobber
+	$(DESCEND)
 
 install: all
 	$(call TOOL_MKDIR,$(STAGING_ROOT)/$(PROJECT_SUBDIR),0755)

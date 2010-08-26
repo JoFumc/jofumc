@@ -149,13 +149,13 @@ fresh: clean all
 ##
 
 # Wrap contents in template
-%.html.in: %.html.tmpl
+%.html.in: %.html.page
 	$(SAY_IT) "[TEMPLATE]" $@
 	$(DO_IT)cat $(PROJECT_TOPDIR)/root/template.html.in | sed -e 's/TEMPLATE_CONTENTS/$</' > $@
 
-%.php.in: %.php.tmpl
-	$(SAY_IT) "[TEMPLATE]" $@
-	$(DO_IT)cat $(PROJECT_TOPDIR)/root/template.php.in | sed -e 's/TEMPLATE_CONTENTS/$</' > $@
+%.php.in: %.php.page
+	$(SAY_IT) "[PAGEFRAG]" $@
+	$(DO_IT)cat pre.tmpl $^ post.tmpl > $@
 
 # Pass through preprocessors
 %.html: %.html.in
