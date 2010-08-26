@@ -19,29 +19,24 @@ padding:0px 0px 0px 0px;
 margin:0px 0px 0px 0px;
 }
 
-#skin-default-header {
-height:10px;
-}
-
-#red-bar-div {
-position:absolute;
-left:0;
-top:0;
+#red-bar-spacer {
 display:block;
-margin:0 0 0 0;
-background:WINESKIN_RED;
+height:10px;
 width:100%;
-height:42px;
 }
 
 #red-bar-content {
-height: 32px;
-background: url('/skins/wine/logo_header_white.png') repeat-y;
 width:WIDTH_FULL;
-margin: 0 auto 0 auto;
-padding-top:9px;
+height:32px;
+margin:0 auto 0 auto;
 }
 
+#red-bar-logo {
+width:WIDTH_LEFT;
+height:32px;
+float:left;
+margin:auto;
+}
 
 /* Special images */
 img.frameless {
@@ -52,15 +47,14 @@ padding:0px;
 
 /* NAV section */
 #top-nav-div {
-position:relative;
-left:90px;
-margin: 0px auto -1px auto;
-border-left: 1px solid WINESKIN_BORDER;
-border-right: 1px solid WINESKIN_BORDER;
-border-top: 1px solid WINESKIN_BORDER;
-/*background-color: #FE4110;*/
+float:right;
+margin:0;
+border:1px solid WINESKIN_BORDER;
+border-bottom:0;
+margin:-1px;
+margin-bottom:0;
 background-color:WINESKIN_LIGHT_RED;
-height: 30px;
+height: 32px;
 width:WIDTH_RIGHT;
 }
 
@@ -71,7 +65,7 @@ font-weight: bold;
 font-size: 12px;
 margin:0px;
 padding:0px;
-height: 30px;
+height: 32px;
 }
 
 li.top-nav {
@@ -79,7 +73,7 @@ float: right;
 border:0px;
 margin:0px;
 padding:0px;
-height:30px;
+height:32px;
 }
 
 li.top-nav-meta {
@@ -87,7 +81,7 @@ float: right;
 border:0px;
 margin: 0px;
 padding:0px;
-height: 30px;
+height: 32px;
 }
 
 a.top-nav {
