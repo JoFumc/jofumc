@@ -1,11 +1,21 @@
-#define FULL_WIDTH 850px
-#define SIDEBAR_WIDTH 210px
-#define WORKAREA_WIDTH 640px
-#define CONTENT_HEIGHT 400px
+/* SECTION 1: Common values and macros */
+  /* Colors */
 #define JOF_RED #C82020
 
+  /* Dimensions */
+#define WIDTH_FULL     850px /* Overall width */
+#define WIDTH_SIDEBAR  210px /* Left column width */
+#define WIDTH_WORKAREA 640px /* Right workarea width */
+#define WIDTH_APP      460px /*   App area (left workarea) */
+#define WIDTH_MULTIBAR 180px /*   Multibar (right workarea) */
+#define HEIGHT_CONTENT 400px 
+
+  /* App-specific */
 #define MAP_HEIGHT 350px
 #define MAP_WIDTH  350px
+
+/* SECTION 2: Import common CSS */
+#include "../common/default.css.h"
 
 body {
 font-family:sans-serif;
@@ -16,35 +26,18 @@ padding:0px 0px 0px 0px;
 margin:0px 0px 0px 0px;
 }
 
-
-/* Special images */
-img.frameless {
-margin:0px;
-border:0px;
-padding:0px;
-}
-
 #skin-default-header {
 display:block;
-width:FULL_WIDTH;
+width:WIDTH_FULL;
 height:100px;
 /*background: #FFF url('/skins/default/header_bg.png') no-repeat; */
 margin: 10px auto 0px auto;
 border: 1px solid black;
 }
 
-.header-quote {
-width: 200px;
-font-size: 14pt;
-font-style: italic;
-float: right;
-text-align:center;
-padding-right: 10px;
-}
-
 /* NAV section */
 #top-nav-div {
-width:FULL_WIDTH;
+width:WIDTH_FULL;
 margin: 0px auto 0px auto;
 border-left: 1px solid black;
 border-right: 1px solid black;
@@ -56,8 +49,6 @@ height: 16px;
 
 
 ul.top-nav {
-list-style-type: none;
-list-style-image: none;
 font-weight: bold;
 font-size: 12px;
 margin:0px;
@@ -90,7 +81,6 @@ overflow:hidden;
 color:#FFF;
 /*background-color:#FE4110;*/
 background-color:JOF_RED;
-text-decoration: none;
 height: 16px;
 }
 
@@ -98,27 +88,24 @@ a.top-nav:hover, li.top-nav:hover {
 /*color:#FE4110;*/
 color:JOF_RED;
 background-color:#FFF;
-text-decoration: none;
 }
 
 /* FOOTER section */
 #footer-div {
-width:FULL_WIDTH;
+width:WIDTH_FULL;
 height: 36px;
 margin: 0px auto 0px auto;
 }
 
 /* PARTNER block */
 #partner-div {
-width:FULL_WIDTH;
+width:WIDTH_FULL;
 height: 36px;
 margin: 0px auto 0px auto;
 }
 
 
 ul.partner-nav {
-list-style-type: none;
-list-style-image: none;
 font-weight: normal;
 font-size: 10px;
 margin:0px;
@@ -150,14 +137,13 @@ padding: 0px;
 border: 0px;
 margin: 0px;
 overflow:hidden;
-text-decoration: none;
 height: 36px;
 }
 
 #copyright-div {
 font-size:9pt;
 font-weight: normal;
-width: FULL_WIDTH;
+width: WIDTH_FULL;
 margin:0px auto 0px auto;
 border:0px;
 padding:0px;
@@ -167,8 +153,8 @@ text-align: center;
 /* toplevel content areas */
 #content-div {
 display:block;
-width:FULL_WIDTH;
-min-height: CONTENT_HEIGHT;
+width:WIDTH_FULL;
+min-height: HEIGHT_CONTENT;
 border-left: 1px solid black;
 border-right: 1px solid black;
 border-bottom: 1px solid black;
@@ -177,21 +163,20 @@ margin: 0px auto 0px auto;
 background-color: #FFF;
 color:black;
 }
+
 #sidebar-div {
 float:left;
 display:block;
-width:SIDEBAR_WIDTH;
-min-height: CONTENT_HEIGHT;
-border:0px;
-margin:0px;
-padding:0px;
+width:WIDTH_SIDEBAR;
+min-height: HEIGHT_CONTENT;
+PACKED();
 }
 
 #workarea-div {
-float:right;
+float:left;
 display:block;
-width:WORKAREA_WIDTH;
-min-height: CONTENT_HEIGHT;
+width:WIDTH_WORKAREA;
+min-height: HEIGHT_CONTENT;
 padding:0px;
 border-top:0px;
 border-bottom:0px;
@@ -203,15 +188,21 @@ margin-right:0px;
 margin-left: -1px;
 }
 
-/* Div to force closure of a container div 
- * with floated children 
- */
-#content-closure-div {
-clear:right;
-line-height:0;
-height:0;
+#application-div {
+float:left;
+display:block;
+width:WIDTH_APP;
+min-height:HEIGHT_CONTENT;
+PACKED();
 }
 
+#multibar-div {
+float:left;
+display:block;
+width:WIDTH_MULTIBAR;
+min-height: HEIGHT_CONTENT;
+PACKED();
+}
 
 /* Maps */
 #block-map-div {
@@ -230,8 +221,6 @@ width:MAP_WIDTH;
  * Generic block support 
  */
 ul.block-nav {
-list-style-type: none;
-list-style-image: none;
 font-weight: bold;
 font-size: 12px;
 margin:0px;
@@ -269,5 +258,4 @@ a.block-nav:hover, li.block-nav:hover, li.block-nav-selected:hover {
 /*color:#FE4110;*/
 color:JOF_RED;
 background-color:#FFF;
-text-decoration: none;
 }

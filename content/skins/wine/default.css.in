@@ -1,25 +1,33 @@
 /* SECTION 1: Common values and macros */
-#define WINESKIN_RED #983B59
-#define WINESKIN_LIGHT_RED #A84B69
+  /* Colors */
+#define WINESKIN_RED         #983B59
+#define WINESKIN_LIGHT_RED   #A84B69
 #define WINESKIN_LIGHTER_RED #B85B79
 #define WINESKIN_BORDER #333
-#define WIDTH_FULL 880px
-#define WIDTH_LEFT 180px
-#define WIDTH_RIGHT 700px
+
+  /* Dimensions */
+#define WIDTH_FULL     880px /* overall width */
+#define WIDTH_SIDEBAR  180px /* width of primary sidebar */
+#define WIDTH_WORKAREA 700px /* width of workarea */
+#define WIDTH_APP      520px   /* app part of workarea */
+#define WIDTH_MULTIBAR 180px   /* multibar part of workarea */
 #define HEIGHT_CONTENT 400px
 
+  /* App-specific */
 #define MAP_HEIGHT 500px
 #define MAP_WIDTH  500px
 
-/* SECTION 2: The bits */
+/* SECTION 2: Import common CSS */
+#include "../common/default.css.h"
+
+/* SECTION 3: The bits */
 body {
 color: #333;
 font-family:'lucida grande',tahoma,verdana,arial,sans-serif;
 font-size:13px;
 font-weight:normal;
 background: #FFF url('/skins/wine/red_bar.png') repeat-x;
-padding:0px 0px 0px 0px;
-margin:0px 0px 0px 0px;
+PACKED();
 }
 
 #red-bar-spacer {
@@ -35,7 +43,7 @@ margin:0 auto 0 auto;
 }
 
 #red-bar-logo {
-width:WIDTH_LEFT;
+width:WIDTH_SIDEBAR;
 height:32px;
 float:left;
 margin:auto;
@@ -62,12 +70,10 @@ margin-bottom:0;
 background-color:WINESKIN_LIGHT_RED;
 color:white;
 height: 32px;
-width:WIDTH_RIGHT;
+width:WIDTH_WORKAREA;
 }
 
 ul.top-nav {
-list-style-type: none;
-list-style-image: none;
 font-weight: bold;
 font-size: 12px;
 margin:0px;
@@ -98,7 +104,6 @@ padding-top: 8px;
 overflow:hidden;
 color:#FFF;
 background-color:WINESKIN_LIGHT_RED;
-text-decoration: none;
 height: 22px;
 display:inline-block;
 }
@@ -106,21 +111,18 @@ display:inline-block;
 a.top-nav:hover, li.top-nav:hover, li.top-nav-meta:hover {
 background-color:WINESKIN_LIGHTER_RED;
 color:#FFF;
-text-decoration: none;
 }
 
 /* PARTNER section */
 #partner-div {
 display:inline-block;
-width:WIDTH_LEFT;
+width:WIDTH_SIDEBAR;
 height: 36px;
 margin: 0px auto 0px auto;
 border: 1px solid WINESKIN_BORDER;
 }
 
 ul.partner-nav {
-list-style-type: none;
-list-style-image: none;
 font-weight: normal;
 font-size: 10px;
 margin:0px;
@@ -152,7 +154,6 @@ padding: 0px;
 border: 0px;
 margin: 0px;
 overflow:hidden;
-text-decoration: none;
 height: 36px;
 }
 
@@ -185,7 +186,7 @@ height:auto;
 #sidebar-div {
 float:left;
 display:block;
-width:WIDTH_LEFT;
+width:WIDTH_SIDEBAR;
 min-height:HEIGHT_CONTENT;
 border:0px;
 margin:0px;
@@ -194,10 +195,10 @@ height:600px;
 }
 
 #workarea-div {
-float:right;
+float:left;
 display:block;
 position:static;
-width:WIDTH_RIGHT;
+width:WIDTH_WORKAREA;
 min-height:HEIGHT_CONTENT;
 border-right:1px solid WINESKIN_BORDER;
 border-bottom:1px solid WINESKIN_BORDER;
@@ -207,13 +208,25 @@ margin:0px -1px -1px -1px;
 padding:0px;
 }
 
-/* Div to force closure of a container div 
- * with floated children 
- */
-#content-closure-div {
-clear:right;
-line-height:0;
-height:0;
+#application-div {
+float:left;
+display:block;
+width:WIDTH_APP;
+min-height:HEIGHT_CONTENT;
+border:0px;
+margin:0px;
+padding:0px;
+}
+
+#multibar-div {
+float:left;
+display:block;
+width:WIDTH_MULTIBAR;
+min-height:HEIGHT_CONTENT;
+border:0px;
+margin:0px;
+overflow:hidden;
+padding:0px;
 }
 
 /* Maps */

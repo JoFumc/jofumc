@@ -1,0 +1,13 @@
+<div id="multibar-div">
+<?php
+require_once("library/core/util-skin.php");
+skin_include("block-multibar-pre.php");
+?>
+<?php
+echo "<h1>SERVER</h1>";
+print_r($_SERVER);
+?>
+<?php
+skin_include("block-multibar-post.php");
+?>
+</div>

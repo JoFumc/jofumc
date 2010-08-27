@@ -34,6 +34,8 @@ OBJS=$(PHPOBJS) $(JSOBJS) $(HTMLOBJS) $(CSSOBJS)
 ##
 ## Section 3: Common rules
 ##
+$(CSSOBJS): ../common/default.css.h
+
 all: $(OBJS)
 	$(DESCEND)
 

@@ -34,6 +34,8 @@ OBJS=$(PHPOBJS) $(JSOBJS) $(HTMLOBJS) $(CSSOBJS)
 ##
 ## Section 3: Common rules
 ##
+$(CSSOBJS): ../common/default.css.h
+
 all: $(OBJS)
 	$(DESCEND)
 
@@ -61,3 +63,4 @@ showcfg::
 	@echo PROJECT_CURDIR=$(PROJECT_CURDIR)
 	@echo PROJECT_SUBDIR=$(PROJECT_SUBDIR)
 	$(DESCEND)
+
