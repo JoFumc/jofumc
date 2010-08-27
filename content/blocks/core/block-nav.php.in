@@ -11,11 +11,11 @@ if (!isset($_COOKIE["jof-session-id"]))
    print '<li class="top-nav-meta"><a class="top-nav" href="/login.php">Login</a></li>';
 }
 ?>
-<li class="top-nav"><a class="top-nav" href="/">Home</a></li>
-<li class="top-nav"><a class="top-nav" href="/about.php">About Us</a></li>
-<li class="top-nav"><a class="top-nav" href="/vision.php">Our Vision</a></li>
-<li class="top-nav"><a class="top-nav" href="/programs.php">Programs</a></li>
-<li class="top-nav"><a class="top-nav" href="/worship.php">Worship</a></li>
+<li class="top-nav"><a class="top-nav" href="/" title="Journey of Faith home">Home</a></li>
+<li class="top-nav"><a class="top-nav" href="/about.php" title="Who we are">About Us</a></li>
+<li class="top-nav"><a class="top-nav" href="/vision.php" title="How we see it">Our Vision</a></li>
+<li class="top-nav"><a class="top-nav" href="/programs.php" title="How to participate">Programs</a></li>
+<li class="top-nav"><a class="top-nav" href="/worship.php" title="When and how we worship together">Worship</a></li>
 </ul>
 </div>
 <?php
