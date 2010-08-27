@@ -1,9 +1,0 @@
-<?php
-require("blocks/core/block-html-head.php");
-require("blocks/core/block-header.php");
-require("blocks/core/block-nav.php");
-require("blocks/core/block-content-basic.php");
-require("blocks/core/block-partner-nav.php");
-require("blocks/core/block-footer.php");
-require("blocks/core/block-html-foot.php");
-?>
