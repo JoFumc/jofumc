@@ -5,6 +5,7 @@ skin_include("block-map-pre.php");
 ?>
 <div id="block-map-div" class="block-outer-div block-div">
 <div id="block-map-maps-div">
+
 <?php
 // Build service list of known services
 require_once("library/app/class-akwebservice.php");
@@ -18,6 +19,7 @@ $mapper=config_getValue("map");
 if ($mapper=="default") $mapper="google";
 require_once($mapsrv[$mapper]->url);
 ?>
+
 </div>
 <div id="block-map-alternates-div" class="block-text">
 <?php
@@ -28,7 +30,7 @@ foreach ($mapsrv as $cursrv)
 {
   if ($cursrv->token != $mapper)  {
     $_GET["map"] = $cursrv->token;
-    $cururl=$_SERVER["PHP_SELF"]."?".http_build_query($_GET);
+    $cururl=htmlentities($_SERVER["PHP_SELF"]."?".http_build_query($_GET));
     echo "<a href=\"".$cururl."\" class=\"block-link\" title=\"".$cursrv->label."\">".$cursrv->label."</a>";
     if ($remaining > 0) {
        echo " or ";

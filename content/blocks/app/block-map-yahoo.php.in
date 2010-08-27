@@ -1,6 +1,9 @@
 <div id="map-div-yahoo">
-<script type="text/javascript" src="http://api.maps.yahoo.com/ajaxymap?v=3.8&appid=lGTCDzPV34EfbUFG16mcITHnJK.jVKiq8gxWho9zYj8b.hWP2eXBDQukuQ--"></script>
 <div class="embedded-map" id="map-div-yahoo-embed"></div>
+<?php
+$yurl=htmlentities("http://api.maps.yahoo.com/ajaxymap?v=3.8&appid=lGTCDzPV34EfbUFG16mcITHnJK.jVKiq8gxWho9zYj8b.hWP2eXBDQukuQ--");
+echo "<script type=\"text/javascript\" src=\"".$yurl."\"></script>";
+?>
 <script type="text/javascript">
 var yloc=new YGeoPoint(30.560,-97.604);
 var ymap=new YMap(document.getElementById('map-div-yahoo-embed'));
