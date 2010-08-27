@@ -4,18 +4,39 @@ require_once("library/core/util-skin.php");
 skin_include("block-map-pre.php");
 ?>
 <div id="block-map-div" class="block-outer-div block-div">
-<div id="block-map-nav-div">
-<ul class="block-nav">
-<li class="block-nav block-nav-selected">Google</li>
-<li class="block-nav">MapQuest</li>
-<li class="block-nav">Yahoo!</li>
-</ul>
-</div>
 <div id="block-map-maps-div">
 <?php
-require_once("blocks/app/block-map-google.php");
-require_once("blocks/app/block-map-mapquest.php");
-require_once("blocks/app/block-map-yahoo.php");
+// Build service list of known services
+require_once("library/app/class-akwebservice.php");
+$mapsrv = array(
+  "google" => new akWebService("google","Google Maps","blocks/app/block-map-google.php"),
+  "yahoo"  => new akWebService("yahoo","Yahoo! Maps","blocks/app/block-map-yahoo.php"),
+  "mapquest" => new akWebService("mapquest","Mapquest","blocks/app/block-map-mapquest.php")
+);
+// Determine selected service from config
+$mapper=config_getValue("map");
+if ($mapper=="default") $mapper="google";
+require_once($mapsrv[$mapper]->url);
+?>
+</div>
+<div id="block-map-alternates-div" class="block-text">
+<?php
+// Alternate services text
+echo "(Don't like ".$mapsrv[$mapper]->label."? Try ";
+$remaining=count($mapsrv)-2;
+foreach ($mapsrv as $cursrv)
+{
+  if ($cursrv->token != $mapper)  {
+    $_GET["map"] = $cursrv->token;
+    $cururl=$_SERVER["PHP_SELF"]."?".http_build_query($_GET);
+    echo "<a href=\"".$cururl."\" class=\"block-link\" title=\"".$cursrv->label."\">".$cursrv->label."</a>";
+    if ($remaining > 0) {
+       echo " or ";
+       $remaining--;
+    }
+  }
+}
+echo " instead)."
 ?>
 </div>
 </div>

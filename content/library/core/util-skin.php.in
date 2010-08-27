@@ -2,22 +2,14 @@
 /****************************************************************************
  * util-skin.php -- Skin support functions
  ***************************************************************************/
+/* Includes */
+require_once("library/core/util-config.php");
 /**
  * skin_getName() -- Return the name of the currently-selected skin
  */
 function skin_getName()
 {
-  /* Step 1: URL overrides all else */
-  if (isset($_REQUEST["skin"])) {
-    return $_REQUEST["skin"];
-  }
-  /* Step 2: From cookie? */
-  if (isset($_COOKIE["jof-skin"]))
-  {
-    return $_COOKIE["jof-skin"];
-  }
-  /* Step 3: Default */
-  return "default";
+  return config_getValue("skin");
 }
 
 /**
