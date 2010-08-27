@@ -9,11 +9,6 @@
 /* Shorthand for no padding, border, or margin */
 #define PACKED() padding:0px;margin:0px;border:0px
 
-/* An image that has nothing around it */
-img.frameless {
-PACKED();
-}
-
 /* Div to force closure of a container div with floated children */
 .closure-div, #closure-div, .content-closure-div, #content-closure-div {
 clear:left;
@@ -31,5 +26,15 @@ list-style-image:none;
 
 a {
 text-decoration:none;
+}
+
+/* Additional custom styles that are sufficiently generic */
+img.frameless {
+PACKED();
+}
+
+.block-centered {
+margin-left:auto;
+margin-right:auto;
 }
 
