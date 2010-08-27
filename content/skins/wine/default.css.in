@@ -103,7 +103,7 @@ height: 22px;
 display:inline-block;
 }
 
-li.top-nav:hover, li.top-nav-meta:hover {
+a.top-nav:hover, li.top-nav:hover, li.top-nav-meta:hover {
 background-color:WINESKIN_LIGHTER_RED;
 color:#FFF;
 text-decoration: none;
