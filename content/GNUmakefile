@@ -23,7 +23,7 @@ include $(PROJECT_ROOT)/mk/common.mk
 PHPSRCS=$(wildcard *.php.in)
 PHPOBJS=$(PHPSRCS:%.php.in=%.php)
 
-OBJS=$(PHPOBJS) $(JSOBJS) $(HTMLOBJS)
+OBJS=$(PHPOBJS) $(JSOBJS) $(HTMLOBJS) .htaccess
 
 ##
 ## Section 3: Common rules
