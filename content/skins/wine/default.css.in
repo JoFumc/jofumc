@@ -13,14 +13,14 @@
 #define WIDTH_MULTIBAR 180px   /* multibar part of workarea */
 #define HEIGHT_CONTENT 400px
 
-  /* App-specific */
-#define MAP_HEIGHT 500px
-#define MAP_WIDTH  500px
-
 /* SECTION 2: Import common CSS */
 #include "../common/default.css.h"
 
-/* SECTION 3: The bits */
+/* SECTION 3: Import block CSS */
+#include "block-map.css.h"
+#include "block-calendar.css.h"
+
+/* SECTION 4: The bits */
 body {
 color: #333;
 font-family:'lucida grande',tahoma,verdana,arial,sans-serif;
@@ -229,8 +229,9 @@ overflow:hidden;
 padding:0px;
 }
 
-/* Maps */
-.embedded-map {
-height:MAP_HEIGHT;
-width:MAP_WIDTH;
+/*
+ * Generic block support 
+ */
+.block-outer-div {
+margin-top:10px;
 }

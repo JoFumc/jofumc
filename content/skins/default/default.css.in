@@ -1,6 +1,9 @@
 /* SECTION 1: Common values and macros */
   /* Colors */
-#define JOF_RED #C82020
+#define JOF_RED         #C82020
+#define JOF_DARK_RED    #851414
+#define JOF_LIGHT_RED   #E83030
+#define JOF_LIGHTER_RED #F84040
 
   /* Dimensions */
 #define WIDTH_FULL     850px /* Overall width */
@@ -10,12 +13,12 @@
 #define WIDTH_MULTIBAR 180px /*   Multibar (right workarea) */
 #define HEIGHT_CONTENT 400px 
 
-  /* App-specific */
-#define MAP_HEIGHT 350px
-#define MAP_WIDTH  350px
-
 /* SECTION 2: Import common CSS */
 #include "../common/default.css.h"
+
+/* SECTION 3: Import block CSS */
+#include "block-map.css.h"
+#include "block-calendar.css.h"
 
 body {
 font-family:sans-serif;
@@ -178,14 +181,8 @@ display:block;
 width:WIDTH_WORKAREA;
 min-height: HEIGHT_CONTENT;
 padding:0px;
-border-top:0px;
-border-bottom:0px;
-border-right:0px;
-border-left: 1px solid black;
-margin-top:0px;
-margin-bottom:0px;
-margin-right:0px;
-margin-left: -1px;
+border:0px;
+margin: 0 0 0 -1px;
 }
 
 #application-div {
@@ -204,58 +201,12 @@ min-height: HEIGHT_CONTENT;
 PACKED();
 }
 
-/* Maps */
-#block-map-div {
-width:MAP_WIDTH;
-margin-top:10px;
-margin-left:auto;
-margin-right:auto;
-}
-
-.embedded-map {
-height:MAP_HEIGHT;
-width:MAP_WIDTH;
-}
-
 /*
  * Generic block support 
  */
-ul.block-nav {
-font-weight: bold;
-font-size: 12px;
-margin:0px;
-padding:0px;
-height:16px;
-background-color:white;
-color:black;
-}
-
-li.block-nav {
-float:left;
-height:16px;
-background-color:JOF_RED;
-color:white;
-border-left:1px solid black;
-border-top:1px solid black;
-border-right:1px solid black;
-margin:-1px 1px 0px 1px;
-padding:0px 4px 0px 4px;
-}
-
-li.block-nav-selected {
-float:left;
-height:16px;
-color:white;
-background-color:JOF_RED;
-border-left:3px solid black;
-border-top:3px solid black;
-border-right:3px solid black;
-margin:-3px 1px 0px 1px;
-padding:0px 4px 0px 4px;
-}
-
-a.block-nav:hover, li.block-nav:hover, li.block-nav-selected:hover {
-/*color:#FE4110;*/
-color:JOF_RED;
-background-color:#FFF;
+.block-outer-div {
+/* Center and space all primary block objects */
+margin-left:auto;
+margin-right:auto;
+margin-top:10px;
 }

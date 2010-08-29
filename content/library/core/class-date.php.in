@@ -21,6 +21,7 @@ class akDate
   public $monthName; // Month of the year (Jan-Dec)
   public $monthLen; // Length of the current month
   public $monthLenPrev; // Length of the previous month
+  public $year; // Year number
   /* Basic private members */
   private $dateInfo; // All getdate() information
 
@@ -38,6 +39,7 @@ class akDate
     $this->dowFirst = ($this->dowNum + 7 - (($this->domNum % 7)-1))%7;
     $this->monthNum = $this->dateInfo["mon"];
     $this->monthName = $this->dateInfo["month"];
+    $this->year = $this->dateInfo["year"];
 
     /* Step 3: Calendar extensions */
     $this->monthLen = cal_days_in_month(CAL_GREGORIAN,$this->monthNum,$this->dateInfo["year"]);

@@ -23,6 +23,7 @@ include $(PROJECT_ROOT)/mk/common.mk
 PHPSRCS=$(wildcard *.php.in)
 PHPOBJS=$(PHPSRCS:%.php.in=%.php)
 CSSSRCS=$(wildcard *.css.in)
+CSSHDRS=$(wildcard *.css.h)
 CSSOBJS=$(CSSSRCS:%.css.in=%.css)
 JSSRCS=$(wildcard *.js.in)
 JSOBJS=$(JSSRCS:%.js.in=%.js)
@@ -34,7 +35,7 @@ OBJS=$(PHPOBJS) $(JSOBJS) $(HTMLOBJS) $(CSSOBJS)
 ##
 ## Section 3: Common rules
 ##
-$(CSSOBJS): ../common/default.css.h
+$(CSSOBJS): ../common/default.css.h $(CSSHDRS)
 
 all: $(OBJS)
 	$(DESCEND)
