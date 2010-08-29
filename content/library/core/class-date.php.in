@@ -18,6 +18,7 @@ class akDate
   public $dowFirst; // Day of the week (0-6) of the 1st of this month
   public $domNum; // Day of the month (1-31)
   public $monthNum; // Month of the year (0-11)
+  public $monthName; // Month of the year (Jan-Dec)
   public $monthLen; // Length of the current month
   public $monthLenPrev; // Length of the previous month
   /* Basic private members */
@@ -36,6 +37,7 @@ class akDate
     $this->domNum = $this->dateInfo["mday"];
     $this->dowFirst = ($this->dowNum + 7 - (($this->domNum % 7)-1))%7;
     $this->monthNum = $this->dateInfo["mon"];
+    $this->monthName = $this->dateInfo["month"];
 
     /* Step 3: Calendar extensions */
     $this->monthLen = cal_days_in_month(CAL_GREGORIAN,$this->monthNum,$this->dateInfo["year"]);
