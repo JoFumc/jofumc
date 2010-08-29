@@ -1,0 +1,18 @@
+<div id="sidebar-div">
+<?php
+require_once("library/core/class-date.php");
+require_once("library/core/util-skin.php");
+skin_include("block-calendar-pre.php");
+?>
+<div id="block-calendar-div" class="block-div block-outer-div">
+<?php
+// Calendar goes here, possibly filtered.
+$cal_filter=config_getvalue("calendar");
+$now = new akDate();
+print_r($now);
+?>
+</div>
+<?php
+skin_include("block-calendar-post.php");
+?>
+</div>

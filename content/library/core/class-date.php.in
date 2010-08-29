@@ -1,0 +1,50 @@
+<?php
+/****************************************************************************
+ * util-date.php -- Block date/calendar support
+ *
+ * This requires the calendar extension to be installed on the PHP server.
+ *
+ ***************************************************************************/
+
+/*
+ * akDate -- Class object
+ */
+
+class akDate
+{
+  /* Basic public members */
+  public $dowNum; // Day of the week (0-6)
+  public $dowName; // Day of the week (Sun-Sat)
+  public $dowFirst; // Day of the week (0-6) of the 1st of this month
+  public $domNum; // Day of the month (1-31)
+  public $monthNum; // Month of the year (0-11)
+  public $monthLen; // Length of the current month
+  public $monthLenPrev; // Length of the previous month
+  /* Basic private members */
+  private $dateInfo; // All getdate() information
+
+  /* Constructor */
+  function __construct($when=null)
+  {
+    /* Step 1: Load basic date info array */
+    if ($when == null) $this->dateInfo = getdate();
+    else $this->dateInfo = getdate($when);
+
+    /* Step 2: Init simple members */
+    $this->dowNum = $this->dateInfo["wday"];
+    $this->dowName = $this->dateInfo["weekday"];
+    $this->domNum = $this->dateInfo["mday"];
+    $this->dowFirst = ($this->dowNum + 7 - (($this->domNum % 7)-1))%7;
+    $this->monthNum = $this->dateInfo["mon"];
+
+    /* Step 3: Calendar extensions */
+    $this->monthLen = cal_days_in_month(CAL_GREGORIAN,$this->monthNum,$this->dateInfo["year"]);
+    if ($this->monthNum == 1) 
+      $this->monthLenPrev = cal_days_in_month(CAL_GREGORIAN,12,$this->dateInfo["year"]-1);
+    else
+      $this->monthLenPrev = cal_days_in_month(CAL_GREGORIAN,$this->monthNum-1,$this->dateInfo["year"]);
+  }
+
+  
+}
+?>

@@ -4,6 +4,7 @@ require_once("library/core/util-skin.php");
 skin_include("block-sidebar-pre.php");
 ?>
 <?php
+include_once("blocks/core/block-calendar.php");
 echo "<h1>GET</h1>";
 print_r($_GET);
 echo "<h1>POST</h1>";
