@@ -4,7 +4,8 @@ require_once("library/core/util-skin.php");
 skin_include("block-sidebar-pre.php");
 ?>
 <?php
-include_once("blocks/core/block-calendar.php");
+// NOTE: Mostly, this should be empty -- the
+// skins should set what goes into the sidebar.
 echo "<h1>GET</h1>";
 print_r($_GET);
 echo "<h1>POST</h1>";

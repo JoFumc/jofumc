@@ -1,0 +1,4 @@
+<?php
+// Add a calendar...
+include_once("blocks/core/block-calendar.php");
+?>
