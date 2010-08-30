@@ -16,7 +16,20 @@ $mapsrv = array(
 );
 // Determine selected service from config
 $mapper=config_getValue("map");
-if ($mapper=="default") $mapper="google";
+if ($mapper=="default") {
+  // Nothing set, default to Google Maps
+  $mapper="google";
+}
+else
+{
+  $expire_time=time()+300000000;
+  // User-specified, store as cookie if changed
+  if ($mapper != config_getValue("map",CONFIG_SOURCE_COOKIE)) {
+    echo "<script type=\"text/javascript\">";
+    echo "document.cookie=\"".CONFIG_COOKIE_PREFIX."map=".$mapper.";expires=".$expire_time."\"";
+    echo "</script>";
+  }
+}
 require_once($mapsrv[$mapper]->url);
 ?>
 

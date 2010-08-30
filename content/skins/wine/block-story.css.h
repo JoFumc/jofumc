@@ -1,9 +1,16 @@
+.story-div {
+width:90%;
+margin-left:auto;
+margin-right:auto;
+}
+
 .story-headline {
-color:JOF_DARKER_RED;
-border-bottom: 2px solid JOF_DARKER_RED;
+color:WINESKIN_DARKER_RED;
+border-bottom: 2px solid WINESKIN_DARKER_RED;
 }
 
 h1.story-headline {
+text-align:right;
 font-size:20pt;
 }
 
@@ -23,8 +30,8 @@ margin-right:auto;
 }
 
 .story-span {
-margin-top:5px;
 display:block;
+margin-top:5px;
 }
 
 .story-span a {

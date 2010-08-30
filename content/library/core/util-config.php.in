@@ -10,31 +10,43 @@
  * (3) Config file
  *
  ***************************************************************************/
-$config_prefix="jof-";
+define("CONFIG_COOKIE_PREFIX","jof-");
+
+/*
+ * Config sources
+ */
+define("CONFIG_SOURCE_URL",0x1);
+define("CONFIG_SOURCE_COOKIE",0x2);
+define("CONFIG_SOURCE_FILES",0x4);
+define("CONFIG_SOURCE_ANY",0xF);
 
 /**
  * config_getValue() -- Return the value associated with a config token
  *
  * Any errors (including not set) return the string "default"
  */
-function config_getValue($token=null)
+function config_getValue($token=null,$source=CONFIG_SOURCE_ANY)
 {
   /* Step 0: Check for null */
+    /* CLEAN: Should throw an exception here... */
   if ($token == null) return "default";
 
   /* Step 1: User input */
-  if (isset($_REQUEST[$token])) {
+  if (($source & CONFIG_SOURCE_URL) && (isset($_REQUEST[$token]))) {
     return $_REQUEST[$token];
   }
 
   /* Step 2: Cookies */
-    /* Step 2a: as-is */
-  if (isset($_COOKIE[$token])) {
-    return $_COOKIE[$token];
-  }
-    /* Step 2b: with prefix */
-  if (isset($_COOKIE[$config_prefix.$token])) {
-    return $_COOKIE[$config_prefix.$token];
+  if ($source & CONFIG_SOURCE_COOKIE)
+  {
+      /* Step 2a: with prefix */
+    if (isset($_COOKIE[CONFIG_COOKIE_PREFIX.$token])) {
+      return $_COOKIE[CONFIG_COOKIE_PREFIX.$token];
+    }
+      /* Step 2b: as-is */
+    if (isset($_COOKIE[$token])) {
+      return $_COOKIE[$token];
+    }
   }
 
   /* Step 3: From config file */

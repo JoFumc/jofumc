@@ -1,0 +1,57 @@
+<div class="story-div">
+<h1 class="story-headline">About Journey of Faith</h1>
+</div>
+<div class="story-div">
+<h2 class="story-headline">Who we are</h2>
+<img class="story-lede" src="/skins/common/button_icon_umc_48_white.png" alt="United Methodist Church home"/>
+<span class="story-span">
+Journey of Faith United Methodist Church is a grace-filled Christian 
+community which offers a safe place to ask the tough questions of 
+faith in an atmosphere of unconditional acceptance.</span>
+<span class="story-span">
+&quot;Open Hearts. Open Minds. Open Doors.&quot;
+</span>
+<span class="story-span">
+We are a community committed to offering a safe place for asking the 
+difficult questions of life, and we seek to offer acceptance to all 
+people wherever they are in their faith journey.  So, if you like to 
+ask questions, are a bit skeptical of pat answers, and are open to a 
+journey of discovering truth, this church is for you.
+</span>
+<img class="story-lede" src="/skins/common/button_icon_rmn_48_white.png" alt="Reconciling Ministry Network"/>
+<span class="story-span">
+We are also a 
+<a href="http://www.rmnetwork.org" title="Reconciling Ministries Network">Reconciling Congregation</a>, 
+welcoming and affirming people of all sexual orientations and lifestyles.
+</span>
+<span class="story-span">
+Progressive in our theology, Journey of Faith offers small group 
+studies that take advantage of the works of some of today's leading 
+theologians and Bible scholars.
+</span>
+</div>
+<div class="story-div">
+<h2 class="story-headline">When we meet</h2>
+<span class="story-span">
+On Sunday mornings, we begin with adult 
+<a href="/sunday_school.php" title="Meets on Sunday, hence the name...">Sunday School</a>
+at 9:00am, with our primary 
+<a href="/worship.php">worship </a>
+beginning at 10:30am.
+</span>
+</div>
+<div class="story-div">
+<h2 class="story-headline">Where we are</h2>
+<span class="story-span">
+7301 County Road 110, Round Rock, Texas
+</span>
+<span class="story-span">
+(about 1.8 miles north of Highway 79)
+</span>
+<?php
+require("blocks/app/block-map.php");
+?>
+</div>
+<?php
+require("blocks/core/block-spacer.php");
+?>

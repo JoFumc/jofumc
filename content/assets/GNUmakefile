@@ -8,8 +8,8 @@
 ##
 firstrule: all
 PROJECT=jofrr
-PROJECT_ROOT=..
-SUBDIRS=library blocks skins external pages assets
+PROJECT_ROOT=../..
+SUBDIRS=random_pool
 
 ##
 ## Section 2: includes
@@ -23,7 +23,7 @@ include $(PROJECT_ROOT)/mk/common.mk
 PHPSRCS=$(wildcard *.php.in)
 PHPOBJS=$(PHPSRCS:%.php.in=%.php)
 
-OBJS=$(PHPOBJS) $(JSOBJS) $(HTMLOBJS) .htaccess
+OBJS=$(PHPOBJS) $(JSOBJS) $(HTMLOBJS)
 
 ##
 ## Section 3: Common rules
@@ -31,16 +31,16 @@ OBJS=$(PHPOBJS) $(JSOBJS) $(HTMLOBJS) .htaccess
 all: $(OBJS)
 	$(DESCEND)
 
-clean:: local-clean
-	$(DESCEND)
-
 local-clean::
 	@$(foreach cleanee,$(OBJS),$(call TOOL_CLEAN,$(cleanee)))
 
-clobber:: local-clobber
+clean: local-clean
 	$(DESCEND)
 
 local-clobber: local-clean
+
+clobber:: local-clobber
+	$(DESCEND)
 
 install: all
 	$(call TOOL_MKDIR,$(STAGING_ROOT)/$(PROJECT_SUBDIR),0755)

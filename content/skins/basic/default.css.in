@@ -223,3 +223,14 @@ margin-left:auto;
 margin-right:auto;
 margin-top:10px;
 }
+
+.block-centered {
+margin-left:auto;
+margin-right:auto;
+text-align:center;
+}
+
+.image-caption {
+display:block;
+text-align:center;
+}

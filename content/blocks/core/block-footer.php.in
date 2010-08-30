@@ -9,16 +9,7 @@ skin_include("block-footer-pre.php");
 </div>
 <div id="footer-info-div">
 <span class="footer-text">
-<?php
-$map_skin=config_getValue("skin");
-echo "<a href=\"/map.php";
-if ($map_skin != "default")  {
-    echo "?skin=".$map_skin;
-}
-echo "\" title=\"Directions to the Church\">";
-?>
-7301 County Road 110, Round Rock, Texas
-</a>
+<a href="/map.php" title="Directions to the Church">7301 County Road 110, Round Rock, Texas</a>
 </span>
 <span class="footer-text">(512)&nbsp;255-8403</span>
 </div>

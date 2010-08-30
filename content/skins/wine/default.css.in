@@ -1,6 +1,8 @@
 /* SECTION 1: Common values and macros */
   /* Colors */
 #define WINESKIN_RED         #983B59
+#define WINESKIN_DARK_RED    #66273B
+#define WINESKIN_DARKER_RED  #4C1E2D
 #define WINESKIN_LIGHT_RED   #A84B69
 #define WINESKIN_LIGHTER_RED #B85B79
 #define WINESKIN_BORDER #333
@@ -19,6 +21,7 @@
 /* SECTION 3: Import block CSS */
 #include "block-map.css.h"
 #include "block-calendar.css.h"
+#include "block-story.css.h"
 
 /* SECTION 4: The bits */
 body {
@@ -82,7 +85,7 @@ height: 32px;
 }
 
 li.top-nav {
-float: right;
+float: left;
 border:0px;
 margin:0px;
 padding:0px;
@@ -245,6 +248,17 @@ margin-top:10px;
 .block-centered {
 margin-left:auto;
 margin-right:auto;
+display:block;
+text-align:center;
+}
+
+.block-framed {
+margin:0 auto 0 auto;
+padding:0;
+border:1px solid WINESKIN_BORDER;
+}
+
+.image-caption {
 display:block;
 text-align:center;
 }

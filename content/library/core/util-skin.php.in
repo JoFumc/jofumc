@@ -10,9 +10,27 @@ require_once("library/core/util-config.php");
  */
 function skin_getName()
 {
+  /* Step 1: Get requested value */
   $skin_name=config_getValue("skin");
-  if ($skin_name=="default") $skin_name="basic";
+  
+  /* Step 2: Validate */
+  if (FALSE == file_exists("skins/".$skin_name."/default.css"))
+  {
+    $skin_name="basic";
+  }
   return $skin_name;
+}
+
+/**
+ * skin_storeName() -- Store any skin name given as part of the URL
+ */
+function skin_storeName()
+{
+  $skin_name=config_getValue("skin",CONFIG_SOURCE_URL);
+  // Store for a bit less than 10 years...
+  $expire_time=time()+300000000;
+  if ($skin_name != "default") setcookie(CONFIG_COOKIE_PREFIX."skin","$skin_name",$expire_time);
+  return;
 }
 
 /**
