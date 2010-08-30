@@ -1,9 +1,18 @@
 <div class="story-div">
 <h1 class="story-headline">Welcome</h1>
+<span class="story-span">
+Welcome to Journey of Faith!
+</span>
+<span class="story-span">
+Thanks for stopping by -- if you'd like to come by
+and say hello, <a href="/map.php" title="How to get to us">drop by</a> on 
+Sunday morning around 10:30.  Or, give us a call at (512) 255-8403.  We look forward
+to seeing you.
+</span>
 <img class="story-lede" src="skins/common/Flames-150x150.jpg" alt="Cross and Flames"/>
 <span class="story-span">
-Our "Come as you are" worship is a blend of traditional and contemporary with 
-high quality music and thought-provoking sermons that speak to the questions 
+Our "come as you are" worship is a blend of traditional and contemporary styles,
+with high quality music and thought-provoking sermons that speak to the questions 
 asked by thinking Christians.
 </span>
 <span class="story-span">
