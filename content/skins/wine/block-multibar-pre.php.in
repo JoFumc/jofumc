@@ -1,4 +1,6 @@
 <?php
 // Add a calendar...
 include_once("blocks/core/block-calendar.php");
+// ...and the partner bar
+include_once("blocks/core/block-partner-nav.php");
 ?>

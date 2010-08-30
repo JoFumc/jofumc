@@ -4,6 +4,8 @@ require_once("library/core/util-skin.php");
 skin_include("block-multibar-pre.php");
 ?>
 <?php
+// NOTE: Mostly, this should be empty -- the
+// skins should set what goes into the multibar.
 ?>
 <?php
 skin_include("block-multibar-post.php");

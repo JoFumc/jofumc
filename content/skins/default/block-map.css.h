@@ -2,7 +2,7 @@
 #define MAP_WIDTH  350px
 
 /* Maps */
-#block-map-div {
+.dummy, #block-map-div {
 width:MAP_WIDTH;
 margin-top:10px;
 margin-left:auto;
