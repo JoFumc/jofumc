@@ -159,15 +159,16 @@ height: 36px;
 
 /* FOOTER section */
 #footer-div {
-width:850px;
+width:WIDTH_FULL;
 height: 36px;
 margin: 0px auto 0px auto;
 }
 
-#copyright-div {
+#copyright-div, .footer-text {
+display:block;
 font-size:9pt;
 font-weight: normal;
-width: 850px;
+width: WIDTH_FULL;
 margin:0px auto 0px auto;
 border:0px;
 padding:0px;
@@ -229,9 +230,21 @@ overflow:hidden;
 padding:0px;
 }
 
+#validator-div {
+width:180px;
+float:right;
+}
+
 /*
  * Generic block support 
  */
 .block-outer-div {
 margin-top:10px;
+}
+
+.block-centered {
+margin-left:auto;
+margin-right:auto;
+display:block;
+text-align:center;
 }

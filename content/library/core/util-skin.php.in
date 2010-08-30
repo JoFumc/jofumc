@@ -6,10 +6,13 @@
 require_once("library/core/util-config.php");
 /**
  * skin_getName() -- Return the name of the currently-selected skin
+ *                   (defaults to "basic").
  */
 function skin_getName()
 {
-  return config_getValue("skin");
+  $skin_name=config_getValue("skin");
+  if ($skin_name=="default") $skin_name="basic";
+  return $skin_name;
 }
 
 /**

@@ -6,10 +6,6 @@ skin_include("block-sidebar-pre.php");
 <?php
 // NOTE: Mostly, this should be empty -- the
 // skins should set what goes into the sidebar.
-echo "<h1>GET</h1>";
-print_r($_GET);
-echo "<h1>POST</h1>";
-print_r($_POST);
 ?>
 <?php
 skin_include("block-sidebar-post.php");

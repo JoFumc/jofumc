@@ -9,7 +9,7 @@
 firstrule: all
 PROJECT=jofrr
 PROJECT_ROOT=../..
-SUBDIRS=common default wine mobile
+SUBDIRS=common basic wine mobile
 
 ##
 ## Section 2: includes
