@@ -119,7 +119,7 @@ display:inline-block;
 width:WIDTH_SIDEBAR;
 height: 36px;
 margin: 0px auto 0px auto;
-border: 1px solid WINESKIN_BORDER;
+/*border: 1px solid WINESKIN_BORDER;*/
 }
 
 ul.partner-nav {

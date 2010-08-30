@@ -2,6 +2,7 @@
   /* Colors */
 #define JOF_RED         #C82020
 #define JOF_DARK_RED    #851414
+#define JOF_DARKER_RED  #641010
 #define JOF_LIGHT_RED   #E83030
 #define JOF_LIGHTER_RED #F84040
 
@@ -19,6 +20,7 @@
 /* SECTION 3: Import block CSS */
 #include "block-map.css.h"
 #include "block-calendar.css.h"
+#include "block-story.css.h"
 
 body {
 font-family:sans-serif;
@@ -98,6 +100,17 @@ background-color:#FFF;
 width:WIDTH_FULL;
 height: 36px;
 margin: 0px auto 0px auto;
+}
+
+.footer-text {
+display:block;
+font-size:9pt;
+font-weight: normal;
+width: WIDTH_FULL;
+margin:0px auto 0px auto;
+border:0px;
+padding:0px;
+text-align: center;
 }
 
 /* PARTNER block */
