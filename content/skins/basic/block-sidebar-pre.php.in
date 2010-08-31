@@ -4,8 +4,6 @@ include_once("blocks/core/block-calendar.php");
 // Random picture...
 $random_image_path="assets/random_pool";
 $random_image_width=160;
-echo "<div class=\"block-centered\">";
+$random_image_caption="JoF in action";
 require("blocks/app/block-random-image.php");
-echo "<span class=\"block-centered\">JoF in action</span>";
-echo "</div>";
 ?>

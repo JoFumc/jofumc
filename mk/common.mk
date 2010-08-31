@@ -160,19 +160,19 @@ fresh: clean all
 # Pass through preprocessors
 %.html: %.html.in
 	$(SAY_IT) "[HTML PP ]" $@
-	$(DO_IT)cat $< | sed $(SED_SCRUB) |sed $(SED_REINC) $(SED_REMACRO) | gcc -E $(PROJECT_FLAGS) - | sed $(SED_UNSCRUB) $(PROJECT_SEDFLAGS) | egrep -v '^# ' > $@
+	$(DO_IT)cat $< | sed $(SED_SCRUB) |sed $(SED_REINC) $(SED_REMACRO) | gcc -E $(PROJECT_FLAGS) - | sed $(SED_UNSCRUB) $(PROJECT_SEDFLAGS) | egrep -v '^# |^$$' > $@
 
 %.php: %.php.in
 	$(SAY_IT) "[ PHP PP ]" $@
-	$(DO_IT)cat $< | sed $(SED_SCRUB) |sed $(SED_REINC) $(SED_REMACRO) | gcc -E $(PROJECT_FLAGS) - | sed $(SED_UNSCRUB) $(PROJECT_SEDFLAGS) | egrep -v '^# ' > $@
+	$(DO_IT)cat $< | sed $(SED_SCRUB) |sed $(SED_REINC) $(SED_REMACRO) | gcc -E $(PROJECT_FLAGS) - | sed $(SED_UNSCRUB) $(PROJECT_SEDFLAGS) | egrep -v '^# |^$$' > $@
 
 %.css: %.css.in
 	$(SAY_IT) "[ CSS PP ]" $@
-	$(DO_IT)cat $< | sed $(SED_SCRUB) |sed $(SED_REINC) $(SED_REMACRO) | gcc -E $(PROJECT_FLAGS) - | sed $(SED_UNSCRUB) $(PROJECT_SEDFLAGS) | egrep -v '^# ' > $@
+	$(DO_IT)cat $< | sed $(SED_SCRUB) |sed $(SED_REINC) $(SED_REMACRO) | gcc -E $(PROJECT_FLAGS) - | sed $(SED_UNSCRUB) $(PROJECT_SEDFLAGS) | egrep -v '^# |^$$' > $@
 
 %.js: %.js.in
 	$(SAY_IT) "[  JS PP ]" $@
-	$(DO_IT)cat $< | sed $(SED_SCRUB) |sed $(SED_REINC) $(SED_REMACRO) | gcc -E $(PROJECT_FLAGS) - | sed $(SED_UNSCRUB) $(PROJECT_SEDFLAGS) | egrep -v '^# ' > $@
+	$(DO_IT)cat $< | sed $(SED_SCRUB) |sed $(SED_REINC) $(SED_REMACRO) | gcc -E $(PROJECT_FLAGS) - | sed $(SED_UNSCRUB) $(PROJECT_SEDFLAGS) | egrep -v '^# |^$$' > $@
 
 # Simple copies from source
 %.js: %.js.cp
@@ -183,3 +183,7 @@ fresh: clean all
 	$(SAY_IT) "[CSS COPY]" $@
 	$(DO_IT)cp $< $@
 
+# htaccess dotfiles
+.%: %.in
+	$(SAY_IT) "[DOT COPY]" $@
+	$(DO_IT)cp $< $@
