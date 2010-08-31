@@ -3,7 +3,7 @@
 </div>
 <div class="story-div">
 <h2 class="story-headline">Who we are</h2>
-<img class="story-lede" src="/skins/common/button_icon_umc_48_white.png" alt="United Methodist Church home"/>
+<a href="http://www.umc.org" alt="United Methodist Church home"><img class="story-lede" src="/skins/common/button_icon_umc_48_white.png" alt="United Methodist Church home"/></a>
 <span class="story-span">
 Journey of Faith United Methodist Church is a grace-filled Christian 
 community which offers a safe place to ask the tough questions of 
@@ -18,7 +18,7 @@ people wherever they are in their faith journey.  So, if you like to
 ask questions, are a bit skeptical of pat answers, and are open to a 
 journey of discovering truth, this church is for you.
 </span>
-<img class="story-lede" src="/skins/common/button_icon_rmn_48_white.png" alt="Reconciling Ministry Network"/>
+<a href="http://www.rmnetwork.org" alt="Reconciling Ministries Network"><img class="story-lede" src="/skins/common/button_icon_rmn_48_white.png" alt="Reconciling Ministry Network"/></a>
 <span class="story-span">
 We are also a 
 <a href="http://www.rmnetwork.org" title="Reconciling Ministries Network">Reconciling Congregation</a>, 
