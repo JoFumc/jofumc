@@ -21,6 +21,7 @@
 #include "block-map.css.h"
 #include "block-calendar.css.h"
 #include "block-story.css.h"
+#include "util-form.css.h"
 
 body {
 font-family:sans-serif;
@@ -228,6 +229,12 @@ margin-top:10px;
 margin-left:auto;
 margin-right:auto;
 text-align:center;
+}
+
+.block-image {
+display:block;
+margin-left:auto;
+margin-right:auto;
 }
 
 .image-caption {

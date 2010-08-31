@@ -1,10 +1,22 @@
-+ Open-style skin (see Highland Park)
+-----------------
+NOW:
+-----------------
++ Login and per-user handling
++ Headline blocks
++ Schedule (static) block
++ Media uploader (type and date pickers)
++ Per-program/generic  media gallery
+-----------------
+SOON:
+-----------------
 + Dynamic menus (load from plain/JSON files)
++ Open-style skin (see Highland Park)
 + Calendar day cache and hover popup (see Agape)
 + Program template/editor
 + Story editor (program picker)
 + Story page/comment system
-+ Media uploader (type and date pickers)
-+ Headline blocks
-+ Schedule (static) block
++ Verse of the day from biblegateway.com
+-----------------
+LATER:
+-----------------
 + Generic page editor with block drop
