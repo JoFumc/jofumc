@@ -7,6 +7,7 @@ skin_include("login-processor-pre.php");
 // Open a connection to the DB
 require_once("library/core/util-db.php");
 echo "Checking user(".$_REQUEST['username'].") and password(".$_REQUEST['password'].");";
+// Test for good username/password combo
 $userlist=db_userlist($_REQUEST['username'],$_REQUEST['password']);
 ?>
 <?php
