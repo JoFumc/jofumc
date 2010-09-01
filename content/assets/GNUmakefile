@@ -43,6 +43,9 @@ clobber:: local-clobber
 	$(DESCEND)
 
 install: all
+	$(NOTHING)
+
+install-assets: all
 	$(call TOOL_MKDIR,$(STAGING_ROOT)/$(PROJECT_SUBDIR),0755)
 	@$(foreach obj,$(OBJS),$(call TOOL_INSTALL,$(obj),0644,$(STAGING_ROOT)/$(PROJECT_SUBDIR)))
 	$(DESCEND)

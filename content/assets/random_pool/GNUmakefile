@@ -48,7 +48,7 @@ local-clobber: local-clean
 clobber:: local-clobber
 	$(DESCEND)
 
-install: all
+install-assets: all
 	$(call TOOL_MKDIR,$(STAGING_ROOT)/$(PROJECT_SUBDIR),0755)
 	@$(foreach obj,$(OBJS),$(call TOOL_INSTALL,$(obj),0644,$(STAGING_ROOT)/$(PROJECT_SUBDIR)))
 	@$(foreach img,$(IMAGES),$(call TOOL_INSTALL,$(img),0644,$(STAGING_ROOT)/$(PROJECT_SUBDIR)))
