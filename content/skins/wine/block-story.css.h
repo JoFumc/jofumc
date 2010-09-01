@@ -12,10 +12,12 @@ border-bottom: 2px solid WINESKIN_DARKER_RED;
 h1.story-headline {
 text-align:right;
 font-size:20pt;
+width:90%;
 }
 
 h2.story-headline {
 font-size:15pt;
+width:80%
 }
 
 img.story-lede {
