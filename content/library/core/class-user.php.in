@@ -1,0 +1,24 @@
+<?php
+/****************************************************************************
+ * class-user.php -- User class definitions
+ *
+ ***************************************************************************/
+
+/*
+ * akUser -- User object
+ */
+class akUser
+{
+  /* Basic public members */
+  public $name; // Username
+  public $email; // Primary email contact
+  public $displayname; // Name to display
+  public $fullname; // Full user name
+
+  /* Constructor */
+  function __construct($name=null)
+  {
+    $this->name = $name;
+  }
+}
+?>

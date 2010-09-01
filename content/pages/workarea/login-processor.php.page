@@ -1,0 +1,15 @@
+<?php
+// If the skin has pre-content setup, include it here.
+require_once("library/core/util-skin.php");
+skin_include("login-processor-pre.php");
+?>
+<?php
+// Open a connection to the DB
+require_once("library/core/util-db.php");
+echo "Checking user(".$_REQUEST['username'].") and password(".$_REQUEST['password'].");";
+$userlist=db_userlist($_REQUEST['username'],$_REQUEST['password']);
+?>
+<?php
+// If the skin has post-content setup, include it here.
+skin_include("login-processor-post.php");
+?>
