@@ -1,0 +1,15 @@
+<div class="story-div">
+<h1 class="story-headline">Programs</h1>
+<span class="story-span">
+Journey of Faith offers various programs for you to (add more text here).
+</span>
+<h2 class="story-headline">Youth</h2>
+<span class="story-span">
+Example program-related text with YouTube embed.  This is from the &quot;Imagine No Malaria&quot; concert in Austin.  We were there (proof is at about 1:45).
+</span>
+<?php
+// REQUIRED param
+$youtube_video_id="VzvWyC_QUIM";
+require("blocks/app/block-video-youtube.php");
+?>
+</div>

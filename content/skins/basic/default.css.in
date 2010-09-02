@@ -22,6 +22,7 @@
 #include "block-calendar.css.h"
 #include "block-story.css.h"
 #include "util-form.css.h"
+#include "block-video.css.h"
 
 body {
 font-family:sans-serif;
@@ -42,6 +43,7 @@ border: 1px solid black;
 }
 
 /* NAV section */
+#define HEIGHT_NAV 24px
 #top-nav-div {
 width:WIDTH_FULL;
 margin: 0px auto 0px auto;
@@ -50,7 +52,7 @@ border-right: 1px solid black;
 border-bottom: 1px solid black;
 background-color: JOF_RED;
 color:white;
-height: 16px;
+height: HEIGHT_NAV;
 }
 
 
@@ -60,14 +62,14 @@ font-size: 12px;
 margin:0px;
 padding:0px;
 /*background-color: #000;*/
-height: 16px;
+height: HEIGHT_NAV;
 }
 
 li.top-nav {
 float: left;
 border-right: 1px solid black;
 margin: 0px;
-height: 16px;
+height: HEIGHT_NAV;
 padding:0px;
 }
 
@@ -75,19 +77,28 @@ li.top-nav-meta {
 float: right;
 border-left: 1px solid black;
 margin: 0px;
-height: 16px;
+height: HEIGHT_NAV;
 padding:0px;
+}
+
+li.top-nav-label {
+float: right;
+margin: 0 24px 0 24px;
+border:0;
+height: HEIGHT_NAV;
+color:#AAA;
 }
 
 a.top-nav {
 padding-left: 8px;
 padding-right: 8px;
+padding-top: 4px;
 display:inline-block;
 overflow:hidden;
 color:#FFF;
 /*background-color:#FE4110;*/
 background-color:JOF_RED;
-height: 16px;
+height: 20px; /* HEIGHT_NAV - padding-top */
 }
 
 a.top-nav:hover, li.top-nav:hover {

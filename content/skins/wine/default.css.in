@@ -22,6 +22,8 @@
 #include "block-map.css.h"
 #include "block-calendar.css.h"
 #include "block-story.css.h"
+#include "util-form.css.h"
+#include "block-video.css.h"
 
 /* SECTION 4: The bits */
 body {
@@ -261,4 +263,10 @@ border:1px solid WINESKIN_BORDER;
 .image-caption {
 display:block;
 text-align:center;
+}
+
+.youtube-embed {
+width:480px;
+height:385px;
+margin: 5px auto 5px auto;
 }

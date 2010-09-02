@@ -1,0 +1,26 @@
+<div class="block-video block-video-div block-video-youtube">
+<?php
+//
+// REQUIRED PARAMETERS:
+// @param $youtube_video_id YouTube video identifier
+// 
+// OPTIONAL PARAMETERS:
+// @param $youtube_video_width Override skin width 
+// @param $youtube_video_height Override skin height
+//        
+
+$youtube_video_prefix="http://www.youtube.com/v/";
+
+print '<object class="block-video block-video-youtube">';
+print '<param name="movie" value="'.$youtube_video_prefix.$youtube_video_id.'?fs=1&amp;hl=en_US"></param>';
+print '<param name="allowFullScreen" value="true"></param>';
+print '<param name="allowscriptaccess" value="always"></param>';
+print '<embed class="block-video block-video-youtube" src="'.$youtube_video_prefix.$youtube_video_id.'?fs=1&amp;hl=en_US" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true"></embed>';
+print '</object>';
+
+   // Clear parameters
+unset($youtube_video_id);
+unset($youtube_video_width);
+unset($youtube_video_height);
+?>
+</div>

@@ -1,5 +1,5 @@
 .story-div {
-width:90%;
+width:95%;
 margin-left:auto;
 margin-right:auto;
 }
@@ -12,20 +12,20 @@ border-bottom: 2px solid WINESKIN_DARKER_RED;
 h1.story-headline {
 text-align:right;
 font-size:20pt;
-width:90%;
+width:100%;
 }
 
 h2.story-headline {
 font-size:15pt;
-width:80%
+width:90%
 }
 
-img.story-lede {
+.story-lede {
 float:left;
 margin:5px;
 }
 
-img.story-banner {
+.story-banner {
 display:block;
 margin-left:auto;
 margin-right:auto;
