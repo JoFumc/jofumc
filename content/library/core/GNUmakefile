@@ -22,6 +22,8 @@ include $(PROJECT_ROOT)/mk/common.mk
 ##
 PHPSRCS=$(wildcard *.php.in)
 PHPOBJS=$(PHPSRCS:%.php.in=%.php)
+JSSRCS=$(wildcard *.js.in)
+JSOBJS=$(JSSRCS:%.js.in=%.js)
 
 OBJS=$(PHPOBJS) $(JSOBJS) $(HTMLOBJS)
 
