@@ -1,0 +1,43 @@
+// ////////////////////////////////////////////////////////////////////////
+//
+// @file util-core.js
+// 
+// @brief Javascript implementation of basic support utilities
+//
+// @details 
+// This file implements common client-side tools and utilities.
+//
+// ////////////////////////////////////////////////////////////////////////
+
+// All modules have a name to identify themselves.
+var ak_module='util-core';
+var ak_cookiePrefix='jof-';
+
+
+// ////////////////////////////////////////////////////////////////////////
+// ak_setCookie() -- Set a cookie
+//
+// @param cName Name of the cookie to set
+// @param cValue Value of the cookie to set
+// @param cDays Number of days the cookie should be valid (0 for "forever")
+//
+// @return Nothing
+//
+// NOTE: For our purposes, "forever" is ~10 years
+// NOTE: We expect the input to be urlencoded already.
+function ak_setCookie(cName,cValue,cDays)
+{
+    /* Step 1: calculate expiry time */
+    var edays=cDays;
+    var etime=new Date();
+    if ((cDays == null) || (cDays==0)) { edays=3650; }
+    etime.setDate(etime.getDate()+edays);
+
+    /* Step 2: set the cookie name */
+    if (cName.substr(0,ak_cookiePrefix.length) != ak_cookiePrefix) {
+        cName=ak_cookiePrefix.concat(cName);
+    }
+
+    /* Step 3: actually set the cookie */
+    document.cookie=cName+'='+cValue+';expires='+etime.toUTCString();
+}
