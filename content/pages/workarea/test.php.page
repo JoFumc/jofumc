@@ -1,5 +1,0 @@
-<?php
-/*phpinfo();*/
-$qs=http_build_query($_GET);
-printf("%s",$qs);
-?>
