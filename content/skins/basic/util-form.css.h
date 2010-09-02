@@ -2,6 +2,7 @@
 
 .login-form-div {
 float:left;
+margin:10px;
 }
 
 .login-form-label {

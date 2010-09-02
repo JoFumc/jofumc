@@ -3,12 +3,35 @@
 require_once("library/core/util-skin.php");
 skin_include("login-processor-pre.php");
 ?>
+<h1 class="story-headline">Login</h1>
 <?php
 // Open a connection to the DB
 require_once("library/core/util-db.php");
-echo "Checking user(".$_REQUEST['username'].") and password(".$_REQUEST['password'].");";
 // Test for good username/password combo
-$userlist=db_userlist($_REQUEST['username'],$_REQUEST['password']);
+$user=$_REQUEST['username'];
+$pass=$_REQUEST['password'];
+$userlist=db_userlist($user,$pass);
+if ((null==$userlist) || !array_key_exists($user,$userlist))
+{
+  // Login failure -- show login form again
+    // REQUIRED PARAMTERS  
+  $login_form_referrer=$_REQUEST['referrer'];
+    // OPTIONAL PARAMETERS
+  $login_form_header="blocks/core/block-login-fail-header.php";
+  $login_form_footer="blocks/core/block-login-fail-footer.php";
+  require("blocks/core/block-login-form.php");
+}
+else
+{
+  // Login success -- offer option to go back
+  echo "<h2 class=\"story-headline\">Success</h2>";
+  echo "<span class=\"story-span\">";
+  echo "Welcome back, ".$userlist[$user]->displayname.".";
+  echo "</span>";
+  echo "<a href=\"".$_REQUEST['referrer']."\" title=\"Continue...\">Continue</a> ";
+  echo "what you were doing, or head over to your";
+  echo " <a href=\"/user.php?name=".$user."\" title=\"Dashboard\">dashboard</a>.";
+}
 ?>
 <?php
 // If the skin has post-content setup, include it here.

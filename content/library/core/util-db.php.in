@@ -71,10 +71,14 @@ function db_userlist($name=null,$pass=null)
   $ct=0;
   while ($row=mysql_fetch_array($result))
   {
-    $userlist[$ct]=new akUser($row['username']);
+    /* Step 3.1: Create the new reference */
+    $userlist[$row['username']]=new akUser($row['username']);
+    /* Step 3.2: Fill in the remaining fields */
+    $userlist[$row['username']]->email = $row['email'];
+    $userlist[$row['username']]->displayname = $row['display'];
+    $userlist[$row['username']]->fullname = $row['fullname'];
     $ct++;
   }
-  echo "Found ".$ct." matches.";
     
   return $userlist;
 }

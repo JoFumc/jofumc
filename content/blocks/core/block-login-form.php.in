@@ -1,0 +1,53 @@
+<?php
+//
+// REQUIRED PARAMETERS:
+// @param $login_form_referrer URL of original referrer.
+// 
+// OPTIONAL PARAMETERS:
+// @param $login_form_header PHP file containing pre-form information
+// @param $login_form_footer PHP file containing post-form information
+//        
+
+// If the skin has pre-content setup, include it here.
+require_once("library/core/util-skin.php");
+skin_include("block-login-form-pre.php");
+?>
+<div class="story-div">
+<span class="story-span">
+<?php
+if (isset($login_form_header)) @include($login_form_header);
+?>
+</span>
+<div class="form-div login-form-div">
+<form action="/login-processor.php" method="post" id="login-form">
+
+<div class="form-item-div form-text-entry-div">
+<label for="login-form-username" class="login-form-label">Username:</label>
+<input id="login-form-username" name="username" type="text" maxlength="256" size="20" class="form-text-entry" placeholder="Enter username or email"/>
+</div>
+
+<div class="form-item-div form-password-entry-div">
+<label for="login-form-password" class="login-form-label">Password:</label>
+<input id="login-form-password" name="password" type="password" maxlength="256" size="20" class="form-password-entry" placeholder="Enter password"/>
+</div>
+
+<div class="form-item-div form-submit-div">
+<input id="login-form-submit" name="submit" type="submit" class="form-button form-button-submit" value="Log in"/>
+</div>
+
+<div class="form-item-div form-hidden-div">
+<?php
+echo "<input id=\"login-form-referrer\" name=\"referrer\" type=\"hidden\" class=\"form-hidden-entry\" value=\"".$login_form_referrer."\"/>";
+?>
+</div>
+
+</form>
+</div>
+<?php
+if (isset($login_form_footer)) @include($login_form_footer);
+?>
+</div>
+<?php
+// If the skin has post-content setup, include it here.
+skin_include("block-login-form-post.php");
+?>
