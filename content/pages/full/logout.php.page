@@ -1,0 +1,7 @@
+<div id="logout-story-div" class="story-div">
+<h1 class="story-headline">Logout</h1>
+<h2 class="story-headline">Success</h2>
+<span class="story-span">
+You have been successfully logged out.
+</span>
+</div>

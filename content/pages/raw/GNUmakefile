@@ -8,8 +8,8 @@
 ##
 firstrule: all
 PROJECT=jofrr
-PROJECT_ROOT=../..
-SUBDIRS=full workarea multibar raw
+PROJECT_ROOT=../../..
+SUBDIRS=
 
 ##
 ## Section 2: includes
@@ -22,12 +22,16 @@ include $(PROJECT_ROOT)/mk/common.mk
 ##
 PHPSRCS=$(wildcard *.php.in)
 PHPOBJS=$(PHPSRCS:%.php.in=%.php)
+TEMPLATES=$(wildcard *.tmpl)
 
 OBJS=$(PHPOBJS) $(JSOBJS) $(HTMLOBJS)
 
 ##
 ## Section 3: Common rules
 ##
+
+$(OBJS): $(TEMPLATES)
+
 all: $(OBJS)
 	$(DESCEND)
 
@@ -43,8 +47,8 @@ clobber:: local-clobber
 	$(DESCEND)
 
 install: all
-	$(call TOOL_MKDIR,$(STAGING_ROOT)/$(PROJECT_SUBDIR),0755)
-	@$(foreach obj,$(OBJS),$(call TOOL_INSTALL,$(obj),0644,$(STAGING_ROOT)/$(PROJECT_SUBDIR)))
+	$(call TOOL_MKDIR,$(CONTENT_ROOT),0755)
+	@$(foreach obj,$(OBJS),$(call TOOL_INSTALL,$(obj),0644,$(CONTENT_ROOT)))
 	$(DESCEND)
 
 showcfg::

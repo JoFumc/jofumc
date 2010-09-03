@@ -54,4 +54,17 @@ function config_getValue($token=null,$source=CONFIG_SOURCE_ANY)
   return "default";
 }
 
+/**
+ * config_logout() -- Do any logout processing
+ *
+ * NOTE: This must be called before anything is
+ *       emitted.
+ */
+function config_logout()
+{
+  setcookie("jof-user","guest",time()-3600);
+  $_COOKIE["jof-user"] = "guest";
+  setcookie("jof-session-id","",time()-3600);
+  $_COOKIE["jof-session-id"] = "";
+}
 ?>

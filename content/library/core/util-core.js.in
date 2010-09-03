@@ -14,6 +14,9 @@ var ak_module='util-core';
 var ak_cookiePrefix='jof-';
 
 
+#include "util-menu.js.h"
+
+
 // ////////////////////////////////////////////////////////////////////////
 // ak_setCookie() -- Set a cookie
 //
@@ -40,4 +43,26 @@ function ak_setCookie(cName,cValue,cDays)
 
     /* Step 3: actually set the cookie */
     document.cookie=cName+'='+cValue+';expires='+etime.toUTCString();
+}
+
+// ////////////////////////////////////////////////////////////////////////
+// ak_spinner() -- Show a spinner in a div
+//
+// @param divName Name (id) of the div to spin
+// @param skinName Name of the active skin
+//
+// @return Nothing
+//
+function ak_spinner(divName,skinName)
+{
+    /* Step 1: build spinner href */
+    var spinref="/skins/"+skinName+"/spinner.gif";
+
+    /* Step 2: find element */
+    var spindiv=document.getElemementById(divName);
+    
+    /* Step 3: Replace innerHTML */
+    try {
+        spindiv.innerHTML='<img src="'+spinref+'" alt="Waiting..."/>';
+    } catch (err) {}
 }
