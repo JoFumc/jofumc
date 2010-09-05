@@ -41,6 +41,10 @@ echo "<input id=\"login-form-referrer\" name=\"referrer\" type=\"hidden\" class=
 ?>
 </div>
 
+<div class="form-item-div form-hidden-div">
+<input type="hidden" name="auth-action" value="login"/>
+</div>
+
 </form>
 </div>
 <?php

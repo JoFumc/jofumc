@@ -1,0 +1,14 @@
+<?php
+/* Step 1: Gather/store skin information */
+require_once("library/core/util-skin.php");
+skin_storeName();
+
+/* Step 2: Authentication handling */
+require_once("library/core/util-auth.php");
+switch ($_REQUEST['auth-action'])
+{
+  case 'logout': auth_logout(); break;
+  case 'login':  auth_login(); break;
+  default:       auth_validate(); break;
+}
+?>

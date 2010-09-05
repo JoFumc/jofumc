@@ -6,14 +6,14 @@ skin_include("block-nav-pre.php");
 <div id="top-nav-div">
 <ul class="top-nav">
 <?php
-if (!isset($_COOKIE["jof-user"]) || ($_COOKIE["jof-user"] == "guest"))
+if ($auth_user->name=='default')
 {
    print '<li class="top-nav-meta"><a class="top-nav" href="/login.php">Login</a></li>';
 }
 else
 {
-   print '<li class="top-nav-meta"><a class="top-nav" href="/logout.php?action=logout">Logout</a></li>';
-   print '<li class="top-nav-meta"><a class="top-nav" href="/upload.php?user='.$_COOKIE["jof-user"].'">Upload</a></li>';
+   print '<li class="top-nav-meta"><a class="top-nav" href="/logout.php?auth-action=logout">Logout</a></li>';
+   print '<li class="top-nav-meta"><a class="top-nav" href="/upload.php?user='.$auth_user->name.'">Upload</a></li>';
 }
 ?>
 <li class="top-nav"><a class="top-nav" href="/" title="Journey of Faith home">Home</a></li>

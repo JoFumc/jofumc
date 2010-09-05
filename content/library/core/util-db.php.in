@@ -82,4 +82,28 @@ function db_userlist($name=null,$pass=null)
     
   return $userlist;
 }
+
+/***********************************************
+ * db_validateUser() -- Validate a user session
+ *
+ * @param name Username to check
+ * @param sess Session key to check
+ *
+ * CLEAN: Scrub input!
+ */
+function db_validateUser($name="default",$sess="")
+{
+  /* Step 1: degenerate case; default needs no session */
+  if ($name=="default") return true; 
+
+  /* Step 2: DB lookup/update session... */
+	/* CLEAN: TODO */
+
+  /* Step 3: Send back results */
+	/* CLEAN: Change this hack */
+  if ($name==$sess) return true;
+
+  /* Step 4: No match */
+  return false;
+}
 ?>

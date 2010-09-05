@@ -5,13 +5,8 @@ skin_include("login-processor-pre.php");
 ?>
 <h1 class="story-headline">Login</h1>
 <?php
-// Open a connection to the DB
-require_once("library/core/util-db.php");
-// Test for good username/password combo
-$user=$_REQUEST['username'];
-$pass=$_REQUEST['password'];
-$userlist=db_userlist($user,$pass);
-if ((null==$userlist) || !array_key_exists($user,$userlist))
+// Test for good username/password combo (test happened in 'early' block)
+if ((null==$auth_user) || ($auth_user->name == 'default'))
 {
   // Login failure -- show login form again
     // REQUIRED PARAMTERS  
@@ -24,13 +19,9 @@ if ((null==$userlist) || !array_key_exists($user,$userlist))
 else
 {
   
-  $displayname=$userlist[$user]->display;
-  // Login success 
-    // Store username in cookies
-  echo "<script type=\"text/javascript\">ak_setCookie('user','".$user."');</script>";
-  echo "<script type=\"text/javascript\">ak_setCookie('displayname','".$displayname."');</script>";
-    // CLEAN: Generate session keys; for now, use user as session key !INSECURE!
-  echo "<script type=\"text/javascript\">ak_setCookie('session-id','".$user."');</script>";
+  $displayname=$auth_user->display;
+  $user=$auth_user->name;
+  
     // Minor welcome blurb
   echo "<h2 class=\"story-headline\">Success</h2>";
   echo "<span class=\"story-span\">";

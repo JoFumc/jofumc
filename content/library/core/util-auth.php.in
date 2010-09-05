@@ -1,0 +1,118 @@
+<?php
+/****************************************************************************
+ * util-auth.php -- Generic authentication handling
+ *
+ ***************************************************************************/
+require_once("library/core/util-config.php");
+require_once("library/core/util-db.php");
+require_once("library/core/class-user.php");
+
+/* Global authenticated user info */
+   /* NOTE: We set this here to guarantee that it is set
+    *       for other script activity. 
+    */
+$auth_user = new akUser('default');
+$auth_prev = null;
+
+
+/**
+ * auth_validate() -- Validate an existing user/session
+ *
+ * NOTE: This must be called before anything is
+ *       emitted.
+ */
+function auth_validate()
+{
+  global $auth_user;
+  $user=config_getValue("user");
+  $sess=config_getValue("session-id");
+
+  /* Step 1: Degenerate case, don't bother */
+  if ($user=="default") return;
+
+  /* Step 2: Had something, validate it */
+    /* Step 2.1: Make sure the user exists at all */
+  $valid=db_userlist($user); 
+  if ((null == $valid) || (!array_key_exists($user,$valid)))
+  {
+    /* Invalid user; leave auth info as default and return 
+     * failure.
+     */
+    return false; 
+  }
+    /* Step 2.2: Check session id */
+  if (!db_validateUser($user,$sess)) {
+    /* Session expired. 
+     * Mark old user and leave current set to 'default' 
+     */
+    $auth_old = new akUser($user);
+    return false;
+  }
+
+  /* Step 3: We're valid.  Set up and return */
+  $auth_user = $valid[$user];
+  return true;
+
+}
+
+/**
+ * auth_login() -- Generate a session for a user
+ *
+ * NOTE: This must be called before anything is
+ *       emitted.
+ */
+function auth_login()
+{
+  global $auth_user;
+  /* Step 1: Get info from URL/form/cookies */
+  $user=config_getValue("username");
+  $pass=config_getValue("password");
+  
+
+  /* Step 2: Validate against the DB */
+  $valid=db_userlist($user,$pass);
+  if ((null == $valid) || (!array_key_exists($user,$valid)))
+  {
+    /* FAILED; return without updating */
+    return false;
+  }
+
+  /* Step 3: Generate session key */
+	/* CLEAN: TODO */
+  /* setcookie("jof-session-id",generated key,time()+3000000); */
+  setcookie("jof-session-id",$valid[$user]->name,time()+300000);
+  $_COOKIE["jof-session-id"] = $valid[$user]->name;
+
+  /* Step 4: Set cookies for subsequent requests */
+  setcookie("jof-user",$valid[$user]->name,time()+300000);
+  $_COOKIE["jof-user"] = $valid[$user]->name;
+
+  /* Step 5: Cache our reference */ 
+  $auth_user=$valid[$user];
+  return true;
+}
+
+/**
+ * auth_logout() -- Do any logout processing
+ *
+ * NOTE: This must be called before anything is
+ *       emitted.
+ */
+function auth_logout()
+{
+  global $auth_user;
+  /* Step 1: Clear any cookies */
+  setcookie("jof-user","default",time()-3600);
+  $_COOKIE["jof-user"] = "default";
+  setcookie("jof-session-id","",time()-3600);
+  $_COOKIE["jof-session-id"] = "";
+
+  /* Step 2: Wipe the auth user */
+  if ($auth_user->name != 'default')
+  {
+    $auth_user = new akUser('default');
+  }
+
+  return true;
+}
+?>
