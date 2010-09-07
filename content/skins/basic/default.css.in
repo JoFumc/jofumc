@@ -6,15 +6,15 @@
 #define WIDTH_APP      460px /*   App area (left workarea) */
 #define WIDTH_MULTIBAR 180px /*   Multibar (right workarea) */
 #define HEIGHT_CONTENT 400px 
-  /* }}}2 */
+  /* }}}2 Common dimensions */
   /* Skin-specific colors {{{2 */
 #define JOF_RED         #C82020
 #define JOF_DARK_RED    #851414
 #define JOF_DARKER_RED  #641010
 #define JOF_LIGHT_RED   #E83030
 #define JOF_LIGHTER_RED #F84040
-  /* }}}2 */
-/* }}}1 */
+  /* }}}2 Skin-specific colors */
+/* }}}1 Values and macros (common and skin-specific) */
 /* SECTION 2: Common CSS for all skins {{{1 */
 #include "../common/default.css.h"
 /* }}}1 */
@@ -149,6 +149,7 @@ width:WIDTH_FULL;
 height: 36px;
 margin: 0px auto 0px auto;
 }
+
 .footer-text {
 display:block;
 font-size:9pt;
@@ -168,7 +169,6 @@ text-align: center;
 #footer-validator-div {
 }
   /* }}}3 Footer contents */
-
 /* }}}2 Footer */
 /* SECTION 4.3: Partner links {{{2 */
 #partner-div {

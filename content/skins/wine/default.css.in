@@ -1,31 +1,26 @@
-/* SECTION 1: Common values and macros */
-  /* Colors */
-#define WINESKIN_RED         #983B59
-#define WINESKIN_DARK_RED    #66273B
-#define WINESKIN_DARKER_RED  #4C1E2D
-#define WINESKIN_LIGHT_RED   #A84B69
-#define WINESKIN_LIGHTER_RED #B85B79
-#define WINESKIN_BORDER #333
-
-  /* Dimensions */
+/* SECTION 1: Values and macros (common and skin-specific) {{{1 */
+  /* Common dimensions {{{2 */
 #define WIDTH_FULL     880px /* overall width */
 #define WIDTH_SIDEBAR  180px /* width of primary sidebar */
 #define WIDTH_WORKAREA 700px /* width of workarea */
 #define WIDTH_APP      520px   /* app part of workarea */
 #define WIDTH_MULTIBAR 180px   /* multibar part of workarea */
 #define HEIGHT_CONTENT 400px
-
-/* SECTION 2: Import common CSS */
+  /* }}}2 Common dimensions */
+  /* Skin-specific colors {{{2 */
+#define WINESKIN_RED         #983B59
+#define WINESKIN_DARK_RED    #66273B
+#define WINESKIN_DARKER_RED  #4C1E2D
+#define WINESKIN_LIGHT_RED   #A84B69
+#define WINESKIN_LIGHTER_RED #B85B79
+#define WINESKIN_BORDER      #333
+  /* }}}2 Skin-specific colors */
+/* }}}1 Values and macros (common and skin-specific) */
+/* SECTION 2: Common CSS for all skins {{{1 */
 #include "../common/default.css.h"
-
-/* SECTION 3: Import block CSS */
-#include "block-map.css.h"
-#include "block-calendar.css.h"
-#include "block-story.css.h"
-#include "util-form.css.h"
-#include "block-video.css.h"
-
-/* SECTION 4: The bits */
+/* }}}1 */
+/* SECTION 3: Common toplevel containers {{{1 */
+  /* These control the base look and layout; required for all skins */
 body {
 color: #333;
 font-family:'lucida grande',tahoma,verdana,arial,sans-serif;
@@ -35,33 +30,65 @@ background: #FFF url('/skins/wine/red_bar.png') repeat-x;
 PACKED();
 }
 
-#red-bar-spacer {
+#content-div {
 display:block;
-height:10px;
-width:100%;
-}
-
-#red-bar-content {
 width:WIDTH_FULL;
-height:32px;
-margin:0 auto 0 auto;
+margin: 0px auto auto auto;
+min-height:HEIGHT_CONTENT;
+height:auto;
 }
 
-#red-bar-logo {
-width:WIDTH_SIDEBAR;
-height:32px;
+#sidebar-div {
 float:left;
-margin:auto;
+display:block;
+width:WIDTH_SIDEBAR;
+min-height:HEIGHT_CONTENT;
+border:0px;
+margin:0px;
+padding:0px;
+height:600px;
 }
 
-/* Special images */
-img.frameless {
-margin:0px;
-border:0px;
+#workarea-div {
+float:left;
+display:block;
+position:static;
+width:WIDTH_WORKAREA;
+min-height:HEIGHT_CONTENT;
+border-right:1px solid WINESKIN_BORDER;
+border-bottom:1px solid WINESKIN_BORDER;
+border-left:1px solid WINESKIN_BORDER;
+border-top:0px;
+margin:0px -1px -1px -1px;
 padding:0px;
 }
 
-/* NAV section */
+#application-div {
+float:left;
+display:block;
+width:WIDTH_APP;
+min-height:HEIGHT_CONTENT;
+border:0px;
+margin:0px;
+padding:0px;
+}
+
+#multibar-div {
+float:left;
+display:block;
+width:WIDTH_MULTIBAR;
+min-height:HEIGHT_CONTENT;
+border:0px;
+margin:0px;
+overflow:hidden;
+padding:0px;
+}
+
+#tagline-div {
+}
+/* }}}1 Common toplevel containers */
+/* SECTION 4: Common toplevel content {{{1 */
+/* SECTION 4.1: Main navigation (top-nav) {{{2 */
 #top-nav-div {
 float:right;
 border-top:1px solid WINESKIN_BORDER;
@@ -117,6 +144,35 @@ a.top-nav:hover, li.top-nav:hover, li.top-nav-meta:hover {
 background-color:WINESKIN_LIGHTER_RED;
 color:#FFF;
 }
+/* }}}2 Main navigation (top-nav) */
+/* SECTION 4.2: Footer {{{2 */
+  /* Footer overall {{{3 */
+#footer-div {
+width:WIDTH_FULL;
+height: 36px;
+margin: 0px auto 0px auto;
+}
+
+.footer-text {
+display:block;
+font-size:9pt;
+font-weight: normal;
+width: WIDTH_FULL;
+margin:0px auto 0px auto;
+border:0px;
+padding:0px;
+text-align: center;
+}
+  /* }}}3 Footer overall */
+  /* Footer contents {{{3 */
+#footer-copyright-div {
+}
+#footer-contact-div {
+}
+#footer-validator-div {
+}
+  /* }}}3 Footer contents */
+/* }}}2 Footer */
 
 /* PARTNER section */
 #partner-div {
@@ -162,84 +218,6 @@ overflow:hidden;
 height: 36px;
 }
 
-/* FOOTER section */
-#footer-div {
-width:WIDTH_FULL;
-height: 36px;
-margin: 0px auto 0px auto;
-}
-
-#copyright-div, .footer-text {
-display:block;
-font-size:9pt;
-font-weight: normal;
-width: WIDTH_FULL;
-margin:0px auto 0px auto;
-border:0px;
-padding:0px;
-text-align: center;
-}
-
-/* CONTENT PANES */
-#content-div {
-display:block;
-width:WIDTH_FULL;
-margin: 0px auto auto auto;
-min-height:HEIGHT_CONTENT;
-height:auto;
-}
-
-#sidebar-div {
-float:left;
-display:block;
-width:WIDTH_SIDEBAR;
-min-height:HEIGHT_CONTENT;
-border:0px;
-margin:0px;
-padding:0px;
-height:600px;
-}
-
-#workarea-div {
-float:left;
-display:block;
-position:static;
-width:WIDTH_WORKAREA;
-min-height:HEIGHT_CONTENT;
-border-right:1px solid WINESKIN_BORDER;
-border-bottom:1px solid WINESKIN_BORDER;
-border-left:1px solid WINESKIN_BORDER;
-border-top:0px;
-margin:0px -1px -1px -1px;
-padding:0px;
-}
-
-#application-div {
-float:left;
-display:block;
-width:WIDTH_APP;
-min-height:HEIGHT_CONTENT;
-border:0px;
-margin:0px;
-padding:0px;
-}
-
-#multibar-div {
-float:left;
-display:block;
-width:WIDTH_MULTIBAR;
-min-height:HEIGHT_CONTENT;
-border:0px;
-margin:0px;
-overflow:hidden;
-padding:0px;
-}
-
-#validator-div {
-width:180px;
-float:right;
-}
-
 /*
  * Generic block support 
  */
@@ -263,6 +241,31 @@ border:1px solid WINESKIN_BORDER;
 .image-caption {
 display:block;
 text-align:center;
+}
+
+#validator-div {
+width:180px;
+float:right;
+}
+
+
+#red-bar-spacer {
+display:block;
+height:10px;
+width:100%;
+}
+
+#red-bar-content {
+width:WIDTH_FULL;
+height:32px;
+margin:0 auto 0 auto;
+}
+
+#red-bar-logo {
+width:WIDTH_SIDEBAR;
+height:32px;
+float:left;
+margin:auto;
 }
 
 .youtube-embed {

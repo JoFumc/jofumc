@@ -33,8 +33,7 @@ img.frameless {
 PACKED();
 }
 
-.block-centered {
-margin-left:auto;
-margin-right:auto;
+.image-caption {
+display:block;
+text-align:center;
 }
-
