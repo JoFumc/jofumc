@@ -5,13 +5,24 @@ skin_include("block-footer-pre.php");
 ?>
 <div id="footer-div">
 <div id="copyright-div">
-<span class="footer-text">Copyright &copy; 2010 Journey Of Faith UMC</span>
+<span class="footer-text">Copyright &copy; 2010 Journey Of Faith UMC, (512)&nbsp;255-8403</span>
 </div>
 <div id="footer-info-div">
 <span class="footer-text">
 <a href="/map.php" title="Directions to the Church">7301 County Road 110, Round Rock, Texas</a>
 </span>
-<span class="footer-text">(512)&nbsp;255-8403</span>
+<span class="footer-text">
+<?php
+require_once("library/core/class-user.php");
+if ($auth_user->name == "default") {
+  print 'Not logged in.';
+}
+else
+{
+  print 'Logged in as '.$auth_user->displayname.'.';
+}
+?>
+</span>
 </div>
 <div id="validator-div">
 <a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0 Transitional" style="height: 31px; width: 88px; border:0" /></a>

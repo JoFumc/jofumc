@@ -1,11 +1,22 @@
 /* Form processing DIV */
 
-.login-form-div {
+.login-form {
 float:left;
 margin:10px;
 }
 
-.login-form-label {
+.form-div {
+}
+
+.form-item-div {
 display:block;
+}
+
+.form-item-label {
+float:left;
 font-weight:bold;
+}
+
+.form-item-text {
+clear:right;
 }

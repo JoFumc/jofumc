@@ -1,0 +1,232 @@
+<?php
+/****************************************************************************
+ * class-form.php -- Define object classes for forms
+ ***************************************************************************/
+
+/*
+ * CONSTANTS
+ */
+  /* Encodings */
+define("FORM_FORMAT_URL","application/x-www-form-urlencoded");
+define("FORM_FORMAT_BINARY","multipart/form-data");
+  /* Processor methods */
+define("FORM_METHOD_GET","get");
+define("FORM_METHOD_POST","post");
+  /* Input types */
+define("FORM_INPUT_HIDDEN","hidden");
+define("FORM_INPUT_BUTTON","button");
+define("FORM_INPUT_SUBMIT","submit");
+define("FORM_INPUT_FILE","file");
+define("FORM_INPUT_CHECK","checkbox");
+define("FORM_INPUT_TEXT","text");
+define("FORM_INPUT_TEXTAREA","textarea");
+define("FORM_INPUT_PASSWORD","password");
+
+/*
+ * akFormItem -- Individual form element, union of all item types
+ */
+
+class akFormItem
+{
+  /* Basic public members */
+  public $id;    // Item identifier (DOM)
+  public $name;  // Item name (form field name)
+  public $type;  // Item type (hidden, text, button, etc.) 
+  public $value; // Currently-assigned value for this form item
+  public $label; // If non-empty, label for item (makes a new DOM element)
+  public $hsize;  // Size attribute (columns)
+  public $max_hsize; // Max-size attribute (columns)
+  public $vsize;     // Size attribute (rows)
+
+  /* Non-standard bits */
+  public $hint;  // Form element hint (placeholder, perhaps)
+
+  /* Event handlers */
+      /* CLEAN: Add this */
+
+  /* Constructor */
+  function __construct($id=null, $type=null, $name=null, $value=null)
+  {
+    /* Step 1: Load basic member info */
+      /* CLEAN: Throw exception on bad inits? */
+    $this->id = $id;
+    $this->type = $type;
+    $this->name = $name;
+    $this->value = $value;
+
+    /* Step 2: Interpretive defaults, should be overwritten */
+    $this->label = null;  // Must be added by caller
+    $this->hsize=20; // CLEAN: Make this a constant? 
+    $this->vsize=1; 
+    $this->max_hsize=256; // CLEAN: Make this a constant? 
+    $this->hint = null;
+  }
+
+  /* Method to emit the HTML for this item */
+  function emit()
+  {
+    /* DIV container */
+    print '<div class="form-item-div form-item-'.$this->type.'-div">'."\n";
+    /* Have a label? */
+    if (null != $this->label) {
+      print '<label class="form-item-label" for="'.$this->id.'">'.$this->label."</label>\n";
+    }
+    /* Switch on type */
+    switch($this->type) {
+      case FORM_INPUT_HIDDEN: {
+        print '<input ';
+        print '  type="hidden" ';
+        print '  id="'.$this->id.'" ';
+        print '  class="form-item-hidden" ';
+        print '  name="'.$this->name.'" ';
+        print '  value="'.$this->value.'" ';
+        print "/>\n";
+        break;
+      }   
+      case FORM_INPUT_TEXT: {
+        print '<input ';
+        print '  type="text" ';
+        print '  id="'.$this->id.'" ';
+        print '  class="form-item-text" ';
+        print '  name="'.$this->name.'" ';
+        print '  value="'.$this->value.'" ';
+        print '  size="'.$this->hsize.'" ';
+        print '  maxlength="'.$this->max_hsize.'" ';
+        if (null != $this->hint) 
+          print '  placeholder="'.$this->hint.'" ';
+        print "/>\n";
+        break;
+      }
+      case FORM_INPUT_TEXTAREA: {
+        print '<input ';
+        print '  type="text" ';
+        print '  id="'.$this->id.'" ';
+        print '  class="form-item-text" ';
+        print '  name="'.$this->name.'" ';
+        print '  value="'.$this->value.'" ';
+        print '  cols="'.$this->hsize.'" ';
+        print '  rows="'.$this->vsize.'" ';
+        if (null != $this->hint) 
+          print '  placeholder="'.$this->hint.'" ';
+        print "/>\n";
+        break;
+      }
+      case FORM_INPUT_PASSWORD: {
+        print '<input ';
+        print '  type="password" ';
+        print '  id="'.$this->id.'" ';
+        print '  class="form-item-password" ';
+        print '  name="'.$this->name.'" ';
+        print '  value="'.$this->value.'" ';
+        print '  size="'.$this->hsize.'" ';
+        print '  maxlength="'.$this->max_hsize.'" ';
+        if (null != $this->hint) 
+          print '  placeholder="'.$this->hint.'" ';
+        print "/>\n";
+        break;
+      }
+      case FORM_INPUT_SUBMIT: {
+        print '<input ';
+        print '  type="submit" ';
+        print '  id="'.$this->id.'" ';
+        print '  class="form-item-submit" ';
+        print '  name="'.$this->name.'" ';
+        print '  value="'.$this->value.'" ';
+        print "/>\n";
+        break;
+      }
+    }
+
+    print '</div>'."\n";
+  }
+}
+
+/*
+ * akForm -- Structural form object
+ */
+class akForm
+{
+  /* Basic public members */
+  public $id;   // Form identifier (DOM)
+  public $method; // Method for processing
+  public $action; // URL that will process this form
+ 
+  /* Advanced public members */
+  public $format; // How to format data 
+  public $accept; // For uploads, which types to accept
+  public $charset; // What charset the server expects
+
+  /* Private members */
+  private $items; // Array of items 
+  private $count; // Number of child items in form 
+
+  /* Wrapper public members (customization) */
+    /* NOTE: These will be in the form DIV, but
+     *       outside the FORM element.
+     */
+  public $header_text;
+  public $header_file;
+  public $footer_text;
+  public $footer_file;
+
+  /* Event handlers */
+      /* CLEAN: Add this */
+
+  /* Constructor */
+  function __construct($id=null, $action=null, $method=FORM_METHOD_POST)
+  {
+    /* Step 1: Load basic member info */
+      /* CLEAN: Throw exception on bad inits? */
+    $this->id = $id;
+    $this->action = $action;
+    $this->method = $method;
+
+    /* Step 2: Defaults */
+    $this->count=0;
+      /* Caller must set these... */
+    $this->format=null;
+    $this->accept=null;
+    $this->charset=null;
+    $this->header_text=null;
+    $this->header_file=null;
+    $this->footer_text=null;
+    $this->footer_file=null;
+  }
+
+  /* Method to adopt a form item */
+  function adopt($item=null)
+  {
+    if ($item == null) return; // CLEAN: throw a warning here?
+    /* Add to array and bump counter */
+    $this->items[$this->count] = $item;
+    $this->count++;
+  }
+
+  /* Method to emit the HTML for this form */
+  function emit()
+  {
+    print '<div class="form-div">'."\n";
+    if (null != $this->header_text) print $this->header_text;
+    if (null != $this->header_file) @include($this->header_file);
+    print '<form ';
+    print '  id="'.$this->id.'" ';
+    print '  method="'.$this->method.'" ';
+    print '  action="'.$this->action.'" ';
+    if (null != $this->format)
+      print '  enctype="'.$this->format.'" ';
+    if (null != $this->accept)
+      print '  accept="'.$this->accept.'" ';
+    if (null != $this->charset)
+      print '  accept-charset="'.$this->charset.'" ';
+    print ">\n";
+    /* Loop over all items */
+    foreach ($this->items as $item) $item->emit();
+    print "</form>\n";
+    if (null != $this->footer_file) @include($this->footer_file);
+    if (null != $this->footer_text) print $this->footer_text;
+    print "</div>\n";
+  }
+}
+
+
+?>

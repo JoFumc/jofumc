@@ -5,6 +5,7 @@ border-bottom: 2px solid JOF_DARKER_RED;
 
 h1.story-headline {
 font-size:20pt;
+margin:0px;
 }
 
 h2.story-headline {
