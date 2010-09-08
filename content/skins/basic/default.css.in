@@ -336,12 +336,16 @@ width:90%
 .story-lede {
 float:left;
 margin:5px;
+padding:0;
+border:0;
 }
 
 .story-banner {
 display:block;
 margin-left:auto;
 margin-right:auto;
+padding:0;
+border:0;
 }
   /* }}}3 Images/bylines */
   /* Text {{{3 */
