@@ -1,0 +1,191 @@
+<?php
+/****************************************************************************
+ * class-story.php -- Define object classes for stories
+ ***************************************************************************/
+
+/*
+ * CONSTANTS
+ */
+  /* Story chunk types */
+  /* Story headline (h1 element) */
+define("STORY_CHUNK_HEADLINE","headline");
+  /* Story section head (h2 element) */
+define("STORY_CHUNK_SECTION","section");
+  /* Lede image */
+define("STORY_CHUNK_LEDE","lede");
+  /* Banner image */
+define("STORY_CHUNK_BANNER","banner");
+  /* Inline text (may contain HTML) */
+define("STORY_CHUNK_TEXT","text");
+  /* Text from file (may contain HTML/PHP) */
+define("STORY_CHUNK_FILE","file");
+  /* Metadata (comment link, post date, etc) */
+define("STORY_CHUNK_META","meta");
+
+/*
+ * akStoryChunk -- Individual story element, union of all chunk types
+ */
+class akStoryChunk
+{
+  /* Basic public members */
+  public $id;    // DOM element ID
+  public $type;  // Chunk type
+  public $value; // Currently-assigned value; link/text/filename
+  public $url;   // If this item is a link anchor 
+  public $alt;   // For images/links, the ALT or 
+
+  /* Event handlers */
+      /* CLEAN: Add this */
+
+  /* Constructor */
+  function __construct($type=null, $value=null)
+  {
+    /* Step 1: Load basic member info */
+      /* CLEAN: Throw exception on bad inits? */
+    $this->type = $type;
+    $this->value = $value;
+    $this->id = null;
+    $this->url = null;
+    $this->alt = null;
+  }
+
+  /* Method to emit the HTML for this chunk */
+  function emit()
+  {
+    /* If there's a link, wrap it */
+    if (null != $this->url) {
+      print '<a ';
+      print '  class="story-link" ';
+      print '  href="'.$this->url.'" ';
+      if (null != $this->alt)
+         print '  title="'.$this->alt.'" ';
+      print '>';
+    }
+    /* Switch on type */
+    switch($this->type) {
+      case STORY_CHUNK_HEADLINE: {
+        print '<h1 ';
+        print '  class="story-headline" ';
+        if (null != $this->id)
+           print '  id="'.$this->id.'" ';
+        print '>'.$this->value.'</h1>';
+        break;
+      }   
+      case STORY_CHUNK_SECTION: {
+        print '<h2 ';
+        print '  class="story-headline" ';
+        if (null != $this->id)
+           print '  id="'.$this->id.'" ';
+        print '>'.$this->value.'</h2>';
+        break;
+      }   
+      case STORY_CHUNK_LEDE: {
+        print '<img ';
+        print '  class="story-lede" ';
+        if (null != $this->id)
+           print '  id="'.$this->id.'" ';
+        if (null != $this->alt)
+           print '  alt="'.$this->alt.'" ';
+        print '  src="'.$this->value.'" ';
+        print '/>';
+        break;
+      }   
+      case STORY_CHUNK_BANNER: {
+        print '<img ';
+        print '  class="story-banner" ';
+        if (null != $this->id)
+           print '  id="'.$this->id.'" ';
+        if (null != $this->alt)
+           print '  alt="'.$this->alt.'" ';
+        print '  src="'.$this->value.'" ';
+        print '/>';
+        break;
+      }   
+      case STORY_CHUNK_TEXT: {
+        print '<span ';
+        print '  class="story-span" ';
+        if (null != $this->id)
+           print '  id="'.$this->id.'" ';
+        print ">\n";
+        print $this->value;
+        print "\n</span>";
+        break;
+      }   
+      case STORY_CHUNK_META: {
+        print '<span ';
+        print '  class="story-meta" ';
+        if (null != $this->id)
+           print '  id="'.$this->id.'" ';
+        print ">\n";
+        print $this->value;
+        print "\n</span>";
+        break;
+      }   
+      case STORY_CHUNK_FILE: {
+        print '<span ';
+        print '  class="story-span" ';
+        if (null != $this->id)
+           print '  id="'.$this->id.'" ';
+        print ">\n";
+        @include($this->value);
+        print "\n</span>";
+        break;
+      }   
+    }
+    /* Finish the link (if any) */
+    if (null != $this->url) print "</a>";
+    /* Add the newline */
+      print "\n";
+  }
+}
+
+/*
+ * akStory -- Structural story object
+ */
+class akStory
+{
+  /* Basic public members */
+  public $id;   // Story identifier (DOM)
+
+  /* Private members */
+  private $chunks; // Array of story chunks 
+  private $count; // Number of child chunks in story 
+
+  /* Event handlers */
+      /* CLEAN: Add this */
+
+  /* Constructor */
+  function __construct($id=null)
+  {
+    /* Step 1: Load basic member info */
+    $this->id = $id;
+
+    /* Step 2: Defaults */
+    $this->count=0;
+  }
+
+  /* Method to adopt a chunk into a story */
+  function adopt($chunk=null)
+  {
+    if ($chunk == null) return; // CLEAN: throw a warning here?
+    /* Add to array and bump counter */
+    $this->chunks[$this->count] = $chunk;
+    $this->count++;
+  }
+
+  /* Method to emit the HTML for this story */
+  function emit()
+  {
+    print '<div ';
+    if (null != $this->id)
+      print '  id="'.$this->id.'" ';
+    print '  class="story-div" ';
+    print ">\n";
+    /* Loop over all chunks */
+    foreach ($this->chunks as $chunk) $chunk->emit();
+    print "</div>\n";
+  }
+}
+
+
+?>

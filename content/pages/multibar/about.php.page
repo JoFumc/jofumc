@@ -3,7 +3,7 @@
 </div>
 <div class="story-div">
 <h2 class="story-headline">Who we are</h2>
-<a href="http://www.umc.org" alt="United Methodist Church home"><img class="story-lede" src="/skins/common/button_icon_umc_48_white.png" alt="United Methodist Church home"/></a>
+<a href="http://www.umc.org" title="United Methodist Church home"><img class="story-lede" src="/skins/common/button_icon_umc_48_white.png" alt="United Methodist Church home"/></a>
 <span class="story-span">
 Journey of Faith United Methodist Church is a grace-filled Christian 
 community which offers a safe place to ask the tough questions of 
