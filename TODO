@@ -7,6 +7,7 @@ NOW:
 + Schedule (static) block
 + Media uploader (type and date pickers)
 + Per-program/generic  media gallery
++ Add custom icon for conference link 
 -----------------
 SOON:
 -----------------
@@ -14,8 +15,11 @@ SOON:
 + Open-style skin (see Highland Park)
 + Calendar day cache and hover popup (see Agape)
 + Program template/editor
-+ Story editor (program picker)
++ Program picker?
++ Story editor
 + Story page/comment system
++ Fix shadow on custom link icons
++ Make custom icons for facebook/twitter
 + Verse of the day from biblegateway.com
 -----------------
 LATER:
