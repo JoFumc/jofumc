@@ -1,4 +1,4 @@
-/* SECTION 1: Values and macros (common and skin-specific) {{{1 */
+/* SECTION 1:Values and macros (common and skin-specific) {{{1 */
   /* Common dimensions {{{2 */
 #define WIDTH_FULL     850px /* Overall width */
 #define WIDTH_SIDEBAR  210px /* Left column width */
@@ -15,30 +15,30 @@
 #define JOF_LIGHTER_RED #F84040
   /* }}}2 Skin-specific colors */
 /* }}}1 Values and macros (common and skin-specific) */
-/* SECTION 2: Common CSS for all skins {{{1 */
+/* SECTION 2:Common CSS for all skins {{{1 */
 #include "../common/default.css.h"
 /* }}}1 */
-/* SECTION 3: Common toplevel containers {{{1 */
+/* SECTION 3:Common toplevel containers {{{1 */
   /* These control the base look and layout; required for all skins */
 body {
+color:black;
 font-family:sans-serif;
 font-size:11pt;
-background: #FFFFFF url('/skins/basic/gradient_navy.png') repeat-x;
-color:black;
-padding:0px 0px 0px 0px;
-margin:0px 0px 0px 0px;
+font-weight:normal;
+background:#FFF url('/skins/basic/gradient_navy.png') repeat-x;
+PACKED();
 }
 
 #content-div {
 display:block;
 width:WIDTH_FULL;
-min-height: HEIGHT_CONTENT;
-border-left: 1px solid black;
-border-right: 1px solid black;
-border-bottom: 1px solid black;
-border-top: 0;
-margin: 0px auto 0px auto;
-background-color: #FFF;
+margin:0px auto 0px auto;
+min-height:HEIGHT_CONTENT;
+border-left:1px solid black;
+border-right:1px solid black;
+border-bottom:1px solid black;
+border-top:0;
+background-color:#FFF;
 color:black;
 }
 
@@ -46,7 +46,7 @@ color:black;
 float:left;
 display:block;
 width:WIDTH_SIDEBAR;
-min-height: HEIGHT_CONTENT;
+min-height:HEIGHT_CONTENT;
 PACKED();
 }
 
@@ -54,10 +54,10 @@ PACKED();
 float:left;
 display:block;
 width:WIDTH_WORKAREA;
-min-height: HEIGHT_CONTENT;
+min-height:HEIGHT_CONTENT;
 padding:0px;
 border:0px;
-margin: 0 0 0 -1px;
+margin:0 0 0 -1px;
 }
 
 #application-div {
@@ -72,93 +72,97 @@ PACKED();
 float:left;
 display:block;
 width:WIDTH_MULTIBAR;
-min-height: HEIGHT_CONTENT;
+min-height:HEIGHT_CONTENT;
 PACKED();
 }
 
 #tagline-div {
+margin-left:auto;
+margin-right:auto;
+text-align:center;
+font-style:italic;
+font-size:14pt;
 }
 /* }}}1 Common toplevel containers */
-/* SECTION 4: Common toplevel content {{{1 */
-/* SECTION 4.1: Main navigation (top-nav) {{{2 */
+/* SECTION 4:Common toplevel content {{{1 */
+/* SECTION 4.1:Main navigation (top-nav) {{{2 */
 #define HEIGHT_NAV 24px
 #top-nav-div {
-width:WIDTH_FULL;
-margin: 0px auto 0px auto;
-border-left: 1px solid black;
-border-right: 1px solid black;
-border-bottom: 1px solid black;
-background-color: JOF_RED;
+background-color:JOF_RED;
 color:white;
-height: HEIGHT_NAV;
+width:WIDTH_FULL;
+margin:0px auto 0px auto;
+border-left:1px solid black;
+border-right:1px solid black;
+border-bottom:1px solid black;
+height:HEIGHT_NAV;
 }
 
 ul.top-nav {
-font-weight: bold;
-font-size: 12px;
+font-weight:bold;
+font-size:12px;
 margin:0px;
 padding:0px;
-/*background-color: #000;*/
-height: HEIGHT_NAV;
+height:HEIGHT_NAV;
 }
 
 li.top-nav {
-float: left;
-border-right: 1px solid black;
-margin: 0px;
-height: HEIGHT_NAV;
+float:left;
+border-right:1px solid black;
+margin:0px;
 padding:0px;
+height:HEIGHT_NAV;
 }
 
 li.top-nav-meta {
-float: right;
-border-left: 1px solid black;
-margin: 0px;
-height: HEIGHT_NAV;
+float:right;
+border-left:1px solid black;
+margin:0px;
+height:HEIGHT_NAV;
 padding:0px;
 }
 
 li.top-nav-label {
-float: right;
-margin: 0 24px 0 24px;
+float:right;
+margin:0 24px 0 24px;
 border:0;
-height: HEIGHT_NAV;
+height:HEIGHT_NAV;
 color:#AAA;
 }
 
 a.top-nav {
-padding-left: 8px;
-padding-right: 8px;
-padding-top: 4px;
+padding-left:8px;
+padding-right:8px;
+padding-top:4px;
 display:inline-block;
 overflow:hidden;
 color:#FFF;
 background-color:JOF_RED;
-height: 20px; /* HEIGHT_NAV - padding-top */
+height:20px; /* HEIGHT_NAV - padding-top */
 }
 
-a.top-nav:hover, li.top-nav:hover {
+a.top-nav:hover, li.top-nav:hover, li.top-nav-meta:hover {
 color:JOF_RED;
 background-color:#FFF;
 }
 /* }}}2 Main navigation (top-nav) */
-/* SECTION 4.2: Footer {{{2 */
+/* SECTION 4.2:Footer {{{2 */
   /* Footer overall {{{3 */
 #footer-div {
 width:WIDTH_FULL;
-height: 36px;
-margin: 0px auto 0px auto;
+height:36px;
+margin:0px auto 0px auto;
 }
 
 .footer-text {
 display:block;
 font-size:9pt;
-font-weight: normal;
-width: WIDTH_FULL;
+font-weight:normal;
+width:WIDTH_FULL;
 margin:0px auto 0px auto;
 border:0px;
 padding:0px;
-text-align: center;
+text-align:center;
 }
   /* }}}3 Footer overall */
   /* Footer contents {{{3 */
@@ -170,50 +174,48 @@ text-align: center;
 }
   /* }}}3 Footer contents */
 /* }}}2 Footer */
-/* SECTION 4.3: Partner links {{{2 */
+/* SECTION 4.3:Partner links {{{2 */
 #partner-div {
 width:WIDTH_FULL;
-height: 36px;
-margin: 0px auto 0px auto;
+height:36px;
+margin:0px auto;
 }
 
 ul.partner-nav {
-font-weight: normal;
-font-size: 10px;
+font-weight:normal;
+font-size:10px;
 margin:0px;
 padding:0px;
-/*background-color: #000;*/
-height: 36px;
+height:36px;
 }
 
 li.partner-nav-extern {
-float: right;
-border: 0px;
-margin-left: 1px;
-margin-right: 1px;
-padding-top: 2px;
-height: 36px;
+float:right;
+border:0px;
+margin-left:1px;
+margin-right:1px;
+padding-top:2px;
+height:36px;
 }
 
 li.partner-nav-ref {
-float: left;
-border: 0px;
-margin-left: 4px;
-margin-right: 4px;
-padding-top: 2px;
-height: 36px;
+float:left;
+border:0px;
+margin-left:4px;
+margin-right:4px;
+padding-top:2px;
+height:36px;
 }
 
 a.partner-nav {
-padding: 0px;
-border: 0px;
-margin: 0px;
+padding:0px;
+border:0px;
+margin:0px;
 overflow:hidden;
-height: 36px;
+height:36px;
 }
-
 /* }}}2 Partner links */
-/* SECTION 4.4: Generic block support {{{2 */
+/* SECTION 4.4:Generic block support {{{2 */
 .block-outer-div {
 margin-left:auto;
 margin-right:auto;
@@ -227,18 +229,18 @@ margin-right:auto;
 }
 /* }}}2 Generic block support */
 /* }}}1 Common toplevel content */
-/* SECTION 5: Skin-specific toplevel content {{{1 */
+/* SECTION 5:Skin-specific toplevel content {{{1 */
 #skin-basic-header {
 display:block;
 width:WIDTH_FULL;
 height:100px;
-/*background: #FFF url('/skins/basic/header_bg.png') no-repeat; */
-margin: 10px auto 0px auto;
-border: 1px solid black;
+/*background:#FFF url('/skins/basic/header_bg.png') no-repeat; */
+margin:10px auto 0px auto;
+border:1px solid black;
 }
 /* }}}1 Skin-specific toplevel content */
-/* SECTION 6: Application/block content {{{1 */
-/* SECTION 6.1: Forms {{{2 */
+/* SECTION 6:Application/block content {{{1 */
+/* SECTION 6.1:Forms {{{2 */
   /* Generic forms {{{3 */ 
 .form-div {
 }
@@ -263,7 +265,7 @@ margin:10px;
 }
   /* }}}3 Custom (well-known) forms */
 /* }}}2 Forms */
-/* SECTION 6.2: Map blocks {{{2 */
+/* SECTION 6.2:Map blocks {{{2 */
 #define MAP_HEIGHT 350px
 #define MAP_WIDTH  350px
 
@@ -279,7 +281,7 @@ height:MAP_HEIGHT;
 width:MAP_WIDTH;
 }
 /* }}}2 Map blocks */
-/* SECTION 6.3: Calendar {{{2 */
+/* SECTION 6.3:Calendar {{{2 */
   /* Layout {{{3 */
 .block-calendar-div {
 width:90%;
@@ -306,11 +308,18 @@ background-color:JOF_RED;
 }
   /* }}}3 Cell display */
 /* }}}2 Calendar */
-/* SECTION 6.4: Stories {{{2 */
+/* SECTION 6.4:Stories {{{2 */
+  /* General layout {{{3 */
+.story-div {
+width:95%;
+margin-left:auto;
+margin-right:auto;
+}
+  /* }}}3 General layout */
   /* Headlines {{{3 */
 .story-headline {
 color:JOF_DARKER_RED;
-border-bottom: 2px solid JOF_DARKER_RED;
+border-bottom:2px solid JOF_DARKER_RED;
 margin:0px;
 }
 
@@ -320,8 +329,8 @@ font-size:20pt;
 
 h2.story-headline {
 font-size:15pt;
+width:90%
 }
-
   /* }}}3 Headlines */
   /* Images/bylines {{{3 */
 .story-lede {
@@ -346,9 +355,9 @@ text-decoration:underline;
 }
   /* }}}3 */
   /* Metainfo {{{3 */
-  /* }}}3 */
+  /* }}}3 Metainfo */
 /* }}}2 Stories */
-/* SECTION 6.5: Video embeds {{{2 */
+/* SECTION 6.5:Video embeds {{{2 */
   /* Common {{{3 */
 #define WIDTH_VIDEO   480px
 #define HEIGHT_VIDEO  385px
@@ -373,4 +382,3 @@ padding:8px 0px;
   /* }}}3 Source-specific */
 /* }}}2 Video embeds */
 /* }}}1 Application/block content */
-
