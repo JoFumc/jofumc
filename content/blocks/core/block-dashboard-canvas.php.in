@@ -1,0 +1,11 @@
+<?php
+// If the skin has pre-content setup, include it here.
+require_once("library/core/util-skin.php");
+skin_include("block-dashboard-menu-pre.php");
+?>
+<div id="dashboard-menu-div">
+</div>
+<?php
+// If the skin has post-content setup, include it here.
+skin_include("block-dashboard-menu-post.php");
+?>

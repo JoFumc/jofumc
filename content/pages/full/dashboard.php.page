@@ -1,0 +1,17 @@
+<?php
+// If the skin has pre-content setup, include it here.
+require_once("library/core/util-skin.php");
+skin_include("dashboard-pre.php");
+?>
+<?php
+// The dashboard is basically a two-region control
+// panel, with functions in a menu and an application
+// area.
+require("blocks/core/block-dashboard-menu.php");
+require("blocks/core/block-dashboard-canvas.php");
+?>
+<div class="closure-div"></div>
+<?php
+// If the skin has post-content setup, include it here.
+skin_include("dashboard-post.php");
+?>

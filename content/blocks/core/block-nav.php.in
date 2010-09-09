@@ -13,7 +13,7 @@ if ($auth_user->name=='default')
 else
 {
    print '<li class="top-nav-meta"><a class="top-nav" href="/logout.php?auth-action=logout">Logout</a></li>';
-   print '<li class="top-nav-meta"><a class="top-nav" href="/upload.php?user='.$auth_user->name.'">Upload</a></li>';
+   print '<li class="top-nav-meta"><a class="top-nav" href="/dashboard.php">Dashboard</a></li>';
 }
 ?>
 <li class="top-nav"><a class="top-nav" href="/" title="Journey of Faith home">Home</a></li>

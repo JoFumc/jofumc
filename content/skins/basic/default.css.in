@@ -83,6 +83,21 @@ text-align:center;
 font-style:italic;
 font-size:14pt;
 }
+
+#dashboard-menu-div {
+float:left;
+display:block;
+width:WIDTH_SIDEBAR;
+min-height:HEIGHT_CONTENT;
+PACKED();
+}
+
+#dashboard-canvas-div {
+float:left;
+width:WIDTH_WORKAREA;
+PACKED();
+}
+
 /* }}}1 Common toplevel containers */
 /* SECTION 4:Common toplevel content {{{1 */
 /* SECTION 4.1:Main navigation (top-nav) {{{2 */
