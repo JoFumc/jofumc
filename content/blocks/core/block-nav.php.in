@@ -1,28 +1,48 @@
 <?php
+require_once("library/core/class-menu.php");
 // If the skin has pre-content setup, include it here.
 require_once("library/core/util-skin.php");
 skin_include("block-nav-pre.php");
 ?>
-<div id="top-nav-div">
-<ul class="top-nav">
 <?php
+// Make menu
+$topnav = new akMenu("top-nav","top-nav-div");
+// Add meta-items
 if ($auth_user->name=='default')
 {
-   print '<li class="top-nav-meta"><a class="top-nav" href="/login.php">Login</a></li>';
+   $topnav->createItem("top-nav-meta","Login","/login.php");
 }
 else
 {
-   print '<li class="top-nav-meta"><a class="top-nav" href="/logout.php?auth-action=logout">Logout</a></li>';
-   print '<li class="top-nav-meta"><a class="top-nav" href="/dashboard.php">Dashboard</a></li>';
+  $topnav->createItem("top-nav-meta","Logout","/logout.php?auth-action=logout");
+  $topnav->createItem("top-nav-meta","Dashboard","/dashboard.php");
 }
+// Add regular items
+  /* HOME */
+$topnav->createSimpleItem("Home","/","Journey of Faith home");
+  /* ABOUT */
+$about = new akMenuItem("top-nav","About Us","/about.php","Who we are");
+$topnav->adopt($about);
+  /* VISION */
+$topnav->createSimpleItem("Our Vision","/vision.php","How we see it");
+  /* PROGRAMS */
+$topnav->createSimpleItem("Programs","/programs.php","How to participate");
+  /* WORSHIP */
+$topnav->createSimpleItem("Worship","/worship.php","When and how we worship together");
+
+// Add submenus
+  /* ABOUT */
+$aboutPopup = new akMenu("menu-popup","top-nav-about-popup");
+$aboutPopup->createSimpleItem("Overview","/about.php");
+$aboutPopup->createSimpleItem("Staff","/about.php?topic=staff");
+$aboutPopup->createSimpleItem("Affiliations","/about.php?topic=affiliations");
+$about->adopt($aboutPopup);
+
+
+// Emit the menu
+$topnav->emit();
+
 ?>
-<li class="top-nav"><a class="top-nav" href="/" title="Journey of Faith home">Home</a></li>
-<li class="top-nav"><a class="top-nav" href="/about.php" title="Who we are">About Us</a></li>
-<li class="top-nav"><a class="top-nav" href="/vision.php" title="How we see it">Our Vision</a></li>
-<li class="top-nav"><a class="top-nav" href="/programs.php" title="How to participate">Programs</a></li>
-<li class="top-nav"><a class="top-nav" href="/worship.php" title="When and how we worship together">Worship</a></li>
-</ul>
-</div>
 <?php
 // If the skin has post-content setup, include it here.
 skin_include("block-nav-post.php");

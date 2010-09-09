@@ -1,9 +1,19 @@
 <?php
-/* Step 1: Gather/store skin information */
+/* Step 1: Turn on tidy output buffering */
+function scrub_output($outstuff)
+{
+  $tidyopts['indent'] = 1;
+  $tidyopts['wrap'] = 0;
+  $tidyopts['hide-comments'] = true;
+  return(tidy_repair_string($outstuff,$tidyopts));
+}
+ob_start(scrub_output);
+
+/* Step 2: Gather/store skin information */
 require_once("library/core/util-skin.php");
 skin_storeName();
 
-/* Step 2: Authentication handling */
+/* Step 3: Authentication handling */
 require_once("library/core/util-auth.php");
 switch ($_REQUEST['auth-action'])
 {

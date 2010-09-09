@@ -131,21 +131,13 @@ height:HEIGHT_NAV;
 
 li.top-nav-meta {
 float:right;
+height:HEIGHT_NAV;
 border-left:1px solid black;
 margin:0px;
-height:HEIGHT_NAV;
 padding:0px;
 }
 
-li.top-nav-label {
-float:right;
-margin:0 24px 0 24px;
-border:0;
-height:HEIGHT_NAV;
-color:#AAA;
-}
-
-a.top-nav {
+a.top-nav, a.top-nav-meta {
 padding-left:8px;
 padding-right:8px;
 padding-top:4px;
@@ -156,12 +148,53 @@ background-color:JOF_RED;
 height:20px; /* HEIGHT_NAV - padding-top */
 }
 
-a.top-nav:hover, li.top-nav:hover, li.top-nav-meta:hover {
+a.top-nav:hover, a.top-nav-meta:hover, li.top-nav:hover, li.top-nav-meta:hover {
 color:JOF_RED;
 background-color:#FFF;
 }
 /* }}}2 Main navigation (top-nav) */
-/* SECTION 4.2:Footer {{{2 */
+/* SECTION 4.2:Menu generics {{{2 */
+  /* SECTION 4.3: Popup menus {{{3 */
+#define HEIGHT_MENU_POPUP 18px
+div.menu-popup {
+display:none;
+border:1px solid black;
+margin:0px;
+padding:0px;
+}
+
+ul.menu-popup {
+font-weight:bold;
+font-size:12px;
+background-color:JOF_RED;
+color:white;
+}
+
+li.menu-popup {
+border-bottom:1px solid black;
+margin:0px;
+padding:0px;
+height:HEIGHT_MENU_POPUP;
+}
+
+a.menu-popup {
+padding-left:8px;
+padding-right:8px;
+padding-top:4px;
+display:inline-block;
+overflow:hidden;
+color:#FFF;
+background-color:JOF_RED;
+height:14px; /* HEIGHT_MENU_POPUP - padding-top */
+}
+
+a.menu-popup:hover, li.menu-popup:hover {
+color:JOF_RED;
+background-color:#FFF;
+}
+   /* }}}3 Popup menus */
+/* }}}2 Menu generics */
+/* SECTION 4.3:Footer {{{2 */
   /* Footer overall {{{3 */
 #footer-div {
 width:WIDTH_FULL;
@@ -189,7 +222,7 @@ text-align:center;
 }
   /* }}}3 Footer contents */
 /* }}}2 Footer */
-/* SECTION 4.3:Partner links {{{2 */
+/* SECTION 4.4:Partner links {{{2 */
 #partner-div {
 width:WIDTH_FULL;
 height:36px;
@@ -230,7 +263,7 @@ overflow:hidden;
 height:36px;
 }
 /* }}}2 Partner links */
-/* SECTION 4.4:Generic block support {{{2 */
+/* SECTION 4.5:Generic block support {{{2 */
 .block-outer-div {
 margin-left:auto;
 margin-right:auto;

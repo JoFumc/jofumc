@@ -88,6 +88,7 @@ font-size:14pt;
 /* }}}1 Common toplevel containers */
 /* SECTION 4:Common toplevel content {{{1 */
 /* SECTION 4.1:Main navigation (top-nav) {{{2 */
+#define HEIGHT_NAV 32px
 #top-nav-div {
 background-color:WINESKIN_LIGHT_RED;
 color:white;
@@ -97,7 +98,7 @@ border-top:1px solid WINESKIN_BORDER;
 border-left:1px solid WINESKIN_BORDER;
 border-right:1px solid WINESKIN_BORDER;
 border-bottom:0;
-height:32px;
+height:HEIGHT_NAV;
 float:right;
 }
 
@@ -106,22 +107,22 @@ font-weight:bold;
 font-size:12px;
 margin:0px;
 padding:0px;
-height:32px;
+height:HEIGHT_NAV;
 }
 
 li.top-nav {
 float:left;
 PACKED();
-height:32px;
+height:HEIGHT_NAV;
 }
 
 li.top-nav-meta {
 float:right;
+height:HEIGHT_NAV;
 PACKED();
-height:32px;
 }
 
-a.top-nav {
+a.top-nav, a.top-nav-meta {
 padding-left:10px;
 padding-right:10px;
 padding-top:8px;
@@ -132,12 +133,32 @@ background-color:WINESKIN_LIGHT_RED;
 height:22px;
 }
 
-a.top-nav:hover, li.top-nav:hover, li.top-nav-meta:hover {
+a.top-nav:hover, a.top-nav-meta:hover, li.top-nav:hover, li.top-nav-meta:hover {
 color:#FFF;
 background-color:WINESKIN_LIGHTER_RED;
 }
 /* }}}2 Main navigation (top-nav) */
-/* SECTION 4.2:Footer {{{2 */
+/* SECTION 4.2:Menu generics {{{2 */
+  /* SECTION 4.3: Popup menus {{{3 */
+#define HEIGHT_MENU_POPUP 18px
+div.menu-popup {
+display:none;
+}
+
+ul.menu-popup {
+}
+
+li.menu-popup {
+}
+
+a.menu-popup {
+}
+
+a.menu-popup:hover, li.menu-popup:hover {
+}
+   /* }}}3 Popup menus */
+/* }}}2 Menu generics */
+/* SECTION 4.3:Footer {{{2 */
   /* Footer overall {{{3 */
 #footer-div {
 width:WIDTH_FULL;
@@ -167,7 +188,7 @@ float:right;
 }
   /* }}}3 Footer contents */
 /* }}}2 Footer */
-/* SECTION 4.3:Partner links {{{2 */
+/* SECTION 4.4:Partner links {{{2 */
 #partner-div {
 display:inline-block;
 width:WIDTH_SIDEBAR;
@@ -209,7 +230,7 @@ overflow:hidden;
 height:36px;
 }
 /* }}}2 Partner links */
-/* SECTION 4.4:Generic block support {{{2 */
+/* SECTION 4.5:Generic block support {{{2 */
 .block-outer-div {
 margin-left:auto;
 margin-right:auto;
