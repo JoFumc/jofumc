@@ -45,7 +45,7 @@ showcfg::
 	@echo PROJECT_SUBDIR=$(PROJECT_SUBDIR)
 	$(DESCEND)
 
-publish::
+publish:: install
 	$(SAY_IT) "[ PUBLISH ] JOFRR staged content --> $(PUBLISH_ROOT)"
 	@$(foreach pub,$(shell find staging/content/ -type f),$(call TOOL_PUBLISH,$(pub),$(PUBLISH_ROOT)/$(subst staging/content/,,$(pub))))
 
@@ -54,8 +54,6 @@ publish::
 ##
 toplevel-all:
 	$(NOTHING)
-
-	
 
 toplevel-%:
 	$(NOTHING)
