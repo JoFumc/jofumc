@@ -298,25 +298,29 @@ border:1px solid black;
 /* SECTION 6.1:Forms {{{2 */
   /* Generic forms {{{3 */ 
 .form-div {
+margin:0 auto;
 }
 
 .form-item-div {
 display:block;
+text-align:center;
 }
 
 .form-item-label {
-float:left;
+display:block;
+/*float:left; */
 font-weight:bold;
 }
 
 .form-item-text {
 clear:right;
 }
+
   /* }}}3 Generic forms */
   /* Custom (well-known) forms {{{3 */
 #login-form {
-float:left;
-margin:10px;
+display:block;
+margin:10px auto;
 }
   /* }}}3 Custom (well-known) forms */
 /* }}}2 Forms */

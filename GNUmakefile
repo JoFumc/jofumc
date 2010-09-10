@@ -24,7 +24,9 @@ include $(PROJECT_ROOT)/mk/common.mk
 ##
 ## Section 3: Common rules
 ##
-all: toplevel-all
+all: publish
+
+local-all: toplevel-all
 	$(DESCEND)
 
 clean:: toplevel-clean
