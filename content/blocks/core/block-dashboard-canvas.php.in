@@ -1,11 +1,28 @@
 <?php
 // If the skin has pre-content setup, include it here.
 require_once("library/core/util-skin.php");
-skin_include("block-dashboard-menu-pre.php");
+skin_include("block-dashboard-canvas-pre.php");
 ?>
-<div id="dashboard-menu-div">
+<div id="dashboard-canvas-div">
+<?php
+require_once("library/core/class-story.php");
+if (isset($_REQUEST['tool'])) $tool=$_REQUEST['tool'];
+else $tool='blog'; // CLEAN: Choose a better default?
+
+$toolNames = array(
+ 'blog' => "Blog",
+ 'upload' => "Upload",
+ 'news' => "News"
+ );
+
+$cStory = new akStory();
+$cStory->createSimpleChunk(STORY_CHUNK_SECTION,$toolNames[$tool]);
+// CLEAN: Add intro text here? 
+$cStory->emit();
+
+?>
 </div>
 <?php
 // If the skin has post-content setup, include it here.
-skin_include("block-dashboard-menu-post.php");
+skin_include("block-dashboard-canvas-post.php");
 ?>

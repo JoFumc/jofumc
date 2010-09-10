@@ -1,11 +1,26 @@
 <?php
 // If the skin has pre-content setup, include it here.
 require_once("library/core/util-skin.php");
-skin_include("block-dashboard-canvas-pre.php");
+skin_include("block-dashboard-menu-pre.php");
 ?>
-<div id="dashboard-canvas-div">
+<div id="dashboard-menu-div">
+<?php
+// Make main menu container
+$dashMenu = new akMenu("menu-tools","menu-tools-div");
+$dashMenu->setTitle("User Tools");
+
+// Add main items
+$dashMenu->createSimpleItem("New/Edit News Item","/dashboard.php?tool=news");
+$dashMenu->createSimpleItem("New/Edit Events","/dashboard.php?tool=event");
+$dashMenu->createSimpleItem("Upload","/dashboard.php?tool=upload");
+$dashMenu->createSimpleItem("Blog","/dashboard.php?tool=blog");
+$dashMenu->createSimpleItem("Friends","/dashboard.php?tool=friends");
+
+// emit HTML
+$dashMenu->emit();
+?>
 </div>
 <?php
 // If the skin has post-content setup, include it here.
-skin_include("block-dashboard-canvas-post.php");
+skin_include("block-dashboard-menu-post.php");
 ?>

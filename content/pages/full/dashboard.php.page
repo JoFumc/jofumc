@@ -4,10 +4,18 @@ require_once("library/core/util-skin.php");
 skin_include("dashboard-pre.php");
 ?>
 <?php
+// Header
+require_once("library/core/class-story.php");
+$heading=$auth_user->displayname."'s dashboard";
+$dashStory = new akStory();
+$dashStory->createSimpleChunk(STORY_CHUNK_HEADLINE,$heading);
+$dashStory->emit();
+
 // The dashboard is basically a two-region control
 // panel, with functions in a menu and an application
 // area.
 require("blocks/core/block-dashboard-menu.php");
+// Choose contents based on tool
 require("blocks/core/block-dashboard-canvas.php");
 ?>
 <div class="closure-div"></div>

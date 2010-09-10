@@ -154,7 +154,7 @@ background-color:#FFF;
 }
 /* }}}2 Main navigation (top-nav) */
 /* SECTION 4.2:Menu generics {{{2 */
-  /* SECTION 4.3: Popup menus {{{3 */
+  /* SECTION 4.2.1: Popup menus {{{3 */
 #define HEIGHT_MENU_POPUP 20px
 div.menu-popup {
 position:absolute;
@@ -196,6 +196,62 @@ width:100%;
 }
 
 a.menu-popup:hover, li.menu-popup:hover {
+color:JOF_RED;
+background-color:#FFF;
+}
+   /* }}}3 Popup menus */
+  /* SECTION 4.2.2: Tool menus {{{3 */
+#define HEIGHT_MENU_TOOLS 20px
+div.menu-tools {
+width:190px; /* WIDTH_SIDEBAR - 20 */
+border-left:1px solid black;
+border-right:1px solid black;
+border-top:1px solid black;
+margin:10px;
+padding:0px;
+}
+
+li.menu-tools-title {
+width:100%;
+display:block;
+text-align:center;
+padding: 10px 0;
+color:#000;
+background-color:#FFF;
+border-bottom:1px solid #000;
+}
+
+
+ul.menu-tools {
+font-weight:bold;
+font-size:12px;
+color:#FFF;
+PACKED();
+background-color:JOF_RED;
+}
+
+li.menu-tools {
+margin:0px;
+height:HEIGHT_MENU_TOOLS;
+padding:0px 8px;
+border-bottom:1px solid #000;
+}
+
+a.menu-tools {
+padding-left:8px;
+margin-left:-8px;
+padding-right:8px;
+margin-right:-8px;
+padding-top:4px;
+display:inline-block;
+overflow:hidden;
+color:#FFF;
+background-color:JOF_RED;
+height:16px; /* HEIGHT_MENU_TOOLS - padding-top */
+width:100%;
+}
+
+a.menu-tools:hover, li.menu-tools:hover {
 color:JOF_RED;
 background-color:#FFF;
 }

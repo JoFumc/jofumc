@@ -90,6 +90,7 @@ class akMenu
   /* Basic private members */
   private $attach; // How does this menu attach to its parent?
   private $items; // Child items (akMenuItem objects)
+  private $title;  // Title text for menu
 
   /* Constructor */
   function __construct($dom_class="menu-item",$dom_id=null)
@@ -100,6 +101,7 @@ class akMenu
 
     /* Step 2: Init private members */
     $this->attach=null;
+    $this->title=null;
     $this->items=array(); /* Create empty array */
   }
 
@@ -116,6 +118,15 @@ class akMenu
     print     'class="'.$this->dom_class.'" '; 
     print   '>';
     print "\n";
+    /* If we have a title, emit it as an item with title class */
+    if (null != $this->title) {
+      print '<li ';
+      print   'class="'.$this->dom_class.'-title" ';
+      print   '>';
+      print   $this->title;
+      print '</li>';
+      print "\n";
+    }
     /* Emit all children */
     foreach ($this->items as $item) {
       $item->emit();
@@ -143,9 +154,15 @@ class akMenu
     /* NOTE: This is just like createItem, but inherits the $dom_class
      *       and doesn't allow any alt text or dom_id 
      */
-  function createSimpleItem($label=null,$url=null)
+  function createSimpleItem($label=null,$url=null,$alt=null)
   {
-    $this->items[] = new akMenuItem($this->dom_class,$label,$url);
+    $this->items[] = new akMenuItem($this->dom_class,$label,$url,$alt);
+  }
+
+  /* Method to add a title to the menu */
+  function setTitle($title=null)
+  {
+    $this->title = $title;
   }
 }
 ?>

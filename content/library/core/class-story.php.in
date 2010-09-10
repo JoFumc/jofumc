@@ -149,7 +149,6 @@ class akStory
 
   /* Private members */
   private $chunks; // Array of story chunks 
-  private $count; // Number of child chunks in story 
 
   /* Event handlers */
       /* CLEAN: Add this */
@@ -159,9 +158,6 @@ class akStory
   {
     /* Step 1: Load basic member info */
     $this->id = $id;
-
-    /* Step 2: Defaults */
-    $this->count=0;
   }
 
   /* Method to adopt a chunk into a story */
@@ -169,8 +165,7 @@ class akStory
   {
     if ($chunk == null) return; // CLEAN: throw a warning here?
     /* Add to array and bump counter */
-    $this->chunks[$this->count] = $chunk;
-    $this->count++;
+    $this->chunks[] = $chunk;
   }
 
   /* Method to emit the HTML for this story */
@@ -184,6 +179,12 @@ class akStory
     /* Loop over all chunks */
     foreach ($this->chunks as $chunk) $chunk->emit();
     print "</div>\n";
+  }
+
+  /* Method to create and add a chunk */
+  function createSimpleChunk($type=STORY_CHUNK_TEXT,$value="") {
+    $chunk = new akStoryChunk($type,$value);
+    $this->adopt($chunk);
   }
 }
 
