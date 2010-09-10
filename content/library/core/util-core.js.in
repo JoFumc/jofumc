@@ -14,7 +14,7 @@ var ak_module='util-core';
 var ak_cookiePrefix='jof-';
 
 
-#include "util-menu.js.h"
+//#include "util-menu.js.h"
 
 
 // ////////////////////////////////////////////////////////////////////////
@@ -79,8 +79,8 @@ function ak_spinner(divName,skinName)
 //
 function ak_moveElement(ele,top,left)
 {
-    ele.style.top = top.toString()+'px';
-    ele.style.left = left.toString()+'px';
+    ele.style.top = ''+top+'px';
+    ele.style.left = ''+left+'px';
 }
 
 

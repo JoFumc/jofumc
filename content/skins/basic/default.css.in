@@ -169,18 +169,16 @@ padding:0px;
 ul.menu-popup {
 font-weight:bold;
 font-size:12px;
-background-color:JOF_RED;
-color:white;
+color:#FFF;
 PACKED();
+background-color:JOF_RED;
 }
 
 li.menu-popup {
 border-bottom:1px solid black;
 margin:0px;
-padding:0px;
 height:HEIGHT_MENU_POPUP;
-padding-left:8px;
-padding-right:8px;
+padding:0px 8px;
 }
 
 a.menu-popup {
