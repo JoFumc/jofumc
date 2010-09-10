@@ -12,6 +12,8 @@ else $tool='blog'; // CLEAN: Choose a better default?
 $toolNames = array(
  'blog' => "Blog",
  'upload' => "Upload",
+ 'event' => "Events",
+ 'friends' => "Manage Friends",
  'news' => "News"
  );
 
