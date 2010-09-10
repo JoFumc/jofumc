@@ -66,3 +66,21 @@ function ak_spinner(divName,skinName)
         spindiv.innerHTML='<img src="'+spinref+'" alt="Waiting..."/>';
     } catch (err) {}
 }
+
+
+// ////////////////////////////////////////////////////////////////////////
+// ak_moveElement() -- Move an element to the given coordinates
+//
+// @return Nothing
+//
+// NOTE: The main trick behind moving elements is that the style
+// coordinate properties ('top','left') are _strings_ and must have
+// unit specifications.
+//
+function ak_moveElement(ele,top,left)
+{
+    ele.style.top = top.toString()+'px';
+    ele.style.left = left.toString()+'px';
+}
+
+

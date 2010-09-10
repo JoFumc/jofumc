@@ -20,7 +20,6 @@ var ak_module='skin-basic';
 HTMLLIElement.prototype.childMenu = null;
 HTMLDIVElement.prototype.popdownTimer = null;
 
-
 // ////////////////////////////////////////////////////////////////////////
 // skin_menuItemEnter() -- Handle a mouseover on a menuitem
 //
@@ -31,6 +30,7 @@ HTMLDIVElement.prototype.popdownTimer = null;
 function skin_menuItemEnter(ele)
 {
     var popmenu;
+    var newTop,newLeft;
     /* Step 1: Do we have a DIV child? */
     try {
         /*  Step 1.1: Look it up if not cached */
@@ -48,11 +48,31 @@ function skin_menuItemEnter(ele)
     if (null==ele.childMenu) return;
     popmenu = ele.childMenu;
        
-    /* Step 2: Show it */
-    /* CLEAN: Calculate position based on class */
+    /* Step 2: Make it visible (needed for dimensions) */
     popmenu.style.display = 'block';
-    popmenu.style.top = '' + (ele.offsetTop + ele.offsetHeight) + 'px';
-    popmenu.style.left = '' + (ele.offsetLeft-1) + 'px';
+
+    /* Step 3: Calculate position based on parent class */
+    switch (ele.className) {
+        case 'top-nav': { /* Main navbar, left side */
+            newTop = ele.offsetTop + ele.offsetHeight;
+            newLeft = ele.offsetLeft - 1;
+            break;
+        }
+        case 'top-nav-meta': { /* Main navbar, right side */
+            newTop = ele.offsetTop + ele.offsetHeight;
+            newLeft = (ele.offsetLeft + ele.offsetWidth) - popmenu.clientWidth - 1;
+            break;
+        }
+        default: { /* WTF? */
+            newTop = ele.offsetTop + ele.offsetHeight;
+            newLeft = ele.offsetLeft - 1;
+            break;
+        }
+    }
+
+
+    /* Step 3: Reposition, if necessary */
+    ak_moveElement(popmenu,newTop,newLeft);
     
     return;
 }
@@ -64,12 +84,6 @@ function skin_menuItemEnter(ele)
 //
 // We check to see if a menuitem has a child, and -- if so, pop it down.
 //
-// The mechanism is to set a (short) timeout that actually does the close;
-// this allows the show() method of the child menu time to keep itself 
-// alive after the mouse exits the parent element and enters the popup.
-// NOTE: There's no state check here -- we will simply re-hide if it is
-// already hidden.
-//
 function skin_menuItemExit(ele)
 {
     var popmenu=ele.childMenu;
@@ -77,8 +91,7 @@ function skin_menuItemExit(ele)
     /* Step 1: Do we have a childmenu? */
     if (null == popmenu) return;
        
-    /* Step 2: Schedule the hide */
-    popmenu.popdownTimer = setTimeout('skin_menuHide(ele);',200);
-    
+    /* Step 2: Simple hide */
+    popmenu.style.display='none';
     return;
 }
