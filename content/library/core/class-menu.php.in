@@ -53,8 +53,8 @@ class akMenuItem
   {
     print '<li ';
     print   'class="'.$this->dom_class.'" '; 
-    print   'onmouseover="skin_menuItemEnter();" ';
-    print   'onmouseout="skin_menuItemExit();" ';
+    print   'onmouseover="skin_menuItemEnter(this);" ';
+    print   'onmouseout="skin_menuItemExit(this);" ';
     if (null != $this->dom_id) 
       print 'id="'.$this->dom_id.'" ';
     print '>';

@@ -1,0 +1,43 @@
+// ////////////////////////////////////////////////////////////////////////
+//
+// @file skin.js
+// 
+// @brief Javascript implementation of skin support utilities
+//
+// @details 
+// This file implements common skin-specific client-side tools and utilities
+//
+// ////////////////////////////////////////////////////////////////////////
+
+// All modules have a name to identify themselves.
+var ak_module='skin-basic';
+
+
+// ////////////////////////////////////////////////////////////////////////
+// skin_menuItemEnter() -- Handle a mouseover on a menuitem
+//
+// @return Nothing
+//
+// We check to see if a menuitem has a child, and -- if so, pop it up
+//
+function skin_menuItemEnter(ele)
+{
+    var popmenu=null;
+
+    /* Step 1: Do we have a DIV child? */
+    for (kid in ele.childNodes) {
+        if (ele.childNodes[kid].nodeName == 'DIV') {
+            popmenu=ele.childNodes[kid];
+            break;
+        }
+    }
+    if (null==popmenu) return;
+       
+    /* Step 2: Show it */
+    /* CLEAN: Calculate position based on class */
+    popmenu.style.display = 'block';
+    popmenu.style.top = '' + (ele.offsetTop + ele.offsetHeight) + 'px';
+    popmenu.style.left = '' + (ele.offsetLeft-1) + 'px';
+    
+    return;
+}
