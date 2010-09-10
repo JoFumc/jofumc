@@ -8,8 +8,13 @@
     <meta name="Keywords" content="journey of faith,church,methodist,UMC,round rock"/>
     <script type="text/javascript" src="/library/core/util-core.js"></script>
 <?php
-/* Import skinning utilities and per-skin HTML header lines (skin JS or CSS) */
+/* Import skinning utilities */
 require_once("library/core/util-skin.php");
+// Skin baseline CSS
+print '    <link rel="stylesheet" type="text/css" media="screen" href="/skins/'.skin_getName().'/default.css"/>'."\n";
+// Skin baseline JS
+print '    <script type="text/javascript" src="/skins/'.skin_getName().'/skin.js"></script>'."\n";
+// Other skin bits
 skin_include("block-html-head.php");
 ?>
   </head>

@@ -7,7 +7,7 @@ function scrub_output($outstuff)
   $tidyopts['hide-comments'] = true;
   return(tidy_repair_string($outstuff,$tidyopts));
 }
-ob_start(scrub_output);
+//ob_start(scrub_output);
 
 /* Step 2: Gather/store skin information */
 require_once("library/core/util-skin.php");
