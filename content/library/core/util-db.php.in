@@ -67,7 +67,7 @@ function db_userlist($name=null,$pass=null)
     }
   }
   /* Step 2: build and issue the query */
-  $query="SELECT username,email,display,fullname FROM ".TBL_USERS.$where;
+  $query="SELECT id,username,email,display,fullname FROM ".TBL_USERS.$where;
   $result=mysql_query($query);
 
   /* Step 3: pull results into user objects */
@@ -106,6 +106,7 @@ function db_booklist($author=null)
 
   /* Step 2: build and issue the query */
   $query="SELECT * FROM ".TBL_BOOKS." WHERE author='".$author."' ORDER BY `type`";
+
   $result=mysql_query($query);
 
   /* Step 3: pull results into user objects */

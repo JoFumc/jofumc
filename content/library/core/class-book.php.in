@@ -30,6 +30,7 @@ class akBook
   public $type;    // Type of contents
   public $author;  // Who wrote this book? (DB people ID)
   public $id;      // DB id 
+  public $hint;    // Description/info about book
     /* Optional */
   public $dom_id; // ID of DOM object
 
@@ -59,6 +60,11 @@ class akBook
   {
       $this->title = $title;
   }
+  /* Method to set the description of a book */
+  function setHint($hint=null) 
+  {
+      $this->hint = $hint;
+  }
   /* Method to set the author of a book */
   function setAuthor($author=null)
   {
@@ -71,11 +77,15 @@ class akBook
     /* NOTE: The mouseover/mouseout functions are provided by the skin */
   function emit()
   {
-    print '<a href="javascript:return false;">';
+    print '<a ';
+    print   'href="javascript:return false;" ';
+    if (null != $this->hint)
+      print 'title="'.$this->hint.'" ';
+    print '>';
     print '<span ';
     print   'class="book-span book-span-'.$this->type.'" '; 
-    print   'onmouseover="skin_bookEnter(this);" ';
-    print   'onmouseout="skin_bookExit(this);" ';
+    //print   'onmouseover="skin_bookEnter(this);" ';
+    //print   'onmouseout="skin_bookExit(this);" ';
     print   'onclick="svc_loadDiv(\'bookshelf-canvas-div\',';
     print                        '\'edit-book\',';
     print                        '\'book='.$this->id.'&format=html\');" ';

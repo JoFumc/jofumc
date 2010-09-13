@@ -484,13 +484,22 @@ display:block;
 color:WINESKIN_BORDER;
 background-color:#DDD;
 border:2px solid WINESKIN_BORDER;
-/*height:88px;*/
+height:104px;
 width:88px;
 margin-left:5px;
+margin-bottom:5px;
 }
 
-.book-span:before {
-content:url('/skins/wine/book.png');
+.book-span-book:before {
+content:url('/skins/wine/book_new.png');
+}
+
+.book-span-profile:before {
+content:url('/skins/wine/book_profile.png');
+}
+
+.book-span-album:before {
+content:url('/skins/wine/book_photo.png');
 }
 
 .book-span:hover {

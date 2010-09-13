@@ -25,10 +25,12 @@ foreach($booklist as $book) $bookShelf->adopt($book);
   // Profile editor
 $book = new akBook("User Profile",BOOK_TYPE_PROFILE);
 $book->id = BOOK_ID_PROFILE;
+$book->setHint("Edit your user profile and settings");
 $bookShelf->adopt($book);
   // Add a new book
 $book = new akBook("Create Book",BOOK_TYPE_BOOK);
 $book->id = BOOK_ID_NEW;
+$book->setHint("Add a new blog, calendar, or photo album");
 $bookShelf->adopt($book);
 
 // emit HTML
