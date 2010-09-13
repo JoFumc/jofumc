@@ -482,8 +482,8 @@ display:none;
 float:left;
 display:block;
 color:WINESKIN_BORDER;
-background-color:#DDD;
-border:2px solid WINESKIN_BORDER;
+background-color:#FAF2F5;
+border:2px solid #FAF2F5;
 height:104px;
 width:88px;
 margin-left:5px;
@@ -503,7 +503,8 @@ content:url('/skins/wine/book_photo.png');
 }
 
 .book-span:hover {
-border:2px solid WINESKIN_LIGHTER_RED;
+padding:0px;
+border:2px solid WINESKIN_RED;
 }
 
 

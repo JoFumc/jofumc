@@ -1,12 +1,10 @@
 -----------------
 NOW:
 -----------------
-+ Login and per-user handling
-+ block innerHTML reload as a webservice (for NAV reload?)
 + Headline blocks
 + Schedule (static) block
 + Media uploader (type and date pickers)
-+ Per-program/generic  media gallery
++ Per-program/generic media gallery
 + Add custom icon for conference link 
 -----------------
 SOON:
@@ -25,3 +23,9 @@ SOON:
 LATER:
 -----------------
 + Generic page editor with block drop
+
+-----------------
+DONE:
+-----------------
++ Login and per-user handling
++ block innerHTML reload as a webservice (for NAV reload?) (svc_loadDiv())

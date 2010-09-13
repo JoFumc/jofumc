@@ -22,6 +22,7 @@ $booklist=db_booklist(); // NULL author means current
 foreach($booklist as $book) $bookShelf->adopt($book);
 
 // Add common elements (last)
+print '<div class="closure-div"></div>'."\n";
   // Profile editor
 $book = new akBook("User Profile",BOOK_TYPE_PROFILE);
 $book->id = BOOK_ID_PROFILE;
