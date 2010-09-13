@@ -45,8 +45,8 @@ clobber:: local-clobber
 	$(DESCEND)
 
 install: all
-	$(call TOOL_MKDIR,$(STAGING_ROOT)/$(PROJECT_SUBDIR),0755)
-	@$(foreach obj,$(OBJS),$(call TOOL_INSTALL,$(obj),0644,$(STAGING_ROOT)/$(PROJECT_SUBDIR)))
+	$(call TOOL_MKDIR,$(CONTENT_ROOT),0755)
+	@$(foreach obj,$(OBJS),$(call TOOL_INSTALL,$(obj),0644,$(CONTENT_ROOT)))
 	$(DESCEND)
 
 showcfg::
