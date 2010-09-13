@@ -115,4 +115,17 @@ function auth_logout()
 
   return true;
 }
+
+/**
+ * is_authenticated() -- Has the user been authenticated?
+ *
+ */
+function is_authenticated()
+{
+  global $auth_user;
+  if (isset($auth_user) && ($auth_user->name != 'default')) {
+    return true;
+  }
+  return false;
+}
 ?>

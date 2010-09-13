@@ -14,6 +14,7 @@ class akUser
   public $email; // Primary email contact
   public $displayname; // Name to display
   public $fullname; // Full user name
+  public $uid;  // ID from people database
 
   /* Constructor */
   function __construct($name=null)

@@ -84,19 +84,6 @@ font-style:italic;
 font-size:14pt;
 }
 
-#dashboard-menu-div {
-float:left;
-display:block;
-width:WIDTH_SIDEBAR;
-min-height:HEIGHT_CONTENT;
-PACKED();
-}
-
-#dashboard-canvas-div {
-float:left;
-width:WIDTH_WORKAREA;
-PACKED();
-}
 
 /* }}}1 Common toplevel containers */
 /* SECTION 4:Common toplevel content {{{1 */
@@ -439,10 +426,13 @@ margin:0px;
 }
 
 h1.story-headline {
+padding-top:10px;
 font-size:20pt;
+margin-bottom:10px;
 }
 
 h2.story-headline {
+padding-top:5px;
 font-size:15pt;
 width:90%
 }
@@ -499,5 +489,25 @@ padding:8px 0px;
 .block-video-vimeo {
 }
   /* }}}3 Source-specific */
+/* }}}2 Video embeds */
+/* SECTION 6.6:Bookshelf {{{2 */
+  /* Menu {{{3 */
+#bookshelf-menu-div {
+float:left;
+width:188px; /* WIDTH_SIDEBAR - 20 - border*/
+border:1px solid black;
+margin:10px 10px 10px 10px;
+padding:0px;
+display:block;
+text-align:center;
+}
+  /* }}}3 Menu */
+  /* Workarea {{{3 */
+#bookshelf-canvas-div {
+float:left;
+width:WIDTH_WORKAREA;
+PACKED();
+}
+  /* }}}3 Workarea */
 /* }}}2 Video embeds */
 /* }}}1 Application/block content */

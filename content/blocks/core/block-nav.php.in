@@ -15,8 +15,8 @@ if ($auth_user->name=='default')
 else
 {
   $topnav->createItem("top-nav-meta","Logout","/logout.php?auth-action=logout");
-  $dash = new akMenuItem("top-nav-meta","Dashboard","/dashboard.php");
-  $topnav->adopt($dash);
+  $book = new akMenuItem("top-nav-meta","Bookshelf","/bookshelf.php");
+  $topnav->adopt($book);
 }
 // Add regular items
 $topnav->createSimpleItem("Home","/","Journey of Faith home");
@@ -28,15 +28,15 @@ $topnav->adopt($prog);
 $topnav->createSimpleItem("Worship","/worship.php","When and how we worship together");
 
 // Add submenus
-  /* DASHBOARD */
+  /* bookshelf */
 if ($auth_user->name != 'default')
 {
-  $dashPopup = new akMenu("menu-popup","top-nav-dashboard-popup");
-  $dashPopup->createSimpleItem("Upload file","/dashboard.php?tool=upload");
-  $dashPopup->createSimpleItem("Add news item","/dashboard.php?tool=news");
-  $dashPopup->createSimpleItem("Blog entry","/dashboard.php?tool=blog");
-  $dashPopup->createSimpleItem("Friends","/dashboard.php?tool=friends");
-  $dash->adopt($dashPopup);
+  $bookPopup = new akMenu("menu-popup","top-nav-bookshelf-popup");
+  $bookPopup->createSimpleItem("Upload file","/bookshelf.php?tool=upload");
+  $bookPopup->createSimpleItem("Add news item","/bookshelf.php?tool=news");
+  $bookPopup->createSimpleItem("Blog entry","/bookshelf.php?tool=blog");
+  $bookPopup->createSimpleItem("Friends","/bookshelf.php?tool=friends");
+  $book->adopt($bookPopup);
 }
 
   /* ABOUT */

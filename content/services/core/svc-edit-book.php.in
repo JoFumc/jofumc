@@ -1,0 +1,32 @@
+<?php
+// PHP service script to generate in-place book editor
+// NOTE: Document root is ../..
+
+  // This is an HTML-formatted service
+header('Content-type: text/html');
+?>
+<?php
+// If the skin has pre-content setup, include it here.
+require_once("library/core/util-skin.php");
+require_once("library/core/util-db.php");
+skin_include("svc-edit-book-pre.php");
+?>
+
+<?php
+$bookid=0+$_REQUEST['book'];
+// Step 1: Check for special book types
+if ($bookid < 1000)
+{
+   print 'Special: id="'.$bookid.'"';
+}
+// Step 2: Handle generic books by type
+else
+{
+   print 'Generic: id="'.$bookid.'"';
+}
+?>
+
+<?php
+// If the skin has post-content setup, include it here.
+skin_include("svc-edit-book-post.php");
+?>

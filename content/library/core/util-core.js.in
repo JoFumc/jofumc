@@ -84,3 +84,63 @@ function ak_moveElement(ele,top,left)
 }
 
 
+// ////////////////////////////////////////////////////////////////////////
+// svc_createXHR() -- Create a new XMLHttpRequest object
+//
+// @return Nothing
+// NOTE: Eventually, we'll be able to trash this, but for now we support
+//       older IE versions with the ActiveX hack.
+//
+function svc_createXHR(svc_url)
+{
+    var xhr;
+    try {
+        /* Step 1: Create base object */
+        if (window.XMLHttpRequest) xhr = new XMLHttpRequest();
+        else xhr = new ActiveXObject("Microsoft.XMLHTTP");
+
+        /* Step 2: Init/open */
+        xhr.open("GET",svc_url,true);
+    } catch(err) {
+        /* Anything goes wrong -- bail */
+        return null;
+    }
+
+    /* Step 3: return it */
+    return xhr;
+}
+
+// ////////////////////////////////////////////////////////////////////////
+// svc_loadDiv() -- Load a DIV with the output from a service request (XHR)
+//
+// @return Nothing
+//
+function svc_loadDiv(divId,service,params)
+{
+    var svc_url;
+    var xhr;
+    var div;
+
+    /* Step 1: DIV sanity check */
+    div = document.getElementById(divId);
+    if (null == div) return;
+
+    /* Step 1: build service URL */
+    svc_url='svc-'+service+'.php';
+    if (null != params) svc_url+='?'+params;
+
+    /* Step 2: Create/setup our XHR */
+    xhr = svc_createXHR(svc_url);
+
+    /* Step 3: Setup handler */
+    xhr.onreadystatechange = function() {
+        if ((this.readyState == 4) && (this.status == 200)) {
+            div.innerHTML=this.responseText;
+        }
+    }
+
+    /* Step 4: Kick off the request */
+    xhr.send();
+}
+
+

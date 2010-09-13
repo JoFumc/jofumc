@@ -1,0 +1,160 @@
+<?php
+/****************************************************************************
+ * class-book.php -- Book(shelf) object definitions
+ *
+ ***************************************************************************/
+  // Book types
+define("BOOK_TYPE_STORY","story");      // Book of stories 
+define("BOOK_TYPE_CALENDAR","event");   // Book of events
+define("BOOK_TYPE_USERS","users");      // Book of users
+define("BOOK_TYPE_PROFILE","profile");  // Book of profile data
+define("BOOK_TYPE_ALBUM","album");      // Book of pictures
+define("BOOK_TYPE_BOOK","book");        // Book of books
+
+ // Custom book IDs (special IDs are less than 1000 )
+define("BOOK_ID_NEW",100);  // Custom editor for creating a new book
+define("BOOK_ID_PROFILE",101); // Custom editor for profile
+
+
+
+/*
+ * akBook -- Book object
+ *
+ * A 'book' is a container for other editable types; stories, users, etc.
+ */
+class akBook
+{
+  /* Basic public members */
+    /* Required (from DB) */
+  public $title;   // Book title
+  public $type;    // Type of contents
+  public $author;  // Who wrote this book? (DB people ID)
+  public $id;      // DB id 
+    /* Optional */
+  public $dom_id; // ID of DOM object
+
+  /* Basic private members */
+  private $contents; // Bits contained in this book
+
+  /* Constructor */
+  function __construct($title=null,$type=null)
+  {
+    /* Step 1: Copy elements from args */
+    if (null == $title) $this->title='Book Title';
+    else $this->title = $title;
+    if (null == $type) $this->type = BOOK_TYPE_STORY;
+    else $this->type = $type;
+
+    /* Step 2: Generic init */
+    $this->author = 0;
+    $this->id = 0; 
+    $this->dom_id = NULL;
+
+    /* Step 3: Init private members */
+    $this->contents=null;
+  }
+
+  /* Method to set the title of a book */
+  function setTitle($title=null) 
+  {
+      $this->title = $title;
+  }
+  /* Method to set the author of a book */
+  function setAuthor($author=null)
+  {
+     global $auth_user; 
+     if (null==$author) $author=$auth_user->uid;
+     $this->author = $author;
+  }
+
+  /* Method to emit the HTML for this object */
+    /* NOTE: The mouseover/mouseout functions are provided by the skin */
+  function emit()
+  {
+    print '<span ';
+    print   'class="book-span book-span-'.$this->type.'" '; 
+    print   'onmouseover="skin_bookEnter(this);" ';
+    print   'onmouseout="skin_bookExit(this);" ';
+    print   'onclick="svc_loadDiv(\'bookshelf-canvas-div\',';
+    print                        '\'edit-book\',';
+    print                        '\'book='.$this->id.'&format=html\');" ';
+    if (null != $this->dom_id) 
+      print 'id="'.$this->dom_id.'" ';
+    print '>';
+    print "\n";
+    print '"'.$this->title.'"';
+    print "\n";
+    print '</span>';
+    print "\n";
+  }
+}
+
+/*
+ * akBookshelf -- Bookshelf object
+ */
+class akBookshelf
+{
+  /* Basic public members */
+    /* Required */
+  public $dom_class; // Class of DOM object(s)
+  
+    /* Optional */
+  public $dom_id; // ID of DOM object
+  public $title;  // Bookshelf lable/title
+
+  /* Basic private members */
+  private $books; // What's on this shelf?
+
+  /* Constructor */
+  function __construct($dom_class="book-shelf",$dom_id=null)
+  {
+    /* Step 1: Copy elements from args */
+    $this->dom_class=$dom_class;
+    $this->dom_id=$dom_id;
+    $this->title="Shelf";
+
+    /* Step 2: Init private members */
+    $this->books=array(); /* Create empty array */
+  }
+
+  /* Method to emit the HTML for this object */
+  function emit()
+  {
+    /* Open the DIV and UL elements */
+    print '<div ';
+    print   'class="'.$this->dom_class.'" '; 
+    if (null != $this->dom_id) 
+      print 'id="'.$this->dom_id.'" ';
+    print '>';
+    print "\n";
+    /* If we have a title, emit it as an item with title class */
+    if (null != $this->title) {
+      print '<span ';
+      print   'class="'.$this->dom_class.'-title" ';
+      print   '>';
+      print   $this->title;
+      print '</span>';
+      print "\n";
+    }
+    /* Emit all children */
+    foreach ($this->books as $book) {
+      $book->emit();
+    }
+    /* Close all elements */
+    print '</div>';
+    print "\n";
+  }
+
+  /* Method to add a book to the shelf */
+  function adopt($book) 
+  {
+      $this->books[]=$book;
+  }
+
+  /* Method to add a title to the menu */
+  function setTitle($title=null)
+  {
+    $this->title = $title;
+  }
+}
+?>
