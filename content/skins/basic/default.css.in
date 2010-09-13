@@ -493,6 +493,7 @@ padding:8px 0px;
 /* SECTION 6.6:Bookshelf {{{2 */
   /* Menu {{{3 */
 #bookshelf-menu-div {
+font-weight:bold;
 float:left;
 width:188px; /* WIDTH_SIDEBAR - 20 - border*/
 border:1px solid black;
@@ -501,6 +502,24 @@ padding:0px;
 display:block;
 text-align:center;
 }
+
+.bookshelf-title {
+width:100%;
+}
+
+.book-span {
+display:block;
+color:#FFF;
+background-color:JOF_RED;
+border-top:1px solid #000;
+}
+
+.book-span:hover {
+background-color:#FFF;
+color:JOF_RED;
+}
+
+
   /* }}}3 Menu */
   /* Workarea {{{3 */
 #bookshelf-canvas-div {
@@ -509,5 +528,5 @@ width:WIDTH_WORKAREA;
 PACKED();
 }
   /* }}}3 Workarea */
-/* }}}2 Video embeds */
+/* }}}2 Bookshelf */
 /* }}}1 Application/block content */

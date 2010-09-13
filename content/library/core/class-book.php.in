@@ -71,6 +71,7 @@ class akBook
     /* NOTE: The mouseover/mouseout functions are provided by the skin */
   function emit()
   {
+    print '<a href="javascript:return false;">';
     print '<span ';
     print   'class="book-span book-span-'.$this->type.'" '; 
     print   'onmouseover="skin_bookEnter(this);" ';
@@ -82,9 +83,9 @@ class akBook
       print 'id="'.$this->dom_id.'" ';
     print '>';
     print "\n";
-    print '"'.$this->title.'"';
+    print $this->title;
     print "\n";
-    print '</span>';
+    print '</span></a>';
     print "\n";
   }
 }
@@ -129,11 +130,11 @@ class akBookshelf
     print "\n";
     /* If we have a title, emit it as an item with title class */
     if (null != $this->title) {
-      print '<span ';
+      print '<div ';
       print   'class="'.$this->dom_class.'-title" ';
       print   '>';
       print   $this->title;
-      print '</span>';
+      print '</div>';
       print "\n";
     }
     /* Emit all children */

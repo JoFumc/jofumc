@@ -5,6 +5,8 @@
 #define WIDTH_WORKAREA 700px /* width of workarea */
 #define WIDTH_APP      520px   /* app part of workarea */
 #define WIDTH_MULTIBAR 180px   /* multibar part of workarea */
+#define WIDTH_BOOKSHELF 220px /* Bookshelf sidebar */
+#define WIDTH_BOOKWORK  660px /* Workarea for book editing */
 #define HEIGHT_CONTENT 400px
   /* }}}2 Common dimensions */
   /* Skin-specific colors {{{2 */
@@ -458,4 +460,52 @@ margin:5px auto 5px auto;
 }
   /* }}}3 Source-specific */
 /* }}}2 Video embeds */
+/* SECTION 6.6:Bookshelf {{{2 */
+  /* Menu {{{3 */
+#bookshelf-menu-div {
+font-weight:bold;
+float:left;
+width:WIDTH_BOOKSHELF;
+border:0px;
+margin:10px 10px 10px 10px;
+padding:0px;
+display:block;
+text-align:center;
+}
+
+.bookshelf-title {
+width:100%;
+display:none;
+}
+
+.book-span {
+float:left;
+display:block;
+color:WINESKIN_BORDER;
+background-color:#DDD;
+border:2px solid WINESKIN_BORDER;
+/*height:88px;*/
+width:88px;
+margin-left:5px;
+}
+
+.book-span:before {
+content:url('/skins/wine/book.png');
+}
+
+.book-span:hover {
+border:2px solid WINESKIN_LIGHTER_RED;
+}
+
+
+  /* }}}3 Menu */
+  /* Workarea {{{3 */
+#bookshelf-canvas-div {
+float:left;
+width:WIDTH_BOOKAREA;
+PACKED();
+}
+  /* }}}3 Workarea */
+/* }}}2 Bookshelf */
+
 /* }}}1 Application/block content */
