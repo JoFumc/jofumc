@@ -16,6 +16,10 @@
 #define WINESKIN_LIGHT_RED   #A84B69
 #define WINESKIN_LIGHTER_RED #B85B79
 #define WINESKIN_BORDER      #333
+#define WINESKIN_BG_HEADER   #DDD
+#define WINESKIN_SHADOW_TOP  #EEE
+#define WINESKIN_SHADOW_BOTTOM #444
+
   /* }}}2 Skin-specific colors */
 /* }}}1 Values and macros (common and skin-specific) */
 /* SECTION 2:Common CSS for all skins {{{1 */
@@ -261,9 +265,9 @@ height:36px;
 /* }}}2 Partner links */
 /* SECTION 4.5:Generic block support {{{2 */
 .block-outer-div {
+width:95%;
 margin-left:auto;
 margin-right:auto;
-margin-top:10px;
 }
 
 .block-image {
@@ -282,6 +286,22 @@ border:1px solid WINESKIN_BORDER;
 display:block;
 text-align:center;
 }
+
+.block-header {
+text-align:center;
+display:block;
+background-color:WINESKIN_BG_HEADER;
+border-top:1px solid WINESKIN_SHADOW_TOP;
+border-left:1px solid WINESKIN_SHADOW_TOP;
+border-right:1px solid WINESKIN_SHADOW_BOTTOM;
+border-bottom:1px solid WINESKIN_SHADOW_BOTTOM;
+}
+
+.block-wrapper-div {
+width:100%;
+padding-top:8px;
+}
+
 /* }}}2 Generic block support */
 /* }}}1 Common toplevel content */
 /* SECTION 5:Skin-specific toplevel content {{{1 */

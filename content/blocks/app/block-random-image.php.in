@@ -1,3 +1,4 @@
+<div class="block-wrapper-div">
 <?php
 // If the skin has pre-content setup, include it here.
 require_once("library/core/util-skin.php");
@@ -15,12 +16,13 @@ skin_include("block-random-image-pre.php");
 $imageset=glob($random_image_path."/*.{png,jpg}",GLOB_BRACE);
 $r=mt_rand(0,count($imageset)-1);
 $image=$imageset[$r];
-echo "<div id=\"block-random-image\" class=\"block-div block-outer-div\">";
-echo "<img src=\"".$image."\" alt=\"Random Image\" width=\"".$random_image_width."\" class=\"block-image\"/>";
-echo "<span class=\"image-caption\">".$random_image_caption."</span>";
-echo "</div>";
+echo '<div id="block-random-image" class="block-div block-outer-div">';
+echo '<img src="'.$image.'" alt="Random Image" width="'.$random_image_width.'" class="block-image"/>';
+echo '<span class="image-caption">'.$random_image_caption.'</span>';
+echo '</div>';
 ?>
 <?php
 // If the skin has post-content setup, include it here.
 skin_include("block-random-image-post.php");
 ?>
+</div>

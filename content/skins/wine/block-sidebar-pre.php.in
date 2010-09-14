@@ -1,8 +1,10 @@
 <?php
+// Contact info
+@include("blocks/core/block-contact.php");
 // Random picture...
 $random_image_path="assets/random_pool";
 $random_image_width=160;
-require("blocks/app/block-random-image.php");
+@include("blocks/app/block-random-image.php");
 // partner bar
 include_once("blocks/core/block-partner-nav.php");
 ?>

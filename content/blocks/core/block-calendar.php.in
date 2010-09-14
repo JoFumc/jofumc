@@ -1,4 +1,4 @@
-<div id="calendar-div">
+<div id="calendar-div" class="block-wrapper-div">
 <?php
 require_once("library/core/class-date.php");
 require_once("library/core/util-skin.php");
@@ -23,9 +23,9 @@ $day_cur=$now->monthLen;
 $day_next = 7 - (($now->monthLen % 7) + $now->dowFirst);
 if ($day_next == 0) $day_next = 7;
 $day_next_offset=$day_next+1;
-echo "<tr class=\"block-calendar-row block-calendar-header\">";
-echo "<td class=\"block-calendar-nav-prevmonth\"></td>";
-echo "<td colspan=\"5\">".$now->monthName." ".$now->year."</td>";
+echo '<tr class="block-calendar-row block-calendar-header">';
+echo '<td class="block-calendar-nav-prevmonth"></td>';
+echo '<td colspan="5">'.$now->monthName.' '.$now->year.'</td>';
 echo "<td class=\"block-calendar-nav-nextmonth\"></td>";
 echo "</tr>";
 while ($day_next > 0)

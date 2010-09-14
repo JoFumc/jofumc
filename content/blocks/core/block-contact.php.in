@@ -1,0 +1,14 @@
+<div class="block-wrapper-div">
+<?php
+// Include any skin-specific pre-content bits
+require_once("library/core/util-skin.php");
+skin_include("block-contact-pre.php");
+?>
+<div class="block-outer-div block-framed">
+<div class="block-header">Contact Us</div>
+Block blah
+</div>
+<?php
+skin_include("block-contact-post.php");
+?>
+</div>
