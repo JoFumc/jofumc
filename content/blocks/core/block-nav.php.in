@@ -29,6 +29,7 @@ $topnav->createSimpleItem("Worship","/worship.php","When and how we worship toge
 
 // Add submenus
   /* bookshelf */
+/*
 if ($auth_user->name != 'default')
 {
   $bookPopup = new akMenu("menu-popup","top-nav-bookshelf-popup");
@@ -38,6 +39,7 @@ if ($auth_user->name != 'default')
   $bookPopup->createSimpleItem("Friends","/bookshelf.php?tool=friends");
   $book->adopt($bookPopup);
 }
+*/
 
   /* ABOUT */
 $aboutPopup = new akMenu("menu-popup","top-nav-about-popup");
