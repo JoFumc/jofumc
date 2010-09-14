@@ -1,14 +1,28 @@
 <?php
-/* Step 1: Turn on tidy output buffering */
+/* Step 1: Enable output buffering */
 function scrub_output($outstuff)
 {
+  /* Setup TIDY output */
   $tidyopts['indent'] = 1;
   $tidyopts['wrap'] = 0;
   $tidyopts['hide-comments'] = true;
   return(tidy_repair_string($outstuff,$tidyopts));
 }
-//ob_start(scrub_output);
+ob_start(scrub_output);
 
+/* Step 2: Allow redirects */
+  /* MUST have output buffering on! */
+function core_redirect($url)
+{
+   /* Wipe the previously buffered output */
+   while (ob_get_level()) ob_end_clean();
+   /* Add our redirect header */
+     /* NOTE: HTTP 1.1 requires a full URI, scheme and all */
+   $host=$_SERVER['HTTP_HOST'];
+   header("Location: http://$host$url",true,303);
+   ob_end_flush();
+   exit();
+}
 /* Step 2: Gather/store skin information */
 require_once("library/core/util-skin.php");
 skin_storeName();
