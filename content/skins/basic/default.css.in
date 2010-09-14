@@ -514,6 +514,13 @@ background-color:JOF_RED;
 border-top:1px solid #000;
 }
 
+.book-divider {
+border-top:1px solid #000;
+}
+
+.book-span-divider {
+}
+
 .book-span:hover {
 background-color:#FFF;
 color:JOF_RED;

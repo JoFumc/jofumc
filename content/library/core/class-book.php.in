@@ -10,6 +10,7 @@ define("BOOK_TYPE_USERS","users");      // Book of users
 define("BOOK_TYPE_PROFILE","profile");  // Book of profile data
 define("BOOK_TYPE_ALBUM","album");      // Book of pictures
 define("BOOK_TYPE_BOOK","book");        // Book of books
+define("BOOK_TYPE_DIVIDER","divider");  // Separates groups on shelf
 
  // Custom book IDs (special IDs are less than 1000 )
 define("BOOK_ID_NEW",100);  // Custom editor for creating a new book
@@ -77,26 +78,41 @@ class akBook
     /* NOTE: The mouseover/mouseout functions are provided by the skin */
   function emit()
   {
-    print '<a ';
-    print   'href="javascript:return false;" ';
-    if (null != $this->hint)
-      print 'title="'.$this->hint.'" ';
-    print '>';
-    print '<span ';
-    print   'class="book-span book-span-'.$this->type.'" '; 
-    //print   'onmouseover="skin_bookEnter(this);" ';
-    //print   'onmouseout="skin_bookExit(this);" ';
-    print   'onclick="svc_loadDiv(\'bookshelf-canvas-div\',';
-    print                        '\'edit-book\',';
-    print                        '\'book='.$this->id.'&format=html\');" ';
-    if (null != $this->dom_id) 
-      print 'id="'.$this->dom_id.'" ';
-    print '>';
-    print "\n";
-    print $this->title;
-    print "\n";
-    print '</span></a>';
-    print "\n";
+    switch($this->type) {
+      case BOOK_TYPE_DIVIDER: {
+        print '<div class="book-divider"> '."\n";
+        print '<span ';
+        print   'class="book-span-divider" ';
+        print '>'."\n";
+        print $this->title;
+        print '</span>'."\n";
+        print '</div>'."\n";
+        break;
+      }
+      default: {
+        print '<a ';
+        print   'href="javascript:return false;" ';
+        if (null != $this->hint)
+          print 'title="'.$this->hint.'" ';
+        print '>';
+        print '<span ';
+        print   'class="book-span book-span-'.$this->type.'" '; 
+        //print   'onmouseover="skin_bookEnter(this);" ';
+        //print   'onmouseout="skin_bookExit(this);" ';
+        print   'onclick="svc_loadDiv(\'bookshelf-canvas-div\',';
+        print                        '\'edit-book\',';
+        print                        '\'book='.$this->id.'&format=html\');" ';
+        if (null != $this->dom_id) 
+          print 'id="'.$this->dom_id.'" ';
+        print '>';
+        print "\n";
+        print $this->title;
+        print "\n";
+        print '</span></a>';
+        print "\n";
+        break;
+      }
+    }
   }
 }
 

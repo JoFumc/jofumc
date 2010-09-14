@@ -21,10 +21,12 @@ $booklist=db_booklist(); // NULL author means current
 
 foreach($booklist as $book) $bookShelf->adopt($book);
 
+// Add divider
+$book = new akBook("Tools",BOOK_TYPE_DIVIDER);
+$bookShelf->adopt($book);
 // Add common elements (last)
-print '<div class="closure-div"></div>'."\n";
   // Profile editor
-$book = new akBook("User Profile",BOOK_TYPE_PROFILE);
+$book = new akBook("Edit Profile",BOOK_TYPE_PROFILE);
 $book->id = BOOK_ID_PROFILE;
 $book->setHint("Edit your user profile and settings");
 $bookShelf->adopt($book);

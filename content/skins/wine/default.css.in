@@ -487,9 +487,21 @@ color:WINESKIN_BORDER;
 background-color:#FAF2F5;
 border:2px solid #FAF2F5;
 height:104px;
-width:88px;
+width:85px;
 margin-left:5px;
 margin-bottom:5px;
+}
+
+.book-divider {
+width:95%;
+float:left;
+clear:right;
+border-bottom:2px solid WINESKIN_BORDER;
+margin-bottom:5px;
+}
+
+.book-span-divider {
+display:none;
 }
 
 .book-span-book:before {
