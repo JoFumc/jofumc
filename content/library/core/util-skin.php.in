@@ -2,6 +2,9 @@
 /****************************************************************************
  * util-skin.php -- Skin support functions
  ***************************************************************************/
+  /* Set the default skin */
+define("DEFAULT_SKIN","wine");
+
 /* Includes */
 require_once("library/core/util-config.php");
 
@@ -22,7 +25,7 @@ function skin_getName()
   /* Step 2: Validate */
   if (FALSE == file_exists("skins/".$skin_name."/default.css"))
   {
-    $skin_name="basic";
+    $skin_name=DEFAULT_SKIN;
   }
 
   $cache_skin = $skin_name;

@@ -5,7 +5,7 @@
 #define WIDTH_WORKAREA 700px /* width of workarea */
 #define WIDTH_APP      520px   /* app part of workarea */
 #define WIDTH_MULTIBAR 180px   /* multibar part of workarea */
-#define WIDTH_BOOKSHELF 220px /* Bookshelf sidebar */
+#define WIDTH_BOOKSHELF 200px /* Bookshelf sidebar */
 #define WIDTH_BOOKWORK  660px /* Workarea for book editing */
 #define HEIGHT_CONTENT 400px
   /* }}}2 Common dimensions */
@@ -390,12 +390,14 @@ margin:0px;
 }
 
 h1.story-headline {
+padding-top:8px;
 text-align:right;
 font-size:20pt;
 width:100%;
 }
 
 h2.story-headline {
+padding-top: 5px;
 font-size:15pt;
 width:90%
 }
@@ -512,7 +514,7 @@ border:2px solid WINESKIN_RED;
   /* Workarea {{{3 */
 #bookshelf-canvas-div {
 float:left;
-width:WIDTH_BOOKAREA;
+width:WIDTH_BOOKWORK;
 PACKED();
 }
   /* }}}3 Workarea */
