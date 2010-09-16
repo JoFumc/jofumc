@@ -17,7 +17,7 @@
 #define WINESKIN_LIGHTER_RED #B85B79
 #define WINESKIN_BORDER      #333
 #define WINESKIN_BG_HEADER   #DDD
-#define WINESKIN_SHADOW_TOP  #EEE
+#define WINESKIN_SHADOW_TOP  #FFF
 #define WINESKIN_SHADOW_BOTTOM #444
 
   /* }}}2 Skin-specific colors */
@@ -270,7 +270,7 @@ margin-left:auto;
 margin-right:auto;
 }
 
-.block-image {
+.block-image .block-text {
 display:block;
 margin-left:auto;
 margin-right:auto;

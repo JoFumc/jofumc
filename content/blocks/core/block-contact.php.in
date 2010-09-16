@@ -6,7 +6,20 @@ skin_include("block-contact-pre.php");
 ?>
 <div class="block-outer-div block-framed">
 <div class="block-header">Contact Us</div>
-Block blah
+<div class="block-text">
+<span class="block-text">
+Journey of Faith United Methodist Church
+</span>
+<span class="block-text">
+7301 County Road 110, Round Rock, Texas 
+</span>
+<span class="block-text">
+(512) 255-8403
+</span>
+<span class="block-text">
+Pastor Glenda Whitehead glenda@jofrr.org
+</span>
+</div>
 </div>
 <?php
 skin_include("block-contact-post.php");
