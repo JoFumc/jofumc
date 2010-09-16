@@ -1,2 +1,10 @@
 <?php
+// Add the twitter widget
+  // Fill params
+$tweet_shell_bg = "#C82020";
+$tweet_shell_fg = "#FFFFFF";
+$tweet_bg = "#FFFFFF";
+$tweet_fg = "#000000";
+  // Load widget
+require("blocks/app/block-twitter-widget.php");
 ?>

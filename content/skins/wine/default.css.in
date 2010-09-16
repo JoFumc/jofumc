@@ -421,12 +421,14 @@ padding-top:8px;
 text-align:right;
 font-size:20pt;
 width:100%;
+clear:both;
 }
 
 h2.story-headline {
 padding-top: 5px;
 font-size:15pt;
-width:90%
+width:90%;
+clear:both;
 }
   /* }}}3 Headlines */
   /* Images/bylines {{{3 */

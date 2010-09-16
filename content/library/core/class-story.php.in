@@ -72,6 +72,7 @@ class akStoryChunk
         break;
       }   
       case STORY_CHUNK_SECTION: {
+        print '<div class="closure_div"></div>';
         print '<h2 ';
         print '  class="story-headline" ';
         if (null != $this->id)

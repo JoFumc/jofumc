@@ -1,4 +1,11 @@
 <?php
 // Add a calendar...
 require("blocks/core/block-calendar.php");
+// Add the twitter widget
+  // Fill params
+$tweet_shell_bg = "#66273B";
+$tweet_bg = "#B85B79";
+$tweet_fg = "#FFFFFF";
+require("blocks/app/block-twitter-widget.php");
 ?>
+<div class="block-wrapper-div"></div>
