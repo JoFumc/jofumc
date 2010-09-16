@@ -270,7 +270,14 @@ margin-left:auto;
 margin-right:auto;
 }
 
-.block-image .block-text {
+.block-text {
+text-align:center;
+display:block;
+margin-left:auto;
+margin-right:auto;
+}
+
+.block-image {
 display:block;
 margin-left:auto;
 margin-right:auto;
