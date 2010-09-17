@@ -86,6 +86,8 @@ class akMenu
   public $dom_class; // Class of DOM object(s)
     /* Optional */
   public $dom_id; // ID of DOM object
+  public $prefix; // Anything to emit beforehand 
+  public $postfix; // Anything to emit afterwards
 
   /* Basic private members */
   private $attach; // How does this menu attach to its parent?
@@ -98,6 +100,8 @@ class akMenu
     /* Step 1: Copy elements from args */
     $this->dom_class=$dom_class;
     $this->dom_id=$dom_id;
+    $this->prefix = null;
+    $this->postfix = null;
 
     /* Step 2: Init private members */
     $this->attach=null;
@@ -114,6 +118,8 @@ class akMenu
     if (null != $this->dom_id) 
       print 'id="'.$this->dom_id.'" ';
     print '>';
+    /* Handle any prefix (inside the main DIV) */
+    if (null != $this->prefix) print $this->prefix;
     print   '<ul ';
     print     'class="'.$this->dom_class.'" '; 
     print   '>';
@@ -133,6 +139,8 @@ class akMenu
     }
     /* Close all elements */
     print '</ul>';
+    /* Handle any postfix (inside the main DIV) */
+    if (null != $this->postfix) print $this->postfix;
     print '</div>';
     print "\n";
   }

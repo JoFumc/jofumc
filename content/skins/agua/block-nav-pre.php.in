@@ -1,0 +1,7 @@
+<?php
+// AGUA skin block-nav-pre
+//
+// Set the top-nav prefix and postfix...
+$top_nav_prefix='<img src="/skins/agua/bump_48_left.png" alt="LeftCap"/>';
+$top_nav_postfix='<img src="/skins/agua/bump_48_right.png" alt="RightCap"/>';
+?>

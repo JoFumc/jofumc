@@ -82,12 +82,7 @@ font-size:14pt;
 /* }}}1 Common toplevel containers */
 /* SECTION 4:Common toplevel content {{{1 */
 /* SECTION 4.1:Main navigation (top-nav) {{{2 */
-#define HEIGHT_NAV 40px
-#nav-bg-div {
-width:100%;
-height:40px;
-background:#FFF url('/skins/agua/gradient_nav.png') repeat-x;
-}
+#define HEIGHT_NAV 48px
 
 #top-nav-div {
 color:white;
@@ -96,8 +91,6 @@ border:0;
 padding:0;
 margin:0 auto;
 height:HEIGHT_NAV;
-position:relative;
-top:-40px;
 }
 
 ul.top-nav {
@@ -112,6 +105,8 @@ li.top-nav {
 float:left;
 PACKED();
 height:HEIGHT_NAV;
+background-image:url('/skins/agua/bump_48_middle.png');
+background-repeat: repeat-x;
 }
 
 li.top-nav-meta {
@@ -306,7 +301,7 @@ padding-top:8px;
 #skin-agua-header {
 height:100px;
 width:100%;
-background:#EEE;
+/*background:#EEE;*/
 }
 
 .skin-agua-logo {
