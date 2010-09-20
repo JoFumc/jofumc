@@ -36,4 +36,7 @@ switch ($_REQUEST['auth-action'])
   case 'login':  auth_login(); break;
   default:       auth_validate(); break;
 }
+
+/* Step 4: Prep block output */
+require_once("library/core/class-block.php");
 ?>

@@ -1,7 +1,6 @@
 <?php
-require("library/core/class-block.php");
 // Add partner nav
-$partner = new akBlock(BLOCK_TYPE_MULTIBAR,"blocks/core/block-partner-nav.php");
+$partner = new akBlock(BLOCK_TYPE_MULTIBAR,"blocks/core/block-partner-nav.php","Beyond JoF");
 $partner->emit();
 // Add the twitter widget (with parameters)
 $twidget = new akBlock(BLOCK_TYPE_RAW,"blocks/app/block-twitter-widget.php");

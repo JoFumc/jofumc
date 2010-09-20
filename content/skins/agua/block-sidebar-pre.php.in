@@ -1,6 +1,10 @@
 <?php
 // Contact info
-@include("blocks/core/block-contact.php");
+$contact = new akBlock(BLOCK_TYPE_SIDEBAR,"blocks/core/block-contact.php","Contact Us");
+$contact->emit();
 // Calendar
-@include("blocks/core/block-calendar.php");
+require_once("library/core/class-date.php");
+$calendar = new akBlock(BLOCK_TYPE_SIDEBAR,"blocks/core/block-calendar.php");
+$calendar->title = calendar_getTitle();
+$calendar->emit();
 ?>

@@ -1,12 +1,3 @@
-<div class="block-wrapper-div">
-<?php
-// Include any skin-specific pre-content bits
-require_once("library/core/util-skin.php");
-skin_include("block-contact-pre.php");
-?>
-<div class="block-outer-div block-framed">
-<div class="block-header">Contact Us</div>
-<div class="block-text">
 <span class="block-text">
 Journey of Faith United Methodist Church
 </span>
@@ -19,9 +10,3 @@ Journey of Faith United Methodist Church
 <span class="block-text">
 Pastor Glenda Whitehead glenda@jofrr.org
 </span>
-</div>
-</div>
-<?php
-skin_include("block-contact-post.php");
-?>
-</div>

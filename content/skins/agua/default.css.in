@@ -12,6 +12,7 @@
   /* }}}2 Common dimensions */
   /* Skin-specific colors {{{2 */
 #define AGUA_BLUE_DARKEST #05446B
+#define AGUA_BORDER       #05446B
 #define AGUA_BLUE_LIGHT  #A7DBFB
 #define AGUA_BLUE_LIGHTER #BEE4FC
 
@@ -76,8 +77,7 @@ overflow:hidden;
 }
 
 #tagline-div {
-margin-left:auto;
-margin-right:auto;
+margin:8px auto;
 text-align:center;
 font-style:italic;
 font-size:14pt;
@@ -262,7 +262,22 @@ height:36px;
 }
 /* }}}2 Partner links */
 /* SECTION 4.5:Generic block support {{{2 */
-  /* SECTION 4.5.1: Raw blocks {{{3 */
+  /* SECTION 4.5.1: Common blocks {{{3 */
+.block-title {
+width:100%;
+PACKED();
+font-weight:bold;
+text-align:center;
+}
+
+.block-text {
+width:100%;
+PACKED();
+display:block;
+text-align:center;
+}
+  /* }}}3 Common blocks */
+  /* SECTION 4.5.2: Raw blocks {{{3 */
 .block-raw {
 width:100%;
 border:0px;
@@ -270,7 +285,7 @@ padding:0px;
 margin:8px 0px 0px 0px;
 }
   /* }}}3 Raw blocks */
-  /* SECTION 4.5.2: Multibar blocks {{{3 */
+  /* SECTION 4.5.3: Multibar blocks {{{3 */
 .block-multibar {
 width:100%;
 border:0px;
@@ -279,7 +294,15 @@ margin:8px 0px 0px 0px;
 }
 
 .block-content-multibar {
-background-color:#BAD3E9;
+background-color:#E0EBF5;
+border-left:1px solid #94BBDC;
+border-right:1px solid #94BBDC;
+padding:8px 0px;
+}
+
+.block-title-multibar {
+background-color:#94BBDC;
+padding-bottom:8px;
 }
 
 .block-prefix-multibar, .block-suffix-multibar {
@@ -295,6 +318,39 @@ content:url('/skins/agua/multibar-cap.png');
 content:url('/skins/agua/multibar-shoe.png');
 }
   /* }}}3 Multibar blocks */
+  /* SECTION 4.5.4: Sidebar blocks {{{3 */
+.block-sidebar {
+width:100%;
+border:0px;
+padding:0px;
+margin:8px 0px 0px 0px;
+}
+
+.block-content-sidebar {
+background-color:#E0EBF5;
+border-left:1px solid #94BBDC;
+border-right:1px solid #94BBDC;
+padding:8px 0px;
+}
+
+.block-title-sidebar {
+background-color:#94BBDC;
+padding-bottom:8px;
+}
+
+.block-prefix-sidebar, .block-suffix-sidebar {
+PACKED();
+height:8px;
+}
+
+.block-prefix-sidebar:before {
+content:url('/skins/agua/sidebar-cap.png');
+}
+
+.block-suffix-sidebar:after {
+content:url('/skins/agua/sidebar-shoe.png');
+}
+  /* }}}3 Sidebar blocks */
 
 /* }}}2 Generic block support */
 /* }}}1 Common toplevel content */
@@ -359,28 +415,21 @@ border:1px solid AGUA_BORDER;
 /* }}}2 Map blocks */
 /* SECTION 6.3:Calendar {{{2 */
   /* Layout {{{3 */
-.block-calendar-div {
-width:90%;
-text-align:center;
-}
-
 .block-calendar-row, #block-calendar-table {
 width:100%;
-border:1px solid AGUA_BORDER;
+text-align:center;
 }
   /* }}}3 Layout */
   /* Cell display {{{3 */
 .block-calendar-previous, .block-calendar-next {
 font-size:10pt;
-color:black;
-background-color:AGUA_LIGHTER_RED;
+color:#5891CA;
 }
 
 .block-calendar-current {
-color:white;
+color:#1B3B55;
 font-size:10pt;
 font-weight:bold;
-background-color:AGUA_RED;
 }
   /* }}}3 Cell display */
 /* }}}2 Calendar */

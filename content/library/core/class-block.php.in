@@ -143,7 +143,8 @@ class akBlock
   /* Method to emit the content for the block */
   function emit_content()
   {
-    $GLOBALS['block-parameters'] = $this->opts;
+    /* Save options as parameters */
+    $GLOBALS['block-parameters'] = &$this->opts;
     print '<div class="block-content block-content-'.$this->type.'">';
     print $this->content_prefix;
     @include($this->provider); 

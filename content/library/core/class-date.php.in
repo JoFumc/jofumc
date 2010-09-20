@@ -51,4 +51,11 @@ class akDate
 
   
 }
+
+function calendar_getTitle()
+{
+   $now = new akDate();
+
+   return $now->monthName.' '.$now->year;
+}
 ?>
