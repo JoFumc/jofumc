@@ -1,0 +1,13 @@
+<?php
+require("library/core/class-block.php");
+// Add partner nav
+$partner = new akBlock(BLOCK_TYPE_MULTIBAR,"blocks/core/block-partner-nav.php");
+$partner->emit();
+// Add the twitter widget (with parameters)
+$twidget = new akBlock(BLOCK_TYPE_RAW,"blocks/app/block-twitter-widget.php");
+$twidget->setParameter('tweet_shell_bg','#94BBDC');
+$twidget->setParameter('tweet_fg','#1B3B55');
+$twidget->setParameter('tweet_bg','#E0EBF5');
+$twidget->setParameter('tweet_width','200');
+$twidget->emit();
+?>

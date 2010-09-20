@@ -1,0 +1,6 @@
+<?php
+// Contact info
+@include("blocks/core/block-contact.php");
+// Calendar
+@include("blocks/core/block-calendar.php");
+?>

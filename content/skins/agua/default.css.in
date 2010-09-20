@@ -1,7 +1,7 @@
 /* SECTION 1:Values and macros (common and skin-specific) {{{1 */
   /* Common dimensions {{{2 */
 #define WIDTH_FULL     960px /* overall width */
-#define WIDTH_NAV      960px /* WIDTH_FULL-40 */
+#define WIDTH_NAV      880px /* WIDTH_FULL-80 */
 #define WIDTH_SIDEBAR  240px /* width of primary sidebar */
 #define WIDTH_WORKAREA 720px /* width of workarea */
 #define WIDTH_APP      520px   /* app part of workarea */
@@ -11,8 +11,10 @@
 #define HEIGHT_CONTENT 400px
   /* }}}2 Common dimensions */
   /* Skin-specific colors {{{2 */
-#define AGUA_OCEAN_LIGHT #A7FBEE
+#define AGUA_BLUE_DARKEST #05446B
 #define AGUA_BLUE_LIGHT  #A7DBFB
+#define AGUA_BLUE_LIGHTER #BEE4FC
+
 
   /* }}}2 Skin-specific colors */
 /* }}}1 Values and macros (common and skin-specific) */
@@ -69,6 +71,7 @@ display:block;
 width:WIDTH_MULTIBAR;
 min-height:HEIGHT_CONTENT;
 PACKED();
+margin-right:0;
 overflow:hidden;
 }
 
@@ -84,6 +87,15 @@ font-size:14pt;
 /* SECTION 4.1:Main navigation (top-nav) {{{2 */
 #define HEIGHT_NAV 48px
 
+#top-nav-wrapper {
+width:WIDTH_FULL;
+height:HEIGHT_NAV;
+border:0;
+padding:0;
+margin:0 auto;
+background-image: url('/skins/agua/bump_menubar_blue.png');
+}
+
 #top-nav-div {
 color:white;
 width:WIDTH_NAV;
@@ -91,7 +103,6 @@ border:0;
 padding:0;
 margin:0 auto;
 height:HEIGHT_NAV;
-background-image: url('/skins/agua/bump_menubar.png');
 }
 
 ul.top-nav {
@@ -105,6 +116,8 @@ height:HEIGHT_NAV;
 li.top-nav {
 float:left;
 PACKED();
+/*border-left:1px solid #FFF;
+border-right:1px solid #000; */
 height:HEIGHT_NAV;
 }
 
@@ -208,7 +221,7 @@ float:right;
 /* SECTION 4.4:Partner links {{{2 */
 #partner-div {
 display:inline-block;
-width:WIDTH_SIDEBAR;
+width:WIDTH_MULTIBAR;
 height:36px;
 margin:0px auto;
 }
@@ -216,9 +229,10 @@ margin:0px auto;
 ul.partner-nav {
 font-weight:normal;
 font-size:10px;
-margin:0px;
-padding:0px;
 height:36px;
+padding:0px;
+border:0;
+margin:0px auto;
 }
 
 li.partner-nav-extern {
@@ -248,50 +262,39 @@ height:36px;
 }
 /* }}}2 Partner links */
 /* SECTION 4.5:Generic block support {{{2 */
-.block-outer-div {
-width:95%;
-margin-left:auto;
-margin-right:auto;
-}
-
-.block-text {
-text-align:center;
-display:block;
-margin-left:auto;
-margin-right:auto;
-}
-
-.block-image {
-display:block;
-margin-left:auto;
-margin-right:auto;
-}
-
-.block-framed {
-margin:0 auto 0 auto;
-padding:0;
-border:1px solid AGUA_BORDER;
-}
-
-.image-caption {
-display:block;
-text-align:center;
-}
-
-.block-header {
-text-align:center;
-display:block;
-background-color:AGUA_BG_HEADER;
-border-top:1px solid AGUA_SHADOW_TOP;
-border-left:1px solid AGUA_SHADOW_TOP;
-border-right:1px solid AGUA_SHADOW_BOTTOM;
-border-bottom:1px solid AGUA_SHADOW_BOTTOM;
-}
-
-.block-wrapper-div {
+  /* SECTION 4.5.1: Raw blocks {{{3 */
+.block-raw {
 width:100%;
-padding-top:8px;
+border:0px;
+padding:0px;
+margin:8px 0px 0px 0px;
 }
+  /* }}}3 Raw blocks */
+  /* SECTION 4.5.2: Multibar blocks {{{3 */
+.block-multibar {
+width:100%;
+border:0px;
+padding:0px;
+margin:8px 0px 0px 0px;
+}
+
+.block-content-multibar {
+background-color:#BAD3E9;
+}
+
+.block-prefix-multibar, .block-suffix-multibar {
+PACKED();
+height:8px;
+}
+
+.block-prefix-multibar:before {
+content:url('/skins/agua/multibar-cap.png');
+}
+
+.block-suffix-multibar:after {
+content:url('/skins/agua/multibar-shoe.png');
+}
+  /* }}}3 Multibar blocks */
 
 /* }}}2 Generic block support */
 /* }}}1 Common toplevel content */
@@ -391,14 +394,14 @@ margin-right:auto;
   /* }}}3 General layout */
   /* Headlines {{{3 */
 .story-headline {
-color:AGUA_DARKER_RED;
-border-bottom:2px solid AGUA_DARKER_RED;
+color:AGUA_BLUE_DARKEST;
 margin:0px;
 }
 
 h1.story-headline {
+border-bottom:2px solid AGUA_BLUE_DARKEST;
 padding-top:8px;
-text-align:right;
+text-align:left;
 font-size:20pt;
 width:100%;
 clear:both;
@@ -409,6 +412,7 @@ padding-top: 5px;
 font-size:15pt;
 width:90%;
 clear:both;
+text-align:right;
 }
   /* }}}3 Headlines */
   /* Images/bylines {{{3 */

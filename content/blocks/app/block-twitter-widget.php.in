@@ -1,9 +1,4 @@
 <?php
-// If the skin has pre-content setup, include it here.
-require_once("library/core/util-skin.php");
-skin_include("block-twitter-widget-pre.php");
-?>
-<?php
 // Before including this file, the caller must set the following
 //    parameters:
 //
@@ -18,20 +13,23 @@ skin_include("block-twitter-widget-pre.php");
 // $tweet_shell_fg
 // $tweet_link_fg
 //
-// Pull plain defaults
-if (!isset($tweet_fg)) $tweet_fg = "#000000";
-if (!isset($tweet_bg)) $tweet_bg = "#FFFFFF";
-// Fill in optionals
-if (!isset($tweet_shell_bg)) $tweet_shell_bg = $tweet_bg;
-if (!isset($tweet_shell_fg)) $tweet_shell_fg = $tweet_fg;
-if (!isset($tweet_link_fg))  $tweet_link_fg = $tweet_fg;
+// Pull any parameters
+$tweet_fg = block_getParameter('tweet_fg',"#000000");
+$tweet_bg = block_getParameter('tweet_bg',"#FFFFFF");
+$tweet_shell_bg = block_getParameter('tweet_shell_bg',$tweet_bg);
+$tweet_shell_fg = block_getParameter('tweet_shell_fg',$tweet_fg);
+$tweet_link_fg = block_getParameter('tweet_link_fg',$tweet_fg);
+$tweet_width = block_getParameter('tweet_width',200);
+$tweet_height = block_getParameter('tweet_height',400);
 ?>
-<div class="block-wrapper-div">
-<div id="block-twitter-widget-div" class="block-outer-div block-div">
+<div id="block-twitter-widget">
 <script src="http://widgets.twimg.com/j/2/widget.js"></script>
 <script>
 new TWTR.Widget({
-  version: 2, type: 'profile', rpp: 5, interval: 6000, width: 172, height: 400,
+  version: 2, type: 'profile', rpp: 5, interval: 6000, 
+<?php
+  print 'width: '.$tweet_width.', height: '.$tweet_height.',';
+?>
   theme: {
 <?php
   print '  shell: { background: \''.$tweet_shell_bg.'\', color: \''.$tweet_shell_fg.'\' },'."\n";
@@ -44,8 +42,3 @@ new TWTR.Widget({
 }).render().setUser('JOFUMC').start();
 </script>
 </div>
-</div>
-<?php
-// If the skin has post-content setup, include it here.
-skin_include("block-twitter-widget-post.php");
-?>

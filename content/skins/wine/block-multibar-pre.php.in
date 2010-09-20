@@ -6,6 +6,7 @@ require("blocks/core/block-calendar.php");
 $tweet_shell_bg = "#66273B";
 $tweet_bg = "#B85B79";
 $tweet_fg = "#FFFFFF";
+$tweet_width=172;
 require("blocks/app/block-twitter-widget.php");
 ?>
 <div class="block-wrapper-div"></div>

@@ -3,10 +3,11 @@
 function scrub_output($outstuff)
 {
   /* Setup TIDY output */
-  $tidyopts['indent'] = 1;
+  $tidyopts['indent'] = 0;
   $tidyopts['wrap'] = 0;
   $tidyopts['hide-comments'] = true;
-  return(tidy_repair_string($outstuff,$tidyopts));
+  //return(tidy_repair_string($outstuff,$tidyopts));
+  return($outstuff);
 }
 ob_start(scrub_output);
 
