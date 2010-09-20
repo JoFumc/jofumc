@@ -1,8 +1,13 @@
 <?php
 // Basic contact info
-@include("blocks/core/block-contact.php");
-// Add a calendar...
-@include("blocks/core/block-calendar.php");
+// Contact info
+$contact = new akBlock(BLOCK_TYPE_SIDEBAR,"blocks/core/block-contact.php","Contact Us");
+$contact->emit();
+// Calendar
+require_once("library/core/class-date.php");
+$calendar = new akBlock(BLOCK_TYPE_SIDEBAR,"blocks/core/block-calendar.php");
+$calendar->title = calendar_getTitle();
+$calendar->emit();
 // Random picture...
 $random_image_path="assets/random_pool";
 $random_image_width=160;

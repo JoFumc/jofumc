@@ -1,12 +1,15 @@
 <?php
 // Add a calendar...
-require("blocks/core/block-calendar.php");
-// Add the twitter widget
-  // Fill params
-$tweet_shell_bg = "#66273B";
-$tweet_bg = "#B85B79";
-$tweet_fg = "#FFFFFF";
-$tweet_width=172;
-require("blocks/app/block-twitter-widget.php");
+require_once("library/core/class-date.php");
+$calendar = new akBlock(BLOCK_TYPE_MULTIBAR,"blocks/core/block-calendar.php");
+$calendar->title = calendar_getTitle();
+$calendar->emit();
+// Add the twitter widget (with parameters)
+$twidget = new akBlock(BLOCK_TYPE_RAW,"blocks/app/block-twitter-widget.php");
+$twidget->setParameter('tweet_shell_bg','#66273B');
+$twidget->setParameter('tweet_bg','#B85B79');
+$twidget->setParameter('tweet_fg','#FFFFFF');
+$twidget->setParameter('tweet_width','172');
+$twidget->emit();
 ?>
 <div class="block-wrapper-div"></div>

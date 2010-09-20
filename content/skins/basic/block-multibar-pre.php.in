@@ -1,10 +1,10 @@
 <?php
-// Add the twitter widget
-  // Fill params
-$tweet_shell_bg = "#C82020";
-$tweet_shell_fg = "#FFFFFF";
-$tweet_bg = "#FFFFFF";
-$tweet_fg = "#000000";
-  // Load widget
-require("blocks/app/block-twitter-widget.php");
+// Add the twitter widget (with parameters)
+$twidget = new akBlock(BLOCK_TYPE_RAW,"blocks/app/block-twitter-widget.php");
+$twidget->setParameter('tweet_shell_bg','#C82020');
+$twidget->setParameter('tweet_shell_fg','#FFFFFF');
+$twidget->setParameter('tweet_fg','#000000');
+$twidget->setParameter('tweet_bg','#FFFFFF');
+$twidget->setParameter('tweet_width','180');
+$twidget->emit();
 ?>

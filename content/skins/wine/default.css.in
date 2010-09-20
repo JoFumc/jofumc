@@ -264,51 +264,77 @@ height:36px;
 }
 /* }}}2 Partner links */
 /* SECTION 4.5:Generic block support {{{2 */
-.block-outer-div {
-width:95%;
-margin-left:auto;
-margin-right:auto;
+  /* SECTION 4.5.1: Common blocks {{{3 */
+.block-title {
+width:100%;
+PACKED();
+font-weight:bold;
+text-align:center;
 }
 
 .block-text {
+width:100%;
+PACKED();
+display:block;
 text-align:center;
-display:block;
-margin-left:auto;
-margin-right:auto;
+}
+  /* }}}3 Common blocks */
+  /* SECTION 4.5.2: Raw blocks {{{3 */
+.block-raw {
+width:100%;
+border:0px;
+padding:0px;
+margin:6px 0px 6px 0px;
+}
+  /* }}}3 Raw blocks */
+  /* SECTION 4.5.3: Multibar blocks {{{3 */
+.block-multibar {
+width:95%;
+border:0px;
+padding:0px;
+margin:6px 0px 0px 0px;
 }
 
-.block-image {
-display:block;
-margin-left:auto;
-margin-right:auto;
-}
-
-.block-framed {
-margin:0 auto 0 auto;
-padding:0;
+.block-content-multibar {
+padding:0px;
 border:1px solid WINESKIN_BORDER;
 }
 
-.image-caption {
-display:block;
-text-align:center;
-}
-
-.block-header {
-text-align:center;
-display:block;
+.block-title-multibar {
 background-color:WINESKIN_BG_HEADER;
-border-top:1px solid WINESKIN_SHADOW_TOP;
-border-left:1px solid WINESKIN_SHADOW_TOP;
-border-right:1px solid WINESKIN_SHADOW_BOTTOM;
-border-bottom:1px solid WINESKIN_SHADOW_BOTTOM;
+border:1px solid WINESKIN_BORDER;
+margin-right:-2px;
 }
 
-.block-wrapper-div {
-width:100%;
-padding-top:8px;
+.block-prefix-multibar, .block-suffix-multibar {
+PACKED();
 }
 
+  /* }}}3 Multibar blocks */
+  /* SECTION 4.5.4: Sidebar blocks {{{3 */
+.block-sidebar {
+width:95%;
+border:0px;
+padding:0px;
+margin:8px 0px 0px 0px;
+}
+
+.block-content-sidebar {
+padding:8px 0px;
+border:1px solid WINESKIN_BORDER;
+}
+
+.block-title-sidebar {
+background-color:WINESKIN_BG_HEADER;
+border:1px solid WINESKIN_BORDER;
+margin-right:-2px;
+}
+
+.block-prefix-sidebar, .block-suffix-sidebar {
+PACKED();
+}
+
+  /* }}}3 Sidebar blocks */
 /* }}}2 Generic block support */
 /* }}}1 Common toplevel content */
 /* SECTION 5:Skin-specific toplevel content {{{1 */
@@ -383,7 +409,7 @@ text-align:center;
 
 .block-calendar-row, #block-calendar-table {
 width:100%;
-border:1px solid WINESKIN_BORDER;
+text-align:center;
 }
   /* }}}3 Layout */
   /* Cell display {{{3 */
