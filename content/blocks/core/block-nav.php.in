@@ -3,12 +3,8 @@ require_once("library/core/class-menu.php");
 // If the skin has pre-content setup, include it here.
 require_once("library/core/util-skin.php");
 skin_include("block-nav-pre.php");
-?>
-<?php
 // Make menu
 $topnav = new akMenu("top-nav","top-nav-div");
-global $top_nav_prefix;
-print 'top_nav_prefix="'.$top_nav_prefix.'"';
 // Add any skin-specific bits
 if (isset($top_nav_prefix)) $topnav->prefix = $top_nav_prefix;
 if (isset($top_nav_postfix)) $topnav->postfix = $top_nav_postfix;

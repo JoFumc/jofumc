@@ -1,7 +1,7 @@
 /* SECTION 1:Values and macros (common and skin-specific) {{{1 */
   /* Common dimensions {{{2 */
 #define WIDTH_FULL     960px /* overall width */
-#define WIDTH_NAV      920px /* WIDTH_FULL-40 */
+#define WIDTH_NAV      960px /* WIDTH_FULL-40 */
 #define WIDTH_SIDEBAR  240px /* width of primary sidebar */
 #define WIDTH_WORKAREA 720px /* width of workarea */
 #define WIDTH_APP      520px   /* app part of workarea */
@@ -91,6 +91,7 @@ border:0;
 padding:0;
 margin:0 auto;
 height:HEIGHT_NAV;
+background-image: url('/skins/agua/bump_menubar.png');
 }
 
 ul.top-nav {
@@ -105,8 +106,6 @@ li.top-nav {
 float:left;
 PACKED();
 height:HEIGHT_NAV;
-background-image:url('/skins/agua/bump_48_middle.png');
-background-repeat: repeat-x;
 }
 
 li.top-nav-meta {
@@ -118,16 +117,15 @@ PACKED();
 a.top-nav, a.top-nav-meta {
 padding-left:10px;
 padding-right:10px;
-padding-top:14px;
+padding-top:16px;
 display:inline-block;
 overflow:hidden;
 color:#000;
-height:26px;
+height:32px;
 }
 
 a.top-nav:hover, a.top-nav-meta:hover, li.top-nav:hover, li.top-nav-meta:hover {
 color:#FFF;
-background-color:#AAA;
 }
 /* }}}2 Main navigation (top-nav) */
 /* SECTION 4.2:Menu generics {{{2 */
