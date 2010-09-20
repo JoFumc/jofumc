@@ -3,7 +3,7 @@
  * util-skin.php -- Skin support functions
  ***************************************************************************/
   /* Set the default skin */
-define("DEFAULT_SKIN","wine");
+define("DEFAULT_SKIN","agua");
 
 /* Includes */
 require_once("library/core/util-config.php");
