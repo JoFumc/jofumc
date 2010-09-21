@@ -8,8 +8,8 @@ Journey of Faith offers various programs for you to (add more text here).
 Example program-related text with YouTube embed.  This is from the &quot;Imagine No Malaria&quot; concert in Austin.  We were there (proof is at about 1:45).
 </span>
 <?php
-// REQUIRED param
-$youtube_video_id="VzvWyC_QUIM";
-require("blocks/app/block-video-youtube.php");
+$vid = new akBlock(BLOCK_TYPE_APP,"blocks/app/block-video-youtube.php");
+$vid->setParameter('youtube_video_id',"VzvWyC_QUIM");
+$vid->emit();
 ?>
 </div>

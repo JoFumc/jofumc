@@ -38,6 +38,7 @@ function skin_getName()
  */
 function skin_storeName()
 {
+  // Get configuration value
   $skin_name=config_getValue("skin",CONFIG_SOURCE_URL);
   // Store for a bit less than 10 years...
   $expire_time=time()+300000000;
@@ -55,7 +56,7 @@ function skin_include($filename)
 
   /* Step 2: Include if readable */
   if (is_readable($_skin_inc_file)) {
-    include($_skin_inc_file);
+    @include($_skin_inc_file);
   }
 }
 ?>

@@ -54,4 +54,23 @@ function config_getValue($token=null,$source=CONFIG_SOURCE_ANY)
   return "default";
 }
 
+/**
+ * config_setParameter() -- Set a global system parameter
+ */
+function config_setParameter($param='option',$value='')
+{
+  $GLOBALS['config-parameters'][$param] = $value;
+}
+
+/**
+ * config_getParameter() -- Retrieve a global system parameter
+ */
+function config_getParameter($param='option',$default=null)
+{
+  if (!isset($GLOBALS['config-parameters'][$param])) {
+    return($default);
+  }
+  return($GLOBALS['config-parameters'][$param]);
+}
+
 ?>

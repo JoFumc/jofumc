@@ -450,7 +450,6 @@ text-align:center;
 
 .block-calendar-row, #block-calendar-table {
 width:100%;
-border:1px solid black;
 }
   /* }}}3 Layout */
   /* Cell display {{{3 */
@@ -526,31 +525,7 @@ text-decoration:underline;
   /* Metainfo {{{3 */
   /* }}}3 Metainfo */
 /* }}}2 Stories */
-/* SECTION 6.5:Video embeds {{{2 */
-  /* Common {{{3 */
-#define WIDTH_VIDEO   480px
-#define HEIGHT_VIDEO  385px
-
-.block-video {
-height:HEIGHT_VIDEO;
-width:WIDTH_VIDEO;
-margin:0px;
-padding:0px;
-border:0px;
-}
-
-.block-video-div {
-padding:8px 0px;
-}
-  /* }}}3 Common */
-  /* Source-specific {{{3 */
-.block-video-youtube {
-}
-.block-video-vimeo {
-}
-  /* }}}3 Source-specific */
-/* }}}2 Video embeds */
-/* SECTION 6.6:Bookshelf {{{2 */
+/* SECTION 6.5:Bookshelf {{{2 */
   /* Menu {{{3 */
 #bookshelf-menu-div {
 font-weight:bold;

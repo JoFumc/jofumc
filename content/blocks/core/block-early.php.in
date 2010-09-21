@@ -27,6 +27,7 @@ function core_redirect($url)
 /* Step 2: Gather/store skin information */
 require_once("library/core/util-skin.php");
 skin_storeName();
+skin_include("parameters.php");
 
 /* Step 3: Authentication handling */
 require_once("library/core/util-auth.php");

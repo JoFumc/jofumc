@@ -194,6 +194,7 @@ background-color:AGUA_LIGHTER_RED;
 width:WIDTH_FULL;
 height:36px;
 margin:0px auto 0px auto;
+clear:both;
 }
 
 .footer-text {
@@ -220,7 +221,6 @@ float:right;
 /* }}}2 Footer */
 /* SECTION 4.4:Partner links {{{2 */
 #partner-div {
-display:inline-block;
 width:WIDTH_MULTIBAR;
 /*height:36px;*/
 margin:0px auto;
@@ -528,9 +528,7 @@ margin:5px auto 5px auto;
 font-weight:bold;
 float:left;
 width:WIDTH_BOOKSHELF;
-border:0px;
-margin:10px 10px 10px 10px;
-padding:0px;
+PACKED();
 display:block;
 text-align:center;
 }

@@ -1,0 +1,11 @@
+<?php
+//
+// parameters.php -- Skin parameters for global use.
+//
+
+config_setParameter("skin_width_full"    ,850);
+config_setParameter("skin_width_sidebar" ,210);
+config_setParameter("skin_width_multibar",180);
+config_setParameter("skin_width_workarea",640);
+config_setParameter("skin_width_app"     ,460);
+?>

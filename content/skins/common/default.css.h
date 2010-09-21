@@ -11,6 +11,7 @@
 
 /* Div to force closure of a container div with floated children */
 .closure-div, #closure-div, .content-closure-div, #content-closure-div {
+display:block;
 clear:left;
 line-height:0px;
 height:0px;
