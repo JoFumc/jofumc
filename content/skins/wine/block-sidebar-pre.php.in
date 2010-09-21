@@ -4,9 +4,10 @@
 $contact = new akBlock(BLOCK_TYPE_SIDEBAR,"blocks/core/block-contact.php","Contact Us");
 $contact->emit();
 // Random picture...
-$random_image_path="assets/random_pool";
-$random_image_width=160;
-@include("blocks/app/block-random-image.php");
+$pic = new akBlock(BLOCK_TYPE_SIDEBAR,"blocks/app/block-random-image.php","Snapshots from the Journey");
+$pic->setParameter('random_image_path','assets/random_pool');
+$pic->setParameter('random_image_width',172);
+$pic->emit();
 // Add partner nav
 $partner = new akBlock(BLOCK_TYPE_SIDEBAR,"blocks/core/block-partner-nav.php","Beyond JoF");
 $partner->emit();

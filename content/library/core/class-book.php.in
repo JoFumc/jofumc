@@ -99,9 +99,7 @@ class akBook
         print   'class="book-span book-span-'.$this->type.'" '; 
         //print   'onmouseover="skin_bookEnter(this);" ';
         //print   'onmouseout="skin_bookExit(this);" ';
-        print   'onclick="svc_loadDiv(\'bookshelf-canvas-div\',';
-        print                        '\'edit-book\',';
-        print                        '\'book='.$this->id.'&format=html\');" ';
+        print   'onclick="svc_loadDiv(\'bookshelf-canvas-div\',\'edit-book\',\'book='.$this->id.'&format=html\');" ';
         if (null != $this->dom_id) 
           print 'id="'.$this->dom_id.'" ';
         print '>';

@@ -9,7 +9,8 @@ $calendar = new akBlock(BLOCK_TYPE_SIDEBAR,"blocks/core/block-calendar.php");
 $calendar->title = calendar_getTitle();
 $calendar->emit();
 // Random picture...
-$random_image_path="assets/random_pool";
-$random_image_width=160;
-require("blocks/app/block-random-image.php");
+$pic = new akBlock(BLOCK_TYPE_SIDEBAR,"blocks/app/block-random-image.php","JoF in action");
+$pic->setParameter('random_image_path','assets/random_pool');
+$pic->setParameter('random_image_width',198);
+$pic->emit();
 ?>

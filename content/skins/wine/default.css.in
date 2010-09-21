@@ -222,36 +222,25 @@ float:right;
   /* }}}3 Footer contents */
 /* }}}2 Footer */
 /* SECTION 4.4:Partner links {{{2 */
-#partner-div {
-display:inline-block;
-width:WIDTH_SIDEBAR;
-height:36px;
-margin:0px auto;
-}
-
 ul.partner-nav {
 font-weight:normal;
 font-size:10px;
 margin:0px;
-padding:0px;
+padding:8px 0px;
 height:36px;
 }
 
 li.partner-nav-extern {
 float:left;
 border:0px;
-margin-left:1px;
-margin-right:1px;
-padding-top:2px;
+margin-left:5px;
 height:36px;
 }
 
 li.partner-nav-ref {
 float:left;
 border:0px;
-margin-left:4px;
-margin-right:4px;
-padding-top:2px;
+margin-left:5px;
 height:36px;
 }
 
@@ -289,21 +278,19 @@ margin:6px 0px 6px 0px;
   /* }}}3 Raw blocks */
   /* SECTION 4.5.3: Multibar blocks {{{3 */
 .block-multibar {
-width:95%;
-border:0px;
+border:1px solid WINESKIN_BORDER;
+width:172px;
 padding:0px;
-margin:6px 0px 0px 0px;
+margin:8px 0px 0px 0px;
 }
 
 .block-content-multibar {
-padding:0px;
-border:1px solid WINESKIN_BORDER;
+PACKED();
 }
 
 .block-title-multibar {
 background-color:WINESKIN_BG_HEADER;
-border:1px solid WINESKIN_BORDER;
-margin-right:-2px;
+border-bottom:1px solid WINESKIN_BORDER;
 }
 
 .block-prefix-multibar, .block-suffix-multibar {
@@ -313,21 +300,20 @@ PACKED();
   /* }}}3 Multibar blocks */
   /* SECTION 4.5.4: Sidebar blocks {{{3 */
 .block-sidebar {
-width:95%;
 border:0px;
 padding:0px;
 margin:8px 0px 0px 0px;
+border:1px solid WINESKIN_BORDER;
+width:172px;
 }
 
 .block-content-sidebar {
-padding:8px 0px;
-border:1px solid WINESKIN_BORDER;
+PACKED();
 }
 
 .block-title-sidebar {
 background-color:WINESKIN_BG_HEADER;
-border:1px solid WINESKIN_BORDER;
-margin-right:-2px;
+border-bottom:1px solid WINESKIN_BORDER;
 }
 
 .block-prefix-sidebar, .block-suffix-sidebar {

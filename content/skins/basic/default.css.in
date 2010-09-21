@@ -314,45 +314,74 @@ height:36px;
 }
 /* }}}2 Partner links */
 /* SECTION 4.5:Generic block support {{{2 */
-.block-outer-div {
-width:95%;
-margin-left:auto;
-margin-right:auto;
+  /* SECTION 4.5.1: Common blocks {{{3 */
+.block-title {
+width:100%;
+PACKED();
+font-weight:bold;
+text-align:center;
 }
 
 .block-text {
-text-align:center;
-display:block;
-margin-left:auto;
-margin-right:auto;
-}
-
-.block-image {
-display:block;
-margin-left:auto;
-margin-right:auto;
-}
-
-.block-framed {
-margin:0 auto 0 auto;
-padding:0;
-border:1px solid #000;
-}
-
-.image-caption {
-display:block;
-text-align:center;
-}
-
-.block-header {
-text-align:center;
-display:block;
-background-color:#FFF;
-}
-.block-wrapper-div {
 width:100%;
-padding-top:8px;
+PACKED();
+display:block;
+text-align:center;
 }
+  /* }}}3 Common blocks */
+  /* SECTION 4.5.2: Raw blocks {{{3 */
+.block-raw {
+width:100%;
+border:0px;
+padding:0px;
+margin:8px 0px 0px 0px;
+}
+  /* }}}3 Raw blocks */
+  /* SECTION 4.5.3: Multibar blocks {{{3 */
+.block-multibar {
+width:172px;
+border:1px solid JOF_RED;
+padding:0px;
+margin:8px auto 0px auto;
+}
+
+.block-content-multibar {
+PACKED();
+}
+
+.block-title-multibar {
+background-color:JOF_RED;
+color:#FFF;
+}
+
+.block-prefix-multibar, .block-suffix-multibar {
+PACKED();
+}
+
+  /* }}}3 Multibar blocks */
+  /* SECTION 4.5.4: Sidebar blocks {{{3 */
+.block-sidebar {
+width:198px;
+border:1px solid JOF_RED;
+padding:0px;
+margin:8px auto 0px auto;
+}
+
+.block-content-sidebar {
+PACKED();
+}
+
+.block-title-sidebar {
+background-color:JOF_RED;
+color:#FFF;
+}
+
+.block-prefix-sidebar, .block-suffix-sidebar {
+PACKED();
+}
+
+  /* }}}3 Sidebar blocks */
+
 
 /* }}}2 Generic block support */
 /* }}}1 Common toplevel content */

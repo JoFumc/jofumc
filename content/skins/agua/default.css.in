@@ -222,14 +222,14 @@ float:right;
 #partner-div {
 display:inline-block;
 width:WIDTH_MULTIBAR;
-height:36px;
+/*height:36px;*/
 margin:0px auto;
 }
 
 ul.partner-nav {
 font-weight:normal;
 font-size:10px;
-height:36px;
+/*height:36px;*/
 padding:0px;
 border:0;
 margin:0px auto;
@@ -238,8 +238,7 @@ margin:0px auto;
 li.partner-nav-extern {
 float:left;
 border:0px;
-margin-left:1px;
-margin-right:1px;
+margin-left:6px;
 padding-top:2px;
 height:36px;
 }
@@ -247,8 +246,7 @@ height:36px;
 li.partner-nav-ref {
 float:left;
 border:0px;
-margin-left:4px;
-margin-right:4px;
+margin-left:6px;
 padding-top:2px;
 height:36px;
 }

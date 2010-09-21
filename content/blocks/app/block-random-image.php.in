@@ -1,28 +1,33 @@
-<div class="block-wrapper-div">
-<?php
-// If the skin has pre-content setup, include it here.
-require_once("library/core/util-skin.php");
-skin_include("block-random-image-pre.php");
-?>
 <?php
 // Random image block; whoever includes this block
-// must set $random_image_path and $random_image_width;
-// (and, optionally, $random_image_title)
+//
+// Required parameters:
+// ---------------------
+// $random_image_path 
+// $random_image_width;
+//
+// Optional parameters:
+// ---------------------
+// $random_image_caption
+// 
 // Be careful not to use large images in the random pool,
 // as the download and scaling costs may cause resource 
 // issues.
 //
 // CLEAN: Pull from DB instead of globbing the path
-$imageset=glob($random_image_path."/*.{png,jpg}",GLOB_BRACE);
+
+// Step 1: Pull parameters
+$path = block_getParameter('random_image_path',"/");
+$width = block_getParameter('random_image_width',"200");
+$caption = block_getParameter('random_image_caption',"");
+
+
+// Step 2: Choose the image from the path 
+$imageset=glob($path."/*.{png,jpg}",GLOB_BRACE);
 $r=mt_rand(0,count($imageset)-1);
 $image=$imageset[$r];
-echo '<div id="block-random-image" class="block-div block-outer-div">';
-echo '<img src="'.$image.'" alt="Random Image" width="'.$random_image_width.'" class="block-image"/>';
-echo '<span class="image-caption">'.$random_image_caption.'</span>';
+echo '<div id="block-random-image">';
+echo '<img src="'.$image.'" alt="Random Image" width="'.$width.'" class="block-image"/>';
+echo '<span class="block-text">'.$caption.'</span>';
 echo '</div>';
 ?>
-<?php
-// If the skin has post-content setup, include it here.
-skin_include("block-random-image-post.php");
-?>
-</div>

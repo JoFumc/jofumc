@@ -20,7 +20,7 @@ include $(PROJECT_ROOT)/mk/common.mk
 ##
 ## Section 2: Objects/targets
 ##
-IMAGES=$(wildcard *32x32.png)
+IMAGES=$(wildcard *.png)
 
 OBJS=$(PHPOBJS) $(JSOBJS) $(HTMLOBJS) $(CSSOBJS)
 
