@@ -1,0 +1,39 @@
+<div class="block-editor block-editor-html">
+<?php
+require_once("library/core/class-form.php");
+//
+// BLOCK: Edit a server-side HTML file.
+//
+// Required parameters:
+// -------------------
+// @param $editor_filename The relative path to the file to edit.
+//
+// Optional parameters:
+// -------------------
+// @param $editor_option_preview Add a preview button.
+//
+
+$editor_filename = block_getParameter('editor-filename');
+
+if (null == $editor_filename)
+{
+   print('Something is wrong.');
+   return;
+}
+// Step 1: Create the base form
+$editor = new akForm("edit-html-form","/edit-processor.php",FORM_METHOD_POST);
+
+// Step 2: Generate items for the form */
+  // Hidden reference to the file
+$editor->createSimpleItem("hidden-filename-item",FORM_INPUT_HIDDEN,"edit-html-filename",$editor_filename);
+  // Main text area 
+$textarea = new akFormItem("file-text",FORM_INPUT_TEXTAREA,"edit-html-contents",$editor_filename);
+$textarea->hsize=60;
+$textarea->vsize=15;
+$editor->adopt($textarea);
+
+// Step 3: Emit the form
+$editor->emit();
+
+?>
+</div>

@@ -123,12 +123,27 @@ class akStoryChunk
         break;
       }   
       case STORY_CHUNK_FILE: {
+        /* If the user is logged in, add an editor button */
+        if (is_authenticated()) {
+          print '<a ';
+          print '  href="/edit-story-file.php?file='.$this->value.'" ';
+          print '  class="story-trail" ';
+          print '  title="Edit this text" ';
+          print '>';
+          skin_img("edit_48.png","Edit this text","story-trail");
+          print '</a>';
+        }
         print '<span ';
         print '  class="story-span" ';
         if (null != $this->id)
            print '  id="'.$this->id.'" ';
         print ">\n";
-        @include($this->value);
+        /* Verify that we can read it */
+        if (!is_readable($this->value)) {
+          print "[[I can't import text from \"".$this->value."\", because I can't find it (or can't read it).  Sorry 'bout that.]]";
+        } else {
+          @include($this->value);
+        }
         print "\n</span>";
         break;
       }   

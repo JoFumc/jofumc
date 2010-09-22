@@ -38,6 +38,7 @@ switch ($_REQUEST['auth-action'])
   default:       auth_validate(); break;
 }
 
-/* Step 4: Prep block output */
+/* Step 4: Import commonly used classes */
 require_once("library/core/class-block.php");
+require_once("library/core/class-story.php");
 ?>

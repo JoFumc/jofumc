@@ -57,7 +57,7 @@ class akFormItem
     /* Step 2: Interpretive defaults, should be overwritten */
     $this->label = null;  // Must be added by caller
     $this->hsize=20; // CLEAN: Make this a constant? 
-    $this->vsize=1; 
+    $this->vsize=null; 
     $this->max_hsize=256; // CLEAN: Make this a constant? 
     $this->hint = null;
   }
@@ -98,17 +98,16 @@ class akFormItem
         break;
       }
       case FORM_INPUT_TEXTAREA: {
-        print '<input ';
-        print '  type="text" ';
+        print '<textarea ';
         print '  id="'.$this->id.'" ';
-        print '  class="form-item-text" ';
+        print '  class="form-item-textarea" ';
         print '  name="'.$this->name.'" ';
-        print '  value="'.$this->value.'" ';
         print '  cols="'.$this->hsize.'" ';
-        print '  rows="'.$this->vsize.'" ';
-        if (null != $this->hint) 
-          print '  placeholder="'.$this->hint.'" ';
+        if (null != $this->vsize)
+          print 'rows="'.$this->vsize.'" ';
         print "/>\n";
+        print $this->value;
+        print '</textarea>';
         break;
       }
       case FORM_INPUT_PASSWORD: {
@@ -200,6 +199,13 @@ class akForm
     /* Add to array and bump counter */
     $this->items[$this->count] = $item;
     $this->count++;
+  }
+
+  /* Method to create and adopt a simple item */
+  function createSimpleItem($id=null,$type=null,$name=null,$value=null)
+  {
+    $item = new akFormItem($id,$type,$name,$value);
+    $this->adopt($item);
   }
 
   /* Method to emit the HTML for this form */

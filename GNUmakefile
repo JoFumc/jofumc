@@ -39,6 +39,10 @@ clobber::
 install:: toplevel-install
 	$(DESCEND)
 
+webfs::
+	@echo -n "[  WEBFS  ] "
+	@if [ ! -d /export/webspace/roots/jofrr ] ; then echo "remounting" ; sudo /etc/init.d/webfs start ; else echo "mounted" ; fi
+
 showcfg::
 	@echo PHPOBJS=$(PHPOBJS)
 	@echo PROJECT_ROOT=$(PROJECT_ROOT)
@@ -47,7 +51,7 @@ showcfg::
 	@echo PROJECT_SUBDIR=$(PROJECT_SUBDIR)
 	$(DESCEND)
 
-publish:: install
+publish:: install webfs
 	$(SAY_IT) "[ PUBLISH ] JOFRR staged content --> $(PUBLISH_ROOT)"
 	@$(foreach pub,$(shell find staging/content/ -type f),$(call TOOL_PUBLISH,$(pub),$(PUBLISH_ROOT)/$(subst staging/content/,,$(pub))))
 

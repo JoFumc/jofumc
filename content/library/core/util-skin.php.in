@@ -59,4 +59,22 @@ function skin_include($filename)
     @include($_skin_inc_file);
   }
 }
+
+/**
+ * skin_img() -- Emit HTML for a skin-specific image
+ *
+ * NOTE: We do no error check here -- just implement the HTML emit.
+ */
+function skin_img($name=null,$alt='Image',$class=null,$dom_id=null)
+{
+  /* Step 1: Straight up emit */
+  print '<img ';
+  print '  src="skins/'.skin_getName().'/'.$name.'" ';
+  print '  alt="'.$alt.'" ';
+  if (null != $class)
+    print 'class="'.$class.'" ';
+  if (null != $dom_id)
+    print 'id="'.$id.'" ';
+  print '/>';
+}
 ?>

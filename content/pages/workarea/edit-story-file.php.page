@@ -1,0 +1,62 @@
+<?php
+// If the skin has pre-content setup, include it here.
+require_once("library/core/util-skin.php");
+skin_include("edit-story-file-pre.php");
+?>
+<?php
+// Step 1: Get args
+$file = $_REQUEST['file'];
+$ref = $_SERVER['HTTP_REFERER'];
+// Step 2: Create story to start the page
+$intro = new akStory();
+$intro->createSimpleChunk(STORY_CHUNK_HEADLINE,"HTML text editor");
+$intro->createSimpleChunk(STORY_CHUNK_SECTION,'Editing file: "'.$file.'"');
+// NOTE: Don't emit the intro until we've passed security checks...
+
+// Step 3: Security checks
+$ok_to_edit = true;
+  // Step 3.1: Authentication
+if (!is_authenticated()) {
+  $ok_to_edit = false;
+  $intro->createSimpleChunk(STORY_CHUNK_SECTION,"ERROR: Authentication Failure");
+  $intro->createSimpleChunk(STORY_CHUNK_TEXT,"You must be logged in and have sufficient permissions before editing this file."); 
+  $intro->createSimpleChunk(STORY_CHUNK_TEXT,"Try logging in again, or contact your administrator.");
+}
+  // Step 3.2: File must exist
+if ($ok_to_edit && !is_readable($file)) {
+  $ok_to_edit = false;
+  $intro->createSimpleChunk(STORY_CHUNK_SECTION,"ERROR: File Not Found");
+  $intro->createSimpleChunk(STORY_CHUNK_TEXT,"Well, something went wrong here.  I can't seem to find \"".$file."\", and we can't really expect to edit something we can't find, right?");
+  $intro->createSimpleChunk(STORY_CHUNK_TEXT,"Verify the file that you are attempting to edit and try again.");
+  $intro->createSimpleChunk(STORY_CHUNK_META,"(You probably followed a link here, though, so odds are it's really my fault....)");
+}
+
+// Step 4: Emit the intro
+if ($ok_to_edit) {
+  // We're editing, so add our intro text from file
+  $intro->createSimpleChunk(STORY_CHUNK_FILE,"assets/text/pages/edit-story-file/intro.html");
+}
+
+$intro->emit();
+
+// Step 5: Pull in the block if we've passed our security checks.
+if ($ok_to_edit)
+{
+  $block = new akBlock(BLOCK_TYPE_WORKAREA,"blocks/editors/block-edit-html.php");
+  $block->setParameter('editor-filename',$file);
+  print '<div class="story-div">';
+  $block->emit();
+  print '</div>';
+}
+
+// Step 6: Add referrer button
+/*
+$outro = new akStory();
+$outro->createSimpleChunk(STORY_CHUNK_META,'<a title="Return to referring page" href="'.$ref.'">Go back to what you were doing</a>');
+$outro->emit();
+*/
+?>
+<?php
+// If the skin has post-content setup, include it here.
+skin_include("edit-story-file-post.php");
+?>

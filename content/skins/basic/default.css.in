@@ -504,6 +504,13 @@ padding:0;
 border:0;
 }
 
+.story-trail {
+float:right;
+margin:5px;
+padding:0;
+border:0;
+}
+
 .story-banner {
 display:block;
 margin-left:auto;
