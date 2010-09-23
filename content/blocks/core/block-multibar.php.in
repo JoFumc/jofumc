@@ -1,4 +1,5 @@
 <div id="multibar-div">
+<div id="multibar-container">
 <?php
 require_once("library/core/util-skin.php");
 skin_include("block-multibar-pre.php");
@@ -10,4 +11,5 @@ skin_include("block-multibar-pre.php");
 <?php
 skin_include("block-multibar-post.php");
 ?>
-</div>
+</div><!-- End multibar content -->
+</div><!-- End multibar layout -->

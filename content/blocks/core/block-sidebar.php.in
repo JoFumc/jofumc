@@ -1,4 +1,5 @@
 <div id="sidebar-div">
+<div id="sidebar-container">
 <?php
 require_once("library/core/util-skin.php");
 skin_include("block-sidebar-pre.php");
@@ -10,4 +11,5 @@ skin_include("block-sidebar-pre.php");
 <?php
 skin_include("block-sidebar-post.php");
 ?>
-</div>
+</div><!-- End sidebar content -->
+</div><!-- End sidebar layout -->

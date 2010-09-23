@@ -8,6 +8,7 @@ define("BLOCK_TYPE_MULTIBAR","multibar"); // Multibar block
 define("BLOCK_TYPE_WORKAREA","workarea"); // Workarea block 
 define("BLOCK_TYPE_APP","app");           // App area block
 define("BLOCK_TYPE_RAW","raw");           // Raw block, no decoration
+define("BLOCK_TYPE_BOOKSHELF","bookshelf"); // Bookshelf canvas block
 
 /*
  * A "block" has the following structure:

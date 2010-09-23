@@ -3,9 +3,9 @@
 // parameters.php -- Skin parameters for global use.
 //
 
-config_setParameter("skin_width_full"    ,850);
-config_setParameter("skin_width_sidebar" ,210);
-config_setParameter("skin_width_multibar",180);
-config_setParameter("skin_width_workarea",640);
-config_setParameter("skin_width_app"     ,460);
+config_setParameter("skin_width_full"    ,834);
+config_setParameter("skin_width_sidebar" ,202);
+config_setParameter("skin_width_multibar",164);
+config_setParameter("skin_width_workarea",632);
+config_setParameter("skin_width_app"     ,452);
 ?>

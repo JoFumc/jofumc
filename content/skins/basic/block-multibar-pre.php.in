@@ -5,6 +5,6 @@ $twidget->setParameter('tweet_shell_bg','#C82020');
 $twidget->setParameter('tweet_shell_fg','#FFFFFF');
 $twidget->setParameter('tweet_fg','#000000');
 $twidget->setParameter('tweet_bg','#FFFFFF');
-$twidget->setParameter('tweet_width','180');
+$twidget->setParameter('tweet_width',config_getParameter('skin_width_multibar'));
 $twidget->emit();
 ?>

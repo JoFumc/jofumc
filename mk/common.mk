@@ -67,7 +67,13 @@ SED_REINC=-e "s/PREPROC_INCLUDE/\#include/"
 SED_DEMACRO=-e "s/\#define/PREPROC_DEFINE/"
 SED_REMACRO=-e "s/PREPROC_DEFINE/\#define/"
 
-SED_SCRUB=$(SED_DEINC) $(SED_DEMACRO) $(SED_DEQUOTE) $(SED_DEHASH)
+SED_DEIF=-e "s/^\#if/PREPROC_TEST/"
+SED_REIF=-e "s/PREPROC_TEST/\#if/"
+
+SED_DEPASTE=-e "s/\#\#/PREPROC_PASTE/"
+SED_REPASTE=-e "s/PREPROC_PASTE/\#\#/"
+
+SED_SCRUB=$(SED_DEINC) $(SED_DEMACRO) $(SED_DEIF) $(SED_DEPASTE) $(SED_DEQUOTE) $(SED_DEHASH)
 SED_UNSCRUB=$(SED_REQUOTE) $(SED_REHASH)
 
 ifeq ($(V),1)
@@ -160,19 +166,19 @@ fresh: clean all
 # Pass through preprocessors
 %.html: %.html.in
 	$(SAY_IT) "[HTML PP ]" $@
-	$(DO_IT)cat $< | sed $(SED_SCRUB) |sed $(SED_REINC) $(SED_REMACRO) | gcc -E $(PROJECT_FLAGS) - | sed $(SED_UNSCRUB) $(PROJECT_SEDFLAGS) | egrep -v '^# |^$$' > $@
+	$(DO_IT)cat $< | sed $(SED_SCRUB) |sed $(SED_REINC) $(SED_REMACRO) $(SED_REIF) $(SED_REPASTE) | gcc -E $(PROJECT_FLAGS) - | sed $(SED_UNSCRUB) $(PROJECT_SEDFLAGS) | egrep -v '^# |^$$' > $@
 
 %.php: %.php.in
 	$(SAY_IT) "[ PHP PP ]" $@
-	$(DO_IT)cat $< | sed $(SED_SCRUB) |sed $(SED_REINC) $(SED_REMACRO) | gcc -E $(PROJECT_FLAGS) - | sed $(SED_UNSCRUB) $(PROJECT_SEDFLAGS) | egrep -v '^# |^$$' > $@
+	$(DO_IT)cat $< | sed $(SED_SCRUB) |sed $(SED_REINC) $(SED_REMACRO) $(SED_REIF) $(SED_REPASTE) | gcc -E $(PROJECT_FLAGS) - | sed $(SED_UNSCRUB) $(PROJECT_SEDFLAGS) | egrep -v '^# |^$$' > $@
 
 %.css: %.css.in
 	$(SAY_IT) "[ CSS PP ]" $@
-	$(DO_IT)cat $< | sed $(SED_SCRUB) |sed $(SED_REINC) $(SED_REMACRO) | gcc -E $(PROJECT_FLAGS) - | sed $(SED_UNSCRUB) $(PROJECT_SEDFLAGS) | egrep -v '^# |^$$' > $@
+	$(DO_IT)cat $< | sed $(SED_SCRUB) |sed $(SED_REINC) $(SED_REMACRO) $(SED_REIF) $(SED_REPASTE) | gcc -E $(PROJECT_FLAGS) - | sed $(SED_UNSCRUB) $(PROJECT_SEDFLAGS) | egrep -v '^# |^$$' > $@
 
 %.js: %.js.in
 	$(SAY_IT) "[  JS PP ]" $@
-	$(DO_IT)cat $< | sed $(SED_SCRUB) |sed $(SED_REINC) $(SED_REMACRO) | gcc -E $(PROJECT_FLAGS) - | sed $(SED_UNSCRUB) $(PROJECT_SEDFLAGS) | egrep -v '^# |^$$' > $@
+	$(DO_IT)cat $< | sed $(SED_SCRUB) |sed $(SED_REINC) $(SED_REMACRO) $(SED_REIF) $(SED_REPASTE) | gcc -E $(PROJECT_FLAGS) - | sed $(SED_UNSCRUB) $(PROJECT_SEDFLAGS) | egrep -v '^# |^$$' > $@
 
 # Simple copies from source
 %.js: %.js.cp

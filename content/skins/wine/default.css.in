@@ -1,13 +1,23 @@
 /* SECTION 1:Values and macros (common and skin-specific) {{{1 */
   /* Common dimensions {{{2 */
+    /* Toplevel regions {{{3 */
+#define WIDTH_GUTTER     8px /* Area (margin) between toplevel regions */
 #define WIDTH_FULL     880px /* overall width */
 #define WIDTH_SIDEBAR  180px /* width of primary sidebar */
 #define WIDTH_WORKAREA 700px /* width of workarea */
-#define WIDTH_APP      520px   /* app part of workarea */
-#define WIDTH_MULTIBAR 180px   /* multibar part of workarea */
+#define WIDTH_APP      512px   /* app part of workarea */
+#define WIDTH_MULTIBAR 188px   /* multibar part of workarea */
 #define WIDTH_BOOKSHELF 200px /* Bookshelf sidebar */
 #define WIDTH_BOOKWORK  660px /* Workarea for book editing */
 #define HEIGHT_CONTENT 400px
+    /* }}}3 Toplevel regions */
+    /* Inner content containers {{{3 */
+#define WIDTH_CONTENT_CONTAINER  880px /* Use whole space */
+#define WIDTH_SIDEBAR_CONTAINER  172px /* Left-justified in sidebar container */
+#define WIDTH_WORKAREA_CONTAINER 692px /* Right-justified in workarea div */
+#define WIDTH_APP_CONTAINER      504px /* Leftmost part of workarea */
+#define WIDTH_MULTIBAR_CONTAINER 172px /* Full multibar width */
+    /* }}}3 Inner content containers */
   /* }}}2 Common dimensions */
   /* Skin-specific colors {{{2 */
 #define WINESKIN_RED         #983B59
@@ -26,6 +36,7 @@
 #include "../common/default.css.h"
 /* }}}1 */
 /* SECTION 3:Common toplevel containers {{{1 */
+  /* Baseline page info {{{2 */
   /* These control the base look and layout; required for all skins */
 body {
 color:#333;
@@ -35,7 +46,11 @@ font-weight:normal;
 background:#FFF url('/skins/wine/red_bar.png') repeat-x;
 PACKED();
 }
-
+  /* }}}2 Baseline page info */
+  /* Screen divisions {{{2 */
+      /* These should generally have no margins....
+       * content spacing is handled in containers below 
+       */
 #content-div {
 display:block;
 width:WIDTH_FULL;
@@ -91,6 +106,37 @@ text-align:center;
 font-style:italic;
 font-size:14pt;
 }
+  /* }}}2 Screen divisions */
+  /* Content containers {{{2 */
+#content-container { /* Full-width page content */
+width:WIDTH_CONTENT_CONTAINER;
+PACKED();
+}
+
+#sidebar-container { /* Sidebar content */
+width:WIDTH_SIDEBAR_CONTAINER;
+border:0;
+margin:0 WIDTH_GUTTER 0 0;
+padding:0;
+}
+
+#workarea-container {
+width:WIDTH_WORKAREA_CONTAINER;
+margin-left:WIDTH_GUTTER;
+height:auto;
+}
+
+#application-container {
+width:WIDTH_APP_CONTAINER;
+margin-left:WIDTH_GUTTER;
+}
+
+#multibar-container {
+width:WIDTH_MULTIBAR_CONTAINER;
+margin-left:WIDTH_GUTTER;
+}
+
+  /* }}}2 Content containers */
 /* }}}1 Common toplevel containers */
 /* SECTION 4:Common toplevel content {{{1 */
 /* SECTION 4.1:Main navigation (top-nav) {{{2 */

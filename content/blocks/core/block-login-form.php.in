@@ -1,24 +1,4 @@
 <?php
-//
-// REQUIRED PARAMETERS:
-// @param $login_form_referrer URL of original referrer.
-// 
-// OPTIONAL PARAMETERS:
-// @param $login_form_header PHP file containing pre-form information
-// @param $login_form_footer PHP file containing post-form information
-//        
-
-// If the skin has pre-content setup, include it here.
-require_once("library/core/util-skin.php");
-skin_include("block-login-form-pre.php");
-?>
-<div class="story-div">
-<span class="story-span">
-<?php
-if (isset($login_form_header)) @include($login_form_header);
-?>
-</span>
-<?php
 require_once("library/core/class-form.php");
 /* Step 1: Create the form object */
 $login = new akForm("login-form","/login-processor.php",FORM_METHOD_POST);
@@ -48,12 +28,4 @@ $login->adopt($item);
 
 /* Step 3: Emit the form */
 $login->emit();
-?>
-<?php
-if (isset($login_form_footer)) @include($login_form_footer);
-?>
-</div>
-<?php
-// If the skin has post-content setup, include it here.
-skin_include("block-login-form-post.php");
 ?>
