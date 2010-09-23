@@ -27,7 +27,7 @@ $editor = new akForm("edit-html-form","/edit-processor.php",FORM_METHOD_POST);
   // Hidden reference to the file
 $editor->createSimpleItem("hidden-filename-item",FORM_INPUT_HIDDEN,"edit-html-filename",$editor_filename);
   // Main text area 
-$textarea = new akFormItem("file-text",FORM_INPUT_TEXTAREA,"edit-html-contents",$editor_filename);
+$textarea = new akFormItem("file-text",FORM_INPUT_TEXTAREA,"edit-html-contents",file_get_contents($editor_filename));
 $textarea->hsize=60;
 $textarea->vsize=15;
 $editor->adopt($textarea);
