@@ -14,7 +14,7 @@
     /* Inner content containers {{{3 */
 #define WIDTH_CONTENT_CONTAINER  834px /* Use whole space */
 #define WIDTH_SIDEBAR_CONTAINER  202px /* Right-justified in sidebar div */
-#define WIDTH_WORKAREA_CONTAINER 632px /* Full space when sidebar+workarea */
+#define WIDTH_WORKAREA_CONTAINER 624px /* Full space when sidebar+workarea */
 #define WIDTH_APP_CONTAINER      452px /* Leftmost part of workarea */
 #define WIDTH_MULTIBAR_CONTAINER 164px /* Full multibar width */
     /* }}}3 Inner content containers */
@@ -517,9 +517,7 @@ background-color:JOF_RED;
 /* SECTION 6.4:Stories {{{2 */
   /* General layout {{{3 */
 .story-div {
-width:95%;
-margin-left:auto;
-margin-right:auto;
+PACKED();
 }
   /* }}}3 General layout */
   /* Headlines {{{3 */
