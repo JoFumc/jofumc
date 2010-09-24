@@ -15,7 +15,7 @@
 #define WIDTH_CONTENT_CONTAINER  960px /* Use whole space */
 #define WIDTH_SIDEBAR_CONTAINER  240px /* Left-justified in sidebar container */
 #define WIDTH_WORKAREA_CONTAINER 700px /* Full space when sidebar+workarea */
-#define WIDTH_APP_CONTAINER      510px /* Leftmost part of workarea */
+#define WIDTH_APP_CONTAINER      500px /* Leftmost part of workarea */
 #define WIDTH_MULTIBAR_CONTAINER 200px /* Full multibar width */
     /* }}}3 Inner content containers */
   /* Usable areas (incorporate gutters) */
