@@ -1,3 +1,4 @@
+<div id="bookshelf-menu-div">
 <?php
 // 
 //  Bookshelf menu block -- retrieve the current user's 
@@ -7,7 +8,7 @@
 require_once("library/core/util-skin.php");
 skin_include("block-bookshelf-menu-pre.php");
 ?>
-<div id="bookshelf-menu-div">
+<div id="bookshelf-menu-container">
 <?php
 // Includes 
 require_once("library/core/util-db.php");
@@ -39,8 +40,9 @@ $bookShelf->adopt($book);
 // emit HTML
 $bookShelf->emit();
 ?>
-</div>
+</div><!-- Close bookshelf-menu-container -->
 <?php
 // If the skin has post-content setup, include it here.
 skin_include("block-bookshelf-menu-post.php");
 ?>
+</div>

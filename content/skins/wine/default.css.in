@@ -8,16 +8,17 @@
 #define WIDTH_APP      512px   /* app part of workarea */
 #define WIDTH_MULTIBAR 188px   /* multibar part of workarea */
 #define WIDTH_BOOKSHELF 200px /* Bookshelf sidebar */
-#define WIDTH_BOOKWORK  680px /* Workarea for book editing */
+#define WIDTH_BOOKWORK  664px /* Workarea for book editing */
 #define HEIGHT_CONTENT 400px
     /* }}}3 Toplevel regions */
     /* Inner content containers {{{3 */
-#define WIDTH_CONTENT_CONTAINER  880px /* Use whole space */
+#define WIDTH_CONTENT_CONTAINER  864px /* Use whole space */
 #define WIDTH_SIDEBAR_CONTAINER  172px /* Left-justified in sidebar container */
 #define WIDTH_WORKAREA_CONTAINER 684px /* Right-justified in workarea div */
 #define WIDTH_APP_CONTAINER      504px /* Leftmost part of workarea */
 #define WIDTH_MULTIBAR_CONTAINER 172px /* Full multibar width */
-#define WIDTH_BOOKSHELF_CONTAINER 664px /* Bookshelf canvas */
+#define WIDTH_BOOKSHELF_CONTAINER 200px /* Bookshelf menu container */
+#define WIDTH_BOOKWORK_CONTAINER  656px /* Bookshelf canvas container */
     /* }}}3 Inner content containers */
   /* }}}2 Common dimensions */
   /* Skin-specific colors {{{2 */
@@ -111,7 +112,9 @@ font-size:14pt;
   /* Content containers {{{2 */
 #content-container { /* Full-width page content */
 width:WIDTH_CONTENT_CONTAINER;
-PACKED();
+border:0;
+padding:0;
+margin:0 auto;
 }
 
 #sidebar-container { /* Sidebar content */
@@ -558,11 +561,15 @@ margin:5px auto 5px auto;
 /* SECTION 6.6:Bookshelf {{{2 */
   /* Menu {{{3 */
 #bookshelf-menu-div {
-font-weight:bold;
-float:left;
 width:WIDTH_BOOKSHELF;
+float:left;
+PACKED();
+}
+#bookshelf-menu-container {
+font-weight:bold;
+width:WIDTH_BOOKSHELF_CONTAINER;
 border:0px;
-margin:10px 10px 10px 10px;
+margin:10px 0 0 0;
 padding:0px;
 display:block;
 text-align:center;
@@ -618,9 +625,15 @@ border:2px solid WINESKIN_RED;
   /* }}}3 Menu */
   /* Workarea {{{3 */
 #bookshelf-canvas-div {
-float:left;
 width:WIDTH_BOOKWORK;
+float:left;
 PACKED();
+}
+#bookshelf-canvas-container {
+width:WIDTH_BOOKWORK_CONTAINER;
+border:0;
+padding:0;
+margin:0 0 0 8px;
 }
   /* }}}3 Workarea */
 /* }}}2 Bookshelf */
