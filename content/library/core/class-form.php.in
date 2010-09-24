@@ -40,7 +40,8 @@ class akFormItem
 
   /* Non-standard bits */
   public $hint;  // Form element hint (placeholder, perhaps)
-  public $style; // Local item style (USE WITH CAUTION)
+  private $style; // Local item style (USE WITH CAUTION)
+  private $events; // Events and handlers
 
   /* Event handlers */
       /* CLEAN: Add this */
@@ -60,14 +61,22 @@ class akFormItem
     $this->hsize=null;
     $this->vsize=null; 
     $this->max_hsize=256; // CLEAN: Make this a constant? 
-    $this->hint = null;
+    $this->hint = null; 
     $this->style = null;
+    $this->events = null;
   }
 
   function addStyle($parm=null,$value=null)
   {
     if ((null != $parm) && (null != $value))
       $this->style .= $parm.':'.$value.';';
+  }
+
+  function addEvent($event=null,$handler=null)
+  {
+    if (($event != null) && ($handler != null)) {
+      $this->events[$event] = $handler;
+    }
   }
 
   /* Method to emit the HTML for this item */
@@ -140,6 +149,20 @@ class akFormItem
           print '  placeholder="'.$this->hint.'" ';
         if (null != $this->style)
           print 'style="'.$this->style.'" ';
+        print "/>\n";
+        break;
+      }
+      case FORM_INPUT_BUTTON: {
+        print '<input ';
+        print '  type="button" ';
+        print '  id="'.$this->id.'" ';
+        print '  class="form-item-button" ';
+        print '  name="'.$this->name.'" ';
+        print '  value="'.$this->value.'" ';
+        if (null != $this->style)
+          print 'style="'.$this->style.'" ';
+        foreach(array_keys($this->events) as $evkey)
+          print $evkey.'="'.$this->events[$evkey].'" ';
         print "/>\n";
         break;
       }

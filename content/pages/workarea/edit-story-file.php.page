@@ -5,6 +5,7 @@ skin_include("edit-story-file-pre.php");
 ?>
 <?php
 // Step 1: Get args and setup
+$ref = $_SERVER['HTTP_REFERER'];
 $file = $_REQUEST['file'];
 $ok_to_go = true;
 $intro = new akStory();
@@ -46,6 +47,7 @@ if ($_GET)
     $block = new akBlock(BLOCK_TYPE_WORKAREA,"blocks/editors/block-edit-html.php");
     $block->setParameter('editor-filename',$file);
     $block->setParameter('editor-processor',"edit-story-file.php");
+    $block->setParameter('editor-hostpage',$ref);
     print '<div class="story-div">';
     $block->emit();
     print '</div>';
@@ -53,7 +55,6 @@ if ($_GET)
 
   // Step 4: Add referrer button
   /*
-  $ref = $_SERVER['HTTP_REFERER'];
   $outro = new akStory();
   $outro->createSimpleChunk(STORY_CHUNK_META,'<a title="Return to referring page" href="'.$ref.'">Go back to what you were doing</a>');
   $outro->emit();
@@ -61,15 +62,12 @@ if ($_GET)
 }
 else
 {
-  // Step 5: Emit processing intro
-  $intro->emit();
-
-  // Step 6: Make a backup of the resource
+  // Step 5: Make a backup of the resource
   $backupfile=$file.".bak";
   if (file_exists($backupfile)) unlink($backupfile);
   rename($file,$backupfile);
 
-  // Step 7: Update file contents (dequote if necessary)
+  // Step 6: Update file contents (dequote if necessary)
   if (get_magic_quotes_gpc()) {
     $newdata=stripslashes($_POST['edit-html-contents']);
   } else {
@@ -77,7 +75,15 @@ else
   }
   file_put_contents($file,$newdata);
 
-  print 'Edits saved to '.$file;
+  $intro->createSimpleChunk(STORY_CHUNK_TEXT,"Edits successfully saved.");
+
+  // Step 7: Emit processing intro
+  $intro->emit();
+
+  // Step 8: Create a button to return to updated host page
+  print '<a href="'.$_REQUEST['hostpage'].'" title="Return to edited page">';
+  skin_img("return_48.png","Return to original page","story-lede");
+  print '</a>';
 
 }
 ?>

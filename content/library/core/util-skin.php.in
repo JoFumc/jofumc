@@ -12,7 +12,7 @@ $cache_skin='';
 
 /**
  * skin_getName() -- Return the name of the currently-selected skin
- *                   (defaults to "basic").
+ *                   (defaults to DEFAULT_SKIN)
  */
 function skin_getName()
 {
