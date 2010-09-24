@@ -7,16 +7,32 @@ header('Content-type: text/html');
 <?php
 /* Step 1: Includes */
 require_once("library/core/class-book.php");
+require_once("library/core/class-story.php");
 require_once("library/core/class-form.php");
+require_once("library/core/util-auth.php");
+
+/* Step 2: Get user auth info */
+auth_validate();
+
+/* Step 3: Service story */
+$ss = new akStory("edit-profile-story");
+$ss->createSimpleChunk(STORY_CHUNK_SECTION,"Edit profile settings");
+$ss->emit();
 
 /* Step 2: Start form */
 $pf = new akForm("edit-profile-form","edit-profile-processor.php",FORM_METHOD_POST);
 
-$pf->createSimpleItem("profile-display-name",
-                      FORM_INPUT_TEXT,
-                      "profile-display-name",
-                      $auth_user->displayname,
+$pf->createSimpleItem("profile-display-name", FORM_INPUT_TEXT,
+                      "profile-display-name", $auth_user->displayname,
                       "Display Name");
+
+$pf->createSimpleItem("profile-password", FORM_INPUT_PASSWORD,
+                      "profile-password", null, "Password");
+$pf->createSimpleItem("profile-password-confirm", FORM_INPUT_PASSWORD,
+                      "profile-password-confirm", null, "Confirm Password");
+
+$pf->createSimpleItem("profile-submit", FORM_INPUT_SUBMIT,
+                      "profile-submit", "Save");
 
 $pf->emit();
 
