@@ -17,8 +17,6 @@ $editor_filename = block_getParameter('editor-filename');
 $editor_processor = block_getParameter('editor-processor');
 $editor_width = block_getParameter('block-width').'px';
 
-print 'Got a block width of: '.$editor_width.'px';
-
 if (null == $editor_filename)
 {
    print('Something is wrong.');
@@ -29,7 +27,7 @@ $editor = new akForm("edit-html-form",$editor_processor,FORM_METHOD_POST);
 
 // Step 2: Generate items for the form */
   // Hidden reference to the file
-$editor->createSimpleItem("hidden-filename-item",FORM_INPUT_HIDDEN,"edit-html-filename",$editor_filename);
+$editor->createSimpleItem("hidden-filename-item",FORM_INPUT_HIDDEN,"file",$editor_filename);
   // Main text area 
 $textarea = new akFormItem("file-text",FORM_INPUT_TEXTAREA,"edit-html-contents",file_get_contents($editor_filename));
 $textarea->addStyle('width',$editor_width);
