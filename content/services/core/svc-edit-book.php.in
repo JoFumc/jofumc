@@ -17,7 +17,14 @@ $bookid=0+$_REQUEST['book'];
 // Step 1: Check for special book types
 if ($bookid < 1000)
 {
-   print 'Special: id="'.$bookid.'"';
+  switch($bookid) { 
+    case BOOK_ID_PROFILE: {
+      @include("svc-edit-book-profile.php");
+      break;
+    }
+    default:
+      print 'Unknown "special" bookID="'.$bookid.'"';
+  }
 }
 // Step 2: Handle generic books by type
 else

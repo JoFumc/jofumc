@@ -8,8 +8,8 @@
 ##
 firstrule: all
 PROJECT=jofrr
-PROJECT_ROOT=../..
-SUBDIRS=core books
+PROJECT_ROOT=../../..
+SUBDIRS=
 
 ##
 ## Section 2: includes
@@ -22,6 +22,8 @@ include $(PROJECT_ROOT)/mk/common.mk
 ##
 PHPSRCS=$(wildcard *.php.in)
 PHPOBJS=$(PHPSRCS:%.php.in=%.php)
+JSSRCS=$(wildcard *.js.in)
+JSOBJS=$(JSSRCS:%.js.in=%.js)
 
 OBJS=$(PHPOBJS) $(JSOBJS) $(HTMLOBJS)
 
@@ -43,8 +45,8 @@ clobber:: local-clobber
 	$(DESCEND)
 
 install: all
-	$(call TOOL_MKDIR,$(STAGING_ROOT)/$(PROJECT_SUBDIR),0755)
-	@$(foreach obj,$(OBJS),$(call TOOL_INSTALL,$(obj),0644,$(STAGING_ROOT)/$(PROJECT_SUBDIR)))
+	$(call TOOL_MKDIR,$(CONTENT_ROOT),0755)
+	@$(foreach obj,$(OBJS),$(call TOOL_INSTALL,$(obj),0644,$(CONTENT_ROOT)))
 	$(DESCEND)
 
 showcfg::

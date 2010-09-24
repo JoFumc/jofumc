@@ -47,7 +47,7 @@ class akFormItem
       /* CLEAN: Add this */
 
   /* Constructor */
-  function __construct($id=null, $type=null, $name=null, $value=null)
+  function __construct($id=null, $type=null, $name=null, $value=null, $label=null)
   {
     /* Step 1: Load basic member info */
       /* CLEAN: Throw exception on bad inits? */
@@ -55,9 +55,9 @@ class akFormItem
     $this->type = $type;
     $this->name = $name;
     $this->value = $value;
+    $this->label = $label;
 
     /* Step 2: Interpretive defaults, should be overwritten */
-    $this->label = null;  // Must be added by caller
     $this->hsize=null;
     $this->vsize=null; 
     $this->max_hsize=256; // CLEAN: Make this a constant? 
@@ -246,9 +246,9 @@ class akForm
   }
 
   /* Method to create and adopt a simple item */
-  function createSimpleItem($id=null,$type=null,$name=null,$value=null)
+  function createSimpleItem($id=null,$type=null,$name=null,$value=null,$label=null)
   {
-    $item = new akFormItem($id,$type,$name,$value);
+    $item = new akFormItem($id,$type,$name,$value,$label);
     $this->adopt($item);
   }
 

@@ -1,0 +1,24 @@
+<?php
+// PHP service script to emit profile editor form
+
+  // This is an HTML-formatted service
+header('Content-type: text/html');
+?>
+<?php
+/* Step 1: Includes */
+require_once("library/core/class-book.php");
+require_once("library/core/class-form.php");
+
+/* Step 2: Start form */
+$pf = new akForm("edit-profile-form","edit-profile-processor.php",FORM_METHOD_POST);
+
+$pf->createSimpleItem("profile-display-name",
+                      FORM_INPUT_TEXT,
+                      "profile-display-name",
+                      $auth_user->displayname,
+                      "Display Name");
+
+$pf->emit();
+
+
+?>
