@@ -18,7 +18,7 @@ var ak_module='skin-basic';
 // Add a couple of extra properties to some element types to help with
 // skinning.
 HTMLLIElement.prototype.childMenu = null;
-HTMLDIVElement.prototype.popdownTimer = null;
+HTMLDivElement.prototype.popdownTimer = null;
 
 // ////////////////////////////////////////////////////////////////////////
 // skin_menuItemEnter() -- Handle a mouseover on a menuitem

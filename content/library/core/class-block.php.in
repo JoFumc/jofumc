@@ -95,8 +95,8 @@ class akBlock
     if (null != $this->dom_id)
       print 'id="'.$this->dom_id.'" ';
     print   'class="block-'.$this->type.'" ';
-    print   'onmouseover="skin_blockEnter(this);" ';
-    print   'onmouseout="skin_blockExit(this);" ';
+    //print   'onmouseover="skin_blockEnter(this);" ';
+    //print   'onmouseout="skin_blockExit(this);" ';
     print ">";
     /* Step 2: Emit block prefix */
     if ($this->type != BLOCK_TYPE_RAW) {

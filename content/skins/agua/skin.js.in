@@ -1,0 +1,44 @@
+// ////////////////////////////////////////////////////////////////////////
+//
+// @file skin.js
+// 
+// @brief Javascript implementation of skin support utilities
+//
+// @details 
+// This file implements common skin-specific client-side tools and utilities
+//
+// ////////////////////////////////////////////////////////////////////////
+
+// All modules have a name to identify themselves.
+var ak_module='skin-agua';
+
+// ////////////////////////////////////////////////////////////////////////
+// skin additional properties
+//
+// Add a couple of extra properties to some element types to help with
+// skinning.
+HTMLDivElement.prototype.popdownTimer = null;
+HTMLLIElement.prototype.childMenu = null;
+
+// ////////////////////////////////////////////////////////////////////////
+// skin_menuItemEnter() -- Handle a mouseover on a menuitem
+//
+// @return Nothing
+//
+// We check to see if a menuitem has a child, and -- if so, pop it up
+//
+function skin_menuItemEnter(ele)
+{
+    return;
+}
+
+// ////////////////////////////////////////////////////////////////////////
+// skin_menuItemExit() -- Handle a mouseout on a menuitem
+//
+// @return Nothing
+//
+// We check to see if a menuitem has a child, and -- if so, pop it down.
+//
+function skin_menuItemExit(ele)
+{
+}
