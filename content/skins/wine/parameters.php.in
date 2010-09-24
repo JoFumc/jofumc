@@ -5,7 +5,8 @@
 
 config_setParameter("skin_width_full"    ,880);
 config_setParameter("skin_width_sidebar" ,172);
-config_setParameter("skin_width_multibar",172);
-config_setParameter("skin_width_workarea",692);
+config_setParameter("skin_width_workarea",684);
 config_setParameter("skin_width_app"     ,504);
+config_setParameter("skin_width_multibar",172);
+config_setParameter("skin_width_bookshelf",664);
 ?>

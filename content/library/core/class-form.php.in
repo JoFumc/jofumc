@@ -40,6 +40,7 @@ class akFormItem
 
   /* Non-standard bits */
   public $hint;  // Form element hint (placeholder, perhaps)
+  public $style; // Local item style (USE WITH CAUTION)
 
   /* Event handlers */
       /* CLEAN: Add this */
@@ -56,10 +57,17 @@ class akFormItem
 
     /* Step 2: Interpretive defaults, should be overwritten */
     $this->label = null;  // Must be added by caller
-    $this->hsize=20; // CLEAN: Make this a constant? 
+    $this->hsize=null;
     $this->vsize=null; 
     $this->max_hsize=256; // CLEAN: Make this a constant? 
     $this->hint = null;
+    $this->style = null;
+  }
+
+  function addStyle($parm=null,$value=null)
+  {
+    if ((null != $parm) && (null != $value))
+      $this->style .= $parm.':'.$value.';';
   }
 
   /* Method to emit the HTML for this item */
@@ -80,6 +88,8 @@ class akFormItem
         print '  class="form-item-hidden" ';
         print '  name="'.$this->name.'" ';
         print '  value="'.$this->value.'" ';
+        if (null != $this->style)
+          print 'style="'.$this->style.'" ';
         print "/>\n";
         break;
       }   
@@ -90,10 +100,13 @@ class akFormItem
         print '  class="form-item-text" ';
         print '  name="'.$this->name.'" ';
         print '  value="'.$this->value.'" ';
-        print '  size="'.$this->hsize.'" ';
+        if (null != $this->hsize)
+          print 'size="'.$this->hsize.'" ';
         print '  maxlength="'.$this->max_hsize.'" ';
         if (null != $this->hint) 
-          print '  placeholder="'.$this->hint.'" ';
+          print 'placeholder="'.$this->hint.'" ';
+        if (null != $this->style)
+          print 'style="'.$this->style.'" ';
         print "/>\n";
         break;
       }
@@ -102,9 +115,12 @@ class akFormItem
         print '  id="'.$this->id.'" ';
         print '  class="form-item-textarea" ';
         print '  name="'.$this->name.'" ';
-        print '  cols="'.$this->hsize.'" ';
+        if (null != $this->hsize)
+          print 'cols="'.$this->hsize.'" ';
         if (null != $this->vsize)
           print 'rows="'.$this->vsize.'" ';
+        if (null != $this->style)
+          print 'style="'.$this->style.'" ';
         print "/>\n";
         print $this->value;
         print '</textarea>';
@@ -117,10 +133,13 @@ class akFormItem
         print '  class="form-item-password" ';
         print '  name="'.$this->name.'" ';
         print '  value="'.$this->value.'" ';
-        print '  size="'.$this->hsize.'" ';
+        if (null != $this->hsize)
+          print 'size="'.$this->hsize.'" ';
         print '  maxlength="'.$this->max_hsize.'" ';
         if (null != $this->hint) 
           print '  placeholder="'.$this->hint.'" ';
+        if (null != $this->style)
+          print 'style="'.$this->style.'" ';
         print "/>\n";
         break;
       }
@@ -131,6 +150,8 @@ class akFormItem
         print '  class="form-item-submit" ';
         print '  name="'.$this->name.'" ';
         print '  value="'.$this->value.'" ';
+        if (null != $this->style)
+          print 'style="'.$this->style.'" ';
         print "/>\n";
         break;
       }

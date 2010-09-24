@@ -14,6 +14,10 @@ require_once("library/core/class-form.php");
 //
 
 $editor_filename = block_getParameter('editor-filename');
+$editor_processor = block_getParameter('editor-processor');
+$editor_width = block_getParameter('block-width').'px';
+
+print 'Got a block width of: '.$editor_width.'px';
 
 if (null == $editor_filename)
 {
@@ -21,16 +25,18 @@ if (null == $editor_filename)
    return;
 }
 // Step 1: Create the base form
-$editor = new akForm("edit-html-form","/edit-processor.php",FORM_METHOD_POST);
+$editor = new akForm("edit-html-form",$editor_processor,FORM_METHOD_POST);
 
 // Step 2: Generate items for the form */
   // Hidden reference to the file
 $editor->createSimpleItem("hidden-filename-item",FORM_INPUT_HIDDEN,"edit-html-filename",$editor_filename);
   // Main text area 
 $textarea = new akFormItem("file-text",FORM_INPUT_TEXTAREA,"edit-html-contents",file_get_contents($editor_filename));
-$textarea->hsize=60;
+$textarea->addStyle('width',$editor_width);
 $textarea->vsize=15;
 $editor->adopt($textarea);
+  // Submit/cancel buttons
+$editor->createSimpleItem("submit-item",FORM_INPUT_SUBMIT,"submit-item","Save changes");
 
 // Step 3: Emit the form
 $editor->emit();

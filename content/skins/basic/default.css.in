@@ -17,6 +17,7 @@
 #define WIDTH_WORKAREA_CONTAINER 624px /* Full space when sidebar+workarea */
 #define WIDTH_APP_CONTAINER      452px /* Leftmost part of workarea */
 #define WIDTH_MULTIBAR_CONTAINER 164px /* Full multibar width */
+#define WIDTH_BOOKWORK_CONTAINER 610px /* Bookshelf canvas */
     /* }}}3 Inner content containers */
   /* }}}2 Common dimensions */
   /* Skin-specific colors {{{2 */

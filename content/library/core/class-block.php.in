@@ -3,9 +3,10 @@
  * class-block.php -- Block (sidebar/multibar) object definitions
  ***************************************************************************/
   // Block types
+define("BLOCK_TYPE_FULL","full");   // Full-width block
 define("BLOCK_TYPE_SIDEBAR","sidebar");   // Sidebar block
 define("BLOCK_TYPE_MULTIBAR","multibar"); // Multibar block
-define("BLOCK_TYPE_WORKAREA","workarea"); // Workarea block 
+define("BLOCK_TYPE_WORKAREA","workarea"); // Workarea (app+multibar)
 define("BLOCK_TYPE_APP","app");           // App area block
 define("BLOCK_TYPE_RAW","raw");           // Raw block, no decoration
 define("BLOCK_TYPE_BOOKSHELF","bookshelf"); // Bookshelf canvas block
@@ -75,6 +76,7 @@ class akBlock
 
     /* Step 3: Internal parameter set */
     $this->opts = array();
+    $this->opts['block-width'] = config_getParameter("skin_width_".$this->type,0);
 
   }
 

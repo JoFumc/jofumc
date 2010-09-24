@@ -8,7 +8,7 @@
 #define WIDTH_APP      512px   /* app part of workarea */
 #define WIDTH_MULTIBAR 188px   /* multibar part of workarea */
 #define WIDTH_BOOKSHELF 200px /* Bookshelf sidebar */
-#define WIDTH_BOOKWORK  660px /* Workarea for book editing */
+#define WIDTH_BOOKWORK  680px /* Workarea for book editing */
 #define HEIGHT_CONTENT 400px
     /* }}}3 Toplevel regions */
     /* Inner content containers {{{3 */
@@ -17,6 +17,7 @@
 #define WIDTH_WORKAREA_CONTAINER 684px /* Right-justified in workarea div */
 #define WIDTH_APP_CONTAINER      504px /* Leftmost part of workarea */
 #define WIDTH_MULTIBAR_CONTAINER 172px /* Full multibar width */
+#define WIDTH_BOOKSHELF_CONTAINER 664px /* Bookshelf canvas */
     /* }}}3 Inner content containers */
   /* }}}2 Common dimensions */
   /* Skin-specific colors {{{2 */
