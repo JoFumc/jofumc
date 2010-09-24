@@ -19,7 +19,7 @@ if ($auth_user->name == "default") {
 }
 else
 {
-  print 'Logged in as '.$auth_user->displayname.'.';
+  print 'Logged in as "'.$auth_user->name.'" ('.$auth_user->fullname.').';
 }
 ?>
 </span>
