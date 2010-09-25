@@ -53,7 +53,11 @@ showcfg::
 
 publish:: install webfs
 	$(SAY_IT) "[ PUBLISH ] JOFRR staged content --> $(PUBLISH_ROOT)"
-	@$(foreach pub,$(shell find staging/content/ -type f),$(call TOOL_PUBLISH,$(pub),$(PUBLISH_ROOT)/$(subst staging/content/,,$(pub))))
+	@$(foreach pub,$(shell find staging/content/ -type f -name '*.php'),$(call TOOL_PUBLISH,$(pub),$(PUBLISH_ROOT)/$(subst staging/content/,,$(pub))))
+	@$(foreach pub,$(shell find staging/content/ -type f -name '*.css'),$(call TOOL_PUBLISH,$(pub),$(PUBLISH_ROOT)/$(subst staging/content/,,$(pub))))
+	@$(foreach pub,$(shell find staging/content/ -type f -name '*.js'),$(call TOOL_PUBLISH,$(pub),$(PUBLISH_ROOT)/$(subst staging/content/,,$(pub))))
+	@$(foreach pub,$(shell find staging/content/ -type f -name '*.png'),$(call TOOL_PUBLISH,$(pub),$(PUBLISH_ROOT)/$(subst staging/content/,,$(pub))))
+	@$(foreach pub,$(shell find staging/content/ -type f -name '*.jpg'),$(call TOOL_PUBLISH,$(pub),$(PUBLISH_ROOT)/$(subst staging/content/,,$(pub))))
 
 ##
 ## Section 4: Local rules
