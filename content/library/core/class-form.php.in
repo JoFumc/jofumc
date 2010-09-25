@@ -13,14 +13,15 @@ define("FORM_FORMAT_BINARY","multipart/form-data");
 define("FORM_METHOD_GET","get");
 define("FORM_METHOD_POST","post");
   /* Input types */
-define("FORM_INPUT_HIDDEN","hidden");
-define("FORM_INPUT_BUTTON","button");
-define("FORM_INPUT_SUBMIT","submit");
-define("FORM_INPUT_FILE","file");
-define("FORM_INPUT_CHECK","checkbox");
-define("FORM_INPUT_TEXT","text");
-define("FORM_INPUT_TEXTAREA","textarea");
-define("FORM_INPUT_PASSWORD","password");
+define("FORM_ITEM_HIDDEN","hidden");
+define("FORM_ITEM_BUTTON","button");
+define("FORM_ITEM_SUBMIT","submit");
+define("FORM_ITEM_FILE","file");
+define("FORM_ITEM_CHECK","checkbox");
+define("FORM_ITEM_TEXT","text");
+define("FORM_ITEM_TEXTAREA","textarea");
+define("FORM_ITEM_PASSWORD","password");
+define("FORM_ITEM_RAW","raw");
 
 /*
  * akFormItem -- Individual form element, union of all item types
@@ -37,14 +38,13 @@ class akFormItem
   public $hsize;  // Size attribute (columns)
   public $max_hsize; // Max-size attribute (columns)
   public $vsize;     // Size attribute (rows)
+  public $prefix; // HTML for cell preceeding item's cells
+  public $suffix; // HTML for cell following item's cells
 
   /* Non-standard bits */
   public $hint;  // Form element hint (placeholder, perhaps)
   private $style; // Local item style (USE WITH CAUTION)
   private $events; // Events and handlers
-
-  /* Event handlers */
-      /* CLEAN: Add this */
 
   /* Constructor */
   function __construct($id=null, $type=null, $name=null, $value=null, $label=null)
@@ -58,12 +58,14 @@ class akFormItem
     $this->label = $label;
 
     /* Step 2: Interpretive defaults, should be overwritten */
+    $this->prefix=null;
+    $this->suffix=null;
     $this->hsize=null;
     $this->vsize=null; 
     $this->max_hsize=256; // CLEAN: Make this a constant? 
     $this->hint = null; 
     $this->style = null;
-    $this->events = null;
+    $this->events = array();
   }
 
   function addStyle($parm=null,$value=null)
@@ -80,33 +82,69 @@ class akFormItem
   }
 
   /* Method to emit the HTML for this item */
+    /* NOTE: Each item takes up a 2-cell row in the
+     *       form table; the left cell contains the
+     *       item label (if any), and the right cell
+     *       contains the item itself.
+     */
   function emit()
   {
-    /* DIV container */
-    print '<div class="form-item-div form-item-'.$this->type.'-div">'."\n";
-    /* Have a label? */
-    if (null != $this->label) {
-      print '<label class="form-item-label" for="'.$this->id.'">'.$this->label."</label>\n";
+    /* Row container */
+    print '<tr class="form-item-row form-item-'.$this->type.'-row">'."\n";
+    /* Prefix cell */
+    print '<td class="form-item-prefix">';
+    if (null != $this->prefix) print $this->prefix;
+    print '</td>';
+    /* Label cell (if not raw HTML content) */
+    if ($this->type != FORM_ITEM_RAW) {
+      print '<td class="form-item form-item-label">';
+      if (null != $this->label) {
+        print '<label class="form-item-label" for="'.$this->id.'">'.$this->label."</label>\n";
+      }
+      print '</td>';
+      /* Contents cell */
+      print '<td class="form-item-contents">';
+    } else {
+      // For RAW, both cells are the raw content
+      print '<td class="form-item-raw" colspan="2">';
     }
     /* Switch on type */
     switch($this->type) {
-      case FORM_INPUT_HIDDEN: {
+      case FORM_ITEM_HTML: {
+        // Extra bits inside the form...
+        print '<div ';
+        print '  id="'.$this->id.'" ';
+        print '  class="form-item form-item-raw" ';
+        if (null != $this->style)
+          print 'style="'.$this->style.'" ';
+        foreach(array_keys($this->events) as $evkey)
+          print $evkey.'="'.$this->events[$evkey].'" ';
+        print '>';
+        print $this->value;
+        print '</div>';
+        break;
+      }
+      case FORM_ITEM_HIDDEN: {
+        // Hidden field for passing data 
         print '<input ';
         print '  type="hidden" ';
         print '  id="'.$this->id.'" ';
-        print '  class="form-item-hidden" ';
+        print '  class="form-item form-item-hidden" ';
         print '  name="'.$this->name.'" ';
         print '  value="'.$this->value.'" ';
         if (null != $this->style)
           print 'style="'.$this->style.'" ';
+        foreach(array_keys($this->events) as $evkey)
+          print $evkey.'="'.$this->events[$evkey].'" ';
         print "/>\n";
         break;
       }   
-      case FORM_INPUT_TEXT: {
+      case FORM_ITEM_TEXT: {
+        // Simple text entry
         print '<input ';
         print '  type="text" ';
         print '  id="'.$this->id.'" ';
-        print '  class="form-item-text" ';
+        print '  class="form-item form-item-text" ';
         print '  name="'.$this->name.'" ';
         print '  value="'.$this->value.'" ';
         if (null != $this->hsize)
@@ -116,13 +154,16 @@ class akFormItem
           print 'placeholder="'.$this->hint.'" ';
         if (null != $this->style)
           print 'style="'.$this->style.'" ';
+        foreach(array_keys($this->events) as $evkey)
+          print $evkey.'="'.$this->events[$evkey].'" ';
         print "/>\n";
         break;
       }
-      case FORM_INPUT_TEXTAREA: {
+      case FORM_ITEM_TEXTAREA: {
+        // Multiline text entry 
         print '<textarea ';
         print '  id="'.$this->id.'" ';
-        print '  class="form-item-textarea" ';
+        print '  class="form-item form-item-textarea" ';
         print '  name="'.$this->name.'" ';
         if (null != $this->hsize)
           print 'cols="'.$this->hsize.'" ';
@@ -130,16 +171,19 @@ class akFormItem
           print 'rows="'.$this->vsize.'" ';
         if (null != $this->style)
           print 'style="'.$this->style.'" ';
+        foreach(array_keys($this->events) as $evkey)
+          print $evkey.'="'.$this->events[$evkey].'" ';
         print "/>\n";
         print $this->value;
         print '</textarea>';
         break;
       }
-      case FORM_INPUT_PASSWORD: {
+      case FORM_ITEM_PASSWORD: {
+        // Password field
         print '<input ';
         print '  type="password" ';
         print '  id="'.$this->id.'" ';
-        print '  class="form-item-password" ';
+        print '  class="form-item form-item-password" ';
         print '  name="'.$this->name.'" ';
         print '  value="'.$this->value.'" ';
         if (null != $this->hsize)
@@ -149,14 +193,17 @@ class akFormItem
           print '  placeholder="'.$this->hint.'" ';
         if (null != $this->style)
           print 'style="'.$this->style.'" ';
+        foreach(array_keys($this->events) as $evkey)
+          print $evkey.'="'.$this->events[$evkey].'" ';
         print "/>\n";
         break;
       }
-      case FORM_INPUT_BUTTON: {
+      case FORM_ITEM_BUTTON: {
+        // Generic button (remember to add an onClick event)
         print '<input ';
         print '  type="button" ';
         print '  id="'.$this->id.'" ';
-        print '  class="form-item-button" ';
+        print '  class="form-item form-item-button" ';
         print '  name="'.$this->name.'" ';
         print '  value="'.$this->value.'" ';
         if (null != $this->style)
@@ -166,21 +213,29 @@ class akFormItem
         print "/>\n";
         break;
       }
-      case FORM_INPUT_SUBMIT: {
+      case FORM_ITEM_SUBMIT: {
+        // Submit button 
         print '<input ';
         print '  type="submit" ';
         print '  id="'.$this->id.'" ';
-        print '  class="form-item-submit" ';
+        print '  class="form-item form-item-submit" ';
         print '  name="'.$this->name.'" ';
         print '  value="'.$this->value.'" ';
         if (null != $this->style)
           print 'style="'.$this->style.'" ';
+        foreach(array_keys($this->events) as $evkey)
+          print $evkey.'="'.$this->events[$evkey].'" ';
         print "/>\n";
         break;
       }
     }
+    print '</td>';
+    // Suffix cell
+    print '<td class="form-item-suffix">';
+    if (null != $this->suffix) print $this->suffix;
+    print '</td>';
 
-    print '</div>'."\n";
+    print '</tr>'."\n";
   }
 }
 
@@ -192,16 +247,16 @@ class akForm
   /* Basic public members */
   public $id;   // Form identifier (DOM)
   public $method; // Method for processing
-  public $action; // URL that will process this form
+  public $action; // URL or service that will process this form
  
   /* Advanced public members */
   public $format; // How to format data 
   public $accept; // For uploads, which types to accept
   public $charset; // What charset the server expects
+  public $lastSimpleItem; // Reference to last simple item created
 
   /* Private members */
   private $items; // Array of items 
-  private $count; // Number of child items in form 
 
   /* Wrapper public members (customization) */
     /* NOTE: These will be in the form DIV, but
@@ -225,7 +280,6 @@ class akForm
     $this->method = $method;
 
     /* Step 2: Defaults */
-    $this->count=0;
       /* Caller must set these... */
     $this->format=null;
     $this->accept=null;
@@ -240,9 +294,8 @@ class akForm
   function adopt($item=null)
   {
     if ($item == null) return; // CLEAN: throw a warning here?
-    /* Add to array and bump counter */
-    $this->items[$this->count] = $item;
-    $this->count++;
+    /* Add to array */
+    $this->items[] = &$item;
   }
 
   /* Method to create and adopt a simple item */
@@ -250,6 +303,7 @@ class akForm
   {
     $item = new akFormItem($id,$type,$name,$value,$label);
     $this->adopt($item);
+    $this->lastSimpleItem = &$item;
   }
 
   /* Method to emit the HTML for this form */
@@ -269,8 +323,10 @@ class akForm
     if (null != $this->charset)
       print '  accept-charset="'.$this->charset.'" ';
     print ">\n";
-    /* Loop over all items */
+    /* Loop over all items as a table */
+    print '<table class="form-table">';
     foreach ($this->items as $item) $item->emit();
+    print "</table>\n";
     print "</form>\n";
     if (null != $this->footer_file) @include($this->footer_file);
     if (null != $this->footer_text) print $this->footer_text;

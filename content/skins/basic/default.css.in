@@ -453,28 +453,21 @@ border:1px solid black;
 margin:0 auto;
 }
 
-.form-item-div {
-display:block;
-text-align:center;
+.form-item-row {
 }
 
 .form-item-label {
-display:block;
-/*float:left; */
+text-align:right;
 font-weight:bold;
+vertical-align:middle;
 }
 
-.form-item-text {
-clear:right;
+.form-item-contents {
+text-align:left;
+vertical-align:middle;
 }
 
   /* }}}3 Generic forms */
-  /* Custom (well-known) forms {{{3 */
-#login-form {
-display:block;
-margin:10px auto;
-}
-  /* }}}3 Custom (well-known) forms */
 /* }}}2 Forms */
 /* SECTION 6.2:Map blocks {{{2 */
 #define MAP_HEIGHT 350px

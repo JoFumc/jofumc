@@ -16,23 +16,33 @@ auth_validate();
 
 /* Step 3: Service story */
 $ss = new akStory("edit-profile-story");
-$ss->createSimpleChunk(STORY_CHUNK_SECTION,"Edit profile settings");
+$ss->createSimpleChunk(STORY_CHUNK_SECTION,"Editing Book: Profile Settings");
 $ss->emit();
 
 /* Step 2: Start form */
-$pf = new akForm("edit-profile-form","edit-profile-processor.php",FORM_METHOD_POST);
+  /* NOTE: This is a service-based form, so won't actually
+   *       get posted anywhere...the onClick handler of the
+   *       "submit" button will reload the service.
+   */
+$pf = new akForm("edit-profile-form");
 
-$pf->createSimpleItem("profile-display-name", FORM_INPUT_TEXT,
+$pf->createSimpleItem("profile-display-name", FORM_ITEM_TEXT,
                       "profile-display-name", $auth_user->displayname,
-                      "Display Name");
+                      "Display Name:");
 
-$pf->createSimpleItem("profile-password", FORM_INPUT_PASSWORD,
-                      "profile-password", null, "Password");
-$pf->createSimpleItem("profile-password-confirm", FORM_INPUT_PASSWORD,
-                      "profile-password-confirm", null, "Confirm Password");
+$pf->createSimpleItem("profile-full-name", FORM_ITEM_TEXT,
+                      "profile-full-name", $auth_user->fullname,
+                      "Full Name:");
 
-$pf->createSimpleItem("profile-submit", FORM_INPUT_SUBMIT,
-                      "profile-submit", "Save");
+$pf->createSimpleItem("profile-password", FORM_ITEM_PASSWORD,
+                      "profile-password", null, "New Password:");
+$pf->createSimpleItem("profile-password-confirm", FORM_ITEM_PASSWORD,
+                      "profile-password-confirm", null, "Confirm Password:");
+
+$pf->createSimpleItem("profile-update", FORM_ITEM_BUTTON,
+                      "profile-update", "Update");
+
+$pf->lastSimpleItem->addEvent('onClick',"svc_loadDiv('bookshelf-canvas-container','process-book-profile',svc_formParameters('edit-profile-form'));");
 
 $pf->emit();
 

@@ -1,0 +1,4 @@
+<?php
+print 'process-book-profile';
+print_r($_REQUEST);
+?>

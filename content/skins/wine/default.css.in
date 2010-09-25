@@ -397,27 +397,24 @@ margin:auto;
 /* SECTION 6.1:Forms {{{2 */
   /* Generic forms {{{3 */ 
 .form-div {
+margin:0 auto;
 }
 
-.form-item-div {
-display:block;
+.form-item-row {
 }
 
 .form-item-label {
-float:left;
+text-align:right;
 font-weight:bold;
+vertical-align:middle;
 }
 
-.form-item-text {
-clear:right;
+.form-item-contents {
+text-align:left;
+vertical-align:middle;
 }
+
   /* }}}3 Generic forms */
-  /* Custom (well-known) forms {{{3 */
-#login-form {
-float:left;
-margin:10px;
-}
-  /* }}}3 Custom (well-known) forms */
 /* }}}2 Forms */
 /* SECTION 6.2:Map blocks {{{2 */
 #define MAP_HEIGHT 400px

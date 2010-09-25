@@ -144,3 +144,31 @@ function svc_loadDiv(divId,service,params)
 }
 
 
+// ////////////////////////////////////////////////////////////////////////
+// svc_formParameters() -- Generate a parameterized string from a form's 
+//                         fields.
+//
+// @return String of parameters (i.e. <field1>=<value1>&<field2>=<value2>...)
+//
+function svc_formParameters(formId)
+{
+    var fields;
+    var ret = '';
+    /* Step 1: get form from DOM */
+    try {
+       fields = document.getElementById(formId).elements;
+    } catch (err) {
+        return ret;
+    }
+    /* Step 2: Build query strings from all fields */
+    try {
+        for (i in fields) {
+            if (ret != '') ret+='&';
+            ret += escape(fields[i].name) + '=' + escape(fields[i].value);
+        }
+    } catch (err) {
+    }
+
+    return ret;
+}
+
