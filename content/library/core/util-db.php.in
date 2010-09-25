@@ -81,6 +81,7 @@ function db_userlist($name=null,$pass=null)
     $userlist[$row['username']]->displayname = $row['display'];
     $userlist[$row['username']]->fullname = $row['fullname'];
     $userlist[$row['username']]->uid = $row['id'];
+      /* NOTE: Leave password field null */
     $ct++;
   }
     
@@ -149,5 +150,61 @@ function db_validateUser($name="default",$sess="")
 
   /* Step 4: No match */
   return false;
+}
+
+/***********************************************
+ * db_updateUser() -- Change a user's info in DB
+ *
+ * @param nu New (updated) user object
+ */
+function db_updateUser($nu=null,$ou=null)
+{
+  $changed=false;
+
+  /* Step 0: Early validation */
+  if (($nu == null) || ($ou == null) || ($nu->uid != $ou->uid)) {
+    return false;
+  }
+
+  /* Step 1: Connect to db if not connected */
+  if (!db_connect()) return false;
+
+  /* Step 2: start query */
+  $query = "UPDATE `".TBL_USERS."` SET ";
+
+  /* Step 3: Add a bit for each updated field */
+    /* NOTE: Not all fields can be updated! */
+    /* Step 3.1: Email address */
+  if ((null != $nu->email) && ($nu->email != $ou->email)) {
+    $changed=true;
+    $query .= "`email` = '".$nu->email."', ";
+  }
+    /* Step 3.2: Display name */
+  if ((null != $nu->displayname) && ($nu->displayname != $ou->displayname)) {
+    $changed=true;
+    $query .= "`display` = '".$nu->displayname."', ";
+  }
+    /* Step 3.3: Full name */
+  if ((null != $nu->fullname) && ($nu->fullname != $ou->fullname)) {
+    $changed=true;
+    $query .= "`fullname` = '".$nu->fullname."', ";
+  }
+    /* Step 3.4: Password */
+  if ($nu->password != null) {
+    $changed=true;
+    $query .= "`password` = '".$nu->password."', ";
+  }
+
+  /* Step 4: Finish query */
+  $query .= "`ctime` = NOW() WHERE `id`=".$ou->uid;
+
+  print 'SQL: "'.$query.'"';
+  /* Step 5: Do it? */
+
+  if ($changed) {
+    return mysql_query($query);
+  }
+
+  return true;
 }
 ?>

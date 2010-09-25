@@ -9,17 +9,35 @@
  */
 class akUser
 {
-  /* Basic public members */
+  /* Private members */
+    /* NOTE: These aren't really private, but are separated
+     *       here so I'll remember that they can't be updated
+     *       from the UI.
+     */
+  public $uid;  // ID from people database
   public $name; // Username
+
+  /* Basic public members */
   public $email; // Primary email contact
   public $displayname; // Name to display
   public $fullname; // Full user name
-  public $uid;  // ID from people database
+
+  /* Other members */
+  public $password; // User's password in db
 
   /* Constructor */
-  function __construct($name=null)
+  function __construct($name=null,$displayname=null,$fullname=null)
   {
+    /* Step 1: Pull from args */
     $this->name = $name;
+    $this->displayname = $displayname;
+    $this->fullname = $fullname;
+
+    /* Step 2: initialize everything else */
+    $this->password = null;
+    $this->email = null;
+    $this->uid = 0;
+
   }
 }
 ?>

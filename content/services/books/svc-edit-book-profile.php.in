@@ -34,6 +34,10 @@ $pf->createSimpleItem("profile-full-name", FORM_ITEM_TEXT,
                       "profile-full-name", $auth_user->fullname,
                       "Full Name:");
 
+$pf->createSimpleItem("profile-email", FORM_ITEM_TEXT,
+                      "profile-email", $auth_user->email,
+                      "Email:");
+
 $pf->createSimpleItem("profile-password", FORM_ITEM_PASSWORD,
                       "profile-password", null, "New Password:");
 $pf->createSimpleItem("profile-password-confirm", FORM_ITEM_PASSWORD,

@@ -1,4 +1,50 @@
 <?php
-print 'process-book-profile';
+/*
+ * svc-process-book-profile -- Service to process a 'profile'
+ *    book edit.
+ *
+ * NOTES:
+ *   We don't check that password fields match, the frontend is
+ *   responsible for that.
+ */
+/* Step 1: Get current user auth info */
+require_once("library/core/util-db.php");
+require_once("library/core/util-auth.php");
+auth_validate();
+
+function get_field($field)
+{
+  if (!isset($_REQUEST[$field])) return null;
+  if (null == $_REQUEST[$field]) return null;
+  if (strlen($_REQUEST[$field]) < 1) return null;
+  return $_REQUEST[$field];
+}
+
+/* Step 2: Compose fields into a new user struct */
+  /* Step 2.1: Alloc new struct */
+$nu = new akUser($auth_user->name);
+  /* Step 2.2: Email */
+$nu->uid = $auth_user->uid;
+$nu->email = get_field('profile-email');
+$nu->displayname = get_field('profile-display-name');
+$nu->fullname = get_field('profile-full-name');
+$nu->password = get_field('profile-password');
+
+print 'DEBUG: $nu is ';
+print_r($nu);
+
+print 'DEBUG: $ou is ';
+print_r($auth_user);
+
+print 'DEBUG: REQUEST is ';
 print_r($_REQUEST);
+/* Step 3: Update user in db */
+if (true == db_updateUser($nu,$auth_user)) {
+    /* It worked! */
+  print '<br/>It worked!</br>';
+} else {
+    /* Something failed... */
+  print '<br/>It FAILED!</br>';
+}
+
 ?>
