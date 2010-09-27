@@ -82,28 +82,38 @@ class akFormItem
   }
 
   /* Method to emit the HTML for this item */
-    /* NOTE: Each item takes up a 2-cell row in the
-     *       form table; the left cell contains the
-     *       item label (if any), and the right cell
-     *       contains the item itself.
+    /* NOTE: Each item takes up a 4-cell row in the
+     *       form table: prefix,label,content,suffix.
      */
   function emit()
   {
     /* Row container */
-    print '<tr class="form-item-row form-item-'.$this->type.'-row">'."\n";
+    print '<tr ';
+    print '    class="form-item-row form-item-'.$this->type.'-row" ';
+    print '    id="'.$this->id.'-row" ';
+    print '>'."\n";
     /* Prefix cell */
-    print '<td class="form-item-prefix">';
+    print '<td ';
+    print '   class="form-item-prefix" ';
+    print '    id="'.$this->id.'-prefix" ';
+    print '>';
     if (null != $this->prefix) print $this->prefix;
     print '</td>';
     /* Label cell (if not raw HTML content) */
     if ($this->type != FORM_ITEM_RAW) {
-      print '<td class="form-item form-item-label">';
+      print '<td ';
+      print '   class="form-item form-item-label" ';
+      print '   id="'.$this->id.'-label" ';
+      print '>';
       if (null != $this->label) {
         print '<label class="form-item-label" for="'.$this->id.'">'.$this->label."</label>\n";
       }
       print '</td>';
       /* Contents cell */
-      print '<td class="form-item-contents">';
+      print '<td ';
+      print '   class="form-item-contents" ';
+      print '   id="'.$this->id.'-contents" ';
+      print '>';
     } else {
       // For RAW, both cells are the raw content
       print '<td class="form-item-raw" colspan="2">';
@@ -231,7 +241,10 @@ class akFormItem
     }
     print '</td>';
     // Suffix cell
-    print '<td class="form-item-suffix">';
+    print '<td ';
+    print '    class="form-item-suffix" ';
+    print '    id="'.$this->id.'-suffix" ';
+    print '>';
     if (null != $this->suffix) print $this->suffix;
     print '</td>';
 
