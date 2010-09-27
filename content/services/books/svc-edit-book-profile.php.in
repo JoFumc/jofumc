@@ -43,10 +43,22 @@ $pf->createSimpleItem("profile-password", FORM_ITEM_PASSWORD,
 $pf->createSimpleItem("profile-password-confirm", FORM_ITEM_PASSWORD,
                       "profile-password-confirm", null, "Confirm Password:");
 
+$pf->createSimpleItem("profile-skin-frame",FORM_ITEM_RAW,
+                      "profile-skin-frame","Which theme would you like to use?");
+$pf->createSimpleItem("profile-skin-agua",FORM_ITEM_RADIO,
+                      "profile-skin",'agua',"Agua (light blue theme; wide and open layout)");
+if ($auth_user->skin == 'agua') $pf->lastSimpleItem->hint = "checked";
+$pf->createSimpleItem("profile-skin-wine",FORM_ITEM_RADIO,
+                      "profile-skin",'wine',"Wine (wine-colored theme; sidebar and box layout)");
+if ($auth_user->skin == 'wine') $pf->lastSimpleItem->hint = "checked";
+$pf->createSimpleItem("profile-skin-basic",FORM_ITEM_RADIO,
+                      "profile-skin",'basic',"Basic (red and white theme; compact, enclosed layout");
+if ($auth_user->skin == 'basic') $pf->lastSimpleItem->hint = "checked";
+
 $pf->createSimpleItem("profile-update", FORM_ITEM_BUTTON,
                       "profile-update", "Update");
 
-$pf->lastSimpleItem->addEvent('onClick',"svc_loadDiv('bookshelf-canvas-container','process-book-profile',svc_formParameters('edit-profile-form'));");
+$pf->lastSimpleItem->addEvent('onClick',"if (document.getElementById('profile-password').value == document.getElementById('profile-password-confirm').value) { svc_loadDiv('bookshelf-canvas-container','process-book-profile',svc_formParameters('edit-profile-form')); } else { alert('Password mismatch.'); }; return false;");
 
 $pf->emit();
 

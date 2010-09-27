@@ -10,6 +10,8 @@
 /* Step 1: Get current user auth info */
 require_once("library/core/util-db.php");
 require_once("library/core/util-auth.php");
+require_once("library/core/class-story.php");
+require_once("library/core/util-skin.php");
 auth_validate();
 
 function get_field($field)
@@ -29,22 +31,25 @@ $nu->email = get_field('profile-email');
 $nu->displayname = get_field('profile-display-name');
 $nu->fullname = get_field('profile-full-name');
 $nu->password = get_field('profile-password');
+  /* Step 2.3: Skin */
+$nu->skin = get_field('profile-skin');
+if (null != $nu->skin) skin_storeName($nu->skin);
 
-print 'DEBUG: $nu is ';
-print_r($nu);
+/* Step 3: Start results story */
+$res = new akStory();
 
-print 'DEBUG: $ou is ';
-print_r($auth_user);
-
-print 'DEBUG: REQUEST is ';
-print_r($_REQUEST);
-/* Step 3: Update user in db */
+/* Step 4: Update user in db */
 if (true == db_updateUser($nu,$auth_user)) {
     /* It worked! */
-  print '<br/>It worked!</br>';
+  $res->createSimpleChunk(STORY_CHUNK_SECTION,"Profile Update: Success");
+  $res->createSimpleChunk(STORY_CHUNK_TEXT,"Your requested profile update has been applied, and will take effect on the next page load.");
 } else {
     /* Something failed... */
-  print '<br/>It FAILED!</br>';
+  $res->createSimpleChunk(STORY_CHUNK_SECTION,"Profile Update: Failure");
+  $res->createSimpleChunk(STORY_CHUNK_TEXT,"The update failed. Please try again later.");
 }
+
+/* Step 5: emit the results */
+$res->emit();
 
 ?>

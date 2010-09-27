@@ -161,8 +161,14 @@ function svc_formParameters(formId)
         return ret;
     }
     /* Step 2: Build query strings from all fields */
+        /* NOTE: Most fields are a simple value copy, but radio buttons
+         * only contribute if they're checked.
+         */
     try {
         for (i in fields) {
+            if (fields[i].type == 'radio') {
+                if (fields[i].checked == false) continue;
+            }
             if (ret != '') ret+='&';
             ret += escape(fields[i].name) + '=' + escape(fields[i].value);
         }

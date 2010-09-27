@@ -21,6 +21,7 @@ class akUser
   public $email; // Primary email contact
   public $displayname; // Name to display
   public $fullname; // Full user name
+  public $skin; // User's preferred skin
 
   /* Other members */
   public $password; // User's password in db
@@ -36,6 +37,7 @@ class akUser
     /* Step 2: initialize everything else */
     $this->password = null;
     $this->email = null;
+    $this->skin = 'default';
     $this->uid = 0;
 
   }

@@ -21,6 +21,8 @@ define("FORM_ITEM_CHECK","checkbox");
 define("FORM_ITEM_TEXT","text");
 define("FORM_ITEM_TEXTAREA","textarea");
 define("FORM_ITEM_PASSWORD","password");
+define("FORM_ITEM_SELECT","select");
+define("FORM_ITEM_RADIO","radio");
 define("FORM_ITEM_RAW","raw");
 
 /*
@@ -105,7 +107,8 @@ class akFormItem
       print '   class="form-item form-item-label" ';
       print '   id="'.$this->id.'-label" ';
       print '>';
-      if (null != $this->label) {
+      /* Radio buttons have label on the inside... */
+      if ((null != $this->label) && ($this->type != FORM_ITEM_RADIO)) {
         print '<label class="form-item-label" for="'.$this->id.'">'.$this->label."</label>\n";
       }
       print '</td>';
@@ -120,7 +123,7 @@ class akFormItem
     }
     /* Switch on type */
     switch($this->type) {
-      case FORM_ITEM_HTML: {
+      case FORM_ITEM_RAW: {
         // Extra bits inside the form...
         print '<div ';
         print '  id="'.$this->id.'" ';
@@ -186,6 +189,23 @@ class akFormItem
         print "/>\n";
         print $this->value;
         print '</textarea>';
+        break;
+      }
+      case FORM_ITEM_RADIO: {
+        // Radio button
+        print '<input ';
+        print '  type="radio" ';
+        //print '  id="'.$this->id.'" ';
+        print '  class="form-item form-item-radio" ';
+        print '  name="'.$this->name.'" ';
+        print '  value="'.$this->value.'" ';
+        if (null != $this->hint) 
+          print '  checked="'.$this->hint.'" ';
+        if (null != $this->style)
+          print 'style="'.$this->style.'" ';
+        foreach(array_keys($this->events) as $evkey)
+          print $evkey.'="'.$this->events[$evkey].'" ';
+        print "/>".$this->label."\n";
         break;
       }
       case FORM_ITEM_PASSWORD: {

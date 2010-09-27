@@ -6,7 +6,7 @@ function scrub_output($outstuff)
   $tidyopts['indent'] = 0;
   $tidyopts['wrap'] = 0;
   $tidyopts['hide-comments'] = true;
-  //return(tidy_repair_string($outstuff,$tidyopts));
+  return(tidy_repair_string($outstuff,$tidyopts));
   return($outstuff);
 }
 ob_start(scrub_output);
@@ -24,12 +24,8 @@ function core_redirect($url)
    ob_end_flush();
    exit();
 }
-/* Step 2: Gather/store skin information */
-require_once("library/core/util-skin.php");
-skin_storeName();
-skin_include("parameters.php");
 
-/* Step 3: Authentication handling */
+/* Step 2: Authentication handling */
 require_once("library/core/util-auth.php");
 switch ($_REQUEST['auth-action'])
 {
@@ -37,6 +33,11 @@ switch ($_REQUEST['auth-action'])
   case 'login':  auth_login(); break;
   default:       auth_validate(); break;
 }
+
+/* Step 3: Gather/store skin information */
+require_once("library/core/util-skin.php");
+skin_storeName();
+skin_include("parameters.php");
 
 /* Step 4: Import commonly used classes */
 require_once("library/core/class-block.php");

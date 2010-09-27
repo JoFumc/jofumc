@@ -7,6 +7,7 @@ define("DEFAULT_SKIN","agua");
 
 /* Includes */
 require_once("library/core/util-config.php");
+require_once("library/core/util-auth.php");
 
 $cache_skin='';
 
@@ -16,13 +17,21 @@ $cache_skin='';
  */
 function skin_getName()
 {
-  /* Step 0: check cache */
+  global $cache_skin;
+  global $auth_user;
+
+  /* Step 1: check cache */
   if ('' != $cache_skin) return $cache_skin;
 
-  /* Step 1: Get requested value */
+  /* Step 2: Get requested value from config sources */
   $skin_name=config_getValue("skin");
-  
-  /* Step 2: Validate */
+
+  /* Step 3: If not in config sources, check authenticated user prefs */
+  if (is_authenticated() && ($skin_name == 'default')) {
+    $skin_name = $auth_user->skin;
+  }
+
+  /* Step 4: Validate */
   if (FALSE == file_exists("skins/".$skin_name."/default.css"))
   {
     $skin_name=DEFAULT_SKIN;
@@ -34,12 +43,12 @@ function skin_getName()
 }
 
 /**
- * skin_storeName() -- Store any skin name given as part of the URL
+ * skin_storeName() -- Store a skin name given or part of the URL
  */
-function skin_storeName()
+function skin_storeName($skin_name=null)
 {
   // Get configuration value
-  $skin_name=config_getValue("skin",CONFIG_SOURCE_URL);
+  if (null == $skin_name) $skin_name=config_getValue("skin",CONFIG_SOURCE_URL);
   // Store for a bit less than 10 years...
   $expire_time=time()+300000000;
   if ($skin_name != "default") setcookie(CONFIG_COOKIE_PREFIX."skin","$skin_name",$expire_time);

@@ -162,9 +162,11 @@ class akStory
 {
   /* Basic public members */
   public $id;   // Story identifier (DOM)
+  public $lastSimpleChunk; // Reference to last chunk added with createSimpleChunk
 
   /* Private members */
   private $chunks; // Array of story chunks 
+
 
   /* Event handlers */
       /* CLEAN: Add this */
@@ -201,6 +203,7 @@ class akStory
   function createSimpleChunk($type=STORY_CHUNK_TEXT,$value="") {
     $chunk = new akStoryChunk($type,$value);
     $this->adopt($chunk);
+    $this->lastSimpleChunk = &$chunk;
   }
 }
 
