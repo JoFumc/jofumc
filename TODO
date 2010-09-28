@@ -1,23 +1,24 @@
 -----------------
 NOW:
 -----------------
++ Contact form from contact block (or anywhere else for that matter)
++ Feedback form (from footer?)
++ Media uploader (type and date pickers)
++ Notebook object (for option sheets/profile editor)
++ Rich reference object (floating image/text for picking from groups of things (programs))
 + Headline blocks
 + Schedule (static) block
-+ Media uploader (type and date pickers)
 + Per-program/generic media gallery
 + Add custom icon for conference link 
 -----------------
 SOON:
 -----------------
 + Dynamic menus (load from plain/JSON files)
-+ Open-style skin (see Highland Park)
 + Calendar day cache and hover popup (see Agape)
 + Program template/editor
 + Program picker?
 + Story editor
 + Story page/comment system
-+ Fix shadow on custom link icons
-+ Make custom icons for facebook/twitter
 + Verse of the day from biblegateway.com
 -----------------
 LATER:
@@ -29,3 +30,6 @@ DONE:
 -----------------
 + Login and per-user handling
 + block innerHTML reload as a webservice (for NAV reload?) (svc_loadDiv())
++ Open-style skin (see Highland Park) (Skin: Agua)
++ Fix shadow on custom link icons
++ Make custom icons for facebook/twitter
