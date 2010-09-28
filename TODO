@@ -23,6 +23,7 @@ SOON:
 -----------------
 LATER:
 -----------------
++ Change classes from emit() to toString() support (using __toString internally)
 + Generic page editor with block drop
 
 -----------------

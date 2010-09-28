@@ -59,11 +59,18 @@ publish:: install webfs
 	@$(foreach pub,$(shell find staging/content/ -type f -name '*.png'),$(call TOOL_PUBLISH,$(pub),$(PUBLISH_ROOT)/$(subst staging/content/,,$(pub))))
 	@$(foreach pub,$(shell find staging/content/ -type f -name '*.jpg'),$(call TOOL_PUBLISH,$(pub),$(PUBLISH_ROOT)/$(subst staging/content/,,$(pub))))
 
+cscope::
+	find . -type f \( -name '*.php.in' -or -name '*.js.in' \) -print > cscope.files
+	cscope -bi cscope.files
+
 ##
 ## Section 4: Local rules
 ##
 toplevel-all:
 	$(NOTHING)
+
+toplevel-clean::
+	@$(foreach cleanee,$(wildcard cscope.*),$(call TOOL_CLEAN,$(cleanee)))
 
 toplevel-%:
 	$(NOTHING)

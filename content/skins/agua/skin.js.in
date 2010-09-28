@@ -42,3 +42,48 @@ function skin_menuItemEnter(ele)
 function skin_menuItemExit(ele)
 {
 }
+
+function skin_notebookTabEnter(ele) { };
+function skin_notebookTabExit(ele) { };
+
+// ////////////////////////////////////////////////////////////////////////
+// skin_notebookTabClick() -- Handle a mouse click on a notebook tab
+//
+// @return Nothing
+//
+// Change the styling on page and tab
+//
+function skin_notebookTabClick(ele) 
+{
+    var idx;
+    var kid;
+    var notebook;
+    var active;
+    /* Step 1: Change tabs */
+    for (idx in ele.parentElement.children) 
+    {
+        kid = ele.parentElement.children[idx];
+        if (kid == ele)  {
+            kid.className = 'notebook-tab-active';
+        } else {
+            kid.className = 'notebook-tab';
+        }
+    }
+    /* Step 2: Switch page */
+        /* Step 2.1: Get tokens */
+    notebook = ele.parentElement.parentElement;
+    active = ele.id.replace(notebook.id+'-tab-','');
+    for (idx in notebook.children) 
+    {
+        kid = notebook.children[idx];
+        try {
+            if (kid.id.match(notebook.id+'-page-')) {
+                if (kid.id.match(notebook.id + '-page-' + active)) {
+                    kid.className = 'notebook-page-active';
+                } else {
+                    kid.className = 'notebook-page';
+                }
+            }
+        } catch (err) { }
+    }
+}

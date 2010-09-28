@@ -1,0 +1,30 @@
+<?php
+/****************************************************************************
+ * class-string.php -- Simple string object
+ ***************************************************************************/
+
+/*
+ * akString -- String object with emittability.
+ *
+ * In some containers (notebook pages, e.g.) the contents of the container
+ * are an array of objects, whose emit() methods will be called during 
+ * render time.  This object class allows a simple string to be used in 
+ * those cases.
+ */
+class akString
+{
+  /* Required public members */
+  public $string; // The sting itself
+
+  /* Constructor */
+  function __construct($string=null) {
+    $this->string = $string;
+  }
+
+  /* Emit method */
+  function emit()
+  {
+    print $this->string;
+  }
+}
+?>
