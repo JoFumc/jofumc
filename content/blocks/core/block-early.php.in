@@ -8,7 +8,8 @@ $tidyopts = array('indent' => FALSE,
 function scrub_output($outstuff)
 {
   global $tidyopts;
-  return(tidy_repair_string($outstuff,$tidyopts));
+  return ($outstuff);
+  //return(tidy_repair_string($outstuff,$tidyopts));
 }
 ob_start(scrub_output);
 
