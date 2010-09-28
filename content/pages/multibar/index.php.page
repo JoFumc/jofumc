@@ -5,4 +5,9 @@ $welcome = new akStory();
 $welcome->createSimpleChunk(STORY_CHUNK_HEADLINE,"Welcome");
 $welcome->createSimpleChunk(STORY_CHUNK_FILE,"assets/text/pages/index/welcome.html");
 $welcome->emit();
+
+$news = new akStory();
+$news->createSimpleChunk(STORY_CHUNK_HEADLINE,"Latest News");
+$news->createSimpleChunk(STORY_CHUNK_FILE,"assets/text/pages/index/news.html");
+$news->emit();
 ?>
