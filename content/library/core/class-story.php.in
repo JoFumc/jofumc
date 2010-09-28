@@ -11,6 +11,8 @@
 define("STORY_CHUNK_HEADLINE","headline");
   /* Story section head (h2 element) */
 define("STORY_CHUNK_SECTION","section");
+  /* Story grouping head (h3 element) */
+define("STORY_CHUNK_GROUP","group");
   /* Lede image */
 define("STORY_CHUNK_LEDE","lede");
   /* Banner image */
@@ -78,6 +80,15 @@ class akStoryChunk
         if (null != $this->id)
            print '  id="'.$this->id.'" ';
         print '>'.$this->value.'</h2>';
+        break;
+      }   
+      case STORY_CHUNK_SECTION: {
+        print '<div class="closure_div"></div>';
+        print '<h3 ';
+        print '  class="story-headline" ';
+        if (null != $this->id)
+           print '  id="'.$this->id.'" ';
+        print '>'.$this->value.'</h3>';
         break;
       }   
       case STORY_CHUNK_LEDE: {

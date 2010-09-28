@@ -16,7 +16,7 @@ auth_validate();
 
 /* Step 3: Service story */
 $ss = new akStory("edit-profile-story");
-$ss->createSimpleChunk(STORY_CHUNK_SECTION,"Editing Book: Profile Settings");
+$ss->createSimpleChunk(STORY_CHUNK_SECTION,"Profile Settings");
 $ss->emit();
 
 /* Step 2: Start form */
@@ -26,6 +26,8 @@ $ss->emit();
    */
 $pf = new akForm("edit-profile-form");
 
+$pf->createSimpleItem("profile-header-ident",FORM_ITEM_RAW,
+                      "profile-header-ident","<h3 class=\"story-headline\">Identity</h3>");
 $pf->createSimpleItem("profile-display-name", FORM_ITEM_TEXT,
                       "profile-display-name", $auth_user->displayname,
                       "Display Name:");
@@ -38,26 +40,31 @@ $pf->createSimpleItem("profile-email", FORM_ITEM_TEXT,
                       "profile-email", $auth_user->email,
                       "Email:");
 
+$pf->createSimpleItem("profile-header-auth",FORM_ITEM_RAW,
+                      "profile-header-auth","<h3 class=\"story-headline\">Authentication</h3>");
 $pf->createSimpleItem("profile-password", FORM_ITEM_PASSWORD,
                       "profile-password", null, "New Password:");
 $pf->createSimpleItem("profile-password-confirm", FORM_ITEM_PASSWORD,
                       "profile-password-confirm", null, "Confirm Password:");
 
-$pf->createSimpleItem("profile-skin-frame",FORM_ITEM_RAW,
-                      "profile-skin-frame","Which theme would you like to use?");
+$pf->createSimpleItem("profile-header-skin",FORM_ITEM_RAW,
+                      "profile-header-skin","<h3 class=\"story-headline\">Appearance</h3>");
 $pf->createSimpleItem("profile-skin-agua",FORM_ITEM_RADIO,
-                      "profile-skin",'agua',"Agua (light blue theme; wide and open layout)");
+                      "profile-skin",'agua','Agua&nbsp;<img src="/skins/common/screenshot-agua.png" style="vertical-align:middle;" alt="Agua theme screenshot"/>');
 if ($auth_user->skin == 'agua') $pf->lastSimpleItem->hint = "checked";
 $pf->createSimpleItem("profile-skin-wine",FORM_ITEM_RADIO,
-                      "profile-skin",'wine',"Wine (wine-colored theme; sidebar and box layout)");
+                      "profile-skin",'wine','Wine&nbsp;<img src="/skins/common/screenshot-wine.png" style="vertical-align:middle;" alt="Wine theme screenshot"/>');
 if ($auth_user->skin == 'wine') $pf->lastSimpleItem->hint = "checked";
 $pf->createSimpleItem("profile-skin-basic",FORM_ITEM_RADIO,
-                      "profile-skin",'basic',"Basic (red and white theme; compact, enclosed layout");
+                      "profile-skin",'basic','Basic&nbsp;<img src="/skins/common/screenshot-basic.png" style="vertical-align:middle;" alt="Basic theme screenshot"/>');
 if ($auth_user->skin == 'basic') $pf->lastSimpleItem->hint = "checked";
 
+$pf->createSimpleItem("profile-header-action",FORM_ITEM_RAW,
+                      "profile-header-action","<h3 class=\"story-headline\">&nbsp;</h3>");
 $pf->createSimpleItem("profile-update", FORM_ITEM_BUTTON,
                       "profile-update", "Update");
 
+// CLEAN: This form validation is crap.
 $pf->lastSimpleItem->addEvent('onClick',"if (document.getElementById('profile-password').value == document.getElementById('profile-password-confirm').value) { svc_loadDiv('bookshelf-canvas-container','process-book-profile',svc_formParameters('edit-profile-form')); } else { alert('Password mismatch.'); }; return false;");
 
 $pf->emit();

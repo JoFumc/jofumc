@@ -1,13 +1,14 @@
 <?php
 /* Step 1: Enable output buffering */
+
+$tidyopts = array('indent' => FALSE,
+                  'wrap' => 0,
+                  'hide-comments' => TRUE);
+
 function scrub_output($outstuff)
 {
-  /* Setup TIDY output */
-  $tidyopts['indent'] = false;
-  $tidyopts['wrap'] = false;
-  $tidyopts['hide-comments'] = true;
-  //return(tidy_repair_string($outstuff,$tidyopts));
-  return($outstuff);
+  global $tidyopts;
+  return(tidy_repair_string($outstuff,$tidyopts));
 }
 ob_start(scrub_output);
 

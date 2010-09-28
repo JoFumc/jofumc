@@ -484,10 +484,10 @@ PACKED();
 .story-headline {
 color:AGUA_BLUE_DARKEST;
 margin:0px;
+border-bottom:2px solid AGUA_BLUE_DARKEST;
 }
 
 h1.story-headline {
-border-bottom:2px solid AGUA_BLUE_DARKEST;
 padding-top:8px;
 text-align:left;
 font-size:20pt;
@@ -497,10 +497,18 @@ clear:both;
 
 h2.story-headline {
 padding-top: 5px;
-font-size:15pt;
-width:90%;
+font-size:16pt;
+width:95%;
 clear:both;
 text-align:right;
+}
+
+h3.story-headline {
+padding-top: 5px;
+font-size:14pt;
+width:90%;
+clear:both;
+text-align:left;
 }
   /* }}}3 Headlines */
   /* Images/bylines {{{3 */
