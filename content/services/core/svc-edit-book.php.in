@@ -9,12 +9,18 @@ header('Content-type: text/html');
 // If the skin has pre-content setup, include it here.
 require_once("library/core/util-skin.php");
 require_once("library/core/util-db.php");
+require_once("library/core/util-auth.php");
+require_once("library/core/class-book.php");
+require_once("library/core/util-config.php");
 skin_include("svc-edit-book-pre.php");
 ?>
 
 <?php
+/* Step 1: Get current user info */
+auth_validate();
+
 $bookid=0+$_REQUEST['book'];
-// Step 1: Check for special book types
+/* Step 2: Check for special book types */
 if ($bookid < 1000)
 {
   switch($bookid) { 
@@ -26,10 +32,25 @@ if ($bookid < 1000)
       print 'Unknown "special" bookID="'.$bookid.'"';
   }
 }
-// Step 2: Handle generic books by type
+/* Step 3: Handle generic books by type */
 else
 {
-   print 'Generic: id="'.$bookid.'"';
+   /* Step 2.1: Get (and set global ref to) book info */
+   $booklist = db_booklist($auth_user->uid,$bookid);
+   $book = &$booklist[$bookid];
+   config_setParameter('edit-book-id',$book);
+
+   /* Step 2.2: Switch on type */
+   switch ($book->type) {
+     case 'sermon': {
+       @include("svc-edit-book-sermon.php");
+       break;
+     }
+     default: {
+       print 'No editor configured for book type "'.$book->type.'", sorry about that.';
+       break;
+     }
+   }
 }
 ?>
 

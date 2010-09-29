@@ -94,10 +94,11 @@ function db_userlist($name=null,$pass=null)
  * db_booklist() -- Get a list of books for a given author
  *
  * @param author ID (from people table) of author
+ * @param book   ID (from book table) of target book
  * 
  * NOTE: If $author is null, use currently-authenticated
  */
-function db_booklist($author=null)
+function db_booklist($author=null,$bookid=null)
 {
   global $auth_user;
 
@@ -108,7 +109,11 @@ function db_booklist($author=null)
   if (null == $author) $author = $auth_user->uid;
 
   /* Step 2: build and issue the query */
-  $query="SELECT * FROM ".TBL_BOOKS." WHERE author='".$author."' ORDER BY `type`";
+  $where = " WHERE author='".$author."'";
+  if (null != $bookid) {
+    $where .= " AND id='".$bookid."'";
+  }
+  $query="SELECT * FROM ".TBL_BOOKS.$where." ORDER BY `type`";
 
   $result=mysql_query($query);
 
