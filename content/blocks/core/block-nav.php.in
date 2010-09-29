@@ -28,20 +28,6 @@ $prog = new akMenuItem("top-nav", "Programs","/programs.php","How to participate
 $topnav->adopt($prog);
 $topnav->createSimpleItem("Worship","/worship.php","When and how we worship together");
 
-// Add submenus
-  /* bookshelf */
-/*
-if ($auth_user->name != 'default')
-{
-  $bookPopup = new akMenu("menu-popup","top-nav-bookshelf-popup");
-  $bookPopup->createSimpleItem("Upload file","/bookshelf.php?tool=upload");
-  $bookPopup->createSimpleItem("Add news item","/bookshelf.php?tool=news");
-  $bookPopup->createSimpleItem("Blog entry","/bookshelf.php?tool=blog");
-  $bookPopup->createSimpleItem("Friends","/bookshelf.php?tool=friends");
-  $book->adopt($bookPopup);
-}
-*/
-
   /* ABOUT */
 $aboutPopup = new akMenu("menu-popup","top-nav-about-popup");
 $aboutPopup->createSimpleItem("Overview","/about.php");

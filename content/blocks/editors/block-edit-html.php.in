@@ -16,7 +16,8 @@ require_once("library/core/class-form.php");
 $editor_filename = block_getParameter('editor-filename');
 $editor_hostpage = block_getParameter('editor-hostpage');
 $editor_processor = block_getParameter('editor-processor');
-$editor_width = block_getParameter('block-width').'px';
+$editor_block_width = block_getParameter('block-width');
+$editor_width = ''.(0.95 * $editor_block_width).'px';
 
 if (null == $editor_filename)
 {

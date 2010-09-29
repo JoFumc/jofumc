@@ -236,6 +236,59 @@ color:#FFF;
 background-color:AGUA_LIGHTER_RED;
 }
    /* }}}3 Popup menus */
+  /* SECTION 4.2.2: Inline menus {{{3 */
+#define HEIGHT_MENU_INLINE 30px
+div.menu-inline {
+PACKED();
+}
+
+ul.menu-inline {
+height:HEIGHT_MENU_INLINE;
+font-weight:bold;
+font-size:12px;
+color:#FFF;
+margin:8px 8px 8px 8px;
+border-top:1px solid AGUA_BLUE_DARKEST;
+border-bottom:1px solid AGUA_BLUE_DARKEST;
+background-color:AGUA_BG_DARK;
+padding:0;
+}
+
+li.menu-inline-prefix {
+float:left;
+background-image:url('/skins/agua/menu-cap-left.png');
+}
+
+li.menu-inline-suffix {
+float:right;
+background-image:url('/skins/agua/menu-cap-left.png');
+}
+
+li.menu-inline {
+float:left;
+PACKED();
+height:HEIGHT_MENU_INLINE;
+background-color:AGUA_BG_DARK;
+}
+
+a.menu-inline {
+display:inline-block;
+color:AGUA_BLUE_DARKEST;
+background-color:AGUA_BG_DARK;
+height:21px;
+margin:0;
+border-left:0;
+border-top:0;
+border-bottom:0;
+border-right:1px solid WINESKIN_BORDER;
+padding:9px 8px 0 8px;
+}
+
+a.menu-inline:hover, li.menu-inline:hover {
+color:AGUA_BLUE_DARKEST;
+background-color:AGUA_BG_LIGHT;
+}
+   /* }}}3 Inline menus */
 /* }}}2 Menu generics */
 /* SECTION 4.3:Footer {{{2 */
   /* Footer overall {{{3 */
@@ -690,7 +743,7 @@ color:AGUA_BLUE_DARKEST;
 background-color:AGUA_BG_DARK;
 }
 .notebook-tab-active {
-height:26px;
+height:27px;
 background-color:AGUA_BG_LIGHT;
 float:left;
 border-top:1px solid AGUA_BG_DARK;

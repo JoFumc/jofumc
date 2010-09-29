@@ -7,19 +7,9 @@ skin_include("block-dashboard-canvas-pre.php");
 <div id="bookshelf-canvas-container">
 <?php
 require_once("library/core/class-story.php");
-if (isset($_REQUEST['tool'])) $tool=$_REQUEST['tool'];
-else $tool='blog'; // CLEAN: Choose a better default?
-
-$toolNames = array(
- 'blog' => "Blog",
- 'upload' => "Upload",
- 'event' => "Events",
- 'friends' => "Manage Friends",
- 'news' => "News"
- );
-
 $cStory = new akStory();
-$cStory->createSimpleChunk(STORY_CHUNK_SECTION,$toolNames[$tool]);
+$cStory->createSimpleChunk(STORY_CHUNK_SECTION,"Welcome");
+$cStory->createSimpleChunk(STORY_CHUNK_FILE,"assets/text/blocks/bookshelf-canvas/welcome.html");
 // CLEAN: Add intro text here? 
 $cStory->emit();
 

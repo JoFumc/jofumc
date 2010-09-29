@@ -75,7 +75,7 @@ else
   }
   file_put_contents($file,$newdata);
 
-  $intro->createSimpleChunk(STORY_CHUNK_TEXT,"Edits successfully saved.");
+  $intro->createSimpleChunk(STORY_CHUNK_TEXT,"Edits successfully saved; go back to the edited page or continue looking around.");
 
   // Step 7: Emit processing intro
   $intro->emit();

@@ -10,21 +10,22 @@ NOW:
 + Schedule (static) block
 + Per-program/generic media gallery
 + Add custom icon for conference link 
++ Fix menu-inline endcaps to use rounded bits
 -----------------
 SOON:
 -----------------
-+ Dynamic menus (load from plain/JSON files)
-+ Calendar day cache and hover popup (see Agape)
 + Program template/editor
 + Program picker?
 + Story editor
 + Story page/comment system
 + Verse of the day from biblegateway.com
++ Calendar day cache and hover popup (see Agape)
 -----------------
 LATER:
 -----------------
 + Change classes from emit() to toString() support (using __toString internally)
 + Generic page editor with block drop
++ Dynamic menus (load from plain/JSON files)
 
 -----------------
 DONE:

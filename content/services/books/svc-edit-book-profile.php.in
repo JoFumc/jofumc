@@ -78,7 +78,7 @@ $skinForm->createSimpleItem("profile-update", FORM_ITEM_BUTTON,
                       "profile-update", "Update");
 
 // CLEAN: This form validation is crap.
-$skinForm->lastSimpleItem->addEvent('onClick',"svc_loadDiv('bookshelf-canvas-container','process-book-profile',svc_formParameters('edit-profile-form'));");
+$skinForm->lastSimpleItem->addEvent('onClick',"svc_loadDiv('bookshelf-canvas-container','process-book-profile',svc_formParameters('profile-skin-form'));");
 $skinPage->adopt($skinForm);
 
 /* Step 5: Create a notebook to hold the pages */

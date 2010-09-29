@@ -95,7 +95,7 @@ class akMenu
   private $title;  // Title text for menu
 
   /* Constructor */
-  function __construct($dom_class="menu-item",$dom_id=null)
+  function __construct($dom_class="menu-inline",$dom_id=null)
   {
     /* Step 1: Copy elements from args */
     $this->dom_class=$dom_class;

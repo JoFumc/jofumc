@@ -23,6 +23,8 @@ define("STORY_CHUNK_TEXT","text");
 define("STORY_CHUNK_FILE","file");
   /* Metadata (comment link, post date, etc) */
 define("STORY_CHUNK_META","meta");
+  /* Emittable object */
+define("STORY_CHUNK_OBJECT","object");
 
 /*
  * akStoryChunk -- Individual story element, union of all chunk types
@@ -32,7 +34,7 @@ class akStoryChunk
   /* Basic public members */
   public $id;    // DOM element ID
   public $type;  // Chunk type
-  public $value; // Currently-assigned value; link/text/filename
+  public $value; // Currently-assigned value; link/text/filename/object
   public $url;   // If this item is a link anchor 
   public $alt;   // For images/links, the ALT or 
 
@@ -82,7 +84,7 @@ class akStoryChunk
         print '>'.$this->value.'</h2>';
         break;
       }   
-      case STORY_CHUNK_SECTION: {
+      case STORY_CHUNK_GROUP: {
         print '<div class="closure_div"></div>';
         print '<h3 ';
         print '  class="story-headline" ';
@@ -141,7 +143,7 @@ class akStoryChunk
           print '  class="story-trail" ';
           print '  title="Edit this text" ';
           print '>';
-          skin_img("edit_48.png","Edit this text","story-trail");
+          skin_img("edit_icon.png","Edit this text","story-trail");
           print '</a>';
         }
         print '<span ';
@@ -158,6 +160,15 @@ class akStoryChunk
         print "\n</span>";
         break;
       }   
+      case STORY_CHUNK_OBJECT: {
+        print '<div ';
+        print '  class="story-object" ';
+        if (null != $this->id)
+           print '  id="'.$this->id.'" ';
+        print '>';
+        $this->value->emit();
+        print '</div>';
+      }
     }
     /* Finish the link (if any) */
     if (null != $this->url) print "</a>";

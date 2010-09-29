@@ -1,59 +1,51 @@
-<div class="story-div">
-<h1 class="story-headline">About Journey of Faith</h1>
-</div>
-<div class="story-div">
-<h2 class="story-headline">Who we are</h2>
-<a href="http://www.umc.org" title="United Methodist Church home"><img class="story-lede" src="/skins/common/button_icon_umc_48_white.png" alt="United Methodist Church home"/></a>
-<span class="story-span">
-Journey of Faith United Methodist Church is a grace-filled Christian 
-community which offers a safe place to ask the tough questions of 
-faith in an atmosphere of unconditional acceptance.</span>
-<span class="story-span">
-&quot;Open Hearts. Open Minds. Open Doors.&quot;
-</span>
-<span class="story-span">
-We are a community committed to offering a safe place for asking the 
-difficult questions of life, and we seek to offer acceptance to all 
-people wherever they are in their faith journey.  So, if you like to 
-ask questions, are a bit skeptical of pat answers, and are open to a 
-journey of discovering truth, this church is for you.
-</span>
-<a href="http://www.rmnetwork.org" title="Reconciling Ministries Network"><img class="story-lede" src="/skins/common/button_icon_rmn_48_white.png" alt="Reconciling Ministry Network"/></a>
-<span class="story-span">
-We are also a 
-<a href="http://www.rmnetwork.org" title="Reconciling Ministries Network">Reconciling Congregation</a>, 
-welcoming and affirming people of all sexual orientations and lifestyles.
-</span>
-<span class="story-span">
-Progressive in our theology, Journey of Faith offers small group 
-studies that take advantage of the works of some of today's leading 
-theologians and Bible scholars.
-</span>
-</div>
-<div class="story-div">
-<h2 class="story-headline">When we meet</h2>
-<span class="story-span">
-On Sunday mornings, we begin with adult 
-<a href="/sunday_school.php" title="Meets on Sunday, hence the name...">Sunday School</a>
-at 9:00am, with our primary 
-<a href="/worship.php" title="Worship information">worship </a>
-beginning at 10:30am.  We usually round out our Sunday with
-<a href="/youth.php" title="JoF A.R.M.Y.">youth activities</a>
-somewhere around 5:30pm.
-</span>
-</div>
-<div class="story-div">
-<h2 class="story-headline">Where we are</h2>
-<span class="story-span">
-7301 County Road 110, Round Rock, Texas
-</span>
-<span class="story-span">
-(about 1.8 miles north of Highway 79)
-</span>
 <?php
+// If the skin has pre-content setup, include it here.
+require_once("library/core/util-skin.php");
+skin_include("about-pre.php");
+?>
+<?php
+/* Step 1: Start page story */
+$about = new akStory();
+$about->createSimpleChunk(STORY_CHUNK_HEADLINE,"About Journey of Faith");
+
+/* Step 2: Create "about" navigation menu */
+$nav = new akMenu();
+$nav->dom_id = "about-menu";
+
+$nav->createSimpleItem("Overview","about.php","Overview");
+$nav->createSimpleItem("Staff","about-staff.php","Meet the staff of Journey of Faith");
+$nav->createSimpleItem("Affiliations","about-affiliations.php","Groups with whom we are affiliated");
+$about->createSimpleChunk(STORY_CHUNK_OBJECT,&$nav);
+
+/* Step 3: Basic story */
+  /* Step 3.1: Who we are */
+$about->createSimpleChunk(STORY_CHUNK_SECTION,"Who we are");
+  /* UMC */
+$about->createSimpleChunk(STORY_CHUNK_LEDE,"skins/common/button_icon_umc_48_white.png");
+$about->lastSimpleChunk->url = "http://www.umc.org";
+$about->lastSimpleChunk->alt = "United Methodist Church home";
+$about->createSimpleChunk(STORY_CHUNK_FILE,"assets/text/pages/about/who_umc.html");
+  /* RMN */
+$about->createSimpleChunk(STORY_CHUNK_LEDE,"skins/common/button_icon_rmn_48_white.png");
+$about->lastSimpleChunk->url = "http://www.rmnetwork.org";
+$about->lastSimpleChunk->alt = "Reconciling Ministries Network";
+$about->createSimpleChunk(STORY_CHUNK_FILE,"assets/text/pages/about/who_rmn.html");
+  /* Step 3.2: When we meet */
+$about->createSimpleChunk(STORY_CHUNK_SECTION,"When we meet");
+$about->createSimpleChunk(STORY_CHUNK_FILE,"assets/text/pages/about/when.html");
+$about->emit();
+
+/* Step 4: Location and map */
+  /* Step 4.1: Location Story */
+$mapStory = new akStory();
+$mapStory->createSimpleChunk(STORY_CHUNK_SECTION,"Where we are");
+$mapStory->createSimpleChunk(STORY_CHUNK_TEXT,"7301 County Road 110, Round Rock, Texas");
+$mapStory->createSimpleChunk(STORY_CHUNK_TEXT,"(about 1.8 miles north of Highway 79)");
+  /* Step 4.2: Map block */
+    /* CLEAN: Convert this to block object with provider/parameter model */
 require("blocks/app/block-map.php");
 ?>
-</div>
 <?php
-require("blocks/core/block-spacer.php");
+// If the skin has post-content setup, include it here.
+skin_include("about-post.php");
 ?>

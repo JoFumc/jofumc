@@ -11,11 +11,11 @@ $aboutStaff->createSimpleChunk(STORY_CHUNK_HEADLINE,"Journey of Faith Staff");
   /* PASTOR: GLENDA */
 $aboutStaff->createSimpleChunk(STORY_CHUNK_SECTION,"Pastor Glenda Whitehead");
 $aboutStaff->createSimpleChunk(STORY_CHUNK_LEDE,"assets/profiles/glenda/profile_128.png");
-$aboutStaff->createSimpleChunk(STORY_CHUNK_FILE,"assets/profiles/glenda/about.txt");
+$aboutStaff->createSimpleChunk(STORY_CHUNK_FILE,"assets/text/pages/about-staff/glenda.html");
   /* WORSHIP: JUSTIN */
 $aboutStaff->createSimpleChunk(STORY_CHUNK_SECTION,"Worship: Justin Capps");
 $aboutStaff->createSimpleChunk(STORY_CHUNK_LEDE,"assets/profiles/justin/profile_128.png");
-$aboutStaff->createSimpleChunk(STORY_CHUNK_FILE,"assets/profiles/justin/about.txt");
+$aboutStaff->createSimpleChunk(STORY_CHUNK_FILE,"assets/text/pages/about-staff/justin.html");
   /* Others */
 $aboutStaff->createSimpleChunk(STORY_CHUNK_SECTION,"Folks I Forgot");
 $aboutStaff->createSimpleChunk(STORY_CHUNK_TEXT,"Anyone else on staff should go here.  Should we include volunteers?");

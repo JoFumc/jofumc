@@ -42,7 +42,7 @@ $res = new akStory();
 if (true == db_updateUser($nu,$auth_user)) {
     /* It worked! */
   $res->createSimpleChunk(STORY_CHUNK_SECTION,"Profile Update: Success");
-  $res->createSimpleChunk(STORY_CHUNK_TEXT,"Your requested profile update has been applied, and will take effect on the next page load.");
+  $res->createSimpleChunk(STORY_CHUNK_TEXT,"I made your changes, but you'll have to reload the page (or log out and back in) to see them.");
 } else {
     /* Something failed... */
   $res->createSimpleChunk(STORY_CHUNK_SECTION,"Profile Update: Failure");
