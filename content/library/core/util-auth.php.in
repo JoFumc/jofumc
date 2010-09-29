@@ -128,4 +128,17 @@ function is_authenticated()
   }
   return false;
 }
+
+/**
+ * is_editor() -- Does the user have any editing rights?
+ *
+ */
+function is_editor()
+{
+  global $auth_user;
+  if (isset($auth_user) && ($auth_user->editor != 0)) {
+    return true;
+  }
+  return false;
+}
 ?>

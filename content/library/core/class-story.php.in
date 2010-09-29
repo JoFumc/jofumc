@@ -137,7 +137,7 @@ class akStoryChunk
       }   
       case STORY_CHUNK_FILE: {
         /* If the user is logged in, add an editor button */
-        if (is_authenticated()) {
+        if (is_authenticated() && is_editor()) {
           print '<a ';
           print '  href="/edit-story-file.php?file='.$this->value.'" ';
           print '  class="story-trail" ';

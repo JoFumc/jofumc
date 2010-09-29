@@ -82,6 +82,7 @@ function db_userlist($name=null,$pass=null)
     $userlist[$row['username']]->fullname = $row['fullname'];
     $userlist[$row['username']]->uid = $row['id'];
     $userlist[$row['username']]->skin = $row['skin'];
+    $userlist[$row['username']]->editor = $row['editor'];
       /* NOTE: Leave password field null */
     $ct++;
   }
