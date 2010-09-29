@@ -9,18 +9,15 @@ $aboutAffiliations = new akStory();
   /* HEADLINE */
 $aboutAffiliations->createSimpleChunk(STORY_CHUNK_HEADLINE,"Journey of Faith Affiliations");
   /* Blurb */
-$aboutAffiliations->createSimpleChunk(STORY_CHUNK_META,"A man is known by the company he keeps.");
-$aboutAffiliations->createSimpleChunk(STORY_CHUNK_META,"-Aesop");
+$aboutAffiliations->createSimpleChunk(STORY_CHUNK_FILE,"assets/text/pages/about-affiliations/intro.html");
   /* Global UMC */
 $aboutAffiliations->createSimpleChunk(STORY_CHUNK_SECTION,"United Methodist Church");
 $aboutAffiliations->createSimpleChunk(STORY_CHUNK_LEDE,"skins/common/button_icon_umc_64.png");
-$aboutAffiliations->createSimpleChunk(STORY_CHUNK_TEXT,"We're part of the larger UMC, yeh. (Need more description here)");
+$aboutAffiliations->createSimpleChunk(STORY_CHUNK_FILE,"assets/text/pages/about-affiliations/umc.html");
   /* Reconciling ministries */
 $aboutAffiliations->createSimpleChunk(STORY_CHUNK_SECTION,"Reconciling Ministries Network");
 $aboutAffiliations->createSimpleChunk(STORY_CHUNK_LEDE,"skins/common/button_icon_rmn_64.png");
-$aboutAffiliations->createSimpleChunk(STORY_CHUNK_META,"Open hearts. Open minds. Open doors.");
-$aboutAffiliations->createSimpleChunk(STORY_CHUNK_TEXT,"(No exceptions)");
-$aboutAffiliations->createSimpleChunk(STORY_CHUNK_TEXT,"We are a reconciling congregation, welcoming and affirming people of all sexual orientations and lifestyles. (Need more description here)");
+$aboutAffiliations->createSimpleChunk(STORY_CHUNK_FILE,"assets/text/pages/about-affiliations/rmn.html");
   /* Ship it */
 $aboutAffiliations->emit();
 ?>
