@@ -32,7 +32,8 @@ function skin_getName()
   }
 
   /* Step 4: Validate */
-  if (FALSE == file_exists("skins/".$skin_name."/default.css"))
+  if ((FALSE == file_exists("skins/".$skin_name."/default.css")) ||
+      ($skin_name == 'default'))
   {
     $skin_name=DEFAULT_SKIN;
   }

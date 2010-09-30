@@ -83,6 +83,45 @@ function ak_moveElement(ele,top,left)
     ele.style.left = ''+left+'px';
 }
 
+// ////////////////////////////////////////////////////////////////////////
+// ak_notebookTabClick() -- Execute a click on a notebook tab
+//
+// @return Nothing
+//
+function ak_notebookTabClick(ele)
+{
+    var idx;
+    var kid;
+    var notebook;
+    var active;
+    /* Step 1: Change tabs */
+    for (idx in ele.parentNode.children) 
+    {
+        kid = ele.parentNode.children[idx];
+        if (kid == ele)  {
+            kid.className = 'notebook-tab-active';
+        } else {
+            kid.className = 'notebook-tab';
+        }
+    }
+    /* Step 2: Switch page */
+        /* Step 2.1: Get tokens */
+    notebook = ele.parentNode.parentNode;
+    active = ele.id.replace(notebook.id+'-tab-','');
+    for (idx in notebook.children) 
+    {
+        kid = notebook.children[idx];
+        try {
+            if (kid.id.match(notebook.id+'-page-')) {
+                if (kid.id.match(notebook.id + '-page-' + active)) {
+                    kid.className = 'notebook-page-active';
+                } else {
+                    kid.className = 'notebook-page';
+                }
+            }
+        } catch (err) { }
+    }
+}
 
 // ////////////////////////////////////////////////////////////////////////
 // svc_createXHR() -- Create a new XMLHttpRequest object
