@@ -107,35 +107,6 @@ function skin_notebookTabExit(ele) { };
 //
 function skin_notebookTabClick(ele) 
 {
-    var idx;
-    var kid;
-    var notebook;
-    var active;
-    /* Step 1: Change tabs */
-    for (idx in ele.parentElement.children) 
-    {
-        kid = ele.parentElement.children[idx];
-        if (kid == ele)  {
-            kid.className = 'notebook-tab-active';
-        } else {
-            kid.className = 'notebook-tab';
-        }
-    }
-    /* Step 2: Switch page */
-        /* Step 2.1: Get tokens */
-    notebook = ele.parentElement.parentElement;
-    active = ele.id.replace(notebook.id+'-tab-','');
-    for (idx in notebook.children) 
-    {
-        kid = notebook.children[idx];
-        try {
-            if (kid.id.match(notebook.id+'-page-')) {
-                if (kid.id.match(notebook.id + '-page-' + active)) {
-                    kid.className = 'notebook-page-active';
-                } else {
-                    kid.className = 'notebook-page';
-                }
-            }
-        } catch (err) { }
-    }
+    // Call common handler
+    ak_notebookTabClick(ele);
 }

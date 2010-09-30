@@ -21,7 +21,7 @@
 #define WIDTH_BOOKWORK_CONTAINER  670px /* Bookshelf canvas container */
     /* }}}3 Inner content containers */
   /* Usable areas (incorporate gutters) */
-#define HEIGHT_CONTENT       400 /* Minimum page height */
+#define HEIGHT_CONTENT       400px /* Minimum page height */
 
   /* }}}2 Common dimensions */
   /* Skin-specific colors {{{2 */
