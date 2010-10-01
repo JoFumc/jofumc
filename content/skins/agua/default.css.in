@@ -280,7 +280,7 @@ margin:0;
 border-left:0;
 border-top:0;
 border-bottom:0;
-border-right:1px solid WINESKIN_BORDER;
+border-right:1px solid AGUA_BORDER;
 padding:9px 8px 0 8px;
 }
 
@@ -660,7 +660,7 @@ float:left;
 display:block;
 color:AGUA_BORDER;
 background-color:AGUA_BG_LIGHT;
-border:2px solid #FAF2F5;
+border:2px solid AGUA_BG_LIGHT;
 height:104px;
 width:85px;
 margin-left:5px;
@@ -689,6 +689,10 @@ content:url('/skins/wine/book_profile.png');
 
 .book-span-album:before {
 content:url('/skins/wine/book_photo.png');
+}
+
+.book-span-sermon:before {
+content:url('/skins/wine/book_rss.png');
 }
 
 .book-span:hover {
