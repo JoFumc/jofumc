@@ -255,21 +255,71 @@ function db_updateUser($nu=null,$ou=null)
 }
 
 /***********************************************
- * db_updateStory() -- Change or add a story to the DB
+ * db_saveStory() -- Change or add a story to the DB
  *
- * @param nu New (created or updated) akStoryEntry object
+ * @param st New (created or updated) akStoryEntry object
+ *
+ * The DB action that takes place is determined by
+ * the 'id' field of the story object.  If it is zero,
+ * we treat this as a new entry and INSERT it.  If the
+ * id is nonzero, we treat it as an UPDATE.
  */
-function db_updateStory($nu=null)
+function db_saveStory($st=null)
 {
   global $db_cxn;
 
   /* Step 0: Early validation */
-  if ($nu == null) {
+  if (($st == null) ||
+      ($st->book == 0) ||
+      ($st->author == 0)){
     return false;
   }
 
   /* Step 1: Connect to db if not connected */
   if (!db_connect()) return false;
+
+  /* Step 2: Build SQL based on action */
+    /* Step 2.1: Build a col/val array pair for any non-null fields */
+  $c = array(); $v = array();
+  if ($st->id != 0) {$c[] = 'id';$v[]=$st->id;}
+  if ($st->book != 0) {$c[] = 'book';$v[]=$st->book;}
+  if ($st->author != 0) {$c[] = 'author';$v[]=$st->author;}
+  if ($st->deliver_date != '') {$c[] = 'deliver_date';$v[]=$st->deliver_date;}
+  $c[] = 'is_frozen'; $v[]=$st->is_frozen;
+  if ($st->keywords != '') {$c[]='keywords';$v[]=$st->keywords;}
+  if ($st->series) {$c[]='series';$v[]=$st->series;}
+  if ($st->title) {$c[]='title';$v[]=$st->title;}
+  if ($st->section_title) {$c[]='section_title';$v[]=$st->section_title;}
+  $c[] = 'section'; $v[]=$st->section;
+  if ($st->lede) {$c[]='lede';$v[]=$st->lede;}
+  if ($st->banner) {$c[]='banner';$v[]=$st->banner;}
+  if ($st->text) {$c[]='text';$v[]=$st->text;}
+
+    /* Step 2.2: INSERT new entry */
+  if ($st->id == 0) {
+    /* Step 2.2.1: Startup */
+    $query = "INSERT INTO ".TBL_STORIES." (";
+    $comma = '';
+    /* Step 2.2.2: Column names */
+    foreach ($c as $column) {
+      $query .= $comma.$column;
+      $comma=',';
+    }
+    $query .= ")";
+    /* Step 2.2.3: Values */
+    $comma = '';
+    $query .= " VALUES (";
+    foreach ($v as $value) {
+      $query .= $comma.$value;
+      $comma=',';
+    }
+    $query .= ")";
+  } else {
+    /* Step 2.3: UPDATE existing with non-null fields */
+  }
+
+  /* Step 3: Do the DB action */
+  print 'SQL: '.$query;
 
 }
 ?>

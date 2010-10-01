@@ -38,7 +38,7 @@ else
    /* Step 2.1: Get (and set global ref to) book info */
    $booklist = db_booklist($auth_user->uid,PERM_EDIT,$bookid);
    $book = &$booklist[$bookid];
-   config_setParameter('edit-book-id',$book);
+   config_setParameter('edit-book-object',$book);
 
    /* Step 2.2: Switch on type */
    switch ($book->type) {

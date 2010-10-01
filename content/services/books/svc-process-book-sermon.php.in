@@ -22,7 +22,23 @@ function get_field($field)
   return $_REQUEST[$field];
 }
 
-
 print_r($_REQUEST);
+
+/* Step 2: Create a story entry object from fields */
+$st = new akStoryEntry();
+
+$st->deliver_date = get_field('sermon-edit-date');
+$st->series = get_field('sermon-edit-series');
+$st->title = get_field('sermon-edit-title');
+$st->book = get_field('sermon-edit-book');
+$st->author = $auth_user->uid;
+
+print_r($st);
+/* Step 3: Create file to store text */
+/* CLEAN: DO THIS */
+
+/* Step 4: Push it into the DB */
+db_saveStory($st);
+
 
 ?>

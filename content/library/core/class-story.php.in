@@ -244,31 +244,32 @@ class akStory
 class akStoryEntry
 {
   /* Public members that reflect DB columns */
-  public $id;   // Story id number from DB
-  public $book; // Book ID that owns this story
-  public $author; // UID of author of this story
-  public $create_time; // Timestamp of initial story creation
-  public $edit_time;  // Timestamp of last edit or comment
-  public $deliver_date; // Presentation date of this story (for lessons/sermons/etc)
-  public $is_frozen; // Are comments allowed?
-  public $keywords; // Comma-separated list of associated keywords (tags)
-  public $series; // Title of series to which this story belongs
-  public $title; // Story title (h2)
-  public $section_title; // Title of this section of the story
-  public $section; // Ordinal location (numeric) within overall story of this entry
-  public $lede; // Path to lede image (if any)
-  public $banner; // Path to banner image (if any)
-  public $text; // Path to text asset containing this story entry's text
+  public $id=0;   // Story id number from DB
+  public $book=0; // Book ID that owns this story
+  public $author=0; // UID of author of this story
+  public $create_time=0; // Timestamp of initial story creation
+  public $edit_time=0;  // Timestamp of last edit or comment
+  public $deliver_date=''; // Presentation date of this story (for lessons/sermons/etc)
+  public $is_frozen=0; // Are comments allowed?
+  public $keywords=''; // Comma-separated list of associated keywords (tags)
+  public $series=null; // Title of series to which this story belongs
+  public $title=null; // Story title (h2)
+  public $section_title=null; // Title of this section of the story
+  public $section=0; // Ordinal location (numeric) within overall story of this entry
+  public $lede=null; // Path to lede image (if any)
+  public $banner=null; // Path to banner image (if any)
+  public $text=null; // Path to text asset containing this story entry's text
 
   /* Private members */
-  private $create_tag;  // User-assigned tag on create
-  private $story;       // story object representing this entry
+  private $create_tag=null;  // User-assigned tag on create
+  private $story=null;       // story object representing this entry
 
   /* Constructor */
   function __construct($create_tag=null)
   {
     /* Step 1: Load base info */
-    $this->create_tag = $create_tag;
+    $this->id = 0; // Zero means it isn't from DB 
+    $this->create_tag = $create_tag; /* For identification */
 
     /* Step 2: Init any other required fields */
   }
