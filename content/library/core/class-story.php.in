@@ -178,7 +178,7 @@ class akStoryChunk
 }
 
 /*
- * akStory -- Structural story object
+ * akStory -- HTML Structural story object
  */
 class akStory
 {
@@ -226,6 +226,72 @@ class akStory
     $chunk = new akStoryChunk($type,$value);
     $this->adopt($chunk);
     $this->lastSimpleChunk = &$chunk;
+  }
+}
+
+/*
+ * akStoryEntry -- DB representation of a story section
+ *
+ * NOTE: This is a representation of a story entry as
+ * it exists in the DB, which is slightly different than
+ * the story object above, in that several chunks are 
+ * combined into one entry.  A story object becomes one
+ * or more DB entries when stored, where a new entry is
+ * made for each story section; a story section is marked
+ * by a section header (STORY_TYPE_SECTION), or any image
+ * that does not immediately follow a section header.
+ */
+class akStoryEntry
+{
+  /* Public members that reflect DB columns */
+  public $id;   // Story id number from DB
+  public $book; // Book ID that owns this story
+  public $author; // UID of author of this story
+  public $create_time; // Timestamp of initial story creation
+  public $edit_time;  // Timestamp of last edit or comment
+  public $deliver_date; // Presentation date of this story (for lessons/sermons/etc)
+  public $is_frozen; // Are comments allowed?
+  public $keywords; // Comma-separated list of associated keywords (tags)
+  public $series; // Title of series to which this story belongs
+  public $title; // Story title (h2)
+  public $section_title; // Title of this section of the story
+  public $section; // Ordinal location (numeric) within overall story of this entry
+  public $lede; // Path to lede image (if any)
+  public $banner; // Path to banner image (if any)
+  public $text; // Path to text asset containing this story entry's text
+
+  /* Private members */
+  private $create_tag;  // User-assigned tag on create
+  private $story;       // story object representing this entry
+
+  /* Constructor */
+  function __construct($create_tag=null)
+  {
+    /* Step 1: Load base info */
+    $this->create_tag = $create_tag;
+
+    /* Step 2: Init any other required fields */
+  }
+
+  /* Method to generate a story object from this entry */
+  private function cook()
+  {
+    /* 
+    $this->story = new akStory("story-id-".$this->id);
+    */
+  }
+
+  /* Method to emit the HTML for this story */
+  function emit()
+  {
+    $this->cook();
+    $this->story->emit();
+  }
+
+  /* Method to save this story entry in the DB */
+  function save()
+  {
+
   }
 }
 

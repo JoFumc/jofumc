@@ -36,7 +36,7 @@ if ($bookid < 1000)
 else
 {
    /* Step 2.1: Get (and set global ref to) book info */
-   $booklist = db_booklist($auth_user->uid,$bookid);
+   $booklist = db_booklist($auth_user->uid,PERM_EDIT,$bookid);
    $book = &$booklist[$bookid];
    config_setParameter('edit-book-id',$book);
 
