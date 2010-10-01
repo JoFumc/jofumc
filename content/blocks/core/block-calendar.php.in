@@ -12,12 +12,14 @@ echo "<table id=\"block-calendar-table\" class=\"block-calendar block-table\">";
 // to display the current full month, plus at least one day from
 // the previous month, and one day from the following month.
     // Number of days from previous month
+
 if ($now->dowFirst == 0) $day_prev=7;
 else $day_prev=$now->dowFirst;
     // Number of days from current month
 $day_cur=$now->monthLen;
+
     // Number of days from next month
-$day_next = 7 - (($now->monthLen % 7) + $now->dowFirst);
+$day_next = 7 - ((($now->monthLen % 7) + $now->dowFirst) % 7);
 if ($day_next == 0) $day_next = 7;
 $day_next_offset=$day_next+1;
 //echo '<tr class="block-title block-calendar-row block-calendar-header">';
