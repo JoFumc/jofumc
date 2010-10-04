@@ -2,6 +2,9 @@
 // Contact info
 $contact = new akBlock(BLOCK_TYPE_SIDEBAR,"blocks/core/block-contact.php","Contact Us");
 $contact->emit();
+// Sermons
+$ser = new akBlock(BLOCK_TYPE_SIDEBAR,"blocks/app/block-sermon-list.php","Sermons");
+$ser->emit();
 // Calendar
 require_once("library/core/class-date.php");
 $calendar = new akBlock(BLOCK_TYPE_SIDEBAR,"blocks/core/block-calendar.php");

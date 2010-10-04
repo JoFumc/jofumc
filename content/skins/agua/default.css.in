@@ -430,7 +430,7 @@ margin:8px 0px 0px 0px;
 background-color:AGUA_BG_LIGHT;
 border-left:1px solid AGUA_BG_DARK;
 border-right:1px solid AGUA_BG_DARK;
-padding:8px 0px;
+padding:8px 4px;
 }
 
 .block-title-sidebar {
@@ -564,6 +564,13 @@ font-size:14pt;
 width:90%;
 clear:both;
 text-align:left;
+}
+
+h4.story-headline {
+padding-top: 4px;
+font-size:12pt;
+width:100%;
+clear:both;
 }
   /* }}}3 Headlines */
   /* Images/bylines {{{3 */

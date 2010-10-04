@@ -204,7 +204,9 @@ function db_sermonlist($bookid=null,$start_date='1000-01-01',$end_date='2500-12-
       $sermonlist[$row['deliver_date']]->book = $row['book'];
       $sermonlist[$row['deliver_date']]->author = $row['author'];
       $sermonlist[$row['deliver_date']]->deliver_date = $row['deliver_date'];
+      $sermonlist[$row['deliver_date']]->series = $row['series'];
       $sermonlist[$row['deliver_date']]->title = $row['title'];
+      $sermonlist[$row['deliver_date']]->section_title = $row['section_title'];
     }
   }
 

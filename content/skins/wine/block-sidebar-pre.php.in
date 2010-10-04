@@ -1,8 +1,10 @@
 <?php
 // Contact info
-// Contact info
 $contact = new akBlock(BLOCK_TYPE_SIDEBAR,"blocks/core/block-contact.php","Contact Us");
 $contact->emit();
+// Sermons
+$ser = new akBlock(BLOCK_TYPE_SIDEBAR,"blocks/app/block-sermon-list.php","Sermons");
+$ser->emit();
 // Random picture...
 $pic = new akBlock(BLOCK_TYPE_SIDEBAR,"blocks/app/block-random-image.php","Snapshots from the Journey");
 $pic->setParameter('random_image_path','assets/random_pool');

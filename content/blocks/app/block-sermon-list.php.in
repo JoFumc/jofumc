@@ -1,0 +1,45 @@
+<?php
+// Sermon list block (sidebar/multibar)
+//
+// Required parameters:
+// ---------------------
+//
+// Optional parameters:
+// ---------------------
+// sermon_start_date -- Earliest sermon to list
+// sermon_end_date -- Latest sermon to list
+// 
+
+// Step 1: Pull parameters
+  // CLEAN: Make this dynamic....
+$default_start = '2010-09-15';
+$default_end = '2010-10-20';
+$default_book = 1003; // Default sermon book...
+$start_date = block_getParameter('sermon_start_date',$default_start);
+$end_date = block_getParameter('sermon_end_date',$default_end);
+$bookid = block_getParameter('sermon_book',$default_book);
+
+
+// Step 2: Generate list from DB
+$sermonList = db_sermonlist($bookid,$start_date,$end_date);
+
+// Step 3: Build a story, with a series header whenever it changes...
+$lastSeries='';
+$st = new akStory();
+foreach ($sermonList as $sermon)
+{
+  // Step 3.1: Emit a series header if it changes....
+  if ($lastSeries != $sermon->series) {
+    $st->createSimpleChunk(STORY_CHUNK_SUBGROUP,$sermon->series);
+    $st->lastSimpleChunk->url = "/sermon.php?date=".$sermon->deliver_date;
+    $lastSeries = $sermon->series;
+  }
+  // Step 3.2: Emit the sermon header
+  $st->createSimpleChunk(STORY_CHUNK_TEXT,$sermon->deliver_date.": ".$sermon->title);
+  $st->lastSimpleChunk->url = "/sermon.php?date=".$sermon->deliver_date;
+}
+
+// Step 4: emit the story
+$st->emit();
+
+?>

@@ -529,6 +529,13 @@ font-size:14pt;
 width:90%;
 clear:both;
 }
+
+h4.story-headline {
+padding-top: 4px;
+font-size:12pt;
+width:100%;
+clear:both;
+}
   /* }}}3 Headlines */
   /* Images/bylines {{{3 */
 .story-lede {

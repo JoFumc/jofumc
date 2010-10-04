@@ -13,6 +13,8 @@ define("STORY_CHUNK_HEADLINE","headline");
 define("STORY_CHUNK_SECTION","section");
   /* Story grouping head (h3 element) */
 define("STORY_CHUNK_GROUP","group");
+  /* Story sub-grouping head (h4 element) */
+define("STORY_CHUNK_SUBGROUP","subgroup");
   /* Lede image */
 define("STORY_CHUNK_LEDE","lede");
   /* Banner image */
@@ -91,6 +93,14 @@ class akStoryChunk
         if (null != $this->id)
            print '  id="'.$this->id.'" ';
         print '>'.$this->value.'</h3>';
+        break;
+      }   
+      case STORY_CHUNK_SUBGROUP: {
+        print '<h4 ';
+        print '  class="story-headline" ';
+        if (null != $this->id)
+           print '  id="'.$this->id.'" ';
+        print '>'.$this->value.'</h4>';
         break;
       }   
       case STORY_CHUNK_LEDE: {

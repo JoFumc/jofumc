@@ -399,7 +399,9 @@ width:172px;
 }
 
 .block-content-sidebar {
-PACKED();
+border:0;
+margin:0;
+padding:4px;
 }
 
 .block-title-sidebar {
@@ -533,6 +535,13 @@ h3.story-headline {
 padding-top: 5px;
 font-size:14pt;
 width:90%;
+clear:both;
+}
+
+h4.story-headline {
+padding-top: 4px;
+font-size:12pt;
+width:100%;
 clear:both;
 }
   /* }}}3 Headlines */
