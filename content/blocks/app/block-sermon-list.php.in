@@ -35,7 +35,7 @@ foreach ($sermonList as $sermon)
     $lastSeries = $sermon->series;
   }
   // Step 3.2: Emit the sermon header
-  $st->createSimpleChunk(STORY_CHUNK_TEXT,$sermon->deliver_date.": ".$sermon->title);
+  $st->createSimpleChunk(STORY_CHUNK_TEXT,substr($sermon->deliver_date,5).": ".$sermon->title);
   $st->lastSimpleChunk->url = "/sermon.php?date=".$sermon->deliver_date;
 }
 
