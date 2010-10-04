@@ -7,6 +7,7 @@ header('Content-type: text/html');
 <?php
 /* Step 1: Includes */
 require_once("library/core/util-config.php");
+require_once("library/core/util-db.php");
 require_once("library/core/class-book.php");
 require_once("library/core/class-story.php");
 require_once("library/core/class-form.php");
@@ -54,8 +55,15 @@ $editPage->adopt($editForm);
   /* Step 3.2: Archive page */
 $archivePage = new akNotePage("archive","Previous Sermons");
 $archiveForm = new akForm("sermon-archive-form");
-$archiveForm->createSimpleItem("sermon-archive-note",FORM_ITEM_RAW,
-                            "sermon-archive-note","Load some sermons into a list here and allow picking.");
+
+$sermonList = db_sermonlist($book->id); /* No start/end dates */
+foreach ($sermonList as $sermon) {
+  $archiveForm->createSimpleItem("sermon-archive-".$sermon->deliver_date,
+                                 FORM_ITEM_BUTTON,
+                                 "sermon-archive-".$sermon->deliver_date,
+                                 $sermon->title." (".$sermon->deliver_date.")");
+
+}
 $archivePage->adopt($archiveForm);
 
 

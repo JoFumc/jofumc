@@ -661,6 +661,10 @@ content:url('/skins/wine/book_profile.png');
 content:url('/skins/wine/book_photo.png');
 }
 
+.book-span-sermon:before {
+content:url('/skins/wine/book_rss.png');
+}
+
 .book-span:hover {
 padding:0px;
 border:2px solid WINESKIN_RED;

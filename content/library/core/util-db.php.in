@@ -117,7 +117,7 @@ function db_userlist($name=null,$pass=null)
  *
  * @param author ID (from people table) of author
  * @param book   ID (from book table) of target book
- * @parem permission Minimum permission required
+ * @param permission Minimum permission required
  * 
  * NOTE: If $author is null, use currently-authenticated
  */
@@ -167,6 +167,51 @@ function db_booklist($author=null,$permission=PERM_EDIT,$bookid=null)
   $result->free_result();
     
   return $booklist;
+}
+
+/***********************************************
+ * db_sermonlist() -- Get a list of sermons that meet criteria
+ *
+ * @param book   ID (from book table) of target sermon book
+ * 
+ */
+function db_sermonlist($bookid=null,$start_date='1000-01-01',$end_date='2500-12-31')
+{
+  global $db_cxn;
+
+  /* Step 1: Connect to db if not connected */
+  if ((null == $bookid) || !db_connect()) return null;
+
+  /* Step 2: build and issue the query */
+  $query = "SELECT * FROM ".TBL_STORIES." WHERE book=".$bookid." AND deliver_date <= '".$end_date."' AND deliver_date >='".$start_date."'";
+
+    /* Step 2.4: Order newest books first */
+  $query .= ' ORDER BY deliver_date,edit_time ASC';
+
+  $result=@$db_cxn->query($query);
+
+  /* Step 3: pull results into user objects */
+  if ($result->num_rows == 0) {
+    $sermonlist = null;
+  } else {
+    $sermonlist = array();
+    while ($row=$result->fetch_assoc())
+    {
+      /* Step 3.1: Create the new reference */
+      $sermonlist[$row['deliver_date']]=new akStoryEntry($row['deliver_date']);
+      /* Step 3.2: Fill in the remaining fields */
+      $sermonlist[$row['deliver_date']]->id = $row['id'];
+      $sermonlist[$row['deliver_date']]->book = $row['book'];
+      $sermonlist[$row['deliver_date']]->author = $row['author'];
+      $sermonlist[$row['deliver_date']]->deliver_date = $row['deliver_date'];
+      $sermonlist[$row['deliver_date']]->title = $row['title'];
+    }
+  }
+
+  /* Step 4: clean up */
+  $result->free_result();
+    
+  return $sermonlist;
 }
 
 /***********************************************
