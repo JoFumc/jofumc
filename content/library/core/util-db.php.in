@@ -284,16 +284,17 @@ function db_saveStory($st=null)
   if ($st->id != 0) {$c[] = 'id';$v[]=$st->id;}
   if ($st->book != 0) {$c[] = 'book';$v[]=$st->book;}
   if ($st->author != 0) {$c[] = 'author';$v[]=$st->author;}
-  if ($st->deliver_date != '') {$c[] = 'deliver_date';$v[]=$st->deliver_date;}
+  if ($st->deliver_date != '') {$c[] = 'deliver_date';$v[]="'".$st->deliver_date."'";}
   $c[] = 'is_frozen'; $v[]=$st->is_frozen;
-  if ($st->keywords != '') {$c[]='keywords';$v[]=$st->keywords;}
-  if ($st->series) {$c[]='series';$v[]=$st->series;}
-  if ($st->title) {$c[]='title';$v[]=$st->title;}
-  if ($st->section_title) {$c[]='section_title';$v[]=$st->section_title;}
+  if ($st->keywords != '') {$c[]='keywords';$v[]="'".$st->keywords."'";}
+  if ($st->series) {$c[]='series';$v[]="'".$st->series."'";}
+  if ($st->title) {$c[]='title';$v[]="'".$st->title."'";}
+  if ($st->section_title) {$c[]='section_title';$v[]="'".$st->section_title."'";}
   $c[] = 'section'; $v[]=$st->section;
-  if ($st->lede) {$c[]='lede';$v[]=$st->lede;}
-  if ($st->banner) {$c[]='banner';$v[]=$st->banner;}
-  if ($st->text) {$c[]='text';$v[]=$st->text;}
+  if ($st->lede) {$c[]='lede';$v[]="'".$st->lede."'";}
+  if ($st->banner) {$c[]='banner';$v[]="'".$st->banner."'";}
+  if ($st->text) {$c[]='text';$v[]="'".$st->text."'";}
+  $c[] = 'edit_time'; $v[] = 'NOW()';
 
     /* Step 2.2: INSERT new entry */
   if ($st->id == 0) {
@@ -319,7 +320,6 @@ function db_saveStory($st=null)
   }
 
   /* Step 3: Do the DB action */
-  print 'SQL: '.$query;
-
+  return @$db_cxn->query($query);
 }
 ?>

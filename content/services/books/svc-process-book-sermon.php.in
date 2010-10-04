@@ -22,23 +22,41 @@ function get_field($field)
   return $_REQUEST[$field];
 }
 
-print_r($_REQUEST);
 
 /* Step 2: Create a story entry object from fields */
 $st = new akStoryEntry();
 
-$st->deliver_date = get_field('sermon-edit-date');
+$deliver_date = new DateTime(get_field('sermon-edit-date'));
+$st->deliver_date = $deliver_date->format("Y-m-d");
 $st->series = get_field('sermon-edit-series');
 $st->title = get_field('sermon-edit-title');
 $st->book = get_field('sermon-edit-book');
 $st->author = $auth_user->uid;
 
-print_r($st);
 /* Step 3: Create file to store text */
-/* CLEAN: DO THIS */
+  /* Step 3.1: Setup */
+$notes_dir="assets/text/books/".$st->book."/sermons/".$deliver_date->format("Y");
+$notes_file=$deliver_date->format("m-d").".html";
+$st->text=$notes_dir."/".$notes_file;
+  /* Step 3.1: Make containing directory */
+if (!is_dir($notes_dir)) mkdir($notes_dir,0755,true);
+if (!is_dir($notes_dir)) {
+  /* Can't make storage dir? */
+  print '[[Failed to create directory for notes storage, notes will not be saved.]]';
+} else {
+  file_put_contents($st->text,stripslashes(get_field('sermon-edit-notes')));
+}
 
 /* Step 4: Push it into the DB */
-db_saveStory($st);
+$res = new akStory();
+if (db_saveStory($st)) {
+  $res->createSimpleChunk(STORY_CHUNK_SECTION,"Sermon Edit: Success");
+  $res->createSimpleChunk(STORY_CHUNK_TEXT,"Sermon info saved successfully to database.");
+}else {
+  $res->createSimpleChunk(STORY_CHUNK_SECTION,"Sermon Edit: Failure");
+  $res->createSimpleChunk(STORY_CHUNK_TEXT,"The update failed during database update. Please try again later.");
+}
 
+$res->emit();
 
 ?>
