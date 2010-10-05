@@ -1,0 +1,29 @@
+<?php
+// Sermon app block (center app area)
+//
+// Required parameters:
+// ---------------------
+// sermon-date Date of delivery of the sermon to display
+//
+// Optional parameters:
+// ---------------------
+
+// Step 1: Pull parameters
+  // CLEAN: Make this dynamic....
+$sermon_date = block_getParameter('sermon-date','1000-01-01');
+
+// Step 2: Generate entry from DB
+$sermonList = db_sermonlist(1003,$sermon_date,$sermon_date);
+$sermon = $sermonList[$sermon_date];
+
+// Step 3: Build a story
+$st = new akStory();
+
+$st->createSimpleChunk(STORY_CHUNK_SECTION,$sermon->series);
+$st->createSimpleChunk(STORY_CHUNK_GROUP,$sermon->title);
+$st->createSimpleChunk(STORY_CHUNK_FILE,$sermon->text);
+$st->emit();
+
+// Step 4: Add decoration?  Next/Prev?  Others in this series?
+
+?>

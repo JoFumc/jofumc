@@ -1,0 +1,20 @@
+<?php
+// If the skin has pre-content setup, include it here.
+require_once("library/core/util-skin.php");
+skin_include("sermon-pre.php");
+?>
+<?php
+require_once("library/core/class-story.php");
+$serHeader = new akStory();
+$serHeader->createSimpleChunk(STORY_CHUNK_HEADLINE,"Sermon Topics");
+$serHeader->emit();
+/* Pull in sermon display block */
+$serBlock = new akBlock(BLOCK_TYPE_APP,"blocks/app/block-sermon-app.php");
+$serBlock->setParameter('sermon-date',$_REQUEST['date']);
+$serBlock->emit();
+?>
+<div class="closure-div"></div>
+<?php
+// If the skin has post-content setup, include it here.
+skin_include("worship-post.php");
+?>
