@@ -2,6 +2,11 @@
 // Add partner nav
 $partner = new akBlock(BLOCK_TYPE_MULTIBAR,"blocks/core/block-partner-nav.php","Beyond JoF");
 $partner->emit();
+// Random picture...
+$pic = new akBlock(BLOCK_TYPE_MULTIBAR,"blocks/app/block-random-image.php","JoF in action");
+$pic->setParameter('random_image_path','assets/random_pool');
+$pic->setParameter('random_image_width',198);
+$pic->emit();
 // Add the twitter widget (with parameters)
 $twidget = new akBlock(BLOCK_TYPE_RAW,"blocks/app/block-twitter-widget.php");
 $twidget->setParameter('tweet_shell_bg','#94BBDC');

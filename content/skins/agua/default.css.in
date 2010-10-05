@@ -208,7 +208,7 @@ font-weight:bold;
 font-size:12px;
 color:#FFF;
 PACKED();
-background-color:AGUA_LIGHT_RED;
+background-color:AGUA_BG_LIGHT;
 }
 
 li.menu-popup {
@@ -226,14 +226,14 @@ padding-top:4px;
 display:inline-block;
 overflow:hidden;
 color:#FFF;
-background-color:AGUA_LIGHT_RED;
+background-color:AGUA_BG_LIGHT;
 height:20px; /* HEIGHT_MENU_POPUP - padding-top */
 width:100%;
 }
 
 a.menu-popup:hover, li.menu-popup:hover {
 color:#FFF;
-background-color:AGUA_LIGHTER_RED;
+background-color:AGUA_BLUE_LIGHTER;
 }
    /* }}}3 Popup menus */
   /* SECTION 4.2.2: Inline menus {{{3 */
@@ -770,7 +770,7 @@ float:left;
 border-top:1px solid AGUA_BG_DARK;
 border-left:1px solid AGUA_BG_DARK;
 border-right:1px solid AGUA_BG_DARK;
-border-bottom:1px solid AG_BG_LIGHT;
+border-bottom:1px solid AGUA_BG_LIGHT;
 padding:10px 8px 0px 8px;
 margin:0;
 cursor:pointer;

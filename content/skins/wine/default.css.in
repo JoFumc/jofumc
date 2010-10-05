@@ -58,7 +58,6 @@ display:block;
 width:WIDTH_FULL;
 margin:0px auto auto auto;
 min-height:HEIGHT_CONTENT;
-height:auto;
 }
 
 #sidebar-div {
@@ -67,7 +66,6 @@ display:block;
 width:WIDTH_SIDEBAR;
 min-height:HEIGHT_CONTENT;
 PACKED();
-height:600px;
 }
 
 #workarea-div {
