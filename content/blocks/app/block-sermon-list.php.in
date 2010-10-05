@@ -21,12 +21,12 @@ $bookid = block_getParameter('sermon_book',$default_book);
 
 
 // Step 2: Generate list from DB
-$sermonList = db_sermonlist($bookid,$start_date,$end_date);
+$sermonList = db_sermonsByDateRange($bookid,$start_date,$end_date);
 
 // Step 3: Build a story, with a series header whenever it changes...
 $lastSeries='';
 $st = new akStory();
-foreach ($sermonList as $sermon)
+foreach (array_reverse($sermonList,true) as $sermon)
 {
   // Step 3.1: Emit a series header if it changes....
   if ($lastSeries != $sermon->series) {

@@ -19,8 +19,9 @@ $bookShelf->setTitle("Available Books");
 
 // Retrieve list of books for current user
 $booklist=db_booklist(); // NULL author means current
-
-foreach($booklist as $book) $bookShelf->adopt($book);
+if (null != $booklist) {
+  foreach($booklist as $book) $bookShelf->adopt($book);
+}
 
 // Add divider
 $book = new akBook("Tools",BOOK_TYPE_DIVIDER);

@@ -56,7 +56,7 @@ $editPage->adopt($editForm);
 $archivePage = new akNotePage("archive","Previous Sermons");
 $archiveForm = new akForm("sermon-archive-form");
 
-$sermonList = db_sermonlist($book->id); /* No start/end dates */
+$sermonList = db_sermonsByDateRange($book->id); /* No start/end dates */
 foreach ($sermonList as $sermon) {
   $archiveForm->createSimpleItem("sermon-archive-".$sermon->deliver_date,
                                  FORM_ITEM_BUTTON,

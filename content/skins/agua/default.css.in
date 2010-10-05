@@ -702,6 +702,10 @@ content:url('/skins/wine/book_photo.png');
 content:url('/skins/wine/book_rss.png');
 }
 
+.book-span-generic:before {
+content:url('/skins/wine/book_rss.png');
+}
+
 .book-span:hover {
 padding:0px;
 border:2px solid AGUA_BORDER;

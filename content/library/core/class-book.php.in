@@ -15,6 +15,9 @@ define("BOOK_TYPE_DIVIDER","divider");  // Separates groups on shelf
  // Custom book IDs (special IDs are less than 1000 )
 define("BOOK_ID_NEW",100);  // Custom editor for creating a new book
 define("BOOK_ID_PROFILE",101); // Custom editor for profile
+define("BOOK_ID_ANNOUNCEMENTS",102); // Front page announcements
+define("BOOK_ID_SERMONS",103); // Sermon series
+define("BOOK_ID_MUSIC",104); // Worship songs
 
 
 

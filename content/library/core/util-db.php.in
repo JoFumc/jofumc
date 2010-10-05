@@ -170,12 +170,12 @@ function db_booklist($author=null,$permission=PERM_EDIT,$bookid=null)
 }
 
 /***********************************************
- * db_sermonlist() -- Get a list of sermons that meet criteria
+ * db_sermonsByDateRange() -- Get a list of sermons that meet criteria
  *
  * @param book   ID (from book table) of target sermon book
  * 
  */
-function db_sermonlist($bookid=null,$start_date='1000-01-01',$end_date='2500-12-31')
+function db_sermonsByDateRange($bookid=null,$start_date='1000-01-01',$end_date='2500-12-31')
 {
   global $db_cxn;
 
