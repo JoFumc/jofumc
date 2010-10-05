@@ -30,7 +30,7 @@ text-decoration:none;
 }
 
 /* Additional custom styles that are sufficiently generic */
-img.frameless {
+.frameless {
 PACKED();
 }
 
