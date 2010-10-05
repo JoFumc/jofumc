@@ -399,9 +399,7 @@ width:172px;
 }
 
 .block-content-sidebar {
-border:0;
-margin:0;
-padding:4px;
+PACKED();
 }
 
 .block-title-sidebar {
@@ -411,6 +409,10 @@ border-bottom:1px solid WINESKIN_BORDER;
 
 .block-prefix-sidebar, .block-suffix-sidebar {
 PACKED();
+}
+
+.block-content-addmargin {
+margin:3px;
 }
 
   /* }}}3 Sidebar blocks */

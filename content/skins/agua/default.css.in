@@ -450,6 +450,11 @@ content:url('/skins/agua/sidebar-cap.png');
 .block-suffix-sidebar:after {
 content:url('/skins/agua/sidebar-shoe.png');
 }
+
+.block-content-addmargin {
+margin:3px;
+}
+
   /* }}}3 Sidebar blocks */
 
 /* }}}2 Generic block support */

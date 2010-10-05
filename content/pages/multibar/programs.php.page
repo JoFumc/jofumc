@@ -1,14 +1,24 @@
 <?php
 // If the skin has pre-content setup, include it here.
 require_once("library/core/util-skin.php");
-skin_include("worship-pre.php");
+skin_include("programs-pre.php");
 ?>
 <?php
 require_once("library/core/class-story.php");
 
 /* Overview */
 $prog = new akStory();
+  /* Headline */
 $prog->createSimpleChunk(STORY_CHUNK_HEADLINE,"Programs");
+$nav = new akMenu();
+  /* In-page section nav */
+$nav->dom_id = "program-group-menu";
+$nav->createSimpleItem("Overview","programs.php","Overview of program groups");
+$nav->createSimpleItem("Adults","program-group-adult.php","Programs and ministries for Adults");
+$nav->createSimpleItem("Youth","program-group-youth.php","JoF A.R.M.Y and other options for young adults");
+$nav->createSimpleItem("Children","program-group-children.php","Childrens' ministries and programs");
+$prog->createSimpleChunk(STORY_CHUNK_OBJECT,&$nav);
+  /* Intro text */
 $prog->createSimpleChunk(STORY_CHUNK_FILE,"assets/text/pages/programs/intro.html");
 $prog->emit();
 
@@ -35,5 +45,5 @@ $kids->emit();
 ?>
 <?php
 // If the skin has post-content setup, include it here.
-skin_include("worship-post.php");
+skin_include("programs-post.php");
 ?>

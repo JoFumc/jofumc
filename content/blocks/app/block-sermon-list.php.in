@@ -1,3 +1,4 @@
+<div id="block-sermon-list" class="block-content-addmargin">
 <?php
 // Sermon list block (sidebar/multibar)
 //
@@ -43,3 +44,4 @@ foreach (array_reverse($sermonList,true) as $sermon)
 $st->emit();
 
 ?>
+</div>
