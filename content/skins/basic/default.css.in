@@ -375,14 +375,16 @@ margin:8px 0px 0px 0px;
   /* }}}3 Raw blocks */
   /* SECTION 4.5.3: Multibar blocks {{{3 */
 .block-multibar {
-width:172px;
+width:164px;
 border:1px solid JOF_RED;
 padding:0px;
 margin:8px auto 0px auto;
 }
 
 .block-content-multibar {
-PACKED();
+border:0;
+margin:0;
+padding:3px;
 }
 
 .block-title-multibar {

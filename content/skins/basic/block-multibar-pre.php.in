@@ -1,4 +1,7 @@
 <?php
+// Sermons
+$ser = new akBlock(BLOCK_TYPE_MULTIBAR,"blocks/app/block-sermon-list.php","Sermons");
+$ser->emit();
 // Add the twitter widget (with parameters)
 $twidget = new akBlock(BLOCK_TYPE_RAW,"blocks/app/block-twitter-widget.php");
 $twidget->setParameter('tweet_shell_bg','#C82020');
