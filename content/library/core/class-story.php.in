@@ -19,8 +19,12 @@ define("STORY_CHUNK_SUBGROUP","subgroup");
 define("STORY_CHUNK_LEDE","lede");
   /* Banner image */
 define("STORY_CHUNK_BANNER","banner");
-  /* Inline text (may contain HTML) */
+  /* Inline plain text (may contain HTML) */
 define("STORY_CHUNK_TEXT","text");
+  /* Inline error text (may contain HTML) */
+define("STORY_CHUNK_ERROR","error");
+  /* Inline warning text (may contain HTML) */
+define("STORY_CHUNK_WARNING","warning");
   /* Text from file (may contain HTML/PHP) */
 define("STORY_CHUNK_FILE","file");
   /* Metadata (comment link, post date, etc) */
@@ -128,6 +132,26 @@ class akStoryChunk
       case STORY_CHUNK_TEXT: {
         print '<span ';
         print '  class="story-span" ';
+        if (null != $this->id)
+           print '  id="'.$this->id.'" ';
+        print ">\n";
+        print $this->value;
+        print "\n</span>";
+        break;
+      }   
+      case STORY_CHUNK_ERROR: {
+        print '<span ';
+        print '  class="story-error" ';
+        if (null != $this->id)
+           print '  id="'.$this->id.'" ';
+        print ">\n";
+        print $this->value;
+        print "\n</span>";
+        break;
+      }   
+      case STORY_CHUNK_WARNING: {
+        print '<span ';
+        print '  class="story-warning" ';
         if (null != $this->id)
            print '  id="'.$this->id.'" ';
         print ">\n";

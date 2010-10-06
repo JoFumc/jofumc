@@ -572,6 +572,30 @@ display:block;
 .story-span a {
 text-decoration:underline;
 }
+
+.story-meta {
+margin-top:5px;
+display:block;
+font-style:italic;
+}
+
+.story-error {
+margin-top:5px;
+display:block;
+font-weight:bold;
+font-size:13pt;
+color:JOF_RED;
+text-align:center;
+}
+
+.story-warning {
+font-style:italic;
+margin-top:5px;
+display:block;
+font-size:12pt;
+color:JOF_RED;
+text-align:center;
+}
   /* }}}3 */
   /* Metainfo {{{3 */
   /* }}}3 Metainfo */

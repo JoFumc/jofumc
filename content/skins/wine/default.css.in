@@ -578,42 +578,33 @@ display:block;
 .story-span a {
 text-decoration:underline;
 }
+
+.story-meta {
+margin-top:5px;
+display:block;
+font-style:italic;
+}
+
+.story-error {
+margin-top:5px;
+display:block;
+font-weight:bold;
+font-size:13pt;
+color:WINESKIN_DARK_RED;
+text-align:center;
+}
+
+.story-warning {
+font-style:italic;
+margin-top:5px;
+display:block;
+font-size:12pt;
+color:WINESKIN_DARK_RED;
+text-align:center;
+}
   /* }}}3 */
-  /* Metainfo {{{3 */
-  /* }}}3 Metainfo */
 /* }}}2 Stories */
-/* SECTION 6.5:Video embeds {{{2 */
-  /* Common {{{3 */
-#define WIDTH_VIDEO   480px
-#define HEIGHT_VIDEO  385px
-
-.block-video {
-height:HEIGHT_VIDEO;
-width:WIDTH_VIDEO;
-margin:0px;
-padding:0px;
-border:0px;
-}
-
-.block-video-div {
-
-padding:8px 0px;
-}
-  /* }}}3 Common */
-  /* Source-specific {{{3 */
-.block-video-youtube {
-}
-.youtube-embed {
-width:WIDTH_VIDEO;
-height:HEIGHT_VIDEO;
-margin:5px auto 5px auto;
-}
-
-.block-video-vimeo {
-}
-  /* }}}3 Source-specific */
-/* }}}2 Video embeds */
-/* SECTION 6.6:Bookshelf {{{2 */
+/* SECTION 6.5:Bookshelf {{{2 */
   /* Menu {{{3 */
 #bookshelf-menu-div {
 width:WIDTH_BOOKSHELF;
