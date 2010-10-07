@@ -28,7 +28,7 @@ $r=mt_rand(0,count($imageset)-1);
 $image=$imageset[$r];
 echo '<div id="block-random-image">';
 echo '<a href="viewer-photo.php?gallery=random&image_path='.$image.'" class="frameless">';
-echo '<img src="'.$image.'" alt="Random Image" width="'.$width.'" class="block-image"/>';
+echo '<img src="'.$image.'" alt="Random Image" width="'.$width.'" class="block-image frameless"/>';
 echo '</a>';
 echo '<span class="block-text">'.$caption.'</span>';
 echo '</div>';

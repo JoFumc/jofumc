@@ -8,6 +8,14 @@ require_once("library/core/class-story.php");
 $aboutStaff = new akStory();
   /* HEADLINE */
 $aboutStaff->createSimpleChunk(STORY_CHUNK_HEADLINE,"Journey of Faith Staff");
+/* navigation menu */
+$nav = new akMenu();
+$nav->dom_id = "about-menu";
+
+$nav->createSimpleItem("Overview","about.php","Overview");
+$nav->createSimpleItem("Staff","about-staff.php","Meet the staff of Journey of Faith");
+$nav->createSimpleItem("Affiliations","about-affiliations.php","Groups with whom we are affiliated");
+$aboutStaff->createSimpleChunk(STORY_CHUNK_OBJECT,&$nav);
   /* PASTOR: GLENDA */
 $aboutStaff->createSimpleChunk(STORY_CHUNK_SECTION,"Pastor Glenda Whitehead");
 $aboutStaff->createSimpleChunk(STORY_CHUNK_LEDE,"assets/profiles/glenda/profile_128.png");

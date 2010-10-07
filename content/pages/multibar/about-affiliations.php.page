@@ -8,6 +8,14 @@ require_once("library/core/class-story.php");
 $aboutAffiliations = new akStory();
   /* HEADLINE */
 $aboutAffiliations->createSimpleChunk(STORY_CHUNK_HEADLINE,"Journey of Faith Affiliations");
+/* Step 2: Create "about" navigation menu */
+$nav = new akMenu();
+$nav->dom_id = "about-menu";
+
+$nav->createSimpleItem("Overview","about.php","Overview");
+$nav->createSimpleItem("Staff","about-staff.php","Meet the staff of Journey of Faith");
+$nav->createSimpleItem("Affiliations","about-affiliations.php","Groups with whom we are affiliated");
+$aboutAffiliations->createSimpleChunk(STORY_CHUNK_OBJECT,&$nav);
   /* Blurb */
 $aboutAffiliations->createSimpleChunk(STORY_CHUNK_FILE,"assets/text/pages/about-affiliations/intro.html");
   /* Global UMC */

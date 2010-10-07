@@ -431,7 +431,7 @@ margin:8px 0px 0px 0px;
 background-color:AGUA_BG_LIGHT;
 border-left:1px solid AGUA_BG_DARK;
 border-right:1px solid AGUA_BG_DARK;
-padding:8px 4px;
+padding:2px 4px;
 }
 
 .block-title-sidebar {
@@ -549,7 +549,7 @@ border-bottom:2px solid AGUA_BLUE_DARKEST;
 }
 
 h1.story-headline {
-padding-top:8px;
+padding-top:4px;
 text-align:left;
 font-size:20pt;
 width:100%;
@@ -557,7 +557,7 @@ clear:both;
 }
 
 h2.story-headline {
-padding-top: 5px;
+padding-top: 3px;
 font-size:16pt;
 width:95%;
 clear:both;
@@ -565,7 +565,7 @@ text-align:right;
 }
 
 h3.story-headline {
-padding-top: 5px;
+padding-top: 2px;
 font-size:14pt;
 width:90%;
 clear:both;
@@ -573,8 +573,7 @@ text-align:left;
 }
 
 h4.story-headline {
-padding-top: 4px;
-font-size:12pt;
+font-size:13px;
 width:100%;
 clear:both;
 }
