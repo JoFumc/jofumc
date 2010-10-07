@@ -5,6 +5,9 @@ $contact->emit();
 // Sermons
 $ser = new akBlock(BLOCK_TYPE_SIDEBAR,"blocks/app/block-sermon-list.php","Sermons");
 $ser->emit();
+// Staff blogs
+$blogs = new akBlock(BLOCK_TYPE_SIDEBAR,"blocks/app/block-staff-blog.php","Staff Blogs");
+$blogs->emit();
 // Calendar
 require_once("library/core/class-date.php");
 $calendar = new akBlock(BLOCK_TYPE_SIDEBAR,"blocks/core/block-calendar.php");

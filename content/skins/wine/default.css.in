@@ -540,7 +540,7 @@ clear:both;
 
 h4.story-headline {
 padding-top: 4px;
-font-size:12pt;
+font-size:13px;
 width:100%;
 clear:both;
 }

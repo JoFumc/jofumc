@@ -527,14 +527,14 @@ clear:both;
 
 h3.story-headline {
 padding-top:5px;
-font-size:14pt;
+font-size:13pt;
 width:90%;
 clear:both;
 }
 
 h4.story-headline {
 padding-top: 4px;
-font-size:12pt;
+font-size:11pt;
 width:100%;
 clear:both;
 }

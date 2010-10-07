@@ -4,6 +4,9 @@ require_once("library/core/class-date.php");
 $calendar = new akBlock(BLOCK_TYPE_MULTIBAR,"blocks/core/block-calendar.php");
 $calendar->title = calendar_getTitle();
 $calendar->emit();
+// Staff blogs
+$blogs = new akBlock(BLOCK_TYPE_MULTIBAR,"blocks/app/block-staff-blog.php","Staff Blogs");
+$blogs->emit();
 // Add the twitter widget (with parameters)
 $twidget = new akBlock(BLOCK_TYPE_RAW,"blocks/app/block-twitter-widget.php");
 $twidget->setParameter('tweet_shell_bg','#66273B');
