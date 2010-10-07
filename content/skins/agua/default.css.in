@@ -699,6 +699,10 @@ content:url('/skins/wine/book_photo.png');
 content:url('/skins/wine/book_rss.png');
 }
 
+.book-span-blog:before {
+content:url('/skins/wine/book_rss.png');
+}
+
 .book-span-generic:before {
 content:url('/skins/wine/book_rss.png');
 }

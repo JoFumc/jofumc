@@ -5,6 +5,7 @@
  ***************************************************************************/
   // Book types
 define("BOOK_TYPE_STORY","story");      // Book of stories 
+define("BOOK_TYPE_BLOG","blog");        // Book of blog entries 
 define("BOOK_TYPE_CALENDAR","event");   // Book of events
 define("BOOK_TYPE_USERS","users");      // Book of users
 define("BOOK_TYPE_PROFILE","profile");  // Book of profile data

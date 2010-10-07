@@ -13,7 +13,7 @@
 $sermon_date = block_getParameter('sermon-date','1000-01-01');
 
 // Step 2: Generate entry from DB
-$sermonList = db_sermonsByDateRange(1003,$sermon_date,$sermon_date);
+$sermonList = db_sermonsByDateRange(103,$sermon_date,$sermon_date);
 $sermon = $sermonList[$sermon_date];
 
 // Step 3: Build a story
