@@ -26,6 +26,24 @@ define("FORM_ITEM_RADIO","radio");
 define("FORM_ITEM_RAW","raw");
 
 /*
+ * akFormOption -- Individual form option for select/radio
+ */
+class akFormOption
+{
+  public $tag;  // Unique tag for this option
+  public $label; // Display label for this option 
+  public $is_selected; // Hint
+
+  /* Constructor */
+  function __construct($tag=null, $label="Option", $is_selected=false)
+  {
+    $this->tag = $tag;
+    $this->label = $label;
+    $this->is_selected = $is_selected;
+  }
+}
+
+/*
  * akFormItem -- Individual form element, union of all item types
  */
 
@@ -47,6 +65,7 @@ class akFormItem
   public $hint;  // Form element hint (placeholder, perhaps)
   private $style; // Local item style (USE WITH CAUTION)
   private $events; // Events and handlers
+  private $options; // For select or radio items
 
   /* Constructor */
   function __construct($id=null, $type=null, $name=null, $value=null, $label=null)
@@ -68,6 +87,7 @@ class akFormItem
     $this->hint = null; 
     $this->style = null;
     $this->events = array();
+    $this->options = null;
   }
 
   function addStyle($parm=null,$value=null)
@@ -81,6 +101,11 @@ class akFormItem
     if (($event != null) && ($handler != null)) {
       $this->events[$event] = $handler;
     }
+  }
+
+  function addOption($tag=null,$label="Option",$is_selected=false)
+  {
+    $this->options[] = new akFormOption($tag,$label,$is_selected);
   }
 
   /* Method to emit the HTML for this item */
@@ -188,6 +213,23 @@ class akFormItem
           print $evkey.'="'.$this->events[$evkey].'" ';
         print "/>\n";
         print $this->value;
+        print '</textarea>';
+        break;
+      }
+      case FORM_ITEM_SELECT: {
+        print '<select ';
+        if (null != $this->hsize)
+          print 'size="'.$this->hsize.'" ';
+        print "/>\n";
+        if ($this->options != null) foreach($this->options as $option) {
+          print '<option ';
+          print   'value="'.$option->tag.'" ';
+          if ($option->is_selected)
+            print 'selected="true" ';
+          print '>';
+          print $option->label;
+          print '</option>'."\n";
+        }
         print '</textarea>';
         break;
       }
