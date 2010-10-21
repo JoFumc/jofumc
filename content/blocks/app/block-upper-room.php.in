@@ -1,0 +1,37 @@
+<div id="block-upper-room" class="block-content-addmargin">
+<?php
+// Upper Room (R) daily devotional
+// 
+// Required parameters:
+// ---------------------
+//
+// Optional parameters:
+// ---------------------
+
+// Step 1: Pull parameters
+$text_width=block_getParameter('text_width',200);
+
+// Step 2: Import via JS
+?>
+<script type="text/javascript" src="http://devotional.umcom.org/Devotional/s.asp?size=2&body=1"></script>
+<script>
+// Step 3: Hide the original table
+var ur_div = document.getElementById('block-upper-room');
+var ur_tbl = ur_div.children[1];
+ur_tbl.style.display='none';
+// Step 4: Extract the text
+var ur_r2 = ur_tbl.children[0].children[2];
+var ur_r5 = ur_tbl.children[0].children[5];
+var story_head = ur_r2.innerText;
+var story_body = ur_r5.innerText;
+// Step 5: Print as a story 
+document.write('<a class="story-link" href="http://www.upperroom.org/Devotional" target="_blank" title="Read more on the Daily Devotional page at www.upperroom.org">');
+document.write('<h4 class="story-headline">' + story_head + "</h4>");
+document.writeln('</a>');
+document.write('<span class="story-text">' + story_body + "...");
+document.write('<a class="story-link" href="http://www.upperroom.org/Devotional" target="_blank" title="Go to the Daily Devotional page at www.upperroom.org">');
+document.write('<span class="story-meta">');
+document.write('(read more at The Upper Room&reg;)');
+document.writeln('</a></span>');
+</script>
+</div>

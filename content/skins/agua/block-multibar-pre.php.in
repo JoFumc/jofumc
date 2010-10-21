@@ -14,4 +14,8 @@ $twidget->setParameter('tweet_fg','#1B3B55');
 $twidget->setParameter('tweet_bg','#E0EBF5');
 $twidget->setParameter('tweet_width','200');
 $twidget->emit();
+// Add the Upper Room link
+$upper = new akBlock(BLOCK_TYPE_MULTIBAR,"blocks/app/block-upper-room.php","The Upper Room&reg; Daily Devotional");
+$upper->setParameter('text_width','190');
+$upper->emit();
 ?>
