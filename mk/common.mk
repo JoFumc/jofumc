@@ -139,7 +139,7 @@ endef
 # NOTE: Target DIR _must_ exist
 # Usage: TOOL_PUBLISH <object> <published_object>
 define TOOL_PUBLISH
-        (command_line="if [ ! -d $(dir $(2)) ] ; then mkdir -p $(dir $(2)) ; fi ; if [ \"$(1)\" -nt \"$(2)\" ] ; then cp \"$(1)\" \"$(2)\" ; touch \"$(2)\" ; echo '+'; fi" ; echo "[ PUBLISH ] `basename $(1)` --> $(dir $(2))" $(SUPPRESS_TAG) ; echo "$$command_line" $(SUPPRESS_RUN) ; sh -c "$$command_line" $(SUPRESS_RUN));
+        (command_line="if [ ! -d $(dir $(2)) ] ; then mkdir -p $(dir $(2)) ; fi ; if [ \"$(1)\" -nt \"$(2)\" -o ! -f $(2) ] ; then cp \"$(1)\" \"$(2)\" ; touch \"$(2)\" ; echo '+'; fi" ; echo "[ PUBLISH ] `basename $(1)` --> $(dir $(2))" $(SUPPRESS_TAG) ; echo "$$command_line" $(SUPPRESS_RUN) ; sh -c "$$command_line" $(SUPRESS_RUN));
 endef
 
 ##
