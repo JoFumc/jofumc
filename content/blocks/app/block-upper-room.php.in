@@ -27,8 +27,8 @@ ur_tbl.style.display='none';
 // Step 4: Extract the text
 var ur_r2 = ur_tbl.children[0].children[2];
 var ur_r5 = ur_tbl.children[0].children[5];
-story_head = ur_r2.textContent;
-story_body = ur_r5.textContent;
+story_head = ur_r2.children[0].children[0].children[1].innerHTML.replace(/\"/g,'');
+story_body = ur_r5.children[0].children[0].innerHTML;
 } catch (err) {
 story_head = 'Undefined';
 story_body = 'Unable to load remote site data.';
