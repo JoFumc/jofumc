@@ -91,7 +91,7 @@ class akBlock
   function emit()
   {
     /* Step 1: Open overall wrapper  */
-    print '<div ';
+    print "\n<div ";
     if (null != $this->dom_id)
       print 'id="'.$this->dom_id.'" ';
     print   'class="block-'.$this->type.'" ';
