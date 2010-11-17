@@ -406,17 +406,16 @@ background-color:AGUA_BG_DARK;
 padding-bottom:8px;
 }
 
-.block-prefix-multibar, .block-suffix-multibar {
+.block-prefix-multibar {
 PACKED();
 height:8px;
+background-image:url('/skins/agua/multibar-cap.png');
 }
 
-.block-prefix-multibar:before {
-content:url('/skins/agua/multibar-cap.png');
-}
-
-.block-suffix-multibar:after {
-content:url('/skins/agua/multibar-shoe.png');
+.block-suffix-multibar {
+PACKED();
+height:8px;
+background-image:url('/skins/agua/multibar-shoe.png');
 }
   /* }}}3 Multibar blocks */
   /* SECTION 4.5.4: Sidebar blocks {{{3 */
@@ -439,17 +438,16 @@ background-color:AGUA_BG_DARK;
 padding-bottom:8px;
 }
 
-.block-prefix-sidebar, .block-suffix-sidebar {
+.block-prefix-sidebar {
 PACKED();
 height:8px;
+background-image:url('/skins/agua/sidebar-cap.png');
 }
 
-.block-prefix-sidebar:before {
-content:url('/skins/agua/sidebar-cap.png');
-}
-
-.block-suffix-sidebar:after {
-content:url('/skins/agua/sidebar-shoe.png');
+.block-suffix-sidebar {
+PACKED();
+height:8px;
+background-image:url('/skins/agua/sidebar-shoe.png');
 }
 
 .block-content-addmargin {
