@@ -207,7 +207,7 @@ padding:0px;
 ul.menu-popup {
 font-weight:bold;
 font-size:12px;
-color:#FFF;
+color:AGUA_BLUE_DARKEST;
 PACKED();
 background-color:AGUA_BG_LIGHT;
 }
@@ -226,14 +226,14 @@ margin-right:-8px;
 padding-top:4px;
 display:inline-block;
 overflow:hidden;
-color:#FFF;
+color:AGUA_BLUE_DARKEST;
 background-color:AGUA_BG_LIGHT;
 height:20px; /* HEIGHT_MENU_POPUP - padding-top */
 width:100%;
 }
 
 a.menu-popup:hover, li.menu-popup:hover {
-color:#FFF;
+color:AGUA_BLUE_DARKEST;
 background-color:AGUA_BLUE_LIGHTER;
 }
    /* }}}3 Popup menus */
