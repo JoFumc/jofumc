@@ -34,7 +34,7 @@
 /* }}}1 */
 /* SECTION 3:Common toplevel containers {{{1 */
   /* These control the base look and layout; required for all skins */
-body {
+body.page-body {
 color:black;
 font-family:sans-serif;
 font-size:11pt;

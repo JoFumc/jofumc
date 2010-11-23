@@ -18,4 +18,4 @@ print '    <script type="text/javascript" src="/skins/'.skin_getName().'/skin.js
 skin_include("block-html-head.php");
 ?>
   </head>
-  <body class="page-body">
+  <body class="page-bookshelf">

@@ -1,4 +1,3 @@
-#include "parameters.h"
 <?php
 //
 // parameters.php -- Skin parameters for global use.
@@ -12,4 +11,5 @@ config_setParameter("skin_width_multibar",200);
 config_setParameter("skin_width_workarea",710);
 config_setParameter("skin_width_app"     ,510);
 config_setParameter("skin_width_bookshelf",610);
+config_setParameter("skin_height_bookshelf",500);
 ?>

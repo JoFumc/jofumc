@@ -40,7 +40,7 @@
 /* SECTION 3:Common toplevel containers {{{1 */
   /* Baseline page info {{{2 */
   /* These control the base look and layout; required for all skins */
-body {
+body.page-body {
 color:#333;
 font-family:'lucida grande',tahoma,verdana,arial,sans-serif;
 font-size:13px;
