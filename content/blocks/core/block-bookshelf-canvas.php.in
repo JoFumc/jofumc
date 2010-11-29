@@ -9,7 +9,7 @@ skin_include("block-dashboard-canvas-pre.php");
 require_once("library/core/class-story.php");
 $cStory = new akStory();
 $cStory->createSimpleChunk(STORY_CHUNK_SECTION,"Welcome");
-$cStory->createSimpleChunk(STORY_CHUNK_FILE,"assets/text/blocks/bookshelf-canvas/welcome.html");
+$cStory->createSimpleChunk(STORY_CHUNK_FILE,"assets/blocks/bookshelf-canvas/welcome.html");
 // CLEAN: Add intro text here? 
 $cStory->emit();
 

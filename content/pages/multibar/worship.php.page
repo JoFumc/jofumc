@@ -8,14 +8,14 @@ require_once("library/core/class-story.php");
 $aboutStaff = new akStory();
 
 $aboutStaff->createSimpleChunk(STORY_CHUNK_HEADLINE,"Worship at Journey of Faith");
-$aboutStaff->createSimpleChunk(STORY_CHUNK_FILE,"assets/text/pages/worship/overview.html");
+$aboutStaff->createSimpleChunk(STORY_CHUNK_FILE,"assets/pages/worship/overview.html");
 
 $aboutStaff->createSimpleChunk(STORY_CHUNK_SECTION,"What to expect");
 //$aboutStaff->createSimpleChunk(STORY_CHUNK_LEDE,"???.png");
-$aboutStaff->createSimpleChunk(STORY_CHUNK_FILE,"assets/text/pages/worship/expect.html");
+$aboutStaff->createSimpleChunk(STORY_CHUNK_FILE,"assets/pages/worship/expect.html");
 
 $aboutStaff->createSimpleChunk(STORY_CHUNK_SECTION,"NEED TEXT");
-$aboutStaff->createSimpleChunk(STORY_CHUNK_FILE,"assets/text/pages/worship/further.html");
+$aboutStaff->createSimpleChunk(STORY_CHUNK_FILE,"assets/pages/worship/further.html");
 
 
 $aboutStaff->emit();

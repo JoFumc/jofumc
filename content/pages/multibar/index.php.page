@@ -3,11 +3,11 @@ require_once("library/core/class-story.php");
 // Index -- start with simple welcome story
 $welcome = new akStory();
 $welcome->createSimpleChunk(STORY_CHUNK_HEADLINE,"Welcome");
-$welcome->createSimpleChunk(STORY_CHUNK_FILE,"assets/text/pages/index/welcome.html");
+$welcome->createSimpleChunk(STORY_CHUNK_FILE,"assets/pages/index/welcome.html");
 $welcome->emit();
 
 $news = new akStory();
 $news->createSimpleChunk(STORY_CHUNK_HEADLINE,"Latest News");
-$news->createSimpleChunk(STORY_CHUNK_FILE,"assets/text/pages/index/news.html");
+$news->createSimpleChunk(STORY_CHUNK_FILE,"assets/pages/index/news.html");
 $news->emit();
 ?>

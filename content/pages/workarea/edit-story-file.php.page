@@ -37,7 +37,7 @@ if ($_GET)
   // Step 2: Finish and emit the intro
   if ($ok_to_go) {
     // We're editing, so add our intro text from file
-    $intro->createSimpleChunk(STORY_CHUNK_FILE,"assets/text/pages/edit-story-file/intro.html");
+    $intro->createSimpleChunk(STORY_CHUNK_FILE,"assets/pages/edit-story-file/intro.html");
   }
   $intro->emit();
 

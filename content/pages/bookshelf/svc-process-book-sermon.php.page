@@ -35,7 +35,7 @@ $st->author = $auth_user->uid;
 
 /* Step 3: Create file to store text */
   /* Step 3.1: Setup */
-$notes_dir="assets/text/books/".$st->book."/sermons/".$deliver_date->format("Y");
+$notes_dir="assets/books/".$st->book/100."/".$st->book."/".$deliver_date->format("Y");
 $notes_file=$deliver_date->format("m-d").".html";
 $st->text=$notes_dir."/".$notes_file;
   /* Step 3.1: Make containing directory */

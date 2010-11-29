@@ -17,15 +17,15 @@ $nav->createSimpleItem("Staff","about-staff.php","Meet the staff of Journey of F
 $nav->createSimpleItem("Affiliations","about-affiliations.php","Groups with whom we are affiliated");
 $aboutAffiliations->createSimpleChunk(STORY_CHUNK_OBJECT,&$nav);
   /* Blurb */
-$aboutAffiliations->createSimpleChunk(STORY_CHUNK_FILE,"assets/text/pages/about-affiliations/intro.html");
+$aboutAffiliations->createSimpleChunk(STORY_CHUNK_FILE,"assets/pages/about-affiliations/intro.html");
   /* Global UMC */
 $aboutAffiliations->createSimpleChunk(STORY_CHUNK_SECTION,"United Methodist Church");
 $aboutAffiliations->createSimpleChunk(STORY_CHUNK_LEDE,"skins/common/button_icon_umc_64.png");
-$aboutAffiliations->createSimpleChunk(STORY_CHUNK_FILE,"assets/text/pages/about-affiliations/umc.html");
+$aboutAffiliations->createSimpleChunk(STORY_CHUNK_FILE,"assets/pages/about-affiliations/umc.html");
   /* Reconciling ministries */
 $aboutAffiliations->createSimpleChunk(STORY_CHUNK_SECTION,"Reconciling Ministries Network");
 $aboutAffiliations->createSimpleChunk(STORY_CHUNK_LEDE,"skins/common/button_icon_rmn_64.png");
-$aboutAffiliations->createSimpleChunk(STORY_CHUNK_FILE,"assets/text/pages/about-affiliations/rmn.html");
+$aboutAffiliations->createSimpleChunk(STORY_CHUNK_FILE,"assets/pages/about-affiliations/rmn.html");
   /* Ship it */
 $aboutAffiliations->emit();
 ?>

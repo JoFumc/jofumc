@@ -24,15 +24,15 @@ $about->createSimpleChunk(STORY_CHUNK_SECTION,"Who we are");
 $about->createSimpleChunk(STORY_CHUNK_LEDE,"skins/common/button_icon_umc_48_white.png");
 $about->lastSimpleChunk->url = "http://www.umc.org";
 $about->lastSimpleChunk->alt = "United Methodist Church home";
-$about->createSimpleChunk(STORY_CHUNK_FILE,"assets/text/pages/about/who_umc.html");
+$about->createSimpleChunk(STORY_CHUNK_FILE,"assets/pages/about/who_umc.html");
   /* RMN */
 $about->createSimpleChunk(STORY_CHUNK_LEDE,"skins/common/button_icon_rmn_48_white.png");
 $about->lastSimpleChunk->url = "http://www.rmnetwork.org";
 $about->lastSimpleChunk->alt = "Reconciling Ministries Network";
-$about->createSimpleChunk(STORY_CHUNK_FILE,"assets/text/pages/about/who_rmn.html");
+$about->createSimpleChunk(STORY_CHUNK_FILE,"assets/pages/about/who_rmn.html");
   /* Step 3.2: When we meet */
 $about->createSimpleChunk(STORY_CHUNK_SECTION,"When we meet");
-$about->createSimpleChunk(STORY_CHUNK_FILE,"assets/text/pages/about/when.html");
+$about->createSimpleChunk(STORY_CHUNK_FILE,"assets/pages/about/when.html");
 $about->emit();
 
 /* Step 4: Location and map */
