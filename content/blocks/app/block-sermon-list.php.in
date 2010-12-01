@@ -12,13 +12,21 @@
 // 
 
 // Step 1: Pull parameters
-  // CLEAN: Make this dynamic....
-$default_start = '2010-09-15';
-$default_end = '2010-10-20';
+  // Get current time in seconds
+$timenow=time();
+  // Start is about 5 weeks ago (5 * 7 * 24 * 3600 secs ago)
+$timestart=$timenow-3024000;
+  // End is 2 weeks from now (2 * 7 * 24 * 3600 secs into the future)
+$timeend=$timenow+1209600;
+
+$default_start = date('Y-m-d',$timestart);
+$default_end = date('Y-m-d',$timeend);
+
 $default_book = 103; // Default sermon book...
 $start_date = block_getParameter('sermon_start_date',$default_start);
 $end_date = block_getParameter('sermon_end_date',$default_end);
 $bookid = block_getParameter('sermon_book',$default_book);
+
 
 
 // Step 2: Generate list from DB

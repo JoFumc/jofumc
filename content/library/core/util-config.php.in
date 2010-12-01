@@ -73,4 +73,12 @@ function config_getParameter($param='option',$default=null)
   return($GLOBALS['config-parameters'][$param]);
 }
 
+/**
+ * config_getBookDir() -- Get the asset path for a book
+ */
+function config_getBookDir($bookid=0)
+{
+  return "assets/books/".floor($bookid/100)."/".$bookid;
+}
+
 ?>

@@ -330,5 +330,35 @@ class akStoryEntry
   }
 }
 
+/*
+ * akSeries -- Series (lectures, sermons, classes) object
+ *         A 'series' is a grouping for stories in a book.
+ */
+class akSeries
+{
+  /* Basic public members */
+  public $id;   // id from db
+  public $title; // Series title
+  public $subtitle; // Series subtitle
+  public $description; // Human-readable description
+  public $book; // Book containing stories in this series
+
+  /* Private members */
+
+
+  /* Event handlers */
+
+  /* Constructor */
+  function __construct($id=null,$title=null,$subtitle=null,$description=null,$book=null)
+  {
+    /* Step 1: Load basic member info */
+    $this->id = $id;
+    $this->title = $title;
+    $this->subtitle = $subtitle;
+    $this->description = $description;
+    $this->book = $book;
+  }
+
+}
 
 ?>
