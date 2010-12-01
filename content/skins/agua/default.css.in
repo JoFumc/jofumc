@@ -369,6 +369,11 @@ width:100%;
 PACKED();
 font-weight:bold;
 text-align:center;
+color:AGUA_BLUE_DARKEST;
+}
+
+a.block-title, a.block-title:visited, a.block-title:hover {
+color:AGUA_BLUE_DARKEST;
 }
 
 .block-text {
@@ -614,6 +619,7 @@ text-decoration:underline;
 margin-top:5px;
 display:block;
 font-style:italic;
+text-align:right;
 }
 
 .story-error {

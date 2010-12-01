@@ -48,6 +48,8 @@ foreach (array_reverse($sermonList,true) as $sermon)
   $st->lastSimpleChunk->url = "/sermon.php?date=".$sermon->deliver_date;
 }
 
+$st->createSimpleChunk(STORY_CHUNK_META,'<a href="/sermon.php" title="Sermon Archive" class="story-link">(read more in the sermon archive)</a>');
+
 // Step 4: emit the story
 $st->emit();
 

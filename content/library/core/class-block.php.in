@@ -86,6 +86,13 @@ class akBlock
     $this->opts[$parameter] = $value;
   }
 
+  /* Method to add a link to the title */
+  function setTitleLink($targetURL="/",$hint="")
+  {
+    $this->title_prefix='<a class="block-title-link" href="'.$targetURL.'" title="'.$hint.'">';
+    $this->title_suffix='</a>';
+  }
+
   /* Method to emit the HTML for this object */
     /* NOTE: The mouseover/mouseout functions may be provided by the skin */
   function emit()
