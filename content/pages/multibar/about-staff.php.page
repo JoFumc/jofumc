@@ -24,9 +24,6 @@ $aboutStaff->createSimpleChunk(STORY_CHUNK_FILE,"assets/pages/about-staff/glenda
 $aboutStaff->createSimpleChunk(STORY_CHUNK_SECTION,"Worship: Justin Capps");
 $aboutStaff->createSimpleChunk(STORY_CHUNK_LEDE,"assets/profiles/justin/profile_128.png");
 $aboutStaff->createSimpleChunk(STORY_CHUNK_FILE,"assets/pages/about-staff/justin.html");
-  /* Others */
-$aboutStaff->createSimpleChunk(STORY_CHUNK_SECTION,"Folks I Forgot");
-$aboutStaff->createSimpleChunk(STORY_CHUNK_TEXT,"Anyone else on staff should go here.  Should we include volunteers?");
 $aboutStaff->emit();
 ?>
 <div class="closure-div"></div>
