@@ -10,7 +10,7 @@
 //        
 
 /* Step 1: Get parameters */
-$max_count = block_getParameter('max_count',10);
+$max_count = block_getParameter('max_count',5);
 $max_chars = block_getParameter('max_chars',150);
 
 /* Step 2: Get list of announcements */
@@ -28,7 +28,7 @@ else
 {
   foreach ($list as $a) 
   {
-    $st->createSimpleChunk(STORY_CHUNK_TEXT,"<br/><br/>");
+    $st->createSimpleChunk(STORY_CHUNK_TEXT,"<br/>");
     $st->createSimpleChunk(STORY_CHUNK_SUBGROUP,$a->title);
     $st->createSimpleChunk(STORY_CHUNK_FILE,$a->text);
     $st->createSimpleChunk(STORY_CHUNK_META,"Posted: ".$a->edit_time);

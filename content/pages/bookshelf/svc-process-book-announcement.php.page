@@ -34,7 +34,7 @@ $st->author = $auth_user->uid;
   /* Step 3.1: Setup */
 $notes_time=time();
 $notes_dir=config_getBookDir($st->book)."/".date("Y",$notes_time)."/".date("m-d",$notes_time);
-$notes_file=date("H-i-s",$notest_time).".html";
+$notes_file=date("H-i-s",$notes_time).".html";
 $st->text=$notes_dir."/".$notes_file;
   /* Step 3.1: Make containing directory */
 if (!is_dir($notes_dir)) mkdir($notes_dir,0755,true);
