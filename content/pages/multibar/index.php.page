@@ -6,8 +6,14 @@ $welcome->createSimpleChunk(STORY_CHUNK_HEADLINE,"Welcome");
 $welcome->createSimpleChunk(STORY_CHUNK_FILE,"assets/pages/index/welcome.html");
 $welcome->emit();
 
+// Open the announcements section
 $news = new akStory();
 $news->createSimpleChunk(STORY_CHUNK_HEADLINE,"Latest News");
 $news->createSimpleChunk(STORY_CHUNK_FILE,"assets/pages/index/news.html");
 $news->emit();
+
+// Dump the most recent announcements
+$announcements = new akBlock(BLOCK_TYPE_APP,"blocks/app/block-announcements.php");
+$announcements->emit();
+
 ?>

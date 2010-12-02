@@ -219,6 +219,54 @@ function db_sermonsByDateRange($bookid=null,$start_date='1000-01-01',$end_date='
 }
 
 /***********************************************
+ * db_announcementList() -- Get recent announcements
+ *
+ * @param maxcount Most announcements to retrieve
+ * 
+ */
+function db_announcementList($maxcount=10)
+{
+  global $db_cxn;
+
+  /* Step 1: Connect to db if not connected */
+  if (!db_connect()) return null;
+
+  /* Step 2: build and issue the query */
+  $query = "SELECT * FROM ".TBL_STORIES." WHERE book=".BOOK_ID_ANNOUNCEMENTS;
+
+    /* Step 2.4: Order newest books first */
+  $query .= ' ORDER BY edit_time DESC LIMIT '.$maxcount;
+
+  $result=@$db_cxn->query($query);
+
+  /* Step 3: pull results into user objects */
+  if ($result->num_rows == 0) {
+    $list = null;
+  } else {
+    $list = array();
+    $slot = 0;
+    while ($row=$result->fetch_assoc())
+    {
+      /* Step 3.1: Create the new reference */
+      $list[$slot]=new akStoryEntry($slot);
+      /* Step 3.2: Fill in the remaining fields */
+      $list[$slot]->id = $row['id'];
+      $list[$slot]->book = $row['book'];
+      $list[$slot]->author = $row['author'];
+      $list[$slot]->title = $row['title'];
+      $list[$slot]->edit_time = $row['edit_time'];
+      $list[$slot]->text = $row['text'];
+      $slot++;
+    }
+  }
+
+  /* Step 4: clean up */
+  $result->free_result();
+    
+  return $list;
+}
+
+/***********************************************
  * db_seriesList() -- Get a list of topic/series for a given book
  *
  * @param book   ID (from book table) of target book
