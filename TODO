@@ -1,16 +1,21 @@
 -----------------
+PRE-RELEASE:
+-----------------
++ Populate announcements
++ Sermon archive page
++ Sermon individual page
++ Fix announcement file problem
+-----------------
 NOW:
 -----------------
 + Contact form from contact block (or anywhere else for that matter)
 + Feedback form (from footer?)
 + Media uploader (type and date pickers)
-+ Notebook object (for option sheets/profile editor)
 + Rich reference object (floating image/text for picking from groups of things (programs))
 + Headline blocks
 + Schedule (static) block
 + Per-program/generic media gallery
 + Add custom icon for conference link 
-+ Fix menu-inline endcaps to use rounded bits
 -----------------
 SOON:
 -----------------
@@ -30,6 +35,7 @@ LATER:
 -----------------
 DONE:
 -----------------
++ Notebook object (for option sheets/profile editor)
 + Login and per-user handling
 + block innerHTML reload as a webservice (for NAV reload?) (svc_loadDiv())
 + Open-style skin (see Highland Park) (Skin: Agua)
