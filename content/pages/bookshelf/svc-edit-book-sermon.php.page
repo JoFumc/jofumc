@@ -16,7 +16,7 @@ $series=db_seriesList($book->id);
 
 /* Step 2: Start intro story */
 $ss = new akStory("edit-sermon-story");
-$ss->createSimpleChunk(STORY_CHUNK_SECTION,"Sermon editor".$book->id);
+$ss->createSimpleChunk(STORY_CHUNK_SECTION,"Sermon editor");
 $ss->emit();
 
 

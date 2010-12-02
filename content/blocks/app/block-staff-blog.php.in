@@ -17,7 +17,7 @@
 
 // Step 3: Build a story, with a series header whenever it changes...
 $st = new akStory();
-$st->createSimpleChunk(STORY_CHUNK_TEXT,"Blog entries go here.");
+$st->createSimpleChunk(STORY_CHUNK_META,"Coming soon...");
 
 // Step 4: emit the story
 $st->emit();

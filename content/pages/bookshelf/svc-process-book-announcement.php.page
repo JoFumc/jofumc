@@ -1,11 +1,11 @@
 <?php
 /*
- * svc-process-book-sermon -- Service to process a 'sermon'
+ * svc-process-book-announcement -- Service to process an 'announcement'
  *    book edit.
  *
  * NOTES:
- *   A 'sermon' is just a named instance of a generic story
- *   that has a series title and delivery date.
+ *   A 'announcement' is a short notice to list on the front page,
+ *   with headline and body text.
  */
 /* Step 1: Get current user auth info */
 require_once("library/core/util-db.php");
@@ -26,34 +26,32 @@ function get_field($field)
 /* Step 2: Create a story entry object from fields */
 $st = new akStoryEntry();
 
-$deliver_date = new DateTime(get_field('sermon-edit-date'));
-$st->deliver_date = $deliver_date->format("Y-m-d");
-$st->series = get_field('sermon-edit-series');
-$st->title = get_field('sermon-edit-title');
-$st->book = get_field('sermon-edit-book');
+$st->title = get_field('announcement-edit-title');
+$st->book = get_field('announcement-edit-book');
 $st->author = $auth_user->uid;
 
 /* Step 3: Create file to store text */
   /* Step 3.1: Setup */
-$notes_dir=config_getBookDir($st->book)."/".$deliver_date->format("Y");
-$notes_file=$deliver_date->format("m-d").".html";
+$notes_time=time();
+$notes_dir=config_getBookDir($st->book)."/".date("Y",$notes_time)."/".date("m-d",$notes_time);
+$notes_file=date("H-i-s",$notest_time).".html";
 $st->text=$notes_dir."/".$notes_file;
   /* Step 3.1: Make containing directory */
 if (!is_dir($notes_dir)) mkdir($notes_dir,0755,true);
 if (!is_dir($notes_dir)) {
   /* Can't make storage dir? */
-  print '[[Failed to create directory for notes storage, notes will not be saved.]]';
+  print '[[Failed to create directory for text storage, text will not be saved.]]';
 } else {
-  file_put_contents($st->text,stripslashes(get_field('sermon-edit-notes')));
+  file_put_contents($st->text,stripslashes(get_field('announcement-edit-notes')));
 }
 
 /* Step 4: Push it into the DB */
 $res = new akStory();
 if (db_saveStory($st)) {
-  $res->createSimpleChunk(STORY_CHUNK_SECTION,"Sermon Edit: Success");
-  $res->createSimpleChunk(STORY_CHUNK_TEXT,"Sermon info saved successfully to database.");
+  $res->createSimpleChunk(STORY_CHUNK_SECTION,"Announcement Edit: Success");
+  $res->createSimpleChunk(STORY_CHUNK_TEXT,"Announcement info saved successfully to database, and should be available on the front page immediately.");
 }else {
-  $res->createSimpleChunk(STORY_CHUNK_SECTION,"Sermon Edit: Failure");
+  $res->createSimpleChunk(STORY_CHUNK_SECTION,"Announcement Edit: Failure");
   $res->createSimpleChunk(STORY_CHUNK_TEXT,"The update failed during database update. Please try again later.");
 }
 
