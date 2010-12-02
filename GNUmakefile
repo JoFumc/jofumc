@@ -63,6 +63,9 @@ cscope::
 	find . -type f \( -name '*.php.in' -or -name '*.js.in' \) -print > cscope.files
 	cscope -bi cscope.files
 
+ssh::
+	ssh u38465639@akephart.org
+
 ##
 ## Section 4: Local rules
 ##
