@@ -7,7 +7,7 @@ skin_include("login-pre.php");
 $logStory = new akStory();
 $logStory->createSimpleChunk(STORY_CHUNK_HEADLINE,"Login");
 $logStory->createSimpleChunk(STORY_CHUNK_SECTION,"Why Login?");
-$logStory->createSimpleChunk(STORY_CHUNK_TEXT,"Because.");
+$logStory->createSimpleChunk(STORY_CHUNK_FILE,"assets/pages/login/why.html");
 $logStory->emit();
 // Set up common parameters before calling into the login form
     // Referrer is REQUIRED
