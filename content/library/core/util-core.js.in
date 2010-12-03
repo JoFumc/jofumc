@@ -201,7 +201,23 @@ function svc_loadDivIFrame(divId,service,params)
     if (null != params) svc_url+='?'+params;
 
     /* Step 3: Write IFRAME tag into div */
-    div.innerHTML = '<iframe frameborder="0" width="100%" height="100%" scrolling="auto" src="' + svc_url + '"/>';
+    div.innerHTML = '<iframe id="' + divId + '-iframe" name="' + divId + '-iframe" frameborder="0" width="100%" scrolling="auto" src="' + svc_url + '" onload="svc_resizeDivIFrame(\'' + divId + '\');"/>';
+}
+
+// ////////////////////////////////////////////////////////////////////////
+// svc_resizeDivIFrame() -- Resize a parent IFRAME to match our document contents.
+//
+// @return Nothing
+//
+function svc_resizeDivIFrame(divId)
+{
+    var theDiv = document.getElementById(divId);
+
+    var theIFrame = document.getElementById(divId + '-iframe');
+
+    var needHeight = theIFrame.contentDocument.height;
+    
+    theIFrame.height = '' + needHeight + 'px';
 }
 
 // ////////////////////////////////////////////////////////////////////////
