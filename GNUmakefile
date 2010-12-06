@@ -26,6 +26,9 @@ include $(PROJECT_ROOT)/mk/common.mk
 ##
 all: publish
 
+release::
+	PUBLISH_TARGET=live make all
+
 local-all: toplevel-all
 	$(DESCEND)
 
