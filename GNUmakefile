@@ -44,7 +44,7 @@ install:: toplevel-install
 
 webfs::
 	@echo -n "[  WEBFS  ] "
-	@if [ ! -d /export/webspace/roots/jofrr ] ; then echo "remounting" ; sudo /etc/init.d/webfs start ; else echo "mounted" ; fi
+	@if [ ! -d $(PUBLISH_ROOT) ] ; then echo "remounting" ; sudo /etc/init.d/webfs start ; else echo "mounted" ; fi
 
 showcfg::
 	@echo PHPOBJS=$(PHPOBJS)

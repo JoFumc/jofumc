@@ -8,4 +8,5 @@ STAGING_ROOT=$(PROJECT_ROOT)/staging
 CONTENT_ROOT=$(STAGING_ROOT)/content
 # Where to copy to the live tree
 PUBLISH_TARGET?=beta
-PUBLISH_ROOT=/export/webspace/roots/$(PROJECT)/$(PUBLISH_TARGET)
+#PUBLISH_ROOT=/export/webspace/roots/$(PROJECT)/$(PUBLISH_TARGET)
+PUBLISH_ROOT=/export/dreamhost/jofumc.net

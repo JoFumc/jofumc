@@ -10,10 +10,16 @@ require_once("library/core/class-story.php");
 
 /* Configuration */
   /* Overall DB info */
+/*
 define("DB_HOST","db2578.perfora.net");
 define("DB_USER","dbo338689375");
 define("DB_PASS","journeyoffaith");
 define("DB_NAME","db338689375");
+*/
+define("DB_HOST","jofdb-main.jofumc.net");
+define("DB_USER","jofadmin");
+define("DB_PASS","Pel3map1");
+define("DB_NAME","jofdb");
   /* Individual tables */
 define("TBL_USERS","people");
 define("TBL_BOOKS","books");
