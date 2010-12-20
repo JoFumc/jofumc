@@ -63,7 +63,7 @@ publish:: install webfs
 	@$(foreach pub,$(shell find staging/content/ -type f -name '*.jpg'),$(call TOOL_PUBLISH,$(pub),$(PUBLISH_ROOT)/$(subst staging/content/,,$(pub))))
 
 cscope::
-	find . -type f \( -name '*.php.in' -or -name '*.js.in' \) -print > cscope.files
+	find . -type f \( -name '*.php.in' -or -name '*.php.page' -or -name '*.js.in' \) -print > cscope.files
 	cscope -bi cscope.files
 
 ssh::
