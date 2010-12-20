@@ -17,7 +17,7 @@ $nav->createSimpleItem("Overview","programs.php","Overview of program groups");
 //$nav->createSimpleItem("Adults","program-group-adult.php","Programs and ministries for Adults");
 //$nav->createSimpleItem("Youth","program-group-youth.php","JoF A.R.M.Y and other options for young adults");
 //$nav->createSimpleItem("Children","program-group-children.php","Childrens' ministries and programs");
-$prog->createSimpleChunk(STORY_CHUNK_OBJECT,&$nav);
+$prog->createSimpleChunk(STORY_CHUNK_OBJECT,"program-menu",$nav);
   /* Intro text */
 $prog->createSimpleChunk(STORY_CHUNK_FILE,"assets/pages/programs/intro.html");
 $prog->emit();

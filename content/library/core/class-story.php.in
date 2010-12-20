@@ -40,7 +40,8 @@ class akStoryChunk
   /* Basic public members */
   public $id;    // DOM element ID
   public $type;  // Chunk type
-  public $value; // Currently-assigned value; link/text/filename/object
+  public $value; // Currently-assigned value; link/text/filename
+  public $object; // If object type, the object reference 
   public $url;   // If this item is a link anchor 
   public $alt;   // For images/links, the ALT or 
 
@@ -48,12 +49,13 @@ class akStoryChunk
       /* CLEAN: Add this */
 
   /* Constructor */
-  function __construct($type=null, $value=null)
+  function __construct($type=null, $value=null, &$object=null)
   {
     /* Step 1: Load basic member info */
       /* CLEAN: Throw exception on bad inits? */
     $this->type = $type;
     $this->value = $value;
+    $this->object = $object;
     $this->id = null;
     $this->url = null;
     $this->alt = null;
@@ -200,7 +202,7 @@ class akStoryChunk
         if (null != $this->id)
            print '  id="'.$this->id.'" ';
         print '>';
-        $this->value->emit();
+        $this->object->emit();
         print '</div>';
       }
     }
@@ -256,8 +258,8 @@ class akStory
   }
 
   /* Method to create and add a chunk */
-  function createSimpleChunk($type=STORY_CHUNK_TEXT,$value="") {
-    $chunk = new akStoryChunk($type,$value);
+  function createSimpleChunk($type=STORY_CHUNK_TEXT,$value="",&$object=null) {
+    $chunk = new akStoryChunk($type,$value,$object);
     $this->adopt($chunk);
     $this->lastSimpleChunk = &$chunk;
   }

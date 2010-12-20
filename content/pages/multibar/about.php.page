@@ -15,7 +15,7 @@ $nav->dom_id = "about-menu";
 $nav->createSimpleItem("Overview","about.php","Overview");
 $nav->createSimpleItem("Staff","about-staff.php","Meet the staff of Journey of Faith");
 $nav->createSimpleItem("Affiliations","about-affiliations.php","Groups with whom we are affiliated");
-$about->createSimpleChunk(STORY_CHUNK_OBJECT,&$nav);
+$about->createSimpleChunk(STORY_CHUNK_OBJECT,"about-menu",$nav);
 
 /* Step 3: Basic story */
   /* Step 3.1: Who we are */
