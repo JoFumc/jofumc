@@ -1,3 +1,6 @@
+<?php
+@require_once("library/core/util-html.php");
+?>
 <span class="block-text">
 Journey of Faith<br/>United Methodist Church
 </span>
@@ -7,9 +10,10 @@ Journey of Faith<br/>United Methodist Church
 <span class="block-text">
 (512) 255-8403
 </span>
-<span class="block-text"><a href="mailto:glenda@jofrr.org" title="Email Glenda">
-Pastor Glenda Whitehead glenda@jofrr.org
-</a></span>
+<span class="block-text">
+Pastor Glenda Whitehead
+<?php html_mailto("glenda@jofumc.org","Email Glenda"); ?>
+</span>
 <span class="block-text">
 Worship 10:30am Sundays
 </span>
@@ -18,5 +22,5 @@ Worship 10:30am Sundays
 </span>
 <span class="block-text">
 Website questions or feedback? Email
-<a href="mailto:admin@jofrr.org" title="Website Feedback">admin@jofrr.org</a>
+<?php html_mailto("admin@jofumc.org","Website Feedback"); ?>
 </span>
