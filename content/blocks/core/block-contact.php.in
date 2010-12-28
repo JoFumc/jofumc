@@ -12,7 +12,7 @@ Journey of Faith<br/>United Methodist Church
 </span>
 <span class="block-text">
 Pastor Glenda Whitehead
-<?php html_mailto("glenda@jofumc.org","Email Glenda"); ?>
+<?php html_mailto("glenda@jofumc.net","Email Glenda"); ?>
 </span>
 <span class="block-text">
 Worship 10:30am Sundays
@@ -22,5 +22,5 @@ Worship 10:30am Sundays
 </span>
 <span class="block-text">
 Website questions or feedback? Email
-<?php html_mailto("admin@jofumc.org","Website Feedback"); ?>
+<?php html_mailto("admin@jofumc.net","Website Feedback"); ?>
 </span>
