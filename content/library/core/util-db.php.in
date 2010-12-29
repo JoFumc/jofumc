@@ -465,4 +465,63 @@ function db_saveStory($st=null)
   /* Step 3: Do the DB action */
   return @$db_cxn->query($query);
 }
+
+/***********************************************
+ * db_saveSeries() -- Change or add a story to the DB
+ *
+ * @param id ID of series (zero for new, nonzero if updating)
+ * @param book Book that owns the given series
+ * @param title Title of series
+ * @param subtitle Subtitle for series
+ * @param desc Description of series
+ *
+ */
+function db_saveSeries($id=0,$book=0,$title=null,$subtitle=null,$desc=null)
+{
+  global $db_cxn;
+
+  /* Step 0: Early validation */
+  if (($title == null) ||
+      ($book == 0)){
+    return false;
+  }
+
+  /* Step 1: Connect to db if not connected */
+  if (!db_connect()) return false;
+
+  /* Step 2: Build SQL based on action */
+    /* Step 2.1: Build a col/val array pair for any non-null fields */
+  $c = array(); $v = array();
+  if ($id != 0) {$c[] = 'id';$v[]=$id;}
+  if ($title) {$c[]='title';$v[]="'".$title."'";}
+  if ($subtitle) {$c[]='subtitle';$v[]="'".$subtitle."'";}
+  if ($desc) {$c[]='description';$v[]="'".$desc."'";}
+  if ($book != 0) {$c[] = 'book';$v[]=$book;}
+
+    /* Step 2.2: INSERT new entry */
+  if ($id == 0) {
+    /* Step 2.2.1: Startup */
+    $query = "INSERT INTO ".TBL_SERIES." (";
+    $comma = '';
+    /* Step 2.2.2: Column names */
+    foreach ($c as $column) {
+      $query .= $comma.$column;
+      $comma=',';
+    }
+    $query .= ")";
+    /* Step 2.2.3: Values */
+    $comma = '';
+    $query .= " VALUES (";
+    foreach ($v as $value) {
+      $query .= $comma.$value;
+      $comma=',';
+    }
+    $query .= ")";
+  } else {
+    /* Step 2.3: UPDATE existing with non-null fields */
+  }
+
+  /* Step 3: Do the DB action */
+  return @$db_cxn->query($query);
+}
 ?>
