@@ -26,6 +26,18 @@ define("FORM_ITEM_RADIO","radio");
 define("FORM_ITEM_RAW","raw");
 
 /*
+ * GLOBAL FUNCTIONS
+ */
+function form_getField($field)
+{
+  /* Retrieve a field, with sanity checking */
+  if (!isset($_REQUEST[$field])) return null;                                   
+  if (null == $_REQUEST[$field]) return null;                                   
+  if (strlen($_REQUEST[$field]) < 1) return null;                               
+  return $_REQUEST[$field];
+}
+
+/*
  * akFormOption -- Individual form option for select/radio
  */
 class akFormOption
@@ -64,8 +76,10 @@ class akFormItem
   /* Non-standard bits */
   public $hint;  // Form element hint (placeholder, perhaps)
   private $style; // Local item style (USE WITH CAUTION)
+  private $rowStyle; // Overall row (label+item) style (USE WITH CAUTION)
   private $events; // Events and handlers
   private $options; // For select or radio items
+  public $lastOption; // Most recently-added option
 
   /* Constructor */
   function __construct($id=null, $type=null, $name=null, $value=null, $label=null)
@@ -96,6 +110,12 @@ class akFormItem
       $this->style .= $parm.':'.$value.';';
   }
 
+  function addRowStyle($parm=null,$value=null)
+  {
+    if ((null != $parm) && (null != $value))
+      $this->rowStyle .= $parm.':'.$value.';';
+  }
+
   function addEvent($event=null,$handler=null)
   {
     if (($event != null) && ($handler != null)) {
@@ -105,7 +125,9 @@ class akFormItem
 
   function addOption($tag=null,$label="Option",$is_selected=false)
   {
-    $this->options[] = new akFormOption($tag,$label,$is_selected);
+    $newOpt = new akFormOption($tag,$label,$is_selected);
+    $this->options[] = &$newOpt;
+    $this->lastOption = &$newOpt;
   }
 
   /* Method to emit the HTML for this item */
@@ -118,6 +140,8 @@ class akFormItem
     print '<tr ';
     print '    class="form-item-row form-item-'.$this->type.'-row" ';
     print '    id="'.$this->id.'-row" ';
+    if (null != $this->rowStyle)
+      print '  style="'.$this->rowStyle.'" ';
     print '>'."\n";
     /* Prefix cell */
     print '<td ';
@@ -218,9 +242,16 @@ class akFormItem
       }
       case FORM_ITEM_SELECT: {
         print '<select ';
+        print '  id="'.$this->id.'" ';
+        print '  class="form-item form-item-select" ';
+        print '  name="'.$this->name.'" ';
         if (null != $this->hsize)
           print 'size="'.$this->hsize.'" ';
-        print "/>\n";
+        if (null != $this->style)
+          print 'style="'.$this->style.'" ';
+        foreach(array_keys($this->events) as $evkey)
+          print $evkey.'="'.$this->events[$evkey].'" ';
+        print ">\n";
         if ($this->options != null) foreach($this->options as $option) {
           print '<option ';
           print   'value="'.$option->tag.'" ';
@@ -230,7 +261,7 @@ class akFormItem
           print $option->label;
           print '</option>'."\n";
         }
-        print '</textarea>';
+        print '</select>';
         break;
       }
       case FORM_ITEM_RADIO: {
