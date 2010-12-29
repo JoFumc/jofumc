@@ -23,13 +23,34 @@ if (null == $sermonList)
   return;
 }
 
+function file_size($size)
+{
+      $filesizename = array(" Bytes", " KB", " MB", " GB", " TB", " PB", " EB", " ZB", " YB");
+      return $size ? round($size/pow(1024, ($i = floor(log($size, 1024)))), 2) . $filesizename[$i] : '0 Bytes';
+}
+
 // Step 4: Got (at least) one
 $sermon = $sermonList[$sermon_date];
 $st = new akStory();
 $st->createSimpleChunk(STORY_CHUNK_HEADLINE,"Sermon: ".$sermon_date);
 //$st->createSimpleChunk(STORY_CHUNK_SECTION,$sermon->series);
+// Step 4.1: Title emit
 $st->createSimpleChunk(STORY_CHUNK_GROUP,$sermon->title);
+// Step 4.2: Notes/synopsis
 $st->createSimpleChunk(STORY_CHUNK_FILE,$sermon->text);
+// Step 4.3: Audio?
+$sermonPath = dirname($sermon->text);
+$audioFile = $sermonPath.'/'.$sermon_date.'.mp3';
+if (is_readable($audioFile))
+{
+  /* Found one -- make a link */
+  $st->createSimpleChunk(STORY_CHUNK_TEXT,'<a href="'.$audioFile.'" title="Sermon Audio File (MP3)">Sermon Audio</a> (MP3 file, '.file_size(filesize($audioFile)).')');
+}
+else
+{
+  /* No Audio */
+  $st->createSimpleChunk(STORY_CHUNK_META,"No audio available");
+}
 
 // Step 5: Add decoration?  Next/Prev?  Others in this series?
 
