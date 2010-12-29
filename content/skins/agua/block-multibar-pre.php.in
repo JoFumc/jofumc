@@ -1,6 +1,6 @@
 <?php
 // Add partner nav
-$partner = new akBlock(BLOCK_TYPE_MULTIBAR,"blocks/core/block-partner-nav.php","Beyond JoF");
+$partner = new akBlock(BLOCK_TYPE_MULTIBAR,"blocks/core/block-partner-nav.php","Beyond jofumc.org");
 $partner->emit();
 // Random picture...
 $pic = new akBlock(BLOCK_TYPE_MULTIBAR,"blocks/app/block-random-image.php","JoF in action");
