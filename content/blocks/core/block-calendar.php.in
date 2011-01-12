@@ -5,53 +5,10 @@ require_once("library/core/class-date.php");
 <?php
 // Calendar goes here, possibly filtered.
 $cal_filter=config_getvalue("calendar");
-$now = new akDate();
-// The calendar is a table, with each cell representing a day
-echo "<table id=\"block-calendar-table\" class=\"block-calendar block-table\">";
-// The number of rows is the number of integral weeks required
-// to display the current full month, plus at least one day from
-// the previous month, and one day from the following month.
-    // Number of days from previous month
 
-if ($now->dowFirst == 0) $day_prev=7;
-else $day_prev=$now->dowFirst;
-    // Number of days from current month
-$day_cur=$now->monthLen;
-
-    // Number of days from next month
-$day_next = 7 - ((($now->monthLen % 7) + $now->dowFirst) % 7);
-if ($day_next == 0) $day_next = 7;
-$day_next_offset=$day_next+1;
-//echo '<tr class="block-title block-calendar-row block-calendar-header">';
-//echo '<td class="block-calendar-nav-prevmonth"></td>';
-//echo '<td colspan="5">'.$now->monthName.' '.$now->year.'</td>';
-//echo "<td class=\"block-calendar-nav-nextmonth\"></td>";
-//echo "</tr>";
-while ($day_next > 0)
-{
-  // Week
-  echo "<tr class=\"block-calendar-row\">";
-  for ($td=0;$td<7;$td++)
-  {
-      if ($day_prev > 0)
-      {
-        printf("<td class=\"block-calendar-previous\">%d</td>",$now->monthLenPrev-$day_prev+1);
-        $day_prev--;
-      }
-      else if ($day_cur > 0) 
-      {
-        printf("<td class=\"block-calendar-current\">%d</td>",$now->monthLen-$day_cur+1);
-        $day_cur--;
-      }
-      else if ($day_next > 0)
-      {
-        printf("<td class=\"block-calendar-next\">%d</td>",$day_next_offset-$day_next);
-        $day_next--;
-      }
-  }
-  echo "</tr>";
-}
-
-echo "</table>"
+// Create base object
+$cal = new akMonthCalendar(null,"block-calendar-table","block-calendar block-table");
+// Emit
+$cal->emit();
 ?>
 </div>

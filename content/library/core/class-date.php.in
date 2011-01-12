@@ -17,7 +17,7 @@ class akDate
   public $dowName; // Day of the week (Sun-Sat)
   public $dowFirst; // Day of the week (0-6) of the 1st of this month
   public $domNum; // Day of the month (1-31)
-  public $monthNum; // Month of the year (0-11)
+  public $monthNum; // Month of the year (1-12)
   public $monthName; // Month of the year (Jan-Dec)
   public $monthLen; // Length of the current month
   public $monthLenPrev; // Length of the previous month
@@ -48,14 +48,174 @@ class akDate
     else
       $this->monthLenPrev = cal_days_in_month(CAL_GREGORIAN,$this->monthNum-1,$this->dateInfo["year"]);
   }
-
-  
 }
 
-function calendar_getTitle()
+/*
+ * akMonthCalendar -- Month-based calendar object
+ *
+ * A calendar object is a representation of one month.  It presents a grid
+ * of days, each of which may have events or other data attached.  This object
+ * forms the basis for a date picker, as well as a representation of a
+ * monthly calendar view.
+ *
+ * Note that we always start the week on sunday.
+ */
+class akMonthCalendar
 {
-   $now = new akDate();
+  /* Basic public members */
+  public $id;       // ID for table element
+  public $class;    // Class for table element
+  public $refDate;  // Reference akDate for this calendar.
+  /* Display options */
+  public $showTitle; // Show title line (includes nav)
+  public $showNav; // Show prev- or next-month navigation (only seen if showTitle is true)
+  public $livePrevNext; // Make prev/next days active (false means just visible)
+  /* Private status bits */
+  private $daysPrev; // Days from previous month needed to fill out first week
+  private $daysNext; // Days from next month needed to fill out last week
+
+  /* Constructor */
+  function __construct($when=null,$id=null,$class=null)
+  {
+    /* Create reference date */
+    $this->refDate = new akDate($when);
+    $this->id = $id;
+    if (null != $class) $this->class = $class;
+    else $this->class = 'block-calendar';
+    /* Init control variables */
+    $this->showTitle = true;
+    $this->showNav = true;
+    $this->livePrevNext = false;
+
+    /* Calculate support bits */
+      /* How many days from prev month required to fill out the first week? */
+    $this->daysPrev = $this->refDate->dowFirst;
+    if ($this->daysPrev == 0) $this->daysPrev = 7;
+      /* How many days from next month required to fill out the last week? */
+    $this->daysNext = 7 - ((($this->refDate->monthLen % 7) + $this->refDate->dowFirst) % 7);
+    if ($this->daysNext == 0) $this->daysNext = 7;
+
+  }
+
+  /* Emitter */
+  function emit()
+  {
+    $daysPrev = $this->daysPrev;
+    $daysCur = $this->refDate->monthLen;
+    $daysNext = $this->daysNext;
+
+    /* Start table */
+    print '<table ';
+    if (null != $this->id) {
+      print 'id="'.$this->id.'" ';
+    }
+    if (null != $this->class) {
+      print 'class="'.$this->class.'" ';
+    }
+    print '>';
+
+    /* Emit table header as a row */
+    if ($this->showTitle == true)
+    {
+      print '<tr class="block-calendar-title">';
+      if ($this->showNav == true) {
+        print '<td>&lt;</td>';
+        print '<td colspan=5>';
+        print $this->refDate->monthName.' '.$this->refDate->year;
+        print '</td>';
+        print '<td>&gt;</td>';
+      } else {
+        print '<td colspan=7>';
+        print $this->refDate->monthName.' '.$this->refDate->year;
+        print '</td>';
+      }
+      print '</tr>';
+    }
+    /* Emit table body */
+    while ($daysNext > 0) {
+      /* Emit a week at a time as a row */
+        /* Start row */
+      print '<tr class="block-calendar-row">';
+        /* Loop over days in week */
+      for ($td=0;$td<7;$td++)
+      {
+        $showFull = true; 
+          /* For each day, calculate value,class, and refstring */
+        if ($daysPrev > 0) {
+            /* Label number */
+          $dayNum = $this->refDate->monthLenPrev-$daysPrev+1;
+            /* CSS class */
+          $dayClass = 'block-calendar-previous';
+            /* String tag */
+          if ($this->refDate->monthNum == 1) {
+            $dayString = sprintf("%4d-12-%02d",$this->refDate->year-1,$dayNum);
+          } else {
+            $dayString = sprintf("%4d-%02d-%02d",
+                                 $this->refDate->year,
+                                 $this->refDate->monthNum-1,
+                                 $dayNum);
+          }
+          /* Mark for magic bits */
+          if ($this->livePrevNext == false) $showFull = false;
+          /* Decrement */
+          $daysPrev--;
+        } else if ($daysCur > 0) {
+            /* Label number */
+          $dayNum = $this->refDate->monthLen-$daysCur+1;
+            /* CSS class */
+          $dayClass = 'block-calendar-current';
+            /* String tag */
+          $dayString = sprintf("%4d-%02d-%02d",
+                               $this->refDate->year,
+                               $this->refDate->monthNum,
+                               $dayNum);
+          /* Decrement */
+          $daysCur--;
+        } else if ($daysNext > 0) {
+          /* Label number */
+          $dayNum = $this->daysNext-$daysNext+1;
+          /* CSS Class */
+          $dayClass = 'block-calendar-next';
+          if ($this->refDate->monthNum == 12) {
+            /* Next year... */
+            $dayString = sprintf("%4d-01-%02d",
+                                 $this->refDate->year+1,
+                                 $dayNum);
+          } else {
+            $dayString = sprintf("%4d-%02d-%02d",
+                                 $this->refDate->year,
+                                 $this->refDate->monthNum+1, /* zero-based */
+                                 $dayNum);
+          }
+          /* Mark for magic bits */
+          if ($this->livePrevNext == false) $showFull = false;
+          /* Decrement */
+          $daysNext--;
+        }
+        /* Now, emit cell */
+        print '<td class="'.$dayClass.'" id="'.$dayString.'">';
+          /* TODO: CLEAN: Add decoration, links, onClick,etc */
+        print ''.$dayNum;
+        print '</td>';
+
+      }
+        /* Finish row */
+      print '</tr>';
+    }
+
+    /* Finish table */
+    print '</table>';
+  }
+}
+
+/**
+ * Function to create a simple title for a month calendar
+ */
+function calendar_getTitle($when=null)
+{
+   $now = new akDate($when);
 
    return $now->monthName.' '.$now->year;
 }
+
 ?>
