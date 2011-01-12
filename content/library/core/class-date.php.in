@@ -66,6 +66,18 @@ class akMonthCalendar
   public $id;       // ID for table element
   public $class;    // Class for table element
   public $refDate;  // Reference akDate for this calendar.
+  /**
+    Scriptlets -- each of these functions will receive two arguments:
+    the calendar id
+    a date string
+   
+    For days, the date string is the YYYY-MM-DD of the day; for nav,
+    the date string will be YYYY-MM-01
+   */
+  public $onNavClick;
+  public $onDayClick;
+  public $onDayMouseover;
+  public $onDayMouseout;
   /* Display options */
   public $showTitle; // Show title line (includes nav)
   public $showNav; // Show prev- or next-month navigation (only seen if showTitle is true)
@@ -79,13 +91,24 @@ class akMonthCalendar
   {
     /* Create reference date */
     $this->refDate = new akDate($when);
-    $this->id = $id;
+
+    /* Set other parameters to be non-null */
+    if (null != $id) $this->id = $id;
+    else $this->id = 'calendar-'.mt_rand();
     if (null != $class) $this->class = $class;
     else $this->class = 'block-calendar';
+
     /* Init control variables */
     $this->showTitle = true;
     $this->showNav = true;
     $this->livePrevNext = false;
+    $this->parameter = '';
+
+    /* Init scriptlets */
+    $this->onNavClick = null;
+    $this->onDayClick = null;
+    $this->onDayMouseover = null;
+    $this->onDayMouseout = null;
 
     /* Calculate support bits */
       /* How many days from prev month required to fill out the first week? */
@@ -100,9 +123,29 @@ class akMonthCalendar
   /* Emitter */
   function emit()
   {
+    /* Precalc some convenience bits */
     $daysPrev = $this->daysPrev;
     $daysCur = $this->refDate->monthLen;
     $daysNext = $this->daysNext;
+
+    if ($this->refDate->monthNum == 1) {
+      $prevYear = $this->refDate->year - 1;
+      $nextYear = $this->refDate->year;
+      $prevMonth = 12;
+      $nextMonth = 2;
+    } else if ($this->refDate->monthNum == 12) {
+      $prevYear = $this->refDate->year;
+      $nextYear = $this->refDate->year + 1;
+      $prevMonth = 11;
+      $nextMonth = 1;
+    } else {
+      $prevYear = $this->refDate->year;
+      $nextYear = $this->refDate->year;
+      $prevMonth = $this->refDate->monthNum - 1;
+      $nextMonth = $this->refDate->monthNum + 1;
+    }
+    $prevString = sprintf("%04d-%02d-01",$prevYear,$prevMonth);
+    $nextString = sprintf("%04d-%02d-01",$nextYear,$nextMonth);
 
     /* Start table */
     print '<table ';
@@ -119,11 +162,27 @@ class akMonthCalendar
     {
       print '<tr class="block-calendar-title">';
       if ($this->showNav == true) {
-        print '<td>&lt;</td>';
+        print '<td>';
+        print '<a title="Previous Month" ';
+        if (null != $this->onNavClick) {
+          print 'href="javascript:'.$this->onNavClick.'(\''.$this->id.'\',\''.$prevString.'\');"';
+        }
+        print '>';
+        print '&lt;';
+        print '</a>';
+        print '</td>';
         print '<td colspan=5>';
         print $this->refDate->monthName.' '.$this->refDate->year;
         print '</td>';
-        print '<td>&gt;</td>';
+        print '<td>';
+        print '<a title="Next Month" ';
+        if (null != $this->onNavClick) {
+          print 'href="javascript:'.$this->onNavClick.'(\''.$this->id.'\',\''.$nextString.'\');"';
+        }
+        print '>';
+        print '&gt;';
+        print '</a>';
+        print '</td>';
       } else {
         print '<td colspan=7>';
         print $this->refDate->monthName.' '.$this->refDate->year;

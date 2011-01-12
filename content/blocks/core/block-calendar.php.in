@@ -8,6 +8,8 @@ $cal_filter=config_getvalue("calendar");
 
 // Create base object
 $cal = new akMonthCalendar(null,"block-calendar-table","block-calendar block-table");
+// Set nav callback (function name with no params)
+$cal->onNavClick = 'monthNav';
 // Emit
 $cal->emit();
 ?>
