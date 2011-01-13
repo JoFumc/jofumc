@@ -12,6 +12,6 @@ $blogs->emit();
 // Calendar
 require_once("library/core/class-date.php");
 $calendar = new akBlock(BLOCK_TYPE_SIDEBAR,"blocks/core/block-calendar.php");
-$calendar->title = calendar_getTitle();
+$calendar->title = "Calendar";
 $calendar->emit();
 ?>

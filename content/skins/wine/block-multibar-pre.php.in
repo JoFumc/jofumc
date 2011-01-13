@@ -2,7 +2,7 @@
 // Add a calendar...
 require_once("library/core/class-date.php");
 $calendar = new akBlock(BLOCK_TYPE_MULTIBAR,"blocks/core/block-calendar.php");
-$calendar->title = calendar_getTitle();
+$calendar->title = "Calendar";
 $calendar->emit();
 // Staff blogs
 $blogs = new akBlock(BLOCK_TYPE_MULTIBAR,"blocks/app/block-staff-blog.php","Staff Blogs");
