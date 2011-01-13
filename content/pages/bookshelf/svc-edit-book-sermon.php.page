@@ -39,7 +39,7 @@ $editForm->createSimpleItem("sermon-current-series",FORM_ITEM_HIDDEN,
   /* CLEAN: Init this with the first sunday after today that doesn't
    *        already have an entry....
    */
-$editForm->createSimpleItem("sermon-edit-date",FORM_ITEM_TEXT,
+$editForm->createSimpleItem("sermon-edit-date",FORM_ITEM_DATE,
                             "sermon-edit-date","00/00/0000",
                             "Date of delivery:");
   /* Sermon series: Selection list with the default entry as the most

@@ -24,6 +24,7 @@ define("FORM_ITEM_PASSWORD","password");
 define("FORM_ITEM_SELECT","select");
 define("FORM_ITEM_RADIO","radio");
 define("FORM_ITEM_RAW","raw");
+define("FORM_ITEM_DATE","date");
 
 /*
  * GLOBAL FUNCTIONS
@@ -54,6 +55,11 @@ class akFormOption
     $this->is_selected = $is_selected;
   }
 }
+
+/*
+ * akFormPicker -- Form item with popup
+ */
+
 
 /*
  * akFormItem -- Individual form element, union of all item types
@@ -219,6 +225,33 @@ class akFormItem
         foreach(array_keys($this->events) as $evkey)
           print $evkey.'="'.$this->events[$evkey].'" ';
         print "/>\n";
+        break;
+      }
+      case FORM_ITEM_DATE: {
+        // Date item; text entry + datepicker
+        print '<input ';
+        print '  type="text" ';
+        print '  id="'.$this->id.'" ';
+        print '  class="form-item form-item-text" ';
+        print '  name="'.$this->name.'" ';
+        print '  value="'.$this->value.'" ';
+        if (null != $this->hsize)
+          print 'size="'.$this->hsize.'" ';
+        print '  maxlength="'.$this->max_hsize.'" ';
+        if (null != $this->hint) 
+          print 'placeholder="'.$this->hint.'" ';
+        if (null != $this->style)
+          print 'style="'.$this->style.'" ';
+        foreach(array_keys($this->events) as $evkey)
+          print $evkey.'="'.$this->events[$evkey].'" ';
+        print "/>\n";
+        skin_img("form-datepick.png","Select a date",null,$this->name."-datepick");
+        print '<script ';
+        print '  type="text/javascript" ';
+        print '  src="
+        print '>';
+        print '</script>';
+        print '<div
         break;
       }
       case FORM_ITEM_TEXTAREA: {
