@@ -84,7 +84,8 @@ function skin_img($name=null,$alt='Image',$class=null,$dom_id=null)
   if (null != $class)
     print 'class="'.$class.'" ';
   if (null != $dom_id)
-    print 'id="'.$id.'" ';
+    print 'id="'.$dom_id.'" ';
+  print '  onclick="alert(\'nor\');"';
   print '/>';
 }
 ?>
