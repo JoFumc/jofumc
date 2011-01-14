@@ -131,6 +131,17 @@ width:WIDTH_MULTIBAR_CONTAINER;
 margin-left:WIDTH_GUTTER;
 }
 
+.form-popup { /* Popup is generally the same as a notebook page */
+display:none;
+border:2px solid AGUA_BG_DARK;
+color:AGUA_BLUE_DARKEST;
+background-color:AGUA_BG_LIGHT;
+position:fixed;
+z-index:1; /* Above when visible */
+min-height:100px;
+min-width:100px;
+}
+
   /* }}}2 Content containers */
 /* }}}1 Common toplevel containers */
 /* SECTION 4:Common toplevel content {{{1 */
