@@ -255,3 +255,77 @@ function svc_formParameters(formId)
     return ret;
 }
 
+// ////////////////////////////////////////////////////////////////////////
+// AK_Form_Popup -- object class for form popups
+//
+// Attributes:
+// itemID -- DOM id of the item to update 
+// svcName -- name of the service to use to populate the popup
+// svcParam -- if non-null, the parameter string to pass to the service
+// div -- The div to use for the floating popup
+//
+function AK_Form_Popup(itemID,svcName,svcParam)
+{
+    /* Basic properties */
+    this.itemID = itemID;
+    this.svcName = svcName;
+    this.svcParam = svcParam;
+    /* new Document element, reused every time */
+    this.div = document.createElement("div");
+    this.div.id = itemID + "-popup";
+    this.div.className = "form-popup";
+    document.body.appendChild(this.div);
+    /* preload div from service while invisible (faster popup) */
+    try {
+      svc_loadDiv(this.div.id,svcName,svcParam);
+    } catch (err) {}
+}
+
+// ////////////////////////////////////////////////////////////////////////
+// akForm_Popups -- array of registered form popups, indexed by trigger id.
+var akForm_Popups = new Array();
+
+// ////////////////////////////////////////////////////////////////////////
+// akForm_handlePopup -- Event handler for triggering a form popup
+//
+// @param ev Triggering event 
+function akForm_handlePopup(ev)
+{
+    var pop;
+
+    /* Step 1: Lookup popup info from trigger id */
+    pop = akForm_Popups[this.id];
+
+    /* Step 2: Show the div (already loaded, so just position and popup */
+    pop.div.setAttribute("onclick","this.style.display=\"none\";");
+    pop.div.style.position="fixed";
+    ak_moveElement(pop.div,0,0);
+    pop.div.style.display = "inline";
+
+}
+
+// ////////////////////////////////////////////////////////////////////////
+// akForm_registerPopup -- bind a service-populated popup to a form element
+//
+// @param itemID -- DOM id of item to update with results (text or hidden field)
+// @param triggerID -- DOM id of element to act as popup trigger
+// @param svcName -- Name of service that will populate the popup
+// @param svcParam -- Parameter string to pass to popup service
+//
+// @return Nothing, but may update itemID.value
+//
+function akForm_registerPopup(itemID,triggerID,svcName,svcParam)
+{
+    var trigger;
+
+    try {
+        /* Lookup trigger element */
+        trigger = document.getElementById(triggerID);
+        /* Add click handler */
+        trigger.onclick=akForm_handlePopup;
+        /* Register new popup object */
+        akForm_Popups[triggerID] = new AK_Form_Popup(itemID,svcName,svcParam);
+    } catch (err) {
+        alert("registration error: " + err);
+    }
+}

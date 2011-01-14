@@ -57,11 +57,6 @@ class akFormOption
 }
 
 /*
- * akFormPicker -- Form item with popup
- */
-
-
-/*
  * akFormItem -- Individual form element, union of all item types
  */
 
@@ -245,13 +240,10 @@ class akFormItem
         foreach(array_keys($this->events) as $evkey)
           print $evkey.'="'.$this->events[$evkey].'" ';
         print "/>\n";
-        skin_img("form-datepick.png","Select a date",null,$this->name."-datepick");
-        print '<script ';
-        print '  type="text/javascript" ';
-        print '  src="
-        print '>';
+        skin_img("form-datepick.png","Select a date",null,$this->id."-trigger");
+        print "\n".'<script type="text/javascript">'."\n";
+        print "akForm_registerPopup('".$this->id."','".$this->id."-trigger','form-date','');\n";
         print '</script>';
-        print '<div
         break;
       }
       case FORM_ITEM_TEXTAREA: {
