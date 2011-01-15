@@ -95,7 +95,7 @@ class akBook
       }
       default: {
         print '<a ';
-        print   'href="javascript:return false;" ';
+        //print   'href="javascript:return false;" ';
         if (null != $this->hint)
           print 'title="'.$this->hint.'" ';
         print '>';

@@ -48,7 +48,7 @@ $editForm->createSimpleItem("sermon-edit-date",FORM_ITEM_DATE,
 $editForm->createSimpleItem("sermon-edit-series",FORM_ITEM_SELECT,
                             "sermon-edit-series",null,
                             "Select Series");
-$editForm->lastSimpleItem->addEvent("onChange","el=document.getElementById('sermon-edit-newseries-row'); cs=document.getElementById('sermon-current-series'); if (this.selectedIndex == 0) {el.style.display='table-row';} else {el.style.display='none'; cs.value=this.options[this.selectedIndex].text;}; return false;");
+$editForm->lastSimpleItem->addEvent("onChange","el=document.getElementById('sermon-edit-newseries-row'); cs=document.getElementById('sermon-current-series'); if (this.selectedIndex == 0) {el.style.display='table-row';} else {el.style.display='none'; cs.value=this.options[this.selectedIndex].text;};");
 $editForm->lastSimpleItem->addOption(0,"(NEW SERIES: Enter new series below)");
 $is_default = true;
 foreach ($seriesList as $series) {

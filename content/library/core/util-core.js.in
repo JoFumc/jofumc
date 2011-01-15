@@ -216,8 +216,9 @@ function svc_resizeDivIFrame(divId)
 
     try {
     theIFrame = document.getElementById(divId + '-iframe');
-    needHeight = 8+theIFrame.contentDocument.height;
-    theIFrame.height = '' + needHeight + 'px';
+    needHeight = 18+theIFrame.contentDocument.height;
+    theIFrame.style.height = '' + needHeight + 'px';
+    theIFrame.height = needHeight;
     } catch (err) {}
 }
 
@@ -289,9 +290,11 @@ var akForm_Popups = new Array();
 // akForm_handlePopup -- Event handler for triggering a form popup
 //
 // @param ev Triggering event 
-function akForm_handlePopup(ev)
+function akForm_handlePopup(evt)
 {
     var pop;
+    var ev=window.event;
+    if (ev == null) ev = evt;
 
     /* Step 1: Lookup popup info from trigger id */
     pop = akForm_Popups[this.id];
@@ -299,8 +302,8 @@ function akForm_handlePopup(ev)
     /* Step 2: Show the div (already loaded, so just position and popup */
     pop.div.setAttribute("onclick","this.style.display=\"none\";");
     pop.div.style.position="fixed";
-    ak_moveElement(pop.div,0,0);
     pop.div.style.display = "inline";
+    ak_moveElement(pop.div,ev.clientY,ev.clientX-pop.div.offsetWidth);
 
 }
 
