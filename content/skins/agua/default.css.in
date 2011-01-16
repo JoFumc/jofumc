@@ -547,6 +547,10 @@ color:#1B3B55;
 font-size:10pt;
 font-weight:bold;
 }
+
+.block-calendar-title {
+text-align:center;
+}
   /* }}}3 Cell display */
 /* }}}2 Calendar */
 /* SECTION 6.4:Stories {{{2 */

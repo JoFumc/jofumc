@@ -242,7 +242,7 @@ class akFormItem
         print "/>\n";
         skin_img("form-datepick.png","Select a date",null,$this->id."-trigger");
         print "\n".'<script type="text/javascript">'."\n";
-        print "akForm_registerPopup('".$this->id."','".$this->id."-trigger','form-date','');\n";
+        print "akForm_registerPopup('".$this->id."','".$this->id."-trigger','form-date',null);\n";
         print '</script>';
         break;
       }

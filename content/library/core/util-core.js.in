@@ -270,7 +270,6 @@ function AK_Form_Popup(itemID,svcName,svcParam)
     /* Basic properties */
     this.itemID = itemID;
     this.svcName = svcName;
-    this.svcParam = svcParam;
     /* new Document element, reused every time */
     this.div = document.createElement("div");
     this.div.id = itemID + "-popup";
@@ -278,7 +277,9 @@ function AK_Form_Popup(itemID,svcName,svcParam)
     document.body.appendChild(this.div);
     /* preload div from service while invisible (faster popup) */
     try {
-      svc_loadDiv(this.div.id,svcName,svcParam);
+      this.svcParam = 'targetDiv='+this.div.id;
+      if (null != svcParam) this.svcParam += svcParam;
+      svc_loadDiv(this.div.id,svcName,this.svcParam);
     } catch (err) {}
 }
 
@@ -300,7 +301,7 @@ function akForm_handlePopup(evt)
     pop = akForm_Popups[this.id];
 
     /* Step 2: Show the div (already loaded, so just position and popup */
-    pop.div.setAttribute("onclick","this.style.display=\"none\";");
+    //pop.div.setAttribute("onclick","this.style.display=\"none\";");
     pop.div.style.position="fixed";
     pop.div.style.display = "inline";
     ak_moveElement(pop.div,ev.clientY,ev.clientX-pop.div.offsetWidth);
@@ -331,4 +332,17 @@ function akForm_registerPopup(itemID,triggerID,svcName,svcParam)
     } catch (err) {
         alert("registration error: " + err);
     }
+}
+
+// ////////////////////////////////////////////////////////////////////////
+// akForm_datepickerNav
+//
+// @param divId -- DOM id of the div to update on date change
+// @param refDate -- reference date for loading
+//
+// @return Nothing, but may update divID contents
+//
+function akForm_datepickerNav(divId,refDate)
+{
+    svc_loadDiv(divId,'form-date','refDate='+refDate+'&targetDiv='+divId);
 }

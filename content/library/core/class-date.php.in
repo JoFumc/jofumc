@@ -162,7 +162,7 @@ class akMonthCalendar
     {
       print '<tr class="block-calendar-title">';
       if ($this->showNav == true) {
-        print '<td>';
+        print '<td class="block-calendar-title">';
         print '<a title="Previous Month" ';
         if (null != $this->onNavClick) {
           print 'href="javascript:'.$this->onNavClick.'(\''.$this->id.'\',\''.$prevString.'\');"';
@@ -171,10 +171,10 @@ class akMonthCalendar
         print '&lt;';
         print '</a>';
         print '</td>';
-        print '<td colspan=5>';
+        print '<td class="block-calendar-title" colspan=5>';
         print $this->refDate->monthName.' '.$this->refDate->year;
         print '</td>';
-        print '<td>';
+        print '<td class="block-calendar-title">';
         print '<a title="Next Month" ';
         if (null != $this->onNavClick) {
           print 'href="javascript:'.$this->onNavClick.'(\''.$this->id.'\',\''.$nextString.'\');"';
@@ -184,12 +184,22 @@ class akMonthCalendar
         print '</a>';
         print '</td>';
       } else {
-        print '<td colspan=7>';
+        print '<td class="block-calendar-title" colspan=7>';
         print $this->refDate->monthName.' '.$this->refDate->year;
         print '</td>';
       }
       print '</tr>';
     }
+    /* Emit the dayname headers as a row */
+    print '<tr class="block-calendar-title">';
+    print '<td class="block-calendar-title">Su</td>';
+    print '<td class="block-calendar-title">Mo</td>';
+    print '<td class="block-calendar-title">Tu</td>';
+    print '<td class="block-calendar-title">We</td>';
+    print '<td class="block-calendar-title">Th</td>';
+    print '<td class="block-calendar-title">Fr</td>';
+    print '<td class="block-calendar-title">Sa</td>';
+    print '</tr>';
     /* Emit table body */
     while ($daysNext > 0) {
       /* Emit a week at a time as a row */
