@@ -510,6 +510,7 @@ vertical-align:middle;
 text-align:left;
 vertical-align:middle;
 }
+
   /* }}}3 Generic forms */
 /* }}}2 Forms */
 /* SECTION 6.2:Map blocks {{{2 */
@@ -540,17 +541,26 @@ text-align:center;
 .block-calendar-previous, .block-calendar-next {
 font-size:10pt;
 color:#5891CA;
+background-color:AGUA_BG_LIGHT;
+border:1px solid AGUA_BG_LIGHT;
+}
+
+.block-calendar-title {
+text-align:center;
 }
 
 .block-calendar-current {
 color:#1B3B55;
 font-size:10pt;
 font-weight:bold;
+background-color:AGUA_BG_LIGHT;
+border:1px solid AGUA_BG_LIGHT;
 }
 
-.block-calendar-title {
-text-align:center;
+.block-calendar-current:hover, .block-calendar-previous:hover, .block-calendar-next:hover {
+border:1px solid AGUA_BLUE_DARKEST;
 }
+
   /* }}}3 Cell display */
 /* }}}2 Calendar */
 /* SECTION 6.4:Stories {{{2 */

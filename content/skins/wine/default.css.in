@@ -22,14 +22,15 @@
     /* }}}3 Inner content containers */
   /* }}}2 Common dimensions */
   /* Skin-specific colors {{{2 */
-#define WINESKIN_RED         #983B59
-#define WINESKIN_DARK_RED    #66273B
-#define WINESKIN_DARKER_RED  #4C1E2D
-#define WINESKIN_LIGHT_RED   #A84B69
-#define WINESKIN_LIGHTER_RED #B85B79
-#define WINESKIN_BORDER      #333
-#define WINESKIN_BG_HEADER   #DDD
-#define WINESKIN_SHADOW_TOP  #FFF
+#define WINESKIN_RED          #983B59
+#define WINESKIN_DARK_RED     #66273B
+#define WINESKIN_DARKER_RED   #4C1E2D
+#define WINESKIN_LIGHT_RED    #A84B69
+#define WINESKIN_LIGHTER_RED  #B85B79
+#define WINESKIN_LIGHTEST_RED #FAF2F5
+#define WINESKIN_BORDER       #333
+#define WINESKIN_BG_HEADER    #DDD
+#define WINESKIN_SHADOW_TOP   #FFF
 #define WINESKIN_SHADOW_BOTTOM #444
 
   /* }}}2 Skin-specific colors */
@@ -136,6 +137,16 @@ margin-left:WIDTH_GUTTER;
 #multibar-container {
 width:WIDTH_MULTIBAR_CONTAINER;
 margin-left:WIDTH_GUTTER;
+}
+
+.form-popup {
+display:none;
+border:2px solid WINESKIN_DARKER_RED;
+background-color:WINESKIN_LIGHTEST_RED;
+position:fixed;
+z-index:1; /* Above when visible */
+min-height:100px;
+min-width:100px;
 }
 
   /* }}}2 Content containers */
@@ -493,6 +504,11 @@ text-align:center;
 font-size:10pt;
 color:black;
 background-color:WINESKIN_LIGHTER_RED;
+border:2px solid WINESKIN_LIGHTER_RED;
+}
+
+.block-calendar-title {
+text-align:center;
 }
 
 .block-calendar-current {
@@ -500,6 +516,13 @@ color:white;
 font-size:10pt;
 font-weight:bold;
 background-color:WINESKIN_RED;
+border:2px solid WINESKIN_RED;
+}
+
+.block-calendar-current:hover, .block-calendar-previous:hover, .block-calendar-next:hover {
+border:2px solid WINESKIN_BORDER;
+background-color:WINESKIN_LIGHTEST_RED;
+color:black;
 }
   /* }}}3 Cell display */
 /* }}}2 Calendar */
@@ -630,8 +653,8 @@ display:none;
 float:left;
 display:block;
 color:WINESKIN_BORDER;
-background-color:#FAF2F5;
-border:2px solid #FAF2F5;
+background-color:WINESKIN_LIGHTEST_RED;
+border:2px solid WINESKIN_LIGHTEST_RED;
 height:104px;
 width:85px;
 margin-left:5px;
