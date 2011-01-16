@@ -28,6 +28,7 @@ $cal = new akMonthCalendar(strtotime($refDate),$targetDiv, "block-calendar block
 
 /* Step 3: Set any whatnot */
 $cal->onNavClick = 'akForm_datepickerNav';
+$cal->onDayClick = 'akForm_datepickerDay';
 
 /* Step 4: Emit it */
 $cal->emit();

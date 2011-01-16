@@ -346,3 +346,31 @@ function akForm_datepickerNav(divId,refDate)
 {
     svc_loadDiv(divId,'form-date','refDate='+refDate+'&targetDiv='+divId);
 }
+
+// ////////////////////////////////////////////////////////////////////////
+// akForm_datepickerDay
+//
+// @param divId -- DOM id of the div containing the datepicker
+// @param refDate -- selected date
+//
+// @return
+//
+// The div ID is the target form element id with a '-popup' suffix;
+// strip the suffix to find the target form item, and then update it's value;
+//
+function akForm_datepickerDay(divId,refDate)
+{
+    var textEle;
+
+    // Step 1: Find the text field
+    textEle = document.getElementById(divId.replace('-popup',''));
+    try {
+        var d = new Date(refDate);
+        textEle.value=d.toDateString();
+    } catch (err) {};
+
+    // Step 2: Close the popup
+    try {
+        document.getElementById(divId).style.display='none';
+    } catch (err) {};
+}

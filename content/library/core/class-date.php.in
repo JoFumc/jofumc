@@ -262,7 +262,12 @@ class akMonthCalendar
           $daysNext--;
         }
         /* Now, emit cell */
-        print '<td class="'.$dayClass.'" id="'.$dayString.'">';
+        print '<td ';
+        if (null != $this->onDayClick)
+        {
+          print ' onClick="'.$this->onDayClick.'(\''.$this->id.'\',\''.$dayString.'\');" ';
+        }
+        print '  class="'.$dayClass.'" id="'.$dayString.'">';
           /* TODO: CLEAN: Add decoration, links, onClick,etc */
         print ''.$dayNum;
         print '</td>';
