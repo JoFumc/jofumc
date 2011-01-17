@@ -366,7 +366,7 @@ function akForm_datepickerDay(divId,refDate)
     textEle = document.getElementById(divId.replace('-popup',''));
     try {
         var d = new Date(refDate);
-        textEle.value=d.toDateString();
+        textEle.value='' + (d.getMonth()+1) + '/' + d.getDate() + '/' + d.getFullYear();
     } catch (err) {};
 
     // Step 2: Close the popup
