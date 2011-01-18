@@ -1,5 +1,5 @@
 <div id="skin-basic-header">
-<a href="/" title="Journey of Faith home"><img src="/skin/common/logo-jof.png" class="frameless" alt="Journey of Faith home"/></a>
+<a href="/" title="Journey of Faith home"><img src="/skins/common/logo-jof.png" class="frameless" alt="Journey of Faith home"/></a>
 </div>
 <script type="text/javascript">
 <?php
