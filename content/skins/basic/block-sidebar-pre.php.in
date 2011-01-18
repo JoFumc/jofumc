@@ -15,8 +15,8 @@ $pic->emit();
 $ur = new akBlock(BLOCK_TYPE_SIDEBAR,"blocks/app/block-upper-room.php","The Upper Room&reg; Daily Devotional");
 $ur->emit();
 // Calendar
-require_once("library/core/class-date.php");
-$calendar = new akBlock(BLOCK_TYPE_SIDEBAR,"blocks/core/block-calendar.php");
-$calendar->title = "Calendar";
-$calendar->emit();
+//require_once("library/core/class-date.php");
+//$calendar = new akBlock(BLOCK_TYPE_SIDEBAR,"blocks/core/block-calendar.php");
+//$calendar->title = "Calendar";
+//$calendar->emit();
 ?>
