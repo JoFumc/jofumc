@@ -1,3 +1,4 @@
 ErrorDocument 404 /error.php
 AddType x-mapp-php5 .php
+AddType x-mapp-php5 .jof
 DirectoryIndex index.php
