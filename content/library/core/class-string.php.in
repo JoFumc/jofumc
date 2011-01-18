@@ -6,7 +6,7 @@
   /* Types of string obfuscation */
 define("OBFUSCATE_NONE",0);
 define("OBFUSCATE_CHUNK",1); /* Simple chunking */
-define("OBFUSCATE_EMAIL",1); /* Email addresses */
+define("OBFUSCATE_EMAIL",2); /* Email addresses */
 
 /* 
  * string_obfuscate() -- Emit a string, with potential obfuscation
@@ -30,7 +30,25 @@ function string_obfuscate($string="",$mode=OBFUSCATE_NONE, $parameter=null)
       /* Split into javscript multi-character chunks */
       if (null != $parameter) $chunksize=$parameter;
       else $chunksize=5;
+      // Do simple entity replacement during split
       $chunks = str_split($string,$chunksize);
+      print '<script type="text/javascript">';
+      foreach ($chunks as $chunk)
+      {
+        print "document.write('".$chunk."');";
+      }
+      print '</script>';
+      break;
+    }
+    case OBFUSCATE_EMAIL: {
+      /* Replace special chars */
+      $outs = array('<','>','@');
+      $ins = array('&lt;','&gt;','@');
+      $newstr = str_replace($outs,$ins,$string);
+      /* Split into javscript multi-character chunks */
+      if (null != $parameter) $chunksize=$parameter;
+      else $chunksize=5;
+      $chunks = str_split($newstr,$chunksize);
       print '<script type="text/javascript">';
       foreach ($chunks as $chunk)
       {

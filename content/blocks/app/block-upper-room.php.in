@@ -13,7 +13,7 @@ $text_width=block_getParameter('text_width',200);
 
 // Step 2: Import via JS
 ?>
-<script type="text/javascript" src="http://devotional.umcom.org/Devotional/s.asp?size=2&body=1"></script>
+<script type="text/javascript" src="http://devotional.umcom.org/Devotional/s.asp?size=2&amp;body=1"></script>
 <script>
 // Step 3: Hide the original table
 var ur_div;

@@ -10,7 +10,7 @@ require_once("library/core/class-string.php");
  */
 function html_email($addr='nobody@nowhere')
 {
-  string_obfuscate($addr,OBFUSCATE_EMAIL);
+  string_obfuscate($addr,OBFUSCATE_CHUNK);
 }
 /*
  * MAILTO links require some special handling
@@ -23,7 +23,7 @@ function html_mailto($addr='nobody@nowhere',$meta=null,$label=null)
 
   /* Step 2: Create object */
   $m = new akLink('mailto:'.$addr,$label,$meta);
-  $m->setObfuscation(OBFUSCATE_EMAIL);
+  $m->setObfuscation(OBFUSCATE_CHUNK);
   $m->emit();
 }
  
