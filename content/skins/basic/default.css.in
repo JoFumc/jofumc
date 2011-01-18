@@ -135,13 +135,34 @@ margin-left:WIDTH_GUTTER;
 
 .form-popup { /* Popup is generally the same as a notebook page */
 display:none;
-border:1px solid black;
+border:2px solid black;
 color:JOF_DARKER_RED;
 background-color:white;
 position:fixed;
 z-index:1; /* Above when visible */
 min-height:100px;
 min-width:100px;
+}
+
+.form-popup-decoration {
+border-top:1px solid black;
+background-color:white;
+}
+
+.form-popup-close {
+float:right;
+font-weight:bold;
+font-size:12px;
+color:white;
+background-color:JOF_LIGHT_RED;
+border:1px solid black;
+margin: 3px;
+padding: 4px;
+}
+
+.form-popup-close:hover {
+color:JOF_LIGHT_RED;
+background-color:white;
 }
 
   /* }}}2 Content containers */
@@ -503,6 +524,21 @@ border:1px solid JOF_DARK_RED;
 
 .block-calendar-title {
 text-align:center;
+}
+
+.block-calendar-nav {
+font-weight:bold;
+font-size:12px;
+color:white;
+background-color:JOF_LIGHT_RED;
+border:1px solid black;
+padding: 0px 4px;
+}
+
+.block-calendar-nav:hover {
+background-color:white;
+color:JOF_LIGHT_RED;
+padding: 0px 4px;
 }
 
 .block-calendar-current {

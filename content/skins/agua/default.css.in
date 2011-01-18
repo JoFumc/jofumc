@@ -559,6 +559,22 @@ border:1px solid AGUA_BG_LIGHT;
 
 .block-calendar-title {
 text-align:center;
+color:AGUA_BLUE_DARKEST;
+background-color:AGUA_BG_LIGHT;
+}
+
+.block-calendar-nav {
+color:AGUA_BLUE_DARKEST;
+background-color:AGUA_BG_LIGHT;
+border:1px solid AGUA_BG_LIGHT;
+font-weight:bold;
+font-size:14px;
+padding: 0px 4px;
+}
+
+.block-calendar-nav:hover {
+padding: 0px 4px;
+border: 1px solid AGUA_BLUE_DARKEST;
 }
 
 .block-calendar-current {

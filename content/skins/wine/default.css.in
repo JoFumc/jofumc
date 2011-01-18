@@ -149,6 +149,25 @@ min-height:100px;
 min-width:100px;
 }
 
+.form-popup-decoration { /* Frame decorations div */
+display:block;
+padding:4px;
+background-color:WINESKIN_RED;
+min-height:16px;
+border-bottom:2px solid WINESKIN_DARKER_RED;
+}
+
+.form-popup-close { /* Close button on a form popup frame */
+float:right;
+}
+
+.form-popup-title {
+color:white;
+font-size:10pt;
+font-weight:bold;
+}
+
+
   /* }}}2 Content containers */
 /* }}}1 Common toplevel containers */
 /* SECTION 4:Common toplevel content {{{1 */
@@ -509,6 +528,22 @@ border:2px solid WINESKIN_LIGHTER_RED;
 
 .block-calendar-title {
 text-align:center;
+}
+
+.block-calendar-nav {
+font-weight:bold;
+font-size:12px;
+background-color:WINESKIN_LIGHTEST_RED;
+color:WINESKIN_DARKER_RED;
+border:1px solid WINESKIN_LIGHTEST_RED;
+padding: 0px 4px;
+}
+
+.block-calendar-nav:hover {
+background-color:WINESKIN_LIGHTEST_RED;
+color:WINESKIN_DARKER_RED;
+padding: 0px 4px;
+border:1px solid WINESKIN_DARKER_RED;
 }
 
 .block-calendar-current {
