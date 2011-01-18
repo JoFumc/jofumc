@@ -145,7 +145,8 @@ min-width:100px;
 .form-popup-decoration { /* Frame decorations div */
 display:block;
 padding:4px;
-/*min-height:24px;*/
+background-color:AGUA_BG_DARK;
+min-height:16px;
 }
 
 .form-popup-close { /* Close button on a form popup frame */

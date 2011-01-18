@@ -377,8 +377,6 @@ function akForm_datepickerDay(divId,refDate)
     var textEle;
     var dateParts = refDate.split('-');
     
-    alert("refDate: " + refDate);
-
     // Step 1: Find the text field
     textEle = document.getElementById(divId.replace('-popup',''));
     try {
