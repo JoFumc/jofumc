@@ -13,16 +13,17 @@ require_once("library/core/class-date.php");
 ?>
 
 <?php
-// Pull in any skin-based frame decoration
-skin_include("form-popup-pre.php");
-?>
-
-<?php
 /* Step 1: Get current user/target info */
 auth_validate();
 $refDate=$_REQUEST['refDate'];
 $targetDiv=$_REQUEST['targetDiv'];
+?>
 
+<?php
+// Pull in any skin-based frame decoration
+skin_include("form-popup-pre.php");
+?>
+<?php
 /* Step 2: Create base calendar object */
 $cal = new akMonthCalendar(strtotime($refDate),$targetDiv, "block-calendar block-table");
 

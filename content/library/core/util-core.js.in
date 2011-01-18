@@ -84,6 +84,20 @@ function ak_moveElement(ele,top,left)
 }
 
 // ////////////////////////////////////////////////////////////////////////
+// ak_hideElementById() -- Hide an element, given its DOM id
+//
+// @return Nothing
+//
+function ak_hideElementById(id)
+{
+    var ele = document.getElementById(id);
+
+    try {
+        ele.style.display = 'none';
+    } catch (err) {}
+}
+
+// ////////////////////////////////////////////////////////////////////////
 // ak_notebookTabClick() -- Execute a click on a notebook tab
 //
 // @return Nothing
@@ -361,16 +375,16 @@ function akForm_datepickerNav(divId,refDate)
 function akForm_datepickerDay(divId,refDate)
 {
     var textEle;
+    var dateParts = refDate.split('-');
+    
+    alert("refDate: " + refDate);
 
     // Step 1: Find the text field
     textEle = document.getElementById(divId.replace('-popup',''));
     try {
-        var d = new Date(refDate);
-        textEle.value='' + (d.getMonth()+1) + '/' + d.getDate() + '/' + d.getFullYear();
+        textEle.value= dateParts[1] + '/' + dateParts[2] + '/' + dateParts[0];
     } catch (err) {};
 
     // Step 2: Close the popup
-    try {
-        document.getElementById(divId).style.display='none';
-    } catch (err) {};
+    ak_hideElementById(divId);
 }

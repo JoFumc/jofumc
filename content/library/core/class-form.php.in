@@ -240,7 +240,9 @@ class akFormItem
         foreach(array_keys($this->events) as $evkey)
           print $evkey.'="'.$this->events[$evkey].'" ';
         print "/>\n";
-        skin_img("form-datepick.png","Select a date",null,$this->id."-trigger");
+        print '<a class="frameless" title="Select a date" href="javascript:">';
+        skin_img("form-datepick.png","Select a date","frameless",$this->id."-trigger");
+        print '</a>';
         print "\n".'<script type="text/javascript">'."\n";
         print "akForm_registerPopup('".$this->id."','".$this->id."-trigger','form-date',null);\n";
         print '</script>';

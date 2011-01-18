@@ -142,6 +142,17 @@ min-height:100px;
 min-width:100px;
 }
 
+.form-popup-decoration { /* Frame decorations div */
+display:block;
+padding:4px;
+/*min-height:24px;*/
+}
+
+.form-popup-close { /* Close button on a form popup frame */
+float:right;
+}
+
+
   /* }}}2 Content containers */
 /* }}}1 Common toplevel containers */
 /* SECTION 4:Common toplevel content {{{1 */
