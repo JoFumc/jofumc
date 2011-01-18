@@ -24,10 +24,10 @@ include $(PROJECT_ROOT)/mk/common.mk
 ##
 ## Section 3: Common rules
 ##
-all: publish
+all: push
 
 release::
-	PUBLISH_TARGET=release make all
+	PUBLISH_TARGET=release make push
 
 local-all: toplevel-all
 	$(DESCEND)
@@ -53,6 +53,10 @@ showcfg::
 	@echo PROJECT_CURDIR=$(PROJECT_CURDIR)
 	@echo PROJECT_SUBDIR=$(PROJECT_SUBDIR)
 	$(DESCEND)
+
+push:: install
+	$(SAY_IT) "[ PUBLISH ] JOFRR staged content --> $(PUBLISH_ROOT)"
+	(cd staging/content && rsync -av -e ssh . $(PUSH_RSYNC))
 
 publish:: install webfs
 	$(SAY_IT) "[ PUBLISH ] JOFRR staged content --> $(PUBLISH_ROOT)"
