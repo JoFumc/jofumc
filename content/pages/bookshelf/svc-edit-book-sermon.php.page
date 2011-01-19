@@ -35,7 +35,6 @@ $editForm->createSimpleItem("sermon-edit-mode",FORM_ITEM_HIDDEN,
                             "sermon-edit-mode","new");
 $editForm->createSimpleItem("sermon-current-series",FORM_ITEM_HIDDEN,
                             "sermon-current-series",htmlentities($seriesList[0]->title));
-  /* CLEAN: Need a datepicker form item, dude. */
   /* CLEAN: Init this with the first sunday after today that doesn't
    *        already have an entry....
    */
