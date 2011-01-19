@@ -728,8 +728,12 @@ content:url('/skins/wine/book_rss.png');
 content:url('/skins/wine/book_rss.png');
 }
 
+.book-span-event:before {
+content:url('/skins/wine/book_calendar.png');
+}
+
 .book-span-generic:before {
-content:url('/skins/wine/book_rss.png');
+content:url('/skins/common/book.png');
 }
 
 .book-span:hover {

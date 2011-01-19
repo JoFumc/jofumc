@@ -741,27 +741,31 @@ margin-bottom:5px;
 }
 
 .book-span-book:before {
-content:url('/skins/wine/book_new.png');
+content:url('/skins/agua/book_new.png');
 }
 
 .book-span-profile:before {
-content:url('/skins/wine/book_profile.png');
+content:url('/skins/agua/book_profile.png');
 }
 
 .book-span-album:before {
-content:url('/skins/wine/book_photo.png');
+content:url('/skins/agua/book_photo.png');
 }
 
 .book-span-sermon:before {
-content:url('/skins/wine/book_rss.png');
+content:url('/skins/agua/book_rss.png');
 }
 
 .book-span-blog:before {
-content:url('/skins/wine/book_rss.png');
+content:url('/skins/agua/book_rss.png');
+}
+
+.book-span-event:before {
+content:url('/skins/agua/book_calendar.png');
 }
 
 .book-span-generic:before {
-content:url('/skins/wine/book_rss.png');
+content:url('/skins/common/book.png');
 }
 
 .book-span:hover {
