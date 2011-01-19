@@ -96,7 +96,7 @@ $propPage = new akNotePage("properties","Book Properties");
   /* Step 4: Make the notebook */
 $editBook = new akNotebook("edit-sermon-notebook");
 $editBook->adopt($editPage);
-$editBook->adopt($seriesPage);
+//$editBook->adopt($seriesPage);
 //$editBook->adopt($propPage);
 
 $editBook->emit();

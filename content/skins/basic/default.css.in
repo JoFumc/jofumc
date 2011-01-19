@@ -709,6 +709,7 @@ width:WIDTH_BOOKWORK_CONTAINER;
 border:0;
 padding:0;
 margin:0 0 0 8px;
+min-height:600px;
 }
   /* }}}3 Workarea */
 /* }}}2 Bookshelf */

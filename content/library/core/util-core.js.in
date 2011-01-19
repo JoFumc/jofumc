@@ -231,6 +231,7 @@ function svc_resizeDivIFrame(divId)
     try {
     theIFrame = document.getElementById(divId + '-iframe');
     needHeight = 18+theIFrame.contentDocument.height;
+    if (needHeight < 600) needHeight = 600; // Set min height
     theIFrame.style.height = '' + needHeight + 'px';
     theIFrame.height = needHeight;
     } catch (err) {}
