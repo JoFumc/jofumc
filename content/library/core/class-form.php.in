@@ -508,9 +508,13 @@ class akForm
     if ($item == null) return; // CLEAN: throw a warning here?
     /* Add to array */
     $this->items[] = &$item;
-    /* Add this item to current group (if any) */
     if (null != $this->lastGroupItem) {
+      /* Add this item to current group (if any) */
       $this->lastGroupItem->addOption($item->id);
+      /* Make visibility match group */
+      if ($this->lastGroupItem->value == FORM_VALUE_UNCHECKED) {
+        $item->addRowStyle("display","none");
+      }
     }
   }
 
