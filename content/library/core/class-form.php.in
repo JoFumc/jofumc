@@ -12,6 +12,15 @@ define("FORM_FORMAT_BINARY","multipart/form-data");
   /* Processor methods */
 define("FORM_METHOD_GET","get");
 define("FORM_METHOD_POST","post");
+  /* Form generic values */
+define("FORM_VALUE_TRUE","true");
+define("FORM_VALUE_FALSE","false");
+define("FORM_VALUE_UNCHECKED","false");
+define("FORM_VALUE_CHECKED","true");
+  /* Input field grouping */
+define("FORM_GROUP_BOOLEAN","group-boolean"); /* Conditionally visible */
+define("FORM_GROUP_FRAME","group-frame");     /* Simple framing */
+define("FORM_GROUP_END","group-end");         /* End the most recent group */
   /* Input types */
 define("FORM_ITEM_HIDDEN","hidden");
 define("FORM_ITEM_BUTTON","button");
@@ -25,6 +34,7 @@ define("FORM_ITEM_SELECT","select");
 define("FORM_ITEM_RADIO","radio");
 define("FORM_ITEM_RAW","raw");
 define("FORM_ITEM_DATE","date");
+define("FORM_ITEM_TIME","time");
 
 /*
  * GLOBAL FUNCTIONS
@@ -137,6 +147,7 @@ class akFormItem
      */
   function emit()
   {
+    /* For all other items, build a table row */
     /* Row container */
     print '<tr ';
     print '    class="form-item-row form-item-'.$this->type.'-row" ';
@@ -222,6 +233,53 @@ class akFormItem
         print "/>\n";
         break;
       }
+      case FORM_ITEM_CHECK: {
+        // Checkbox
+        print '<input ';
+        print '  type="checkbox" ';
+        print '  id="'.$this->id.'" ';
+        print '  class="form-item form-item-check" ';
+        print '  name="'.$this->name.'" ';
+        if ($this->value == FORM_VALUE_CHECKED) {
+          print 'checked ';
+        }
+        print '  value="'.$this->value.'" ';
+        if (null != $this->style)
+          print 'style="'.$this->style.'" ';
+        foreach(array_keys($this->events) as $evkey)
+          print $evkey.'="'.$this->events[$evkey].'" ';
+        print "/>\n";
+        break;
+      }
+      case FORM_GROUP_BOOLEAN: {
+        // Boolean control for item grouping; implement (for now) as a
+        // checkbox with an invisible span for storage.  The form method
+        // to start a new group must have added the controlling event.
+        print '<input ';
+        print '  type="checkbox" ';
+        print '  id="'.$this->id.'" ';
+        print '  class="form-item form-group-boolean" ';
+        print '  name="'.$this->name.'" ';
+        if ($this->value == FORM_VALUE_CHECKED) {
+          print 'checked ';
+        }
+        print '  value="'.$this->value.'" ';
+        if (null != $this->style)
+          print 'style="'.$this->style.'" ';
+        foreach(array_keys($this->events) as $evkey)
+          print $evkey.'="'.$this->events[$evkey].'" ';
+        print "/>\n";
+        // Tag storage here
+        print '<span ';
+        print '  id="'.$this->id.'-storage" ';
+        print '  class="form-item-storage" ';
+        print '  style="display:none;" ';
+        print '>';
+        foreach ($this->options as $ref)
+          print $ref->tag.',';
+        print '</span>';
+        break;
+      }
       case FORM_ITEM_DATE: {
         // Date item; text entry + datepicker
         print '<input ';
@@ -246,6 +304,26 @@ class akFormItem
         print "\n".'<script type="text/javascript">'."\n";
         print "akForm_registerPopup('".$this->id."','".$this->id."-trigger','form-date',null);\n";
         print '</script>';
+        break;
+      }
+      case FORM_ITEM_TIME: {
+        // Simple text entry
+        print '<input ';
+        print '  type="text" ';
+        print '  id="'.$this->id.'" ';
+        print '  class="form-item form-item-time" ';
+        print '  name="'.$this->name.'" ';
+        print '  value="'.$this->value.'" ';
+        if (null != $this->hsize)
+          print 'size="'.$this->hsize.'" ';
+        print '  maxlength="'.$this->max_hsize.'" ';
+        if (null != $this->hint) 
+          print 'placeholder="'.$this->hint.'" ';
+        if (null != $this->style)
+          print 'style="'.$this->style.'" ';
+        foreach(array_keys($this->events) as $evkey)
+          print $evkey.'="'.$this->events[$evkey].'" ';
+        print "/>\n";
         break;
       }
       case FORM_ITEM_TEXTAREA: {
@@ -390,6 +468,7 @@ class akForm
 
   /* Private members */
   private $items; // Array of items 
+  private $lastGroupItem;  // Reference to the last group started
 
   /* Wrapper public members (customization) */
     /* NOTE: These will be in the form DIV, but
@@ -429,6 +508,10 @@ class akForm
     if ($item == null) return; // CLEAN: throw a warning here?
     /* Add to array */
     $this->items[] = &$item;
+    /* Add this item to current group (if any) */
+    if (null != $this->lastGroupItem) {
+      $this->lastGroupItem->addOption($item->id);
+    }
   }
 
   /* Method to create and adopt a simple item */
@@ -437,6 +520,28 @@ class akForm
     $item = new akFormItem($id,$type,$name,$value,$label);
     $this->adopt($item);
     $this->lastSimpleItem = &$item;
+  }
+
+  /* GROUP HANDLING: 
+   *
+   * WARNING: Groups can't be nested (yet)!
+   */
+  /* Method to mark the start of an item group */
+  function startItemGroup($id=null,$type=null,$label=null,$value=null)
+  {
+    /* Create base item */
+    $item = new akFormItem($id,$type,null,$value,$label);
+    /* Optionally add controller events based on type */
+    $item->addEvent("onclick","akForm_handleGroupClick('".$id."');");
+    $this->adopt($item);
+    $this->lastSimpleItem = &$item;
+    $this->lastGroupItem = &$item;
+  }
+
+  /* Method to mark the end of an item group */
+  function endItemGroup()
+  {
+    $this->lastGroupItem = null;
   }
 
   /* Method to emit the HTML for this form */
