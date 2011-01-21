@@ -411,8 +411,10 @@ function akForm_handleGroupClick(groupId)
     /* Step 2: Determine if this is hide/show */
     if (item.checked) {
         dmode = 'table-row';
+        item.value = 'true';
     } else {
         dmode = 'none';
+        item.value = 'false';
     }
 
     /* Step 3: Loop over stored values */

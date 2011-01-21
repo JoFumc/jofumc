@@ -40,7 +40,7 @@ $editForm->createSimpleItem("event-edit-start-date",FORM_ITEM_DATE,
                             "event-edit-start-date","00/00/0000",
                             "Event date:");
 $editForm->createSimpleItem("event-edit-start-time",FORM_ITEM_TIME,
-                            "event-edit-start-date",null,
+                            "event-edit-start-time",null,
                             "Event time:");
   /* End date/time (if multiday) */
     /* Start the Item Group */

@@ -1,0 +1,69 @@
+<?php
+/*
+ * svc-process-book-calendar -- Service to process a 'calendar'
+ *    book edit.
+ *
+ * NOTES:
+ *   A calendar edit has at least two components: the story of the event, 
+ *   and the event itself.  The story gets saved into the 'stories' table,
+ *   and the event parameters (day/time) get stored in the 'events' table.
+ */
+/* Step 0: Get current user auth info */
+require_once("library/core/util-db.php");
+require_once("library/core/util-auth.php");
+require_once("library/core/class-story.php");
+require_once("library/core/class-form.php");
+require_once("library/core/util-skin.php");
+auth_validate();
+
+print_r($_REQUEST);
+return;
+
+/* Step 1: Extract key pieces from form data */
+$book = form_getField('event-edit-book');
+$edit_mode = form_getField('event-edit-mode');
+$start_date = new DateTime(form_getField('event-edit-start-date'));
+$end_date = null;
+if ('true' == form_getField('event-edit-multiday')) {
+  $end_date = new DateTime(form_getField('event-edit-end-date'));
+}
+
+/* Step 2: Create a story entry object from fields */
+    /* Step 2.1: Base entry */
+$st = new akStoryEntry();
+    /* 'start_date' is the start date */
+$st->start_date = $start_date->format("Y-m-d");
+$st->title = form_getField('event-edit-name');
+$st->book = $book;
+$st->author = $auth_user->uid;
+
+    /* Step 2.2: Create file to store story text */
+     /* Step 2.2.1: Make containing directory */
+$notes_dir=config_getBookDir($st->book)."/".$start_date->format("Y-m");
+$file_iter=1;
+do {
+  $notes_file=sprintf("%s/%s-%03d.html",$notes_dir,$start_date->format("m-d"),$file_iter);
+  $file_iter++;
+} while (file_exists($notes_file);
+$st->text=$notes_file;
+if (!is_dir($notes_dir)) mkdir($notes_dir,0755,true);
+if (!is_dir($notes_dir)) {
+  /* Can't make storage dir? */
+  print '[[Failed to create directory for notes storage, notes will not be saved.]]';
+} else {
+  file_put_contents($st->text,stripslashes(form_getField('event-edit-notes')));
+}
+
+/* Step 4: Push it into the DB */
+$res = new akStory();
+if (db_saveStory($st)) {
+  $res->createSimpleChunk(STORY_CHUNK_SECTION,"event Edit: Success");
+  $res->createSimpleChunk(STORY_CHUNK_TEXT,"event info saved successfully to database.");
+}else {
+  $res->createSimpleChunk(STORY_CHUNK_SECTION,"event Edit: Failure");
+  $res->createSimpleChunk(STORY_CHUNK_TEXT,"The update failed during database update. Please try again later.");
+}
+
+$res->emit();
+
+?>

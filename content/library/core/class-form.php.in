@@ -534,7 +534,7 @@ class akForm
   function startItemGroup($id=null,$type=null,$label=null,$value=null)
   {
     /* Create base item */
-    $item = new akFormItem($id,$type,null,$value,$label);
+    $item = new akFormItem($id,$type,$id,$value,$label);
     /* Optionally add controller events based on type */
     $item->addEvent("onclick","akForm_handleGroupClick('".$id."');");
     $this->adopt($item);

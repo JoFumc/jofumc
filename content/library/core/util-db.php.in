@@ -402,6 +402,8 @@ function db_updateUser($nu=null,$ou=null)
  *
  * @param st New (created or updated) akStoryEntry object
  *
+ * @returns ID of inserted or updated story
+ *
  * The DB action that takes place is determined by
  * the 'id' field of the story object.  If it is zero,
  * we treat this as a new entry and INSERT it.  If the
@@ -467,7 +469,7 @@ function db_saveStory($st=null)
 }
 
 /***********************************************
- * db_saveSeries() -- Change or add a story to the DB
+ * db_saveSeries() -- Change or add a series to the DB
  *
  * @param id ID of series (zero for new, nonzero if updating)
  * @param book Book that owns the given series
@@ -483,11 +485,11 @@ function db_saveSeries($id=0,$book=0,$title=null,$subtitle=null,$desc=null)
   /* Step 0: Early validation */
   if (($title == null) ||
       ($book == 0)){
-    return false;
+    return 0;
   }
 
   /* Step 1: Connect to db if not connected */
-  if (!db_connect()) return false;
+  if (!db_connect()) return 0;
 
   /* Step 2: Build SQL based on action */
     /* Step 2.1: Build a col/val array pair for any non-null fields */
@@ -521,7 +523,11 @@ function db_saveSeries($id=0,$book=0,$title=null,$subtitle=null,$desc=null)
     /* Step 2.3: UPDATE existing with non-null fields */
   }
 
-  /* Step 3: Do the DB action */
-  return @$db_cxn->query($query);
+  /* Step 3: Do the DB action, returning the new or modified story ID */
+  if(@$db_cxn->query($query)) {
+    return $db_cxn->insert_id;
+  } else {
+    return 0;
+  }
 }
 ?>
