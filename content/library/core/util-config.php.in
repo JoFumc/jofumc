@@ -81,4 +81,20 @@ function config_getBookDir($bookid=0)
   return "assets/books/".floor($bookid/100)."/".$bookid;
 }
 
+/**
+ * config_setLastError() -- Store a string describing the last error
+ */
+function config_setLastError($err='Success')
+{
+  config_setParameter('errno',$err);
+}
+
+/**
+ * config_getLastError() -- Retrieve a global system error string
+ */
+function config_getLastError()
+{
+  return config_getParameter('errno','Success');
+}
+
 ?>
