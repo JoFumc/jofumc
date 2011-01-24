@@ -13,29 +13,35 @@ require_once("library/core/util-db.php");
 require_once("library/core/util-auth.php");
 require_once("library/core/class-story.php");
 require_once("library/core/class-form.php");
+require_once("library/core/class-event.php");
 require_once("library/core/util-skin.php");
 auth_validate();
 
-print_r($_REQUEST);
-return;
+$ev_story_id=0;
+$ev_event_id=0;
 
 /* Step 1: Extract key pieces from form data */
 $book = form_getField('event-edit-book');
 $edit_mode = form_getField('event-edit-mode');
 $start_date = new DateTime(form_getField('event-edit-start-date'));
+$start_time = form_getField('event-edit-start-time');
 $end_date = null;
 if ('true' == form_getField('event-edit-multiday')) {
   $end_date = new DateTime(form_getField('event-edit-end-date'));
 }
+$end_time = form_getField('event-edit-end-time');
+
+$do_announce = form_getField('event-edit-announce');
 
 /* Step 2: Create a story entry object from fields */
-    /* Step 2.1: Base entry */
+    /* Step 2.1: Base story entry */
 $st = new akStoryEntry();
     /* 'start_date' is the start date */
-$st->start_date = $start_date->format("Y-m-d");
+$st->deliver_date = $start_date->format("Y-m-d");
 $st->title = form_getField('event-edit-name');
 $st->book = $book;
 $st->author = $auth_user->uid;
+$st->series = "EVENT_STORY";
 
     /* Step 2.2: Create file to store story text */
      /* Step 2.2.1: Make containing directory */
@@ -44,7 +50,7 @@ $file_iter=1;
 do {
   $notes_file=sprintf("%s/%s-%03d.html",$notes_dir,$start_date->format("m-d"),$file_iter);
   $file_iter++;
-} while (file_exists($notes_file);
+} while (file_exists($notes_file));
 $st->text=$notes_file;
 if (!is_dir($notes_dir)) mkdir($notes_dir,0755,true);
 if (!is_dir($notes_dir)) {
@@ -54,16 +60,50 @@ if (!is_dir($notes_dir)) {
   file_put_contents($st->text,stripslashes(form_getField('event-edit-notes')));
 }
 
-/* Step 4: Push it into the DB */
-$res = new akStory();
-if (db_saveStory($st)) {
-  $res->createSimpleChunk(STORY_CHUNK_SECTION,"event Edit: Success");
-  $res->createSimpleChunk(STORY_CHUNK_TEXT,"event info saved successfully to database.");
-}else {
-  $res->createSimpleChunk(STORY_CHUNK_SECTION,"event Edit: Failure");
-  $res->createSimpleChunk(STORY_CHUNK_TEXT,"The update failed during database update. Please try again later.");
+  /* Step 2.3: Push story into db */
+$ev_story_id=db_saveStory($st);
+
+print 'Event story (id='.$ev_story_id.'): ';
+print_r($st);
+
+/* Step 3: Create event object from fields (if story succeeded) */
+$ev = new akEvent();
+if (0 != $ev_story_id)
+{
+  $ev->title = $st->title;
+  $ev->book = $book;
+  $ev->story = $ev_story_id;
+  $ev->startdate = $start_date->format("Y-m-d");
+  $ev->starttime = $start_time;
+  if ($end_date != null) $ev->enddate = $end_date->format("Y-m-d");
+  $ev->endtime = $end_time;
+
+  $ev_event_id = db_saveEvent($ev);
+  print 'Event (id='.$ev_event_id.'): ';
+  print_r($ev);
+
 }
 
+/* Step 4: Start results story */
+$res = new akStory();
+if ($ev_event_id != 0) {
+  $res->createSimpleChunk(STORY_CHUNK_SECTION,"Event Edit: Success");
+  $res->createSimpleChunk(STORY_CHUNK_TEXT,"Event info saved successfully to database.");
+}else {
+  $res->createSimpleChunk(STORY_CHUNK_SECTION,"Event Edit: Failure");
+  $res->createSimpleChunk(STORY_CHUNK_TEXT,"The operation failed during database update. Please try again later.");
+}
+
+/* Step 5: Handle announcement? */
+if ($do_announce == 'true') {
+  $an = new akStoryEntry();
+  $an->book = BOOK_ID_ANNOUNCEMENTS;
+  $an->author = $auth_user->uid;
+  $an->title=form_getField('event-edit-announce-title');
+  $
+}
+
+/* Step 6: Print results */
 $res->emit();
 
 ?>
