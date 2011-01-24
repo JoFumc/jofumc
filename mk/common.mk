@@ -36,6 +36,17 @@ PROJECT_DEFINES+= \
 		-DPROJECT_LANGSUB=$(PROJECT_LANGSUB) \
 		-DPROJECT_EXPDIR=$(PROJECT_EXPDIR) \
 
+ifeq ($(PUBLISH_TARGET),release)
+PROJECT_DEFINES+= \
+	-DPUBLISH_RELEASE \
+	-DPUBLISH_TARGET=release 
+endif
+ifeq ($(PUBLISH_TARGET),beta)
+PROJECT_DEFINES+= \
+	-DPUBLISH_BETA \
+	-DPUBLISH_TARGET=beta
+endif
+
 PROJECT_FLAGS+=$(PROJECT_INCLUDES) $(PROJECT_DEFINES)
 
 ifneq ($(SUBDIRS),)
@@ -70,10 +81,13 @@ SED_REMACRO=-e "s/PREPROC_DEFINE/\#define/"
 SED_DEIF=-e "s/^\#if/PREPROC_TEST/"
 SED_REIF=-e "s/PREPROC_TEST/\#if/"
 
+SED_DEENDIF=-e "s/^\#endif/PREPROC_ENDTEST/"
+SED_REENDIF=-e "s/PREPROC_ENDTEST/\#endif/"
+
 SED_DEPASTE=-e "s/\#\#/PREPROC_PASTE/"
 SED_REPASTE=-e "s/PREPROC_PASTE/\#\#/"
 
-SED_SCRUB=$(SED_DEINC) $(SED_DEMACRO) $(SED_DEIF) $(SED_DEPASTE) $(SED_DEQUOTE) $(SED_DEHASH)
+SED_SCRUB=$(SED_DEINC) $(SED_DEMACRO) $(SED_DEIF) $(SED_DEENDIF) $(SED_DEPASTE) $(SED_DEQUOTE) $(SED_DEHASH)
 SED_UNSCRUB=$(SED_REQUOTE) $(SED_REHASH)
 
 ifeq ($(V),1)
@@ -166,19 +180,19 @@ fresh: clean all
 # Pass through preprocessors
 %.html: %.html.in
 	$(SAY_IT) "[HTML PP ]" $@
-	$(DO_IT)cat $< | sed $(SED_SCRUB) |sed $(SED_REINC) $(SED_REMACRO) $(SED_REIF) $(SED_REPASTE) | gcc -E $(PROJECT_FLAGS) - | sed $(SED_UNSCRUB) $(PROJECT_SEDFLAGS) | egrep -v '^# |^$$' > $@
+	$(DO_IT)cat $< | sed $(SED_SCRUB) |sed $(SED_REINC) $(SED_REMACRO) $(SED_REIF) $(SED_REENDIF) $(SED_REPASTE) | gcc -E $(PROJECT_FLAGS) - | sed $(SED_UNSCRUB) $(PROJECT_SEDFLAGS) | egrep -v '^# |^$$' > $@
 
 %.php: %.php.in
 	$(SAY_IT) "[ PHP PP ]" $@
-	$(DO_IT)cat $< | sed $(SED_SCRUB) |sed $(SED_REINC) $(SED_REMACRO) $(SED_REIF) $(SED_REPASTE) | gcc -E $(PROJECT_FLAGS) - | sed $(SED_UNSCRUB) $(PROJECT_SEDFLAGS) | egrep -v '^# |^$$' > $@
+	$(DO_IT)cat $< | sed $(SED_SCRUB) |sed $(SED_REINC) $(SED_REMACRO) $(SED_REIF) $(SED_REENDIF) $(SED_REPASTE) | gcc -E $(PROJECT_FLAGS) - | sed $(SED_UNSCRUB) $(PROJECT_SEDFLAGS) | egrep -v '^# |^$$' > $@
 
 %.css: %.css.in
 	$(SAY_IT) "[ CSS PP ]" $@
-	$(DO_IT)cat $< | sed $(SED_SCRUB) |sed $(SED_REINC) $(SED_REMACRO) $(SED_REIF) $(SED_REPASTE) | gcc -E $(PROJECT_FLAGS) - | sed $(SED_UNSCRUB) $(PROJECT_SEDFLAGS) | egrep -v '^# |^$$' > $@
+	$(DO_IT)cat $< | sed $(SED_SCRUB) |sed $(SED_REINC) $(SED_REMACRO) $(SED_REIF) $(SED_REENDIF) $(SED_REPASTE) | gcc -E $(PROJECT_FLAGS) - | sed $(SED_UNSCRUB) $(PROJECT_SEDFLAGS) | egrep -v '^# |^$$' > $@
 
 %.js: %.js.in
 	$(SAY_IT) "[  JS PP ]" $@
-	$(DO_IT)cat $< | sed $(SED_SCRUB) |sed $(SED_REINC) $(SED_REMACRO) $(SED_REIF) $(SED_REPASTE) | gcc -E $(PROJECT_FLAGS) - | sed $(SED_UNSCRUB) $(PROJECT_SEDFLAGS) | egrep -v '^# |^$$' > $@
+	$(DO_IT)cat $< | sed $(SED_SCRUB) |sed $(SED_REINC) $(SED_REMACRO) $(SED_REIF) $(SED_REENDIF) $(SED_REPASTE) | gcc -E $(PROJECT_FLAGS) - | sed $(SED_UNSCRUB) $(PROJECT_SEDFLAGS) | egrep -v '^# |^$$' > $@
 
 # Simple copies from source
 %.js: %.js.cp

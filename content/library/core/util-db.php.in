@@ -19,7 +19,14 @@ define("DB_NAME","db338689375");
 define("DB_HOST","jofdb-main.jofumc.net");
 define("DB_USER","jofadmin");
 define("DB_PASS","Pel3map1");
+
+#ifdef PUBLISH_RELEASE
 define("DB_NAME","jofdb");
+#endif
+#ifdef PUBLISH_BETA
+define("DB_NAME","jofdb_beta");
+#endif
+
   /* Individual tables */
 define("TBL_USERS","people");
 define("TBL_BOOKS","books");
