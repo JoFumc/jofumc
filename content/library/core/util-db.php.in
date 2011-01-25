@@ -7,6 +7,7 @@ require_once("library/core/util-config.php");
 require_once("library/core/class-user.php");
 require_once("library/core/class-book.php");
 require_once("library/core/class-story.php");
+require_once("library/core/class-event.php");
 
 /* Configuration */
   /* Overall DB info */
@@ -312,6 +313,67 @@ function db_seriesList($bookid=null)
   $result->free_result();
     
   return $serieslist;
+}
+
+/***********************************************
+ * db_eventsUpcoming() -- Get a list of upcoming events
+ *
+ * @param book   ID (from book table) of target book
+ * @param count  Max # of events to return
+ * 
+ */
+function db_eventsUpcoming($bookid=null,$count=5)
+{
+  global $db_cxn;
+
+  /* Step 1: Connect to db if not connected */
+  if ((null == $bookid) || !db_connect()) return null;
+
+  /* Step 2: build and issue the query */
+    /* Step 2.1: What time is it? */
+  $now = new DateTime();
+    /* Step 2.2: Select later day than today or later time today than now */
+  $query = "SELECT * FROM ".TBL_EVENTS." WHERE `book`=".$bookid;
+  $query .= ' AND (';
+  $query .= ' `startdate` > \''.$now->format("Y-m-d").'\'';
+  $query .= ' OR (';
+  $query .= ' `startdate` = \''.$now->format("Y-m-d").'\'';
+  $query .= ' AND ';
+  $query .= ' `starttime` >= \''.$now->format("His").'\'';
+  $query .= ' ) ';
+  $query .= ' ) ';
+    /* Step 2.3: order by upcoming start date/time */
+  $query .= ' ORDER BY `startdate`,`starttime` ';
+    /* Step 2.4: Set limit by our parameter */
+  $query .= ' LIMIT 0,'.$count.';';
+
+  $result=@$db_cxn->query($query);
+
+  /* Step 3: pull results into user objects */
+  if ($result->num_rows == 0) {
+    $eventlist = null;
+  } else {
+    $eventlist = array();
+    while ($row=$result->fetch_assoc())
+    {
+      /* Step 3.1: Create a new object */
+      $ev = new akEvent($row['book']);
+      $ev->id = $row['id'];
+      $ev->title = $row['title'];
+      $ev->story = $row['story'];
+      $ev->startdate = $row['startdate'];
+      $ev->starttime = $row['starttime'];
+      $ev->enddate = $row['enddate'];
+      $ev->endtime = $row['endtime'];
+      /* Step 3.1: Store into array */
+      $eventlist[] = $ev;
+    }
+  }
+
+  /* Step 4: clean up */
+  $result->free_result();
+    
+  return $eventlist;
 }
 
 /***********************************************

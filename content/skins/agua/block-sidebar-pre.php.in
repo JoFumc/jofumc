@@ -9,8 +9,10 @@ $ser->emit();
 // Staff blogs
 $blogs = new akBlock(BLOCK_TYPE_SIDEBAR,"blocks/app/block-staff-blog.php","Staff Blogs");
 $blogs->emit();
+// Upcoming events 
+$events = new akBlock(BLOCK_TYPE_SIDEBAR,"blocks/app/block-events-list.php","Looking Forward");
+$events->emit();
 // Calendar
-//require_once("library/core/class-date.php");
 //$calendar = new akBlock(BLOCK_TYPE_SIDEBAR,"blocks/core/block-calendar.php");
 //$calendar->title = "Calendar";
 //$calendar->emit();
