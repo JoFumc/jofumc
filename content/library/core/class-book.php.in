@@ -177,7 +177,7 @@ class akBook
     /* Step 5: simple case failed; tack on a counter suffix */
     $file_iter = 1;
     do {
-      $asset_file = sprintf("%s/%s-%03d.%s",$asset_dir,$asset_root,$file_iter,$type);
+      $asset_file = sprintf("%s/%s_%03d.%s",$asset_dir,$asset_root,$file_iter,$type);
       $file_iter++;
     } while (file_exists($asset_file) && ($file_iter < 1000));
     if ($file_iter >= 1000) return null; // All used up; should never happen
@@ -284,12 +284,15 @@ class akBookshelf
 function book_createAsset($book_id=0,$asset_type="html",$ref_date=null,$qualifier=null,$contents=null)
 {
   /* Step 0: Validation */
-  if (0 == $book_id) return null;
+  if (0 == $book_id) {
+    config_setLastError('Bad book id');
+    return null;
+  }
 
   /* Step 1: Get book info from DB */
   $book = null;
   $booklist = db_booklist(null,PERM_WRITE,$book_id);
-  if ($booklist) $book = $booklist[0];
+  if ($booklist) $book = $booklist[$book_id];
   if (null == $book) {
     config_setLastError('Book not found or insufficient permissions.');
     return null; // Not found or no access
