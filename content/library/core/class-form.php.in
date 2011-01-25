@@ -307,23 +307,61 @@ class akFormItem
         break;
       }
       case FORM_ITEM_TIME: {
-        // Simple text entry
+        // Time item: hidden field to store value, with 
+        // selectors for components.
+        // CLEAN: TODO: Use input value to set fields.
+          // Hidden field for passing data 
         print '<input ';
-        print '  type="text" ';
+        print '  type="hidden" ';
         print '  id="'.$this->id.'" ';
-        print '  class="form-item form-item-time" ';
+        print '  class="form-item form-item-hidden" ';
         print '  name="'.$this->name.'" ';
-        print '  value="'.$this->value.'" ';
-        if (null != $this->hsize)
-          print 'size="'.$this->hsize.'" ';
-        print '  maxlength="'.$this->max_hsize.'" ';
-        if (null != $this->hint) 
-          print 'placeholder="'.$this->hint.'" ';
+        //print '  value="'.$this->value.'" ';
+        print '  value="190000" ';
         if (null != $this->style)
           print 'style="'.$this->style.'" ';
         foreach(array_keys($this->events) as $evkey)
           print $evkey.'="'.$this->events[$evkey].'" ';
         print "/>\n";
+          // Hour selector
+        print '<select ';
+        print '  id="'.$this->id.'-hour" ';
+        print '  class="form-item form-item-time" ';
+        print '  name="'.$this->name.'-hour" ';
+        print '  onChange="akForm_timepickerChange(\''.$this->id.'\');"';
+        print '>';
+        print '<option value="12">12</option>'."\n";
+        for ($iter=1;$iter<12;$iter++) {
+            print '<option ';
+            if ($iter==7) print 'selected="true" ';
+            print 'value="'.$iter.'">'.$iter.'</option>'."\n";
+        }
+        print '</select>';
+          // Minute selector
+        print '<select ';
+        print '  id="'.$this->id.'-minute" ';
+        print '  class="form-item form-item-time" ';
+        print '  name="'.$this->name.'-minute" ';
+        print '  onChange="akForm_timepickerChange(\''.$this->id.'\');"';
+        print '>';
+        print '<option value="0" selected="true">:00</option>'."\n";
+        print '<option value="15">:15</option>'."\n";
+        print '<option value="30">:30</option>'."\n";
+        print '<option value="45">:45</option>'."\n";
+        print '</select>';
+          // AM/PM selector
+        print '<select ';
+        print '  id="'.$this->id.'-ampm" ';
+        print '  class="form-item form-item-time" ';
+        print '  name="'.$this->name.'-ampm" ';
+        print '  onChange="akForm_timepickerChange(\''.$this->id.'\');"';
+        print '>';
+        print '<option value="0">AM</option>'."\n";
+        print '<option value="12" selected="true">PM</option>'."\n";
+        print '</select>';
+          // noon/midnight indicator
+        print '<span class="form-item-note" id="'.$this->id.'-note">';
+        print '</span>';
         break;
       }
       case FORM_ITEM_TEXTAREA: {

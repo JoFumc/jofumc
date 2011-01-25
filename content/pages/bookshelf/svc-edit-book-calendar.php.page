@@ -52,7 +52,7 @@ $editForm->createSimpleItem("event-edit-end-date",FORM_ITEM_DATE,
                             "Event end date:");
     /* Add time to group */
 $editForm->createSimpleItem("event-edit-end-time",FORM_ITEM_TIME,
-                            "event-edit-end-date",null,
+                            "event-edit-end-time",null,
                             "Event end time:");
     /* Close the group */
 $editForm->endItemGroup();

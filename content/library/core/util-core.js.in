@@ -389,6 +389,63 @@ function akForm_datepickerDay(divId,refDate)
 }
 
 // ////////////////////////////////////////////////////////////////////////
+// akForm_timepickerChange()
+//
+// @param rootId -- root of DOM ids that comprise the timepicker
+//
+// @return
+//
+// NOTES:
+// The timepicker is actually 5 elements:
+//   1. A hidden item '<rootId>' for storing the calculated time
+//   2. An hour selector '<rootId>-hour'
+//   3. A minute selector '<rootId>-minute'
+//   4. An am/pm selector '<rootId>-ampm'
+//   5. An explanation span, for indicating midnight or noon
+//
+// For our purposes, '12:00am' is midnight, and '12:00pm' is noon.
+//
+// We will create a 6-character time string (24hr notation), 'hhmmss', 
+// by calculating a 7-digit number, convert to a string, and strip the
+// leading '1'. This mechanism guarantees that we never have to pad
+// any leading '0' after converting to a string.
+//
+function akForm_timepickerChange(rootId)
+{
+    var storage = document.getElementById(rootId);
+    var hour    = document.getElementById(rootId+'-hour');
+    var minute  = document.getElementById(rootId+'-minute');
+    var ampm    = document.getElementById(rootId+'-ampm');
+    var note    = document.getElementById(rootId+'-note');
+
+    var calctime = 1000000; /* Force result to 7 digits */
+
+    try {
+        /* Step 1: Convert the hour from 12-hr+am/pm to 24-hr value */
+            /* NOTE: The value of the am/pm field is the raw number of
+             *       hours to add.
+             */
+        calctime += ((Number(hour.value))%12 + Number(ampm.value)) * 10000;
+
+        /* Step 2: Incorporate minutes and seconds */
+        calctime += Number(minute.value) * 100;
+
+        /* Step 3: Special case indicators */
+        switch (calctime) {
+            case 1000000: note.innerHTML = '(midnight)'; break;
+            case 1120000: note.innerHTML = '(noon)'; break;
+            default: note.innerHTML = ''; break;
+        }
+
+        /* Step 4: Convert to a string, stripping the leading '1' */
+        storage.value = calctime.toString().slice(1);
+
+    } catch (err) { }
+
+    return true;
+}
+
+// ////////////////////////////////////////////////////////////////////////
 // akForm_handleGroupClick
 //
 // @param groupId -- ID of the group who's been clicked
