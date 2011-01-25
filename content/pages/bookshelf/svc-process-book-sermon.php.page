@@ -36,17 +36,12 @@ $st->title = form_getField('sermon-edit-title');
 $st->book = $book;
 $st->author = $auth_user->uid;
 
-/* Step 3: Create file to store text */
-  /* Step 3.1: Setup */
-$notes_dir=config_getBookDir($st->book)."/".$deliver_date->format("Y");
-$notes_file=$deliver_date->format("m-d").".html";
-$st->text=$notes_dir."/".$notes_file;
-  /* Step 3.1: Make containing directory */
-if (!is_dir($notes_dir)) mkdir($notes_dir,0755,true);
-if (!is_dir($notes_dir)) {
-  /* Can't make storage dir? */
-  print '[[Failed to create directory for notes storage, notes will not be saved.]]';
+/* Step 3: Create file and store text */
+$notes_file = book_createAsset($book,"html",$deliver_date);
+if ($notes_file == null) {
+  print '[[Asset error: '.config_getLastError().']]';
 } else {
+  $st->text = $notes_file;
   file_put_contents($st->text,stripslashes(form_getField('sermon-edit-notes')));
 }
 
