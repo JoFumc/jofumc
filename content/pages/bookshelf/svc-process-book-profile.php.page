@@ -11,28 +11,21 @@
 require_once("library/core/util-db.php");
 require_once("library/core/util-auth.php");
 require_once("library/core/class-story.php");
+require_once("library/core/class-form.php");
 require_once("library/core/util-skin.php");
 auth_validate();
-
-function get_field($field)
-{
-  if (!isset($_REQUEST[$field])) return null;
-  if (null == $_REQUEST[$field]) return null;
-  if (strlen($_REQUEST[$field]) < 1) return null;
-  return $_REQUEST[$field];
-}
 
 /* Step 2: Compose fields into a new user struct */
   /* Step 2.1: Alloc new struct */
 $nu = new akUser($auth_user->name);
   /* Step 2.2: Email */
 $nu->uid = $auth_user->uid;
-$nu->email = get_field('profile-email');
-$nu->displayname = get_field('profile-display-name');
-$nu->fullname = get_field('profile-full-name');
-$nu->password = get_field('profile-password');
+$nu->email = form_getField('profile-email');
+$nu->displayname = form_getField('profile-display-name');
+$nu->fullname = form_getField('profile-full-name');
+$nu->password = form_getField('profile-password');
   /* Step 2.3: Skin */
-$nu->skin = get_field('profile-skin');
+$nu->skin = form_getField('profile-skin');
 if (null != $nu->skin) skin_storeName($nu->skin);
 
 /* Step 3: Start results story */
