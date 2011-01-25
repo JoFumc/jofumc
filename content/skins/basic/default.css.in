@@ -485,6 +485,11 @@ vertical-align:middle;
 }
 
   /* }}}3 Generic forms */
+  /* Form items {{{3 */ 
+.form-item-note {
+margin-left:8px;
+}
+  /* }}}3 Form items */
 /* }}}2 Forms */
 /* SECTION 6.2:Map blocks {{{2 */
 #define MAP_HEIGHT 350px
