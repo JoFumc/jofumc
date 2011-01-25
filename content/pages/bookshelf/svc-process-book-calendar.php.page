@@ -7,6 +7,7 @@
  *   A calendar edit has at least two components: the story of the event, 
  *   and the event itself.  The story gets saved into the 'stories' table,
  *   and the event parameters (day/time) get stored in the 'events' table.
+ *   Additionally, an announcement may be produced at the same time.
  */
 /* Step 0: Get current user auth info */
 require_once("library/core/util-db.php");
@@ -43,28 +44,17 @@ $st->book = $book;
 $st->author = $auth_user->uid;
 $st->series = "EVENT_STORY";
 
-    /* Step 2.2: Create file to store story text */
-     /* Step 2.2.1: Make containing directory */
-$notes_dir=config_getBookDir($st->book)."/".$start_date->format("Y-m");
-$file_iter=1;
-do {
-  $notes_file=sprintf("%s/%s-%03d.html",$notes_dir,$start_date->format("m-d"),$file_iter);
-  $file_iter++;
-} while (file_exists($notes_file));
-$st->text=$notes_file;
-if (!is_dir($notes_dir)) mkdir($notes_dir,0755,true);
-if (!is_dir($notes_dir)) {
-  /* Can't make storage dir? */
-  print '[[Failed to create directory for notes storage, notes will not be saved.]]';
+    /* Step 2.2: Create file and store story text */
+$notes_file = book_createAsset($st->book,"html");
+if ($notes_file == null) {
+  print '[[Asset error: '.config_getLastError().']]';
 } else {
+  $st->text = $notes_file;
   file_put_contents($st->text,stripslashes(form_getField('event-edit-notes')));
 }
 
-  /* Step 2.3: Push story into db */
+  /* Step 2.3: Push event story into db */
 $ev_story_id=db_saveStory($st);
-
-print 'Event story (id='.$ev_story_id.'): ';
-print_r($st);
 
 /* Step 3: Create event object from fields (if story succeeded) */
 $ev = new akEvent();
@@ -79,9 +69,6 @@ if (0 != $ev_story_id)
   $ev->endtime = $end_time;
 
   $ev_event_id = db_saveEvent($ev);
-  print 'Event (id='.$ev_event_id.'): ';
-  print_r($ev);
-
 }
 
 /* Step 4: Start results story */
@@ -97,10 +84,24 @@ if ($ev_event_id != 0) {
 /* Step 5: Handle announcement? */
 if ($do_announce == 'true') {
   $an = new akStoryEntry();
+  $an->title=form_getField('event-edit-announce-title');
   $an->book = BOOK_ID_ANNOUNCEMENTS;
   $an->author = $auth_user->uid;
-  $an->title=form_getField('event-edit-announce-title');
-  $
+
+  $an_notes = book_createAsset($an->book,"html");
+  if ($an_notes == null) {
+    print '[[Asset error: '.config_getLastError().']]';
+  } else {
+    $an->text = $an_notes;
+    file_put_contents($an->text,stripslashes(form_getField('event-edit-announce-text')));
+  }
+  if (db_saveStory($an)) {
+    $res->createSimpleChunk(STORY_CHUNK_SECTION,"Announcement Edit: Success");
+    $res->createSimpleChunk(STORY_CHUNK_TEXT,"Announcement info saved successfully to database, and should be available on the front page immediately.");
+  }else {
+    $res->createSimpleChunk(STORY_CHUNK_SECTION,"Announcement Edit: Failure");
+    $res->createSimpleChunk(STORY_CHUNK_TEXT,"The update failed during database update. Please try again later.");
+  }
 }
 
 /* Step 6: Print results */
