@@ -30,8 +30,8 @@ var ur_r5 = ur_tbl.children[0].children[5];
 story_head = ur_r2.children[0].children[0].children[1].innerHTML.replace(/\"/g,'');
 story_body = ur_r5.children[0].children[0].innerHTML;
 } catch (err) {
-story_head = 'Undefined';
-story_body = 'Unable to load remote site data.';
+story_head = 'Syndication Failure';
+story_body = 'Unable to load remote site data';
 }
 // Step 5: Print as a story 
 document.write('<a class="story-link" href="http://www.upperroom.org/Devotional" target="_blank" title="Read more on the Daily Devotional page at www.upperroom.org">');
