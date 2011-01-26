@@ -29,13 +29,14 @@ if (null == $eventList)
   $st->createSimpleChunk(STORY_CHUNK_TEXT,"FAILURE");
 } else foreach ($eventList as $event) {
   // Step 3.1: Emit a series header if it changes....
-  if ($lastDate != $event->startdate) {
-    $st->createSimpleChunk(STORY_CHUNK_SUBGROUP,$event->startdate);
-    $st->lastSimpleChunk->url = "/event.php?date=".$event->startdate;
-    $lastDate = $event->startdate;
+  $eventDate = new DateTime($event->startdate);
+  if ($lastDate != $eventDate->format("F")) {
+    $lastDate = $eventDate->format("F");
+    $st->createSimpleChunk(STORY_CHUNK_SUBGROUP,$lastDate);
+    $st->lastSimpleChunk->url = "/event.php?date=".$eventDate->format("Y-m");
   }
   // Step 3.2: Emit the event header
-  $st->createSimpleChunk(STORY_CHUNK_TEXT,$event->title);
+  $st->createSimpleChunk(STORY_CHUNK_TEXT,$eventDate->format("m-d").': '.$event->title);
   $st->lastSimpleChunk->url = "/event.php?id=".$event->id;
 }
 

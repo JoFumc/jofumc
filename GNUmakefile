@@ -26,8 +26,8 @@ include $(PROJECT_ROOT)/mk/common.mk
 ##
 all: push
 
-release::
-	PUBLISH_TARGET=release make push
+release:: 
+	PUBLISH_TARGET=release make clobber push
 
 local-all: toplevel-all
 	$(DESCEND)
