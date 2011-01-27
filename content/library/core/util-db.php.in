@@ -228,6 +228,103 @@ function db_sermonsByDateRange($bookid=null,$start_date='1000-01-01',$end_date='
 }
 
 /***********************************************
+ * db_getStoryById() -- Get a story with a given ID
+ *
+ * @param storyId DB ID of story to retrieve
+ *
+ * @returns akStory object built from DB entries.
+ * 
+ */
+function db_getStoryById($storyId=0)
+{
+  global $db_cxn;
+
+  /* Step 1: Connect to db if not connected */
+  if ((0 == $storyId) || !db_connect()) return null;
+
+  /* Step 2: build and issue the primary query */
+  $query = "SELECT * FROM ".TBL_STORIES." WHERE id=".$storyId.";";
+
+  $result=@$db_cxn->query($query);
+
+  /* Step 3: pull result into user object */
+  if ($result->num_rows == 0) {
+    $story = null;
+  } else {
+    $row = $result->fetch_assoc();
+    $story = new akStoryEntry($storyId);
+
+    $story->id = $row['id'];
+    $story->book = $row['book'];
+    $story->author = $row['author'];
+    $story->create_time = $row['create_time'];
+    $story->edit_time = $row['edit_time'];
+    $story->deliver_date = $row['deliver_date'];
+    $story->is_frozen = $row['is_frozen'];
+    $story->keywords = $row['keywords'];
+    $story->series = $row['series'];
+    $story->title = $row['title'];
+    $story->section_title = $row['section_title'];
+    $story->lede = $row['lede'];
+    $story->banner = $row['banner'];
+    $story->text = $row['text'];
+  }
+
+  /* Step 4: Gather any secondary chunks */
+    /* CLEAN: TODO: Implement me */
+
+  /* Step 5: clean up */
+  $result->free_result();
+    
+  /* Step 6: Return the cooked story object */
+  return $story->getCooked();
+}
+
+/***********************************************
+ * db_getEventById() -- Get an event with a given ID
+ *
+ * @param eventId DB ID of event to retrieve
+ *
+ * @returns akEvent object built from DB entries.
+ * 
+ */
+function db_getEventById($eventId=0)
+{
+  global $db_cxn;
+
+  /* Step 1: Connect to db if not connected */
+  if ((0 == $eventId) || !db_connect()) return null;
+
+  /* Step 2: build and issue the primary query */
+  $query = "SELECT * FROM ".TBL_EVENTS." WHERE id=".$eventId." LIMIT 1;";
+
+  $result=@$db_cxn->query($query);
+
+  /* Step 3: pull result into user object */
+  if ($result->num_rows == 0) {
+    $event = null;
+  } else {
+    $row = $result->fetch_assoc();
+    $event = new akEvent($row['book']);
+
+    $event->id = $row['id'];
+    $event->story = $row['story'];
+    $event->startdate = $row['startdate'];
+    $event->starttime = $row['starttime'];
+    $event->enddate = $row['enddate'];
+    $event->endtime = $row['endtime'];
+    $event->title = $row['title'];
+    $event->update = $row['update'];
+  }
+
+  /* Step 4: clean up */
+  $result->free_result();
+    
+  /* Step 5: Return the cooked event object */
+  return $event;
+}
+
+/***********************************************
  * db_announcementList() -- Get recent announcements
  *
  * @param maxcount Most announcements to retrieve
@@ -499,7 +596,6 @@ function db_saveStory($st=null)
   if ($st->series) {$c[]='series';$v[]="'".$st->series."'";}
   if ($st->title) {$c[]='title';$v[]="'".$st->title."'";}
   if ($st->section_title) {$c[]='section_title';$v[]="'".$st->section_title."'";}
-  $c[] = 'section'; $v[]=$st->section;
   if ($st->lede) {$c[]='lede';$v[]="'".$st->lede."'";}
   if ($st->banner) {$c[]='banner';$v[]="'".$st->banner."'";}
   if ($st->text) {$c[]='text';$v[]="'".$st->text."'";}

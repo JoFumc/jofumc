@@ -33,7 +33,7 @@ if (null == $eventList)
   if ($lastDate != $eventDate->format("F")) {
     $lastDate = $eventDate->format("F");
     $st->createSimpleChunk(STORY_CHUNK_SUBGROUP,$lastDate);
-    $st->lastSimpleChunk->url = "/event.php?date=".$eventDate->format("Y-m");
+    //$st->lastSimpleChunk->url = "/event.php?date=".$eventDate->format("Y-m");
   }
   // Step 3.2: Emit the event header
   $st->createSimpleChunk(STORY_CHUNK_TEXT,$eventDate->format("m-d").': '.$event->title);

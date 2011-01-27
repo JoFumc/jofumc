@@ -222,9 +222,18 @@ class akStory
   public $id;   // Story identifier (DOM)
   public $lastSimpleChunk; // Reference to last chunk added with createSimpleChunk
 
+  /* Public metadata */
+  public $book = null; // Book this story belongs to, if any
+  public $author=null;  // Author of this story
+  public $create_time=null; // When was the story created?
+  public $edit_time=null; // Time of last edit
+  public $deliver_date=null; // Date of presentation/delivery
+  public $is_frozen=true; // By default, all stories are frozen
+  public $keywords=''; // No keywords
+  public $series=null; // If part of a series, the series title
+
   /* Private members */
   private $chunks; // Array of story chunks 
-
 
   /* Event handlers */
       /* CLEAN: Add this */
@@ -266,16 +275,17 @@ class akStory
 }
 
 /*
- * akStoryEntry -- DB representation of a story section
+ * akStoryEntry -- DB representation of a story start
  *
  * NOTE: This is a representation of a story entry as
  * it exists in the DB, which is slightly different than
  * the story object above, in that several chunks are 
- * combined into one entry.  A story object becomes one
- * or more DB entries when stored, where a new entry is
- * made for each story section; a story section is marked
- * by a section header (STORY_TYPE_SECTION), or any image
- * that does not immediately follow a section header.
+ * possibly combined into one entry, with additional chunks
+ * stored as secondary DB entries in the chunk table.
+ * That is, to recreate a full story from the DB requires a
+ * single akStoryEntry object from the story table, combined with
+ * zero or more chunk objects from the chunks table.
+ *
  */
 class akStoryEntry
 {
@@ -291,7 +301,6 @@ class akStoryEntry
   public $series=null; // Title of series to which this story belongs
   public $title=null; // Story title (h2)
   public $section_title=null; // Title of this section of the story
-  public $section=0; // Ordinal location (numeric) within overall story of this entry
   public $lede=null; // Path to lede image (if any)
   public $banner=null; // Path to banner image (if any)
   public $text=null; // Path to text asset containing this story entry's text
@@ -313,9 +322,25 @@ class akStoryEntry
   /* Method to generate a story object from this entry */
   private function cook()
   {
-    /* 
-    $this->story = new akStory("story-id-".$this->id);
-    */
+    /* Create base object */
+    $s = new akStory("story-id-".$this->id);
+    /* Set metadata */
+    $s->book = $this->book;
+    $s->author = $this->author;
+    $s->create_time = $this->create_time;
+    $s->edit_time = $this->edit_time;
+    $s->deliver_date = $this->deliver_date;
+    $s->is_frozen = $this->is_frozen;
+    $s->keywords = $this->keywords;
+    $s->series = $this->series;
+    /* Create chunks from entries, in priority order */
+    if ($this->title) $s->createSimpleChunk(STORY_CHUNK_HEADLINE,$this->title);
+    if ($this->section_title) $s->createSimpleChunk(STORY_CHUNK_SECTION,$this->section_title);
+    if ($this->banner) $s->createSimpleChunk(STORY_CHUNK_BANNER,$this->banner);
+    if ($this->lede) $s->createSimpleChunk(STORY_CHUNK_LEDE,$this->lede);
+    if ($this->text) $s->createSimpleChunk(STORY_CHUNK_FILE,$this->text);
+    /* Set it to our private member */
+    $this->story = $s;
   }
 
   /* Method to emit the HTML for this story */
@@ -329,6 +354,13 @@ class akStoryEntry
   function save()
   {
 
+  }
+
+  /* Method to get the story object from this entry */
+  function getCooked()
+  {
+    $this->cook();
+    return $this->story;
   }
 }
 

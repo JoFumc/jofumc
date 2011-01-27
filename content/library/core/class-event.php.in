@@ -23,6 +23,7 @@ class akEvent
   public $starttime=0; // starting time of event
   public $enddate; // last day of event if multiday
   public $endtime; // ending time of event
+  public $update; // timestamp of last update
 
   /* Private members */
 
