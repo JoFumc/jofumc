@@ -14,7 +14,7 @@ require_once("library/core/util-db.php");
 
 // Step 1: Pull parameters
 $default_book = BOOK_ID_CALENDAR; // Default events book...
-$default_count = 5; // Default # to list
+$default_count = 8; // Default # to list
 $bookid = block_getParameter('event_book',$default_book);
 $count = block_getParameter('event_count',$default_count);
 
