@@ -14,6 +14,27 @@ require_once("library/core/class-user.php");
 $auth_user = new akUser('default');
 $auth_prev = null;
 
+/**
+ * rand_string() -- Generate a string of random length
+ *
+ * We'll generate a string of letters/numbers, with letters
+ * weighted 4 to 1.
+ */
+function rand_string($length=5)
+{
+  /* Step 1: First char is always a letter */
+  $s = chr(mt_rand(65,90));
+  for ($i=1;$i<$length;$i++) {
+    if (mt_rand(0,4) == 0) {
+      /* Number */
+      $s .= chr(mt_rand(48,57));
+    } else {
+      /* Letter (all uppercase) */
+      $s .= chr(mt_rand(65,90));
+    }
+  }
+  return $s;
+}
 
 /**
  * auth_validate() -- Validate an existing user/session
@@ -28,7 +49,7 @@ function auth_validate()
   $sess=config_getValue("session-id");
 
   /* Step 1: Degenerate case, don't bother */
-  if ($user=="default") return;
+  if ($user=="default") return false;
 
   /* Step 2: Had something, validate it */
     /* Step 2.1: Make sure the user exists at all */
@@ -41,18 +62,23 @@ function auth_validate()
     return false; 
   }
     /* Step 2.2: Check session id */
-  if (!db_validateUser($user,$sess)) {
-    /* Session expired. 
-     * Mark old user and leave current set to 'default' 
-     */
-    $auth_old = new akUser($user);
-    return false;
+  if ($valid[$user]->session == $sess) {
+    /* Session valid */
+    $auth_user = $valid[$user];
+    return true;
   }
 
-  /* Step 3: We're valid.  Set up and return */
-  $auth_user = $valid[$user];
-  return true;
+  /* Step 3: Session failure */
+    /* Step 3.1: Clear cookies */
+  setcookie("jof-session-id","default",time()+300000);
+  $_COOKIE["jof-session-id"] = "default";
+  setcookie("jof-user","default",time()+300000);
+  $_COOKIE["jof-user"] = "default";
 
+    /* Step 3.2: Redirect to session failure page */
+  core_redirect("/session_expired.php");
+
+  return false;
 }
 
 /**
@@ -67,7 +93,6 @@ function auth_login()
   /* Step 1: Get info from URL/form/cookies */
   $user=config_getValue("username");
   $pass=config_getValue("password");
-  
 
   /* Step 2: Validate against the DB */
   $valid=db_userlist($user,$pass);
@@ -77,18 +102,19 @@ function auth_login()
     return false;
   }
 
-  /* Step 3: Generate session key */
-	/* CLEAN: TODO */
-  /* setcookie("jof-session-id",generated key,time()+3000000); */
-  setcookie("jof-session-id",$valid[$user]->name,time()+300000);
-  $_COOKIE["jof-session-id"] = $valid[$user]->name;
+  /* Step 3: Validated.  Save user info */
+  $auth_user = $valid[$user];
 
-  /* Step 4: Set cookies for subsequent requests */
-  setcookie("jof-user",$valid[$user]->name,time()+300000);
-  $_COOKIE["jof-user"] = $valid[$user]->name;
+  /* Step 4: Generate/save new session key */
+  $auth_user->session = rand_string(20);
+  db_updateUserSession($auth_user->uid,$auth_user->session);
 
-  /* Step 5: Cache our reference */ 
-  $auth_user=$valid[$user];
+  /* Step 5: Set cookies for subsequent requests */
+  setcookie("jof-session-id",$auth_user->session,time()+300000);
+  $_COOKIE["jof-session-id"] = $auth_user->session;
+  setcookie("jof-user",$auth_user->name,time()+300000);
+  $_COOKIE["jof-user"] = $auth_user->name;
+
   return true;
 }
 

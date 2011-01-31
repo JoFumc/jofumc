@@ -112,6 +112,7 @@ function db_userlist($name=null,$pass=null)
       $userlist[$row['username']]->uid = $row['id'];
       $userlist[$row['username']]->skin = $row['skin'];
       $userlist[$row['username']]->editor = $row['editor'];
+      $userlist[$row['username']]->session = $row['session'];
         /* NOTE: Leave password field null */
     }
   }
@@ -474,30 +475,6 @@ function db_eventsUpcoming($bookid=null,$count=5)
 }
 
 /***********************************************
- * db_validateUser() -- Validate a user session
- *
- * @param name Username to check
- * @param sess Session key to check
- *
- * CLEAN: Scrub input!
- */
-function db_validateUser($name="default",$sess="")
-{
-  /* Step 1: degenerate case; default needs no session */
-  if ($name=="default") return true; 
-
-  /* Step 2: DB lookup/update session... */
-	/* CLEAN: TODO */
-
-  /* Step 3: Send back results */
-	/* CLEAN: Change this hack */
-  if ($name==$sess) return true;
-
-  /* Step 4: No match */
-  return false;
-}
-
-/***********************************************
  * db_updateUser() -- Change a user's info in DB
  *
  * @param nu New (updated) user object
@@ -546,6 +523,11 @@ function db_updateUser($nu=null,$ou=null)
     $changed=true;
     $query .= "`skin` = '".$nu->skin."', ";
   }
+    /* Step 3.6: Session */
+  if ((null != $nu->session) && ($nu->session != $ou->session)) {
+    $changed=true;
+    $query .= "`session` = '".$nu->session."', ";
+  }
 
   /* Step 4: Finish query */
   $query .= "`ctime` = NOW() WHERE `id`=".$ou->uid;
@@ -554,6 +536,43 @@ function db_updateUser($nu=null,$ou=null)
   if ($changed) {
     return $db_cxn->query($query);
   }
+
+  return true;
+}
+
+/***********************************************
+ * db_updateUserSession() -- Change a user's session key in DB
+ *
+ * @param nu New (updated) user object
+ */
+function db_updateUserSession($uid = null, $key = null)
+{
+  global $db_cxn;
+
+  /* Step 0: Early validation */
+  if ($uid == null) {
+    return false;
+  }
+
+  if ($key == null) $session_key = "default";
+  else $session_key = $key;
+
+  /* Step 1: Connect to db if not connected */
+  if (!db_connect()) return false;
+
+  /* Step 2: start query */
+  $query = "UPDATE `".TBL_USERS."` SET ";
+
+  /* Step 3: Add a bit for session field */
+  $query .= "`session` = '".$session_key."', ";
+
+  /* Step 4: Finish query */
+  $query .= "`ctime` = NOW() WHERE `id`=".$uid;
+
+  print 'SQL is: '.$query;
+
+  /* Step 5: Do it */
+  return $db_cxn->query($query);
 
   return true;
 }

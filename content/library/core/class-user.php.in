@@ -26,6 +26,7 @@ class akUser
   /* Other members */
   public $password; // User's password in db
   public $editor;   // Is user an editor of anything?
+  public $session;  // User's active session ID
 
   /* Constructor */
   function __construct($name=null,$displayname=null,$fullname=null)
@@ -41,7 +42,7 @@ class akUser
     $this->skin = 'default';
     $this->uid = 0;
     $this->editor = 0;
-
+    $this->session = null;
   }
 }
 ?>
