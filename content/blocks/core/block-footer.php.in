@@ -9,7 +9,7 @@ skin_include("block-footer-pre.php");
 </div>
 <div id="footer-contact-div">
 <span class="footer-text">
-<a href="/map.php" title="Directions to the Church">7301 County Road 110, Round Rock, Texas</a>, (512)&nbsp;255-8403
+<a href="/map.php" title="Directions to the Church">7301 County Road 110, Round Rock, Texas, 78634</a>, (512)&nbsp;255-8403
 </span>
 <span class="footer-text">
 <?php
