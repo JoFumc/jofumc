@@ -1,4 +1,6 @@
-<h1 class="story-headline">Oops.</h1>
-<span class="story-span">
-Something went wrong, and we couldn't find what you were looking for.
-</span>
+<?php
+$oops = new akStory();
+$oops->createSimpleChunk(STORY_CHUNK_HEADLINE,"Oops");
+$oops->createSimpleChunk(STORY_CHUNK_TEXT,"Something went wrong, and we couldn't find what you were looking for.");
+$oops->emit();
+?>

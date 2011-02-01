@@ -1,7 +1,8 @@
-<div id="logout-story-div" class="story-div">
-<h1 class="story-headline">Logout</h1>
-<h2 class="story-headline">Success</h2>
-<span class="story-span">
-You have been successfully logged out.
-</span>
-</div>
+<?php
+$logStory = new akStory();
+
+$logStory->createSimpleChunk(STORY_CHUNK_HEADLINE,"Logout");
+$logStory->createSimpleChunk(STORY_CHUNK_SECTION,"Success");
+$logStory->createSimpleChunk(STORY_CHUNK_TEXT,"You have been successfully logged out");
+$logStory->emit();
+?>
