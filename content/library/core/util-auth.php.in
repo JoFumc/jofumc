@@ -127,13 +127,23 @@ function auth_login()
 function auth_logout()
 {
   global $auth_user;
-  /* Step 1: Clear any cookies */
+  /* Step 1: Destroy session in DB */
+  $user=config_getValue("user");
+  if ((null!=$user) && ("default" != $user))
+  {
+    $valid=db_userlist($user); 
+    if ((null != $valid) || (array_key_exists($user,$valid))) {
+      db_updateUserSession($valid[$user]->uid,null);
+    }
+  }
+
+  /* Step 2: Clear any cookies */
   setcookie("jof-user","default",time()-3600);
   $_COOKIE["jof-user"] = "default";
   setcookie("jof-session-id","",time()-3600);
   $_COOKIE["jof-session-id"] = "";
 
-  /* Step 2: Wipe the auth user */
+  /* Step 3: Wipe the auth user */
   if ($auth_user->name != 'default')
   {
     $auth_user = new akUser('default');

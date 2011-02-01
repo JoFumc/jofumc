@@ -569,8 +569,6 @@ function db_updateUserSession($uid = null, $key = null)
   /* Step 4: Finish query */
   $query .= "`ctime` = NOW() WHERE `id`=".$uid;
 
-  print 'SQL is: '.$query;
-
   /* Step 5: Do it */
   return $db_cxn->query($query);
 
