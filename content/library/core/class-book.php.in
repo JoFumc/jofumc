@@ -12,6 +12,7 @@ define("BOOK_TYPE_USERS","users");      // Book of users
 define("BOOK_TYPE_PROFILE","profile");  // Book of profile data
 define("BOOK_TYPE_ALBUM","album");      // Book of pictures
 define("BOOK_TYPE_BOOK","book");        // Book of books
+define("BOOK_TYPE_PAGE","page");        // Book of page content 
 define("BOOK_TYPE_DIVIDER","divider");  // Separates groups on shelf
 
  // Custom book IDs (special IDs are less than 1000 )
