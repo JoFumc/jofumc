@@ -69,7 +69,33 @@ class akScrap
     }
   }
 
+  /* Method to emit HTML for this scrap */
+    /* NOTE: Because scraps are (usually) binary objects and not HTML
+     * objects, we support multiple emit() methods.  The "default" emit
+     * method just calls out to one of the others, based on content type.
+     * See the other emit_xxx() methods for descriptions.
+     */
+  function emit()
+  {
+    /* Step 1: Get major/minor content type breakdown */
+    list($major,$minor) = explode('/', $this->content_type);
 
-
+    /* Step 2: Switch on major type */
+    switch ($major) {
+      case 'image': {
+        /* For images, 'normal' is full size inline, constrained by the skin's
+         * hints.  We reference the original file, though.
+         */
+        print akimg_html_constrained($this->path);
+        break;
+      }
+      default: {
+        /* For everything else, 'normal' is an icon representing the 
+         * file type.
+         */
+        print 
+      }
+    }
+  }
 }
 ?>
