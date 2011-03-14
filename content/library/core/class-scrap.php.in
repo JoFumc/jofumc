@@ -7,6 +7,10 @@
  * A scrap object is stored in the story table in the DB, but we repurpose some of 
  * the fields (and don't consider secondary chunks).
  ***************************************************************************/
+/*
+ * INCLUDES
+ */
+require_once("library/core/class-story.php");
 
 /*
  * CONSTANTS
@@ -96,6 +100,29 @@ class akScrap
         print 
       }
     }
+  }
+
+  /* Method to save scrap into DB */
+  function save()
+  {
+    /* First, convert to akStoryEntry */
+    $st = new akStoryEntry();
+    $st->book = $this->book;
+    $st->author = $this->author;
+    $st->create_time = $this->create_time;
+    $st->edit_time = $this->edit_time;
+    $st->deliver_date = $this->reference_date;
+    $st->is_frozen = $this->is_frozen;
+    $st->keywords = implode(',',$this->tags);
+    $st->series = $this->series;
+    $st->title = $this->caption;
+    $st->section_title = $this->content_type;
+    $st->lede = $this->thumb;
+    $st->banner = null; // $this->altimg;
+    $st->text = $this->path;
+
+    /* Now, save it */
+    $st->save();
   }
 }
 ?>

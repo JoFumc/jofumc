@@ -22,6 +22,7 @@ define("BOOK_ID_ANNOUNCEMENTS",102); // Front page announcements
 define("BOOK_ID_SERMONS",103); // Sermon series
 define("BOOK_ID_MUSIC",104); // Worship songs
 define("BOOK_ID_CALENDAR",105); // Calendar/events
+define("BOOK_ID_BULLETINS",106); // Bulletins album
 
 
 

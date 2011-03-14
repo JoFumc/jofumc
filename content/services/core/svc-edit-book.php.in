@@ -40,6 +40,9 @@ if ($bookid < 1000)
     case BOOK_ID_SERMONS:
       @include("svc-edit-book-sermon.php");
       break;
+    case BOOK_ID_BULLETINS:
+      @include("svc-edit-book-album.php");
+      break;
     case BOOK_ID_CALENDAR:
       @include("svc-edit-book-calendar.php");
       break;

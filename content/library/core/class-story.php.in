@@ -2,6 +2,10 @@
 /****************************************************************************
  * class-story.php -- Define object classes for stories
  ***************************************************************************/
+/*
+ * INCLUDES
+ */
+require_once("library/core/util-db.php");
 
 /*
  * CONSTANTS
@@ -353,7 +357,7 @@ class akStoryEntry
   /* Method to save this story entry in the DB */
   function save()
   {
-
+    db_saveStory($this);
   }
 
   /* Method to get the story object from this entry */
