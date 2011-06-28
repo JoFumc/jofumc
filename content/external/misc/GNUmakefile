@@ -21,8 +21,10 @@ include $(PROJECT_ROOT)/mk/common.mk
 ## Section 2: Objects/targets
 ##
 IMAGES=$(wildcard *.png)
+JSOBJS=$(wildcard *.js)
+SWFOBJS=$(wildcard *.swf)
 
-OBJS=$(PHPOBJS) $(JSOBJS) $(HTMLOBJS) $(CSSOBJS)
+OBJS=$(PHPOBJS) $(JSOBJS) $(HTMLOBJS) $(CSSOBJS) $(SWFOBJS)
 
 ##
 ## Section 3: Common rules
