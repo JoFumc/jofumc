@@ -61,6 +61,9 @@ else
 
    /* Step 2.2: Switch on type */
    switch ($book->type) {
+     case BOOK_TYPE_ALBUM:
+      @include("svc-edit-book-album.php");
+      break;
      default: {
        print 'No editor configured for book type "'.$book->type.'", sorry about that.';
        break;
