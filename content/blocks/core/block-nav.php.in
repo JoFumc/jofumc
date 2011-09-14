@@ -16,8 +16,14 @@ if ($auth_user->name=='default')
 else
 {
   $topnav->createItem("top-nav-meta","Logout","/logout.php?auth-action=logout");
-  $book = new akMenuItem("top-nav-meta","Bookshelf","/bookshelf.php");
-  $topnav->adopt($book);
+  $account = new akMenuItem("top-nav-meta","Account","/account.php");
+  $topnav->adopt($account);
+   /* ACCOUNT popup */
+  $accountPopup = new akMenu("menu-popup","top-nav-account-popup");
+  $accountPopup->createSimpleItem("Bookshelf","/bookshelf.php");
+  $accountPopup->createSimpleItem("Profile","/account-profile.php");
+  $accountPopup->createSimpleItem("Preferences", "/account-preferences.php");
+  $account->adopt($accountPopup);
 }
 // Add regular items
 $topnav->createSimpleItem("Home","/","Journey of Faith home");
