@@ -35,6 +35,7 @@ define("FORM_ITEM_RADIO","radio");
 define("FORM_ITEM_RAW","raw");
 define("FORM_ITEM_DATE","date");
 define("FORM_ITEM_TIME","time");
+define("FORM_ITEM_IMAGE","image");
 
 /*
  * GLOBAL FUNCTIONS
