@@ -5,20 +5,18 @@
 Journey of Faith<br/>United Methodist Church
 </span>
 <span class="block-text">
-7301 County Road 110,<br/>Round Rock, Texas 
+PO Box 1343, RR 78680-1343<br/>
 </span>
 <span class="block-text">
-(512) 255-8403
+(512) 255-8403<br/>
 </span>
+<span class="block-text">
+Worship 10:30am Sundays <a href="/map.php" title="Directions to the Church">(map)</a>
+</span>
+<br/>
 <span class="block-text">
 Pastor Glenda Whitehead
 <?php html_mailto("glenda@jofumc.net","Email Glenda"); ?>
-</span>
-<span class="block-text">
-Worship 10:30am Sundays
-</span>
-<span class="block-text">
-<a href="/announcements.php" title="Recent News and Announcements">Recent Announcements</a>
 </span>
 <span class="block-text">
 Website questions or feedback? Email
