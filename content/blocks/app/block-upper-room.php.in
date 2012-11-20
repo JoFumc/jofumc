@@ -29,33 +29,11 @@ $devo = $scripsnip->nextSibling->textContent;;
 // Step 3: Create
 ?>
 <?php
-// Step 3: Hide the original table
-//var ur_div;
-//var ur_tbl;
-//var story_head;
-//var story_body;
-//try {
-//ur_div = document.getElementById('block-upper-room');
-//ur_tbl = ur_div.children[1];
-//ur_tbl.style.display='none';
-//// Step 4: Extract the text
-//var ur_r2 = ur_tbl.children[0].children[2];
-//var ur_r5 = ur_tbl.children[0].children[5];
-//story_head = ur_r2.children[0].children[0].children[1].innerHTML.replace(/\"/g,'');
-//story_body = ur_r5.children[0].children[0].innerHTML;
-//} catch (err) {
-//story_head = 'Syndication Failure';
-//story_body = 'Unable to load remote site data';
-//}
-// Step 5: Print as a story 
-//document.write('<a class="story-link" href="http://www.upperroom.org/Devotional" target="_blank" title="Read more on the Daily Devotional page at www.upperroom.org">');
-//document.write('<h4 class="story-headline">' + story_head + "</h4>");
-//document.writeln('</a>');
-//document.write('<span class="story-text">' + story_body + "...");
-//document.write('<a class="story-link" href="http://www.upperroom.org/Devotional" target="_blank" title="Go to the Daily Devotional page at www.upperroom.org">');
-//document.write('<span class="story-meta">');
-//document.write('(read more at The Upper Room&reg;)');
-//document.writeln('</a></span></span>');
-//</script>
-//</div>
+
+$st = new akStory();
+
+$st->createSimpleChunk(STORY_CHUNK_ERROR,"Syndication Failure");
+$st->createSimpleChunk(STORY_CHUNK_TEXT,"Whoops, our bad.  We're working on getting things all reconnected, but in the meantime, you can go directly to <a href=" . $upperurl . ">the devotional for today.</a><br/><br/>");
+$st->emit();
 ?>
+</div>
