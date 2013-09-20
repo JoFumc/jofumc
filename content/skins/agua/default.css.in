@@ -364,7 +364,7 @@ margin:0px auto;
 li.partner-nav-extern {
 float:left;
 border:0px;
-margin-left:6px;
+margin-left:4px;
 padding-top:2px;
 height:36px;
 }
