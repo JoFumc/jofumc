@@ -41,6 +41,7 @@ $topnav->adopt($mission);
 $aboutPopup = new akMenu("menu-popup","top-nav-about-popup");
 $aboutPopup->createSimpleItem("Overview","/about.php");
 $aboutPopup->createSimpleItem("Staff","/about-staff.php");
+$aboutPopup->createSimpleItem("Committees","/about-committees.php");
 $aboutPopup->createSimpleItem("Affiliations","/about-affiliations.php");
 $about->adopt($aboutPopup);
 
