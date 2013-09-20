@@ -18,7 +18,6 @@ $nav->createSimpleItem("Committees","about-committees.php","Committees in the ch
 $nav->createSimpleItem("Affiliations","about-affiliations.php","Groups with whom we are affiliated");
 
 $aboutCommittees->createSimpleChunk(STORY_CHUNK_OBJECT,"about-menu",$nav);
-$aboutCommittees->createSimpleChunk(STORY_CHUNK_SECTION,"");
 $aboutCommittees->createSimpleChunk(STORY_CHUNK_FILE,"assets/pages/about/committees-overview.html");
 $aboutCommittees->emit();
 ?>
