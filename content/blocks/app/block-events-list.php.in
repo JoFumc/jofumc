@@ -26,7 +26,7 @@ $lastDate='';
 $st = new akStory();
 if (null == $eventList)
 {
-  $st->createSimpleChunk(STORY_CHUNK_TEXT,"FAILURE");
+  $st->createSimpleChunk(STORY_CHUNK_TEXT,"No upcoming events posted.");
 } else foreach ($eventList as $event) {
   // Step 3.1: Emit a series header if it changes....
   $eventDate = new DateTime($event->startdate);
