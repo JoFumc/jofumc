@@ -43,6 +43,7 @@ $aboutPopup->createSimpleItem("Overview","/about.php");
 $aboutPopup->createSimpleItem("Staff","/about-staff.php");
 $aboutPopup->createSimpleItem("Committees","/about-committees.php");
 $aboutPopup->createSimpleItem("Affiliations","/about-affiliations.php");
+$aboutPopup->createSimpleItem("Support","/about-support-us.php");
 $about->adopt($aboutPopup);
 
   /* PROGRAMS */

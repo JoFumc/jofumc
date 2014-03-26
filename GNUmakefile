@@ -52,10 +52,11 @@ showcfg::
 	@echo PROJECT_TOPDIR=$(PROJECT_TOPDIR)
 	@echo PROJECT_CURDIR=$(PROJECT_CURDIR)
 	@echo PROJECT_SUBDIR=$(PROJECT_SUBDIR)
+	@echo PUSH_RSYNC=${PUSH_RSYNC}
 	$(DESCEND)
 
 push:: install
-	$(SAY_IT) "[ PUBLISH ] JOFRR staged content --> $(PUBLISH_ROOT)"
+	$(SAY_IT) "[ PUBLISH ] JOFUMC staged content --> $(PUBLISH_ROOT)"
 	(cd staging/content && rsync -av -e ssh . $(PUSH_RSYNC))
 
 publish:: install webfs

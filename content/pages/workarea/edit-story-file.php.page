@@ -7,6 +7,7 @@ skin_include("edit-story-file-pre.php");
 // Step 1: Get args and setup
 $ref = $_SERVER['HTTP_REFERER'];
 $file = $_REQUEST['file'];
+
 $ok_to_go = true;
 $intro = new akStory();
 $intro->createSimpleChunk(STORY_CHUNK_HEADLINE,"HTML text editor");
@@ -20,12 +21,27 @@ if (!is_authenticated()) {
   $intro->createSimpleChunk(STORY_CHUNK_TEXT,"You must be logged in and have sufficient permissions before editing this file."); 
   $intro->createSimpleChunk(STORY_CHUNK_TEXT,"Try logging in again, or contact your administrator.");
 }
-  // Step 2.2: File must exist
+  // Step 2.2: If we're being asked to create, run some additional checks
+if (!file_exists($file)) {
+  // Validate target is in our assets and has no '..'
+  if ((substr($file,0,7) === 'assets/') && (false === strpos($file,'..'))) {
+    // All good; try to create the path and file
+    mkdir(dirname($file),0755,true);
+    file_put_contents($file,'TEMPLATE FILE');
+  } else {
+    $ok_to_go = false;
+    $intro->createSimpleChunk(STORY_CHUNK_SECTION,"ERROR: Bad file for creation.");
+    $intro->createSimpleChunk(STORY_CHUNK_TEXT,"Well, we do have a problem.  You asked me to create \"".$file."\", but I can't do that.");
+    $intro->createSimpleChunk(STORY_CHUNK_TEXT,"Verify the file that you are attempting to edit and try again.");
+  }
+}
+
+  // Step 2.3: File must exist at this point
 if ($ok_to_go && !is_readable($file)) {
   $ok_to_go = false;
   $intro->createSimpleChunk(STORY_CHUNK_SECTION,"ERROR: File Not Found");
   $intro->createSimpleChunk(STORY_CHUNK_TEXT,"Well, something went wrong here.  I can't seem to find \"".$file."\", and we can't really expect to edit something we can't find, right?");
-  $intro->createSimpleChunk(STORY_CHUNK_TEXT,"Verify the file that you are attempting to edit and try again.");
+  $intro->createSimpleChunk(STORY_CHUNK_TEXT,"Verify the file that you are attempting to edit and try again, or you can try to <a href=\"/edit-story-file.php?create=true&file=$file\" title=\"Create new file\">create the file</a>.");
   $intro->createSimpleChunk(STORY_CHUNK_META,"(You probably followed a link here, though, so odds are it's really my fault....)");
 }
 
