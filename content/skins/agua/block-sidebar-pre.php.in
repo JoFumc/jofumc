@@ -7,8 +7,8 @@ $ser = new akBlock(BLOCK_TYPE_SIDEBAR,"blocks/app/block-sermon-list.php","Sermon
 //$ser->setTitleLink("/sermon.php","Sermon Archive");
 $ser->emit();
 // Staff blogs
-$blogs = new akBlock(BLOCK_TYPE_SIDEBAR,"blocks/app/block-staff-blog.php","Staff Blogs");
-$blogs->emit();
+//$blogs = new akBlock(BLOCK_TYPE_SIDEBAR,"blocks/app/block-staff-blog.php","Staff Blogs");
+//$blogs->emit();
 // Upcoming events 
 $events = new akBlock(BLOCK_TYPE_SIDEBAR,"blocks/app/block-events-list.php","Looking Forward");
 $events->emit();
