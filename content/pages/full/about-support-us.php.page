@@ -7,7 +7,7 @@ skin_include("about-support-us-pre.php");
 require_once("library/core/class-story.php");
 $aboutSupport = new akStory();
   /* HEADLINE */
-$aboutSupport->createSimpleChunk(STORY_CHUNK_HEADLINE,"Support Journey of Faith online");
+$aboutSupport->createSimpleChunk(STORY_CHUNK_HEADLINE,"Support Journey of Faith");
 /* Step 2: Create "about" navigation menu */
 $nav = new akMenu();
 $nav->dom_id = "about-menu";

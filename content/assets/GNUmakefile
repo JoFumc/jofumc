@@ -9,7 +9,7 @@
 firstrule: all
 PROJECT=jofrr
 PROJECT_ROOT=../..
-SUBDIRS=random_pool
+SUBDIRS=random_pool img
 
 ##
 ## Section 2: includes
