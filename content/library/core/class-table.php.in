@@ -30,7 +30,7 @@ class akTable
 
 
   /* Constructor */
-  function __construct($newtitle='Table',$columns=1,$rows=1)
+  function __construct($newtitle='Table')
   {
     $this->dom_id = '';
     $this->title = $newtitle;
@@ -41,6 +41,10 @@ class akTable
   /* Method to load table data from a backing file */
   function load($sourcefile=null)
   {
+    if ($sourcefile == null) {
+      /* BARF. */
+      return;
+    }
     $this->backing = $sourcefile;
   }
 
@@ -52,6 +56,10 @@ class akTable
   /* Method to emit the HTML for a table */
   function emit()
   {
+    print $this->title;
+    print '<h1>Laproscopy!</h1>';
+    print '<table>';
+    print '</table>';
   }
 
 
