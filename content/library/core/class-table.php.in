@@ -1,0 +1,69 @@
+<?php
+/****************************************************************************
+ * class-table.php -- Define a dynamic spreadsheet-style table.
+ ***************************************************************************/
+/*
+ * INCLUDES
+ */
+require_once("library/core/util-auth.php");
+
+
+/*
+ * akTable -- Basic table object
+ *
+ * NOTE: The table cell array may contain values that are outside
+ *       the range defined by $rows/$colums, but we control the render
+ *       based on the metadata, not the contents.
+ */
+class akTable 
+{
+  public $dom_id;   // DOM element ID
+  public $title;    // Table title
+  public $height;   // Number of table rows
+  public $width;    // Number of table columns
+  public $backing;  // Backing store (filepath)
+  public $editable; // Render as editable? 
+  public $column_headers; 
+  public $row_headers;
+
+  /* Private members */
+
+
+  /* Constructor */
+  function __construct($newtitle='Table')
+  {
+    $this->dom_id = '';
+    $this->title = $newtitle;
+    $this->height = 1;
+    $this->width = 1; 
+  }
+
+  /* Method to load table data from a backing file */
+  function load($sourcefile=null)
+  {
+    if ($sourcefile == null) {
+      /* BARF. */
+      return;
+    }
+    $this->backing = $sourcefile;
+  }
+
+  /* Method to save a table to its backing store */
+  function save()
+  {
+  }
+
+  /* Method to emit the HTML for a table */
+  function emit()
+  {
+    print $this->title;
+    print '<h1>Laproscopy!</h1>';
+    print '<table>';
+    print '</table>';
+  }
+
+
+}
+
+
+?>

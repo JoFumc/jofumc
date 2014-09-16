@@ -1,0 +1,16 @@
+<?php
+// If the skin has pre-content setup, include it here.
+require_once("library/core/util-skin.php");
+skin_include("finance-pre.php");
+?>
+<?php
+require_once("library/core/class-table.php");
+$financials = new akTable();
+$financials->load('assets/text/pages/financials.table');
+$financials->emit();
+?>
+<div class="closure-div"></div>
+<?php
+// If the skin has post-content setup, include it here.
+skin_include("finance-post.php");
+?>
