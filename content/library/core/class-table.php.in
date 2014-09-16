@@ -25,40 +25,60 @@ class akTable
   public $editable; // Render as editable? 
   public $column_headers; 
   public $row_headers;
+  public $cells;    // The array of cells
 
   /* Private members */
 
 
-  /* Constructor */
-  function __construct($newtitle='Table')
+  /* Construction */
+    /* See the factory methods below, since we can't
+       simply overload the constructor (forms are 
+       different, but the types of args are the same!)
+      */
+  public function __construct($newtitle='Table')
   {
-    $this->dom_id = '';
-    $this->title = $newtitle;
-    $this->height = 1;
-    $this->width = 1; 
+    $this->cells = array(array());
+    $this->column_headers= array("CHeading");
+    $this->row_headers= array("RHeading");
   }
 
-  /* Method to load table data from a backing file */
-  function load($sourcefile=null)
+  public static function fromScratch($newTitle='Table',$colCount='1',$rowCount='1') 
   {
-    if ($sourcefile == null) {
-      /* BARF. */
-      return;
-    }
-    $this->backing = $sourcefile;
+    $instance = new self();
+    $instance->title = $newTitle;
+    $instance->width = $colCount;
+    $instance->height = $rowCount;
+    $instance->backing = null;
+    return $instance;
   }
 
-  /* Method to save a table to its backing store */
-  function save()
+  public static function fromFile($backingPath=null) 
   {
+
   }
+
 
   /* Method to emit the HTML for a table */
   function emit()
   {
     print $this->title;
-    print '<h1>Laproscopy!</h1>';
     print '<table>';
+    /* Header row */
+    print '<tr>';
+    print '<th></th>';
+    for ($c=0;$c < $this->width; $c++ ) {
+      print '<th>'.$this->column_headers[$c].'</th>';
+    }
+    print '</tr>';
+    /* Content rows */
+    for ($r = 0; $r < $this->height; $r++) {
+      print '<tr>';
+        print '<th>'.$this->row_headers[$r].'</th>';
+        for ($c =0; $c < $this->width; $c++) {
+          print '<td>'.$this->cells[$c][$r].'</td>';
+        }
+      print '</tr>';
+    }
     print '</table>';
   }
 
