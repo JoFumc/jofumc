@@ -42,7 +42,7 @@ local-clobber: local-clean
 clobber:: local-clobber
 	$(DESCEND)
 
-install: all install-assets
+install: all 
 	$(NOTHING)
 
 install-assets: all
