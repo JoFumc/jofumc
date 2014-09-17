@@ -47,6 +47,9 @@ install: all
 	@$(foreach obj,$(OBJS),$(call TOOL_INSTALL,$(obj),0644,$(STAGING_ROOT)/$(PROJECT_SUBDIR)))
 	$(DESCEND)
 
+install-assets::
+	$(DESCEND)
+
 showcfg::
 	@echo PHPOBJS=$(PHPOBJS)
 	@echo PROJECT_ROOT=$(PROJECT_ROOT)

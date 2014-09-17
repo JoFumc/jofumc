@@ -8,8 +8,8 @@
 ##
 firstrule: all
 PROJECT=jofrr
-PROJECT_ROOT=../..
-SUBDIRS=random_pool img text
+PROJECT_ROOT=../../..
+SUBDIRS=pages
 
 ##
 ## Section 2: includes
@@ -22,13 +22,19 @@ include $(PROJECT_ROOT)/mk/common.mk
 ##
 PHPSRCS=$(wildcard *.php.in)
 PHPOBJS=$(PHPSRCS:%.php.in=%.php)
+CSSSRCS=$(wildcard *.css.in)
+CSSOBJS=$(CSSSRCS:%.css.in=%.css)
+JSSRCS=$(wildcard *.js.in)
+JSOBJS=$(JSSRCS:%.js.in=%.js)
 
-OBJS=$(PHPOBJS) $(JSOBJS) $(HTMLOBJS)
+IMAGES=$(wildcard *.gif) $(wildcard *.png) $(wildcard *.jpg) $(wildcard *.ico)
+
+OBJS=$(PHPOBJS) $(JSOBJS) $(HTMLOBJS) $(CSSOBJS)
 
 ##
 ## Section 3: Common rules
 ##
-all: $(OBJS)
+all: $(IMAGES)
 	$(DESCEND)
 
 local-clean::
@@ -42,12 +48,10 @@ local-clobber: local-clean
 clobber:: local-clobber
 	$(DESCEND)
 
-install: all install-assets
-	$(NOTHING)
-
 install-assets: all
 	$(call TOOL_MKDIR,$(STAGING_ROOT)/$(PROJECT_SUBDIR),0755)
 	@$(foreach obj,$(OBJS),$(call TOOL_INSTALL,$(obj),0644,$(STAGING_ROOT)/$(PROJECT_SUBDIR)))
+	@$(foreach img,$(IMAGES),$(call TOOL_INSTALL,$(img),0644,$(STAGING_ROOT)/$(PROJECT_SUBDIR)))
 	$(DESCEND)
 
 showcfg::

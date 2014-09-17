@@ -42,6 +42,9 @@ clobber::
 install:: toplevel-install
 	$(DESCEND)
 
+install-assets:: toplevel-install-assets
+	$(DESCEND)
+
 webfs::
 	@echo -n "[  WEBFS  ] "
 	@if [ ! -d $(PUBLISH_ROOT) ] ; then echo "remounting" ; sudo /etc/init.d/webfs start ; else echo "mounted" ; fi
