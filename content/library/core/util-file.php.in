@@ -17,7 +17,7 @@ class akTextFile {
   private $handle;
 
   /* Base constructor.  Args are same as fopen() */
-  public function __construct($path,$access) {
+  public function __construct($path,$access="r") {
      $this->handle = @fopen($path,$access);
   }
 
@@ -30,20 +30,20 @@ class akTextFile {
 
      Return FALSE if the line should be ignored.
    */
-  private function decodeText($line) {
+  public function decodeText($line) {
     return $line;
   }
-  private function encodeText($line) {
+  public function encodeText($line) {
     return $line;
   }
 
   public function getLine($rawRead=false)
   {
-    if ((FALSE==$this->handle) || (feof($$this->handle)) return null;
+    if ((FALSE==$this->handle) || (feof($this->handle))) return null;
 
     while (!feof($this->handle)) {
       /* Get a line */
-      if (($buffer = fgets($handle,512)) == false) return null;
+      if (($buffer = fgets($this->handle,512)) == false) return null;
       /* If we're reading raw, just return it */
       if ($rawRead) return $buffer;
       /* Otherwise, decode and check for discard */
