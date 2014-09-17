@@ -18,6 +18,7 @@ require_once("library/core/util-auth.php");
 class akTable 
 {
   public $dom_id;   // DOM element ID
+  public $operation; // What to do to this table...
   public $title;    // Table title
   public $height;   // Number of table rows
   public $width;    // Number of table columns
@@ -40,6 +41,11 @@ class akTable
     $this->cells = array(array());
     $this->column_headers= array("CHeading");
     $this->row_headers= array("RHeading");
+    if ($_GET && $_GET["mode"]) {
+      $this->operation = $_GET["mode"];
+    } else {
+      $this->operation = "display";
+    }
   }
 
   public static function fromScratch($newTitle='Table',$colCount='1',$rowCount='1') 
@@ -54,7 +60,8 @@ class akTable
 
   public static function fromFile($backingPath=null) 
   {
-
+    $instance = new self();
+    return $instance;
   }
 
 
@@ -62,6 +69,7 @@ class akTable
   function emit()
   {
     print $this->title;
+    print $this->operation;
     print '<table>';
     /* Header row */
     print '<tr>';

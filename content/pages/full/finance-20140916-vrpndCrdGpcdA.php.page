@@ -5,8 +5,7 @@ skin_include("finance-pre.php");
 ?>
 <?php
 require_once("library/core/class-table.php");
-$financials = new akTable();
-$financials->load('assets/text/pages/financials.table');
+$financials = akTable::fromFile('/assets/text/pages/finance');
 $financials->emit();
 ?>
 <div class="closure-div"></div>
