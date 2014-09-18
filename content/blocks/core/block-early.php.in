@@ -10,7 +10,7 @@ $extraHeaders = '';
 function finalize_headers($outstuff)
 {
   global $extraHeaders;
-  return str_ireplace('</head>',"<botox></botox>".$extraHeaders."\n".'</head>',$outstuff);
+  return str_ireplace('</head>',$extraHeaders."\n".'</head>',$outstuff);
 }
 
 function finalize_output($outstuff)
@@ -38,7 +38,7 @@ function core_redirect($url)
 }
 
 /* Step 2.2: Add per-page bits in the header */
-function core_addScriptFile($type, $url)
+function core_addScriptFile($url, $type='text/javascript')
 {
   global $extraHeaders;
   $extraHeaders .= '<script type="'.$type.'" src="'.$url.'"></script>'."\n";
