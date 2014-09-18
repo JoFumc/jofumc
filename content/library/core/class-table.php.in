@@ -251,6 +251,16 @@ class akTable
     }
     print "<center>\n"; /* All tables are centered?*/
     print $this->title."\n";
+    /* If logged in as an editor, add link button */
+    if (is_authenticated() && is_editor()) {
+      print '<a ';
+      print '  href="/edit-table.php?file='.$this->backing.'" ';
+      print '  class="story-trail" ';
+      print '  title="Modify this table" ';
+      print '>';
+      skin_img("edit_icon.png","Edit this text","story-trail");
+      print '</a>';
+    }
     print "<table>\n";
     /* Content rows */
     for ($r = 0; $r < $this->height; $r++) {
