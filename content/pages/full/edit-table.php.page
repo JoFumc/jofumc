@@ -2,7 +2,7 @@
 // If the skin has pre-content setup, include it here.
 require_once("library/core/util-skin.php");
 skin_include("edit-table-pre.php");
-core_addScriptFile('text/javascript','/library/core/class-table.js');
+core_addScriptFile('/library/core/class-table.js');
 ?>
 <?php
 require_once("library/core/class-table.php");

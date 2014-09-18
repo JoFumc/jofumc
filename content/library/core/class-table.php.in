@@ -140,7 +140,7 @@ class akTableFile extends akTextFile {
  */
 class akTable 
 {
-  public $dom_id;   // DOM element ID
+  public $dom_tag;   // DOM element tag for this table
   public $operation; // What to do to this table...
   public $title;    // Table title
   public $height;   // Number of table rows
@@ -164,6 +164,10 @@ class akTable
     } else {
       $this->operation = TABLE_OPERATION_DISPLAY;
     }
+    /* Random tag.  Doesn't need to be persistent (e.g. between file loads),
+     * but it needs to be consistent through any single page load.
+     */
+    $this->dom_tag = "editable-table-".rand(10000,99999);
   }
 
   public static function fromScratch($newTitle='Table',$colCount='1',$rowCount='1') 
@@ -232,6 +236,7 @@ class akTable
     /* Bail on any error */
     if (null != $instance->error) return $instance;
 
+
     /* Load from file */
     if (null != $store)  {
       /* Get signature */
@@ -266,7 +271,7 @@ class akTable
       $this->emit();
     }
     /* Authenticated.  Build form around a fixed djeiv */
-    print '<div class="form-div" id="table-form-div">';
+    print '<div class="ak-table-editable" id="'.$this->dom_tag.'">';
     print '<center>';
     print '<table border="1px" id="table-form-layout-outer">'."\n";
     print '<tr><td>'; /* Start form cell */
@@ -299,9 +304,9 @@ class akTable
     print '</form>';
     print '</td>'; /* End form cell */
     print '<td id="table-form-add-column" align="center" valign="middle">';
-    print '<input type="button" value="ADD\nCOLUMN"/>';
+    print '<input type="button" value="Add Column"/>';
     print '</tr><tr><td id="table-form-add-row" align="center" valign="middle">';
-    print '<input type="button" value="ADD\nROW"/>';
+    print '<input type="button" value="Add Row"/>';
     print '</td>';
     print '<td>';
     print '<input type="button" value="Save"/>';
@@ -311,6 +316,10 @@ class akTable
     print '</table>'; /* Outer (layout) table */
     print '</center>';
     print '</div>';
+    /* Run the JS to prescan the editable table */
+    print '<script type="text/javascript">';
+    print 'akTable_scan("'.$this->dom_tag.'");';
+    print '</script>';
 
 
   }

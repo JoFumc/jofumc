@@ -16,9 +16,8 @@ var ak_cookiePrefix='jof-';
 // ////////////////////////////////////////////////////////////////////////
 //
 // NOTE: A document may contain multiple simultaneously editable tables,
-//       with each one wrapped in a <DIV> with class="ak-table-editable".
-//       Display-only tables should not be contained in such a div.
-//
+//       with each one triggering a call to akTable_scan() at the end of
+//       its form div.
 // ////////////////////////////////////////////////////////////////////////
 
 
@@ -34,38 +33,13 @@ var ak_cookiePrefix='jof-';
 // ////////////////////////////////////////////////////////////////////////
 // akTable_scan - Scan the document to load table data.
 //
-// @param groupId -- ID of the group who's been clicked
+// @param domtag -- The tag for a particular table.
 //
-// @return
+// After the code for each editable table's form DIV, add a call to this
+// function to create a JS object for the table.
 //
-// The groupId is the DOM id of the input checkbox that triggered us.
-// The list of form items to show/hide is in a hidden span "<groupId>-storage"
-// We actually show/hide the rows containing each of the component elements.
 //
-function akForm_handleGroupClick(groupId)
+function akTable_scan(domtag)
 {
-    /* Step 1: Prep the various elements */
-    var dmode; // Display mode
-    var kids;
-    var item = document.getElementById(groupId);
-    var store = document.getElementById(groupId + "-storage");
-    if (!item || !store || !store.innerHTML) return;
-
-    /* Step 2: Determine if this is hide/show */
-    if (item.checked) {
-        dmode = 'table-row';
-        item.value = 'true';
-    } else {
-        dmode = 'none';
-        item.value = 'false';
-    }
-
-    /* Step 3: Loop over stored values */
-    kids = store.innerHTML.split(',');
-    try {
-        for (idx in kids) {
-            kid = document.getElementById(kids[idx] + '-row');
-            if (kid) kid.style.display = dmode;
-        }
-    } catch (err) {}
+    var editableTables = document.getElementById(domtag);
 }
