@@ -1,0 +1,71 @@
+// ////////////////////////////////////////////////////////////////////////
+//
+// @file class-table.js
+// 
+// @brief Javascript implementation of basic utilities for live data tables
+//
+// @details 
+// This file implements table-related client-side tools and utilities.
+//
+// ////////////////////////////////////////////////////////////////////////
+
+// All modules have a name to identify themselves.
+var ak_module='class-table';
+var ak_cookiePrefix='jof-';
+
+// ////////////////////////////////////////////////////////////////////////
+//
+// NOTE: A document may contain multiple simultaneously editable tables,
+//       with each one wrapped in a <DIV> with class="ak-table-editable".
+//       Display-only tables should not be contained in such a div.
+//
+// ////////////////////////////////////////////////////////////////////////
+
+
+// ////////////////////////////////////////////////////////////////////////
+// AK_Class_Table -- object class for editable data tables
+//
+// Attributes:
+// title -- Basic table title
+// tag -- tag prefix for DOM ids related to this table
+
+
+
+// ////////////////////////////////////////////////////////////////////////
+// akTable_scan - Scan the document to load table data.
+//
+// @param groupId -- ID of the group who's been clicked
+//
+// @return
+//
+// The groupId is the DOM id of the input checkbox that triggered us.
+// The list of form items to show/hide is in a hidden span "<groupId>-storage"
+// We actually show/hide the rows containing each of the component elements.
+//
+function akForm_handleGroupClick(groupId)
+{
+    /* Step 1: Prep the various elements */
+    var dmode; // Display mode
+    var kids;
+    var item = document.getElementById(groupId);
+    var store = document.getElementById(groupId + "-storage");
+    if (!item || !store || !store.innerHTML) return;
+
+    /* Step 2: Determine if this is hide/show */
+    if (item.checked) {
+        dmode = 'table-row';
+        item.value = 'true';
+    } else {
+        dmode = 'none';
+        item.value = 'false';
+    }
+
+    /* Step 3: Loop over stored values */
+    kids = store.innerHTML.split(',');
+    try {
+        for (idx in kids) {
+            kid = document.getElementById(kids[idx] + '-row');
+            if (kid) kid.style.display = dmode;
+        }
+    } catch (err) {}
+}

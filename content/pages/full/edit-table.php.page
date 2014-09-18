@@ -1,0 +1,20 @@
+<?php
+// If the skin has pre-content setup, include it here.
+require_once("library/core/util-skin.php");
+skin_include("edit-table-pre.php");
+core_addScriptFile('text/javascript','/library/core/class-table.js');
+?>
+<?php
+require_once("library/core/class-table.php");
+$financials = akTable::fromFile($_GET["file"]);
+if (null == $financials) {
+  print 'FMBackwards.\n';
+} else {
+  $financials->emit();
+}
+?>
+<div class="closure-div"></div>
+<?php
+// If the skin has post-content setup, include it here.
+skin_include("edit-table-post.php");
+?>

@@ -52,14 +52,7 @@ class akTableCell
     return $instance;
   }
 
-  /* Emit the HTML for this cell */
-  public function emit() {
-    /* Opening tag */
-    if (null == $this->format_class) {
-      print '<td>';
-    } else {
-      print '<td class="'.$this->format_class.'">';
-    }
+  private function render_display() {
     /* "Simple" formatting */
     $simple_open = "";
     $simple_close = "";
@@ -92,6 +85,27 @@ class akTableCell
     print $simple_open;
     print $this->contents;
     print $simple_close;
+  }
+
+  private function render_edit() {
+    /* For editing, we don't add the formatting inline, but add buttons */
+    print '<input type="text" value="'.$this->contents.'"/>';
+  }
+
+  /* Emit the HTML for this cell */
+  public function emit($mode=TABLE_OPERATION_DISPLAY) {
+    /* Opening tag */
+    if (null == $this->format_class) {
+      print '<td>';
+    } else {
+      print '<td class="'.$this->format_class.'">';
+    }
+
+    switch($mode) {
+      case TABLE_OPERATION_EDIT: $this->render_edit();break;
+      default: $this->render_display(); break;
+    }
+
     print "</td>\n";
   }
 
@@ -240,28 +254,81 @@ class akTable
     return $instance;
   }
 
-
-  /* Method to emit the HTML for a table */
-  function emit()
-  {
-    if ($this->error != null) {
-      /* Something went wrong */
-      print '<br/><b>TABLE ERROR: '.$this->error.'</b><br/>';
-      return;
+  /* 
+   *  Father forgive me for using the outer table for layout instead of
+   *  CSS.
+    */
+  private function emit_edit() {
+    /* Error out if not authenticated */
+    if (!is_authenticated() || !is_editor()) {
+      $this->operation = TABLE_OPERATION_DISPLAY;
+      $this->error = "[[Authentication failure.]]";
+      $this->emit();
     }
+    /* Authenticated.  Build form around a fixed djeiv */
+    print '<div class="form-div" id="table-form-div">';
+    print '<center>';
+    print '<table border="1px" id="table-form-layout-outer">'."\n";
+    print '<tr><td>'; /* Start form cell */
+    print '<form ';
+    print '  id="table-form" ';
+    print '  method="post" ';
+    print '  action="'.$_SERVER['HTTP_REFERER'].'" ';
+    print ">\n";
+      /* Add some hidden fields for passing data */
+    print '<input type="hidden" id="table-form-width" value="'.$this->width.'"/>';
+    print '<input type="hidden" id="table-form-height" value="'.$this->height.'"/>';
+    print '<input type="hidden" id="table-form-backing" value="'.$this->backing.'"/>';
+      /* Create the table, with cells as input areas  */
+
+    print 'Table Title: ';
+    print '<input type="text" id="table-form-title" value="'.$this->title.'"/>';
+    print '<table>';
+    /* Content rows */
+    for ($r = 0; $r < $this->height; $r++) {
+      print "<tr>\n";
+        for ($c =0; $c < $this->width; $c++) {
+          if (null != $this->cells[$c][$r]) {
+            $this->cells[$c][$r]->emit(TABLE_OPERATION_EDIT);
+          }
+        }
+      print "</tr>\n";
+    }
+    print '</table>'; /* Actual editable table */
+
+    print '</form>';
+    print '</td>'; /* End form cell */
+    print '<td id="table-form-add-column" align="center" valign="middle">';
+    print '<input type="button" value="ADD\nCOLUMN"/>';
+    print '</tr><tr><td id="table-form-add-row" align="center" valign="middle">';
+    print '<input type="button" value="ADD\nROW"/>';
+    print '</td>';
+    print '<td>';
+    print '<input type="button" value="Save"/>';
+    print '<input type="button" value="Cancel"/>';
+    print '</td>';
+    print '</tr>';
+    print '</table>'; /* Outer (layout) table */
+    print '</center>';
+    print '</div>';
+
+
+  }
+
+  private function emit_display() {
     print "<center>\n"; /* All tables are centered?*/
     print $this->title."\n";
     /* If logged in as an editor, add link button */
     if (is_authenticated() && is_editor()) {
       print '<a ';
-      print '  href="/edit-table.php?file='.$this->backing.'" ';
+      print '  href="/edit-table.php?mode=edit&file='.$this->backing.'" ';
       print '  class="story-trail" ';
       print '  title="Modify this table" ';
       print '>';
       skin_img("edit_icon.png","Edit this text","story-trail");
       print '</a>';
     }
-    print "<table>\n";
+    print "<table border=1>\n";
     /* Content rows */
     for ($r = 0; $r < $this->height; $r++) {
       print "<tr>\n";
@@ -276,6 +343,22 @@ class akTable
     print "</center>\n";
   }
 
+
+  /* Method to emit the HTML for a table */
+  public function emit()
+  {
+    if ($this->error != null) {
+      /* Something went wrong */
+      print '<br/><b>TABLE ERROR: '.$this->error.'</b><br/>';
+      return;
+    }
+    /* Switch on operation.  If we're not authenticated, fall back to display */
+    switch ($this->operation) {
+      case TABLE_OPERATION_DISPLAY: $this->emit_display(); break;
+      case TABLE_OPERATION_EDIT: $this->emit_edit(); break;
+      case TABLE_OPERATION_CREATE: $this->emit_edit(); break;
+    }
+  }
 
 }
 
