@@ -41,12 +41,12 @@ function core_redirect($url)
 function core_addScriptFile($type, $url)
 {
   global $extraHeaders;
-  $extraHeaders += '<script type="'.$type.'" src="'.$url.'"></script>'."\n";
+  $extraHeaders .= '<script type="'.$type.'" src="'.$url.'"></script>'."\n";
 }
 function core_addScriptCode($type, $codeString)
 {
   global $extraHeaders;
-  $extraHeaders += '<script type="'.$type.'">'."\n".$codeString."\n".'</script>';
+  $extraHeaders .= '<script type="'.$type.'">'."\n".$codeString."\n".'</script>';
 }
 
 /* Step 3: Authentication handling */
