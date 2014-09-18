@@ -1,6 +1,6 @@
 <?php
 // PHP bookshelf page to emit album editor
-core_addScriptFile('text/javascript','/marbo.js');
+core_addScriptFile('/marbo.js');
 ?>
 <?php
 /* Step 0: Includes */
