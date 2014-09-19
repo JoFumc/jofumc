@@ -14,6 +14,8 @@ define("TABLE_OPERATION_DISPLAY","display");
 define("TABLE_OPERATION_EDIT","edit");
   /* Create new table */
 define("TABLE_OPERATION_CREATE","create");
+  /* Save from form data */
+define("TABLE_OPERATION_SAVE","save");
 
   /* TABLE file signature */
 define("TABLE_FILE_SIGNATURE","AKTBL");
@@ -31,6 +33,7 @@ class akTableCell
   public $format_class; /* Which (skin-provided) display class to apply */
   public $format_simple; /* Array of simple formatting tags to apply, regardless of class */
   public $contents; /* Actual contents of cell */
+  public $dom_tag; /* For linking to parent */
 
   public function __construct($contentString=null) {
        /* Initialize to base values */
@@ -43,6 +46,10 @@ class akTableCell
         list($params,$this->contents) = explode('=',$contentString,2);
         list($this->col,$this->row,$this->format_simple,$this->format_class) = explode(',',$params,4);
       }
+  }
+
+  public function setDomTag($dom_tag) {
+    $this->dom_tag = $dom_tag;
   }
 
   public static function createEmptyCell($col, $row) {
@@ -89,7 +96,7 @@ class akTableCell
 
   private function render_edit() {
     /* For editing, we don't add the formatting inline, but add buttons */
-    print '<input type="text" value="'.$this->contents.'"/>';
+    print '<input type="text" name="cell_'.$this->dom_tag.'-'.$this->col.'_'.$this->row.'" value="'.$this->contents.'"/>';
   }
 
   /* Emit the HTML for this cell */
@@ -167,7 +174,7 @@ class akTable
     /* Random tag.  Doesn't need to be persistent (e.g. between file loads),
      * but it needs to be consistent through any single page load.
      */
-    $this->dom_tag = "editable-table-".rand(10000,99999);
+    $this->dom_tag = "t".rand(10000,99999);
   }
 
   public static function fromScratch($newTitle='Table',$colCount='1',$rowCount='1') 
@@ -228,6 +235,12 @@ class akTable
         $instance->cells[1][1] = akTableCell::createEmptyCell(1,1);
         break;
       }
+      case TABLE_OPERATION_SAVE: {
+        $instance->error = "[[I can't really save this.]]";
+        print_r($_GET);
+        print_r($_POST);
+        break;
+      }
       default: {
         $instance->error = "[[Invalid table operation given.]]";
         break;
@@ -251,6 +264,7 @@ class akTable
         /* Here on down should be cells */
         while (null != ($cellInfo = $store->getLine())) {
           $cell = new akTableCell($cellInfo);
+          $cell->setDomTag($instance->dom_tag);
           $instance->cells[$cell->col][$cell->row] = $cell;
         }
       }
@@ -259,9 +273,20 @@ class akTable
     return $instance;
   }
 
+  private function makeInput($type="text",$label,$value) {
+    $ret = '<input ';
+    $ret .= 'type="'.$type.'" ';
+    $ret .= 'name="'.$label.'-'.$this->dom_tag.'" ';
+    $ret .= 'id="'.$label.'-'.$this->dom_tag.'" ';
+    $ret .= 'value="'.$value.'" ';
+    $ret .= '/>'."\n";
+    return $ret;
+
+  }
+
   /* 
-   *  Father forgive me for using the outer table for layout instead of
-   *  CSS.
+   *  Father forgive me for using the outer table instead of
+   *  CSS for layout.
     */
   private function emit_edit() {
     /* Error out if not authenticated */
@@ -272,22 +297,23 @@ class akTable
     }
     /* Authenticated.  Build form around a fixed djeiv */
     print '<div class="ak-table-editable" id="'.$this->dom_tag.'">';
-    print '<center>';
-    print '<table border="1px" id="table-form-layout-outer">'."\n";
-    print '<tr><td>'; /* Start form cell */
     print '<form ';
     print '  id="table-form" ';
     print '  method="post" ';
-    print '  action="'.$_SERVER['HTTP_REFERER'].'" ';
+    print '  action="'.$_SERVER['HTTP_REFERER'].'?mode=save" ';
     print ">\n";
+    print '<center>';
+    print '<table border="1px" id="table-form-layout-outer">'."\n";
+    print '<tr><td>'; /* Start form cell */
       /* Add some hidden fields for passing data */
-    print '<input type="hidden" id="table-form-width" value="'.$this->width.'"/>';
-    print '<input type="hidden" id="table-form-height" value="'.$this->height.'"/>';
-    print '<input type="hidden" id="table-form-backing" value="'.$this->backing.'"/>';
+    print $this->makeInput("hidden","table-meta",$this->dom_tag);
+    print $this->makeInput("hidden","table-form-width",$this->width);
+    print $this->makeInput("hidden","table-form-height",$this->height);
+    print $this->makeInput("hidden","table-form-backing",$this->backing);
       /* Create the table, with cells as input areas  */
 
     print 'Table Title: ';
-    print '<input type="text" id="table-form-title" value="'.$this->title.'"/>';
+    print $this->makeInput("text","table-form-title",$this->title);
     print '<table>';
     /* Content rows */
     for ($r = 0; $r < $this->height; $r++) {
@@ -301,25 +327,22 @@ class akTable
     }
     print '</table>'; /* Actual editable table */
 
-    print '</form>';
-    print '</td>'; /* End form cell */
-    print '<td id="table-form-add-column" align="center" valign="middle">';
-    print '<input type="button" value="Add Column"/>';
-    print '</tr><tr><td id="table-form-add-row" align="center" valign="middle">';
-    print '<input type="button" value="Add Row"/>';
-    print '</td>';
-    print '<td>';
-    print '<input type="button" value="Save"/>';
-    print '<input type="button" value="Cancel"/>';
-    print '</td>';
-    print '</tr>';
-    print '</table>'; /* Outer (layout) table */
-    print '</center>';
-    print '</div>';
+    print '</td>'."\n"; /* End form cell */
+    print '<td id="table-form-add-column" align="center" valign="middle">'."\n";
+    print '<input type="button" value="Add Column"/><br/>'."\n";
+    print '<input type="button" value="Add Row"/><br/>'."\n";
+    print '<input type="submit" value="Save"/>'."\n";
+    print '<input type="button" value="Cancel" onClick=\'window.location="'.$_SERVER["HTTP_REFERER"].'"\' />'."\n";
+    print '</td>'."\n";
+    print '</tr>'."\n";
+    print '</table>'."\n"; /* Outer (layout) table */
+    print '</center>'."\n";
+    print '</form>'."\n";
+    print '</div>'."\n";
     /* Run the JS to prescan the editable table */
-    print '<script type="text/javascript">';
-    print 'akTable_scan("'.$this->dom_tag.'");';
-    print '</script>';
+    print '<script type="text/javascript">'."\n";
+    print 'akTable_scan("editable-table-'.$this->dom_tag.'");'."\n";
+    print '</script>'."\n";
 
 
   }
