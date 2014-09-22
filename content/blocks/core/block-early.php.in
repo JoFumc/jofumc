@@ -7,6 +7,8 @@ $tidyopts = array('indent' => FALSE,
 
 $extraHeaders = '';
 
+$debuglevel=5;
+
 function finalize_headers($outstuff)
 {
   global $extraHeaders;
@@ -46,7 +48,19 @@ function core_addScriptFile($url, $type='text/javascript')
 function core_addScriptCode($type, $codeString)
 {
   global $extraHeaders;
-  $extraHeaders .= '<script type="'.$type.'">'."\n".$codeString."\n".'</script>';
+  $extraHeaders .= '<script type="'.$type.'">'."\n".$codeString."\n".'</script>'."\n";
+}
+function core_addDebugHeader($tag, $string) 
+{
+  global $extraHeaders;
+  $extraHeaders .= '<debug type="header" tag="'.$tag.'" value="'.$string.'."></debug>'."\n";
+}
+
+function dbgmsg($num,$tag,$string) {
+  global $debuglevel;
+  if ($num < $debuglevel) {
+    core_addDebugHeader($tag,$string);
+  }
 }
 
 /* Step 3: Authentication handling */
