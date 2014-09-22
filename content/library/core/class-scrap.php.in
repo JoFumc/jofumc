@@ -97,7 +97,7 @@ class akScrap
         /* For everything else, 'normal' is an icon representing the 
          * file type.
          */
-        print 
+        print "";
       }
     }
   }
