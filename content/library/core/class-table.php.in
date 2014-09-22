@@ -3,6 +3,25 @@
  * class-table.php -- Define a dynamic spreadsheet-style table.
  ***************************************************************************/
 /*
+AKTBL
+# Signature (above), version, and title
+1.0
+Example Table
+# Dimensions
+2
+5
+0,0,bc=User
+1,0,bi=Topic
+0,1=marcos
+0,2=andy
+0,3=glenda
+1,1=75
+1,2=50
+1,3=90
+1,90=2385
+*/
+
+/*
  * INCLUDES
  */
 require_once("library/core/util-auth.php");
@@ -48,6 +67,7 @@ class akTableCell
       }
   }
 
+
   public function setDomTag($dom_tag) {
     $this->dom_tag = $dom_tag;
   }
@@ -57,6 +77,15 @@ class akTableCell
     $instance->col = $col;
     $instance->row = $row;
     return $instance;
+  }
+
+  /* Create a string for saving */
+  public function render_save() {
+    $s = "".$this->col.",".$this->row;
+    if (null != $this->format_simple) $s .= ",".$this->format_simple;
+    if (null != $this->format_class) $s .= ",".$this->format_class;
+    $s .= "=".$this->contents;
+    return $s;
   }
 
   private function render_display() {
@@ -96,7 +125,9 @@ class akTableCell
 
   private function render_edit() {
     /* For editing, we don't add the formatting inline, but add buttons */
-    print '<input type="text" name="cell_'.$this->dom_tag.'-'.$this->col.'_'.$this->row.'" value="'.$this->contents.'"/>';
+    print '<input type="text" name="table-cell-'.$this->dom_tag.'_'.$this->col.'-'.$this->row.'" value="'.$this->contents.'"/>';
+    print '<input type="hidden" name="table-cell-class-'.$this->dom_tag.'_'.$this->col.'-'.$this->row.'" value="'.$this->format_class.'"/>';
+    print '<input type="hidden" name="table-cell-format-'.$this->dom_tag.'_'.$this->col.'-'.$this->row.'" value="'.$this->format_simple.'"/>';
   }
 
   /* Emit the HTML for this cell */
@@ -166,6 +197,7 @@ class akTable
   {
     $this->cells = array(array());
     $this->error = null;
+    $this->title = $newtitle;
     if ($_GET && $_GET["mode"]) {
       $this->operation = $_GET["mode"];
     } else {
@@ -187,6 +219,37 @@ class akTable
     return $instance;
   }
 
+  /* Create the table object from a GET/POST form data */
+    /* There may be multiple forms in a page, but the submission will only
+       be related to one of them.  Look at the action URL ($_GET) to extract
+       the tag of the one we care about.  The rest of the form lookups will 
+       use this info.
+     */
+  public static function fromFormData() {
+    /* Determine the base tag */
+    $tag = $_GET["tag"];
+
+    /* Basic setup */
+    $instance = new self($_POST["table-title-".$tag]);
+    $instance->dom_tag = $tag;
+    $instance->height = 0 + $_POST["table-height-".$tag];
+    $instance->width = 0 + $_POST["table-width-".$tag];
+    $instance->backing = $_POST["table-backing-".$tag];
+
+    /* Find cells */
+    for ($c = 0; $c < $instance->width; $c++) {
+      for ($r = 0; $r < $instance->height; $r++) {
+        $newCell = akTableCell::createEmptyCell($c,$r);
+        $newCell->contents = $_POST["table-cell-".$tag."_".$c."-".$r];
+        $newCell->format_class = $_POST["table-cell-class-".$tag."_".$c."-".$r];
+        $newCell->format_simple = $_POST["table-cell-format-".$tag."_".$c."-".$r];
+        $instance->cells[$c][$r] = $newCell;
+      }
+    }
+
+    return $instance;
+  }
+
   public static function fromFile($backingPath=null) 
   {
     $instance = new self();
@@ -197,6 +260,14 @@ class akTable
           return;
     }
     switch ($instance->operation) {
+      case TABLE_OPERATION_SAVE: {
+        akFile::backup($backingPath);
+        $instance->error = "[[I can't really save this.]]";
+        print_r($_GET);
+        print "Also,";
+        print_r($_POST);
+        break;
+      }
       case TABLE_OPERATION_DISPLAY: {
         if (!is_readable($backingPath)) {
           $instance->error = "[[Can't load table data for path ".$backingPath.", giving up.]]";
@@ -235,12 +306,6 @@ class akTable
         $instance->cells[1][1] = akTableCell::createEmptyCell(1,1);
         break;
       }
-      case TABLE_OPERATION_SAVE: {
-        $instance->error = "[[I can't really save this.]]";
-        print_r($_GET);
-        print_r($_POST);
-        break;
-      }
       default: {
         $instance->error = "[[Invalid table operation given.]]";
         break;
@@ -252,9 +317,11 @@ class akTable
 
     /* Load from file */
     if (null != $store)  {
+      $sig = $store->getLine();
       /* Get signature */
-      if (strcmp("AKTBL",$store->getLine())) {
+      if (strcmp("AKTBL",$sig)) {
         $instance->error = "[[Invalid backing store file format.  Can't read ".$backingPath." so I'm quitting.]]";
+        $instance->error .= "[[Signature should be \"AKTBL\", but was \"".$sig."\"]]";
       } else {
         /* Pull basic metadata */
         $fileVersion = $store->getLine();
@@ -268,9 +335,44 @@ class akTable
           $instance->cells[$cell->col][$cell->row] = $cell;
         }
       }
-      $store->close();
+      unset($store);
     }
     return $instance;
+  }
+
+  /******************************************************
+    * Save a table 
+    */
+  public function save() {
+    if ((null == $this->backing) || (!is_writable($this->backing))) {
+      /* Can't save.  This is an error */
+      $this->error .= '[[Cannot write to backing store ('.$this->backing.'), save FAILURE]]';
+      return;
+    }
+    /* Backup */
+    akFile::backup($this->backing);
+    /* Open for writing */
+    $tableFile = new akTableFile($this->backing,"w+");
+    if (null == $tableFile) {
+      /* Can't save.  This is an error */
+      $this->error .= '[[Cannot open backing store ('.$this->backing.'), for writing! Save failed.]]';
+      return;
+    }
+    
+    /* All good and truncated; rewrite */
+    $tableFile->write("AKTBL\n"); /* Signature */
+    $tableFile->write("1.0\n"); /* Format version */
+    $tableFile->write($this->title."\n"); /* Table title */
+    $tableFile->write("".$this->width."\n"); /* #columns */
+    $tableFile->write("".$this->height."\n"); /* #rows */
+    for ($c = 0 ; $c < $this->width; $c++ ) {
+      for ($r = 0; $r < $this->height; $r++ ) {
+        $cell = $this->cells[$c][$r];
+        if (null != $cell) $tableFile->write($cell->render_save()."\n");
+      }
+    }
+    unset($tableFile);
+    return;
   }
 
   private function makeInput($type="text",$label,$value) {
@@ -296,24 +398,24 @@ class akTable
       $this->emit();
     }
     /* Authenticated.  Build form around a fixed djeiv */
-    print '<div class="ak-table-editable" id="'.$this->dom_tag.'">';
+    print '<div class="ak-table-editable" id="'.$this->dom_tag.'">'."\n";
     print '<form ';
     print '  id="table-form" ';
     print '  method="post" ';
-    print '  action="'.$_SERVER['HTTP_REFERER'].'?mode=save" ';
+    print '  action="'.$_SERVER['HTTP_REFERER'].'?mode=save&tag='.$this->dom_tag.'"';
     print ">\n";
     print '<center>';
-    print '<table border="1px" id="table-form-layout-outer">'."\n";
+    print '<table border="1px" id="table-layout-outer">'."\n";
     print '<tr><td>'; /* Start form cell */
       /* Add some hidden fields for passing data */
     print $this->makeInput("hidden","table-meta",$this->dom_tag);
-    print $this->makeInput("hidden","table-form-width",$this->width);
-    print $this->makeInput("hidden","table-form-height",$this->height);
-    print $this->makeInput("hidden","table-form-backing",$this->backing);
+    print $this->makeInput("hidden","table-width",$this->width);
+    print $this->makeInput("hidden","table-height",$this->height);
+    print $this->makeInput("hidden","table-backing",$this->backing);
       /* Create the table, with cells as input areas  */
 
     print 'Table Title: ';
-    print $this->makeInput("text","table-form-title",$this->title);
+    print $this->makeInput("text","table-title",$this->title);
     print '<table>';
     /* Content rows */
     for ($r = 0; $r < $this->height; $r++) {
@@ -386,9 +488,10 @@ class akTable
     }
     /* Switch on operation.  If we're not authenticated, fall back to display */
     switch ($this->operation) {
-      case TABLE_OPERATION_DISPLAY: $this->emit_display(); break;
       case TABLE_OPERATION_EDIT: $this->emit_edit(); break;
       case TABLE_OPERATION_CREATE: $this->emit_edit(); break;
+      default: $this->emit_display(); break;
+
     }
   }
 
