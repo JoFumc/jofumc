@@ -184,6 +184,7 @@ fresh: clean all
 
 %.php: %.php.in
 	$(SAY_IT) "[ PHP PP ]" $@
+	$(DO_IT)php -l $^ 2>&1 > /dev/null
 	$(DO_IT)cat $< | sed $(SED_SCRUB) |sed $(SED_REINC) $(SED_REMACRO) $(SED_REIF) $(SED_REENDIF) $(SED_REPASTE) | gcc -E $(PROJECT_FLAGS) - | sed $(SED_UNSCRUB) $(PROJECT_SEDFLAGS) | egrep -v '^# |^$$' > $@
 
 %.css: %.css.in
