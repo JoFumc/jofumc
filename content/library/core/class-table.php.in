@@ -398,14 +398,14 @@ class akTable
       $this->emit();
     }
     /* Authenticated.  Build form around a fixed djeiv */
-    print '<div class="ak-table-editable" id="'.$this->dom_tag.'">'."\n";
+    print '<div class="table-editable" id="'.$this->dom_tag.'">'."\n";
     print '<form ';
     print '  id="table-form" ';
     print '  method="post" ';
     print '  action="'.$_SERVER['HTTP_REFERER'].'?mode=save&tag='.$this->dom_tag.'"';
     print ">\n";
     print '<center>';
-    print '<table border="1px" id="table-layout-outer">'."\n";
+    print '<table class="table-area-edit"  id="table-layout-outer">'."\n";
     print '<tr><td>'; /* Start form cell */
       /* Add some hidden fields for passing data */
     print $this->makeInput("hidden","table-meta",$this->dom_tag);
@@ -462,7 +462,7 @@ class akTable
       skin_img("edit_icon.png","Edit this text","story-trail");
       print '</a>';
     }
-    print "<table border=1>\n";
+    print "<table class=\"table-area-display\">\n";
     /* Content rows */
     for ($r = 0; $r < $this->height; $r++) {
       print "<tr>\n";

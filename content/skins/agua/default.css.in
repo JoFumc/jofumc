@@ -795,6 +795,16 @@ min-height:600px;
 }
   /* }}}3 Workarea */
 /* }}}2 Bookshelf */
+/* SECTION 6.6:Various Tables {{{2 */
+  /* Workarea {{{3 */
+.table-area-display {
+border:1px solid AGUA_BG_DARK;
+}
+.table-area-edit {
+border:1px solid AGUA_BG_DARK;
+}
+  /* }}}3 Workarea */
+/* }}}2 Tables */
 /* SECTION 6.7:Notebooks {{{2 */
 .notebook-page-active {
 display:block;
