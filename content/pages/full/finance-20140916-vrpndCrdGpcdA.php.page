@@ -5,12 +5,17 @@ skin_include("finance-pre.php");
 ?>
 <?php
 require_once("library/core/class-table.php");
-$financials = akTable::fromFile('assets/text/pages/finance/current.aktbl');
-if (null == $financials) {
-  print 'FMBackwards.\n';
-} else {
-  $financials->emit();
+switch ($_GET["mode"]) {
+  case TABLE_OPERATION_SAVE:
+    $financials = akTable::fromFormData();
+    $financials->save();
+    break;
+  default:
+    $financials = akTable::fromFile('assets/text/pages/finance/current.aktbl');
+    break;
 }
+$financials->emit();
+
 ?>
 <div class="closure-div"></div>
 <?php
