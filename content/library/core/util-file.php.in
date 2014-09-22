@@ -4,7 +4,6 @@
  ***************************************************************************/
 /* Includes */
 
-
 /***********************************************
  * akFile is a base class for text file operations
  * (config files, simple datastores), that is meant
@@ -13,18 +12,70 @@
  * Mostly, this will have to do with how lines are
  * processed before writing or after reading.
  */
-class akTextFile {
-  private $handle;
+class akFile {
+   protected $handle;
+   protected $access;
 
   /* Base constructor.  Args are same as fopen() */
   public function __construct($path,$access="r") {
-     $this->handle = @fopen($path,$access);
+    $this->access = $access;
+    $this->handle = fopen($path,$access);
   }
 
-  public function close() {
-     @fclose($this->handle);
+  public function __destruct() {
+    @fclose($this->handle);
   }
 
+  public function write($text) {
+    return fwrite($this->handle,$text);
+  }
+
+  /* Create a backup of the given path (by copying and
+   * adding an mtime suffix).  Only the last $maxfiles
+   * backups are kept.
+   */
+  public static function backup($path,$maxfiles=10)
+  {
+    /* If the file doesn't exist, there's nothing to backup */
+    if (!file_exists($path)) {
+      return;
+    }
+
+    /* Get array of existing backups of this 
+       path, and unlink any needed.
+     */
+    $glob_pat = "".$path.".[0-9]*.bak";
+
+    $oldbackups = glob($glob_pat);
+
+    if (FALSE != $oldbackups) {
+      $numbackups = count($oldbackups);
+      if ($numbackups >= $maxfiles) {
+        /* Too many, delete oldest */
+        for ($i=0;$i<($numbackups-$maxfiles);$i++) {
+          unlink($oldbackups[$i]);
+        }
+      }
+    }
+    /* Copy new to backup */
+    $stats = stat($path);
+    $newpath = $path.".".$stats['mtime'].".bak";
+    copy($path,$newpath);
+
+  }
+
+}
+
+
+/***********************************************
+ * akTextFile is a class for text file operations
+ * (config files, simple datastores), that is meant
+ * to be subclassed for specific file types.
+ *
+ * Mostly, this will have to do with how lines are
+ * processed before writing or after reading.
+ */
+class akTextFile extends akFile {
   /* Basic text line processing.  Subclasses should override this
      for comments, whitespace, etc.
 
@@ -39,7 +90,12 @@ class akTextFile {
 
   public function getLine($rawRead=false)
   {
-    if ((FALSE==$this->handle) || (feof($this->handle))) return null;
+    if (FALSE==$this->handle) {
+      return null;
+    }
+    if (feof($this->handle)) {
+      return null;
+    }
 
     while (!feof($this->handle)) {
       /* Get a line */
