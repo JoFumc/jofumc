@@ -191,6 +191,7 @@ class akTable
   public $height;   // Number of table rows
   public $width;    // Number of table columns
   public $backing;  // Backing store (filepath)
+  public $refpage;  // The referrer who started us
   public $editable; // Render as editable? 
   public $cells;    // The array of cells
   public $error;    // Did something go wrong?
@@ -209,6 +210,14 @@ class akTable
       $this->operation = $_GET["mode"];
     } else {
       $this->operation = TABLE_OPERATION_DISPLAY;
+    }
+    /* Special version of the referrer without the query string */
+      /* Pull from args if available. */
+    $ref = $_GET["refpage"];
+    if ((null != $ref) && (4 <= strlen($ref))) {
+      $this->refpage = urldecode($_GET["refpage"]);
+    } else {
+      $this->refpage = $_SERVER['PHP_SELF'];
     }
     /* Random tag.  Doesn't need to be persistent (e.g. between file loads),
      * but it needs to be consistent through any single page load.
@@ -242,6 +251,7 @@ class akTable
     $instance->height = 0 + $_POST["table-height-".$tag];
     $instance->width = 0 + $_POST["table-width-".$tag];
     $instance->backing = $_POST["table-backing-".$tag];
+    $instance->refpage = $_POST["table-refpage-".$tag];
 
     /* Find cells */
     for ($c = 0; $c < $instance->width; $c++) {
@@ -379,6 +389,9 @@ class akTable
       }
     }
     unset($tableFile);
+
+    /* Rewritten! Now redirect to original */
+    core_redirect($this->refpage);
     return;
   }
 
@@ -409,13 +422,14 @@ class akTable
     print '<form ';
     print '  id="table-form" ';
     print '  method="post" ';
-    print '  action="'.$_SERVER['HTTP_REFERER'].'?mode=save&tag='.$this->dom_tag.'"';
+    print '  action="'.$this->refpage.'?mode=save&tag='.$this->dom_tag.'"';
     print ">\n";
       /* Add some hidden fields for passing data */
     print $this->makeInput("hidden","table-meta",$this->dom_tag);
     print $this->makeInput("hidden","table-width",$this->width);
     print $this->makeInput("hidden","table-height",$this->height);
     print $this->makeInput("hidden","table-backing",$this->backing);
+    print $this->makeInput("hidden","table-refpage",$this->refpage);
     print '<center>';
     print '<table class="table-area-edit"  id="table-layout-outer">'."\n";
     print '<tr class="table-area-edit"><td>'; /* Start form cell */
@@ -441,7 +455,7 @@ class akTable
     print '<input type="button" value="Add Column"/><br/>'."\n";
     print '<input type="button" value="Add Row"/><br/>'."\n";
     print '<input type="submit" value="Save"/>'."\n";
-    print '<input type="button" value="Cancel" onClick=\'window.location="'.$_SERVER["HTTP_REFERER"].'"\' />'."\n";
+    print '<input type="button" value="Cancel" onClick=\'window.location="'.$this->refpage.'"\' />'."\n";
     print '</td>'."\n";
     print '</tr>'."\n";
     print '</table>'."\n"; /* Outer (layout) table */
@@ -450,7 +464,7 @@ class akTable
     print '</div>'."\n";
     /* Run the JS to prescan the editable table */
     print '<script type="text/javascript">'."\n";
-    print 'akTable_scan("editable-table-'.$this->dom_tag.'");'."\n";
+    print 'akTable_scan('.$this->dom_tag.');'."\n";
     print '</script>'."\n";
 
 
@@ -462,7 +476,7 @@ class akTable
     /* If logged in as an editor, add link button */
     if (is_authenticated() && is_editor()) {
       print '<a ';
-      print '  href="/edit-table.php?mode=edit&file='.$this->backing.'" ';
+      print '  href="/edit-table.php?mode=edit&file='.$this->backing.'&refpage='.$this->refpage.'" ';
       print '  class="story-trail" ';
       print '  title="Modify this table" ';
       print '>';
