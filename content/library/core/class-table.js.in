@@ -20,6 +20,19 @@ var ak_cookiePrefix='jof-';
 //       its form div.
 // ////////////////////////////////////////////////////////////////////////
 
+// ////////////////////////////////////////////////////////////////////////
+// AK_Table_Cell -- object class for a table cell
+//
+// Attributes:
+// format_class -- If given, an additional format class for skin
+// format -- String of chars to use for formatting info
+// contents -- Basic cell contents
+function AK_Table_Cell(contents, format_simple, format_class)
+{
+    this.contents = contents;
+    this.format_simple = format_simple;
+    this.format_class = format_class;
+}
 
 // ////////////////////////////////////////////////////////////////////////
 // AK_Class_Table -- object class for editable data tables
@@ -27,6 +40,10 @@ var ak_cookiePrefix='jof-';
 // Attributes:
 // title -- Basic table title
 // tag -- tag prefix for DOM ids related to this table
+// width -- Number of columns in this table
+// height -- Number of rows in this table
+// backing -- Path to file backing store
+// rows -- Array of row objects
 
 
 

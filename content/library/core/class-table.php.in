@@ -132,16 +132,23 @@ class akTableCell
 
   /* Emit the HTML for this cell */
   public function emit($mode=TABLE_OPERATION_DISPLAY) {
-    /* Opening tag */
-    if (null == $this->format_class) {
-      print '<td>';
-    } else {
-      print '<td class="'.$this->format_class.'">';
-    }
 
     switch($mode) {
-      case TABLE_OPERATION_EDIT: $this->render_edit();break;
-      default: $this->render_display(); break;
+      case TABLE_OPERATION_EDIT:  {
+        print '<td class="table-area-edit">';
+        $this->render_edit();
+        break;
+      }
+      default:  {
+        /* Opening tag */
+        if (null == $this->format_class) {
+          print '<td>';
+        } else {
+          print '<td class="'.$this->format_class.'">';
+        }
+        $this->render_display(); 
+        break;
+      }
     }
 
     print "</td>\n";
@@ -404,14 +411,14 @@ class akTable
     print '  method="post" ';
     print '  action="'.$_SERVER['HTTP_REFERER'].'?mode=save&tag='.$this->dom_tag.'"';
     print ">\n";
-    print '<center>';
-    print '<table class="table-area-edit"  id="table-layout-outer">'."\n";
-    print '<tr><td>'; /* Start form cell */
       /* Add some hidden fields for passing data */
     print $this->makeInput("hidden","table-meta",$this->dom_tag);
     print $this->makeInput("hidden","table-width",$this->width);
     print $this->makeInput("hidden","table-height",$this->height);
     print $this->makeInput("hidden","table-backing",$this->backing);
+    print '<center>';
+    print '<table class="table-area-edit"  id="table-layout-outer">'."\n";
+    print '<tr class="table-area-edit"><td>'; /* Start form cell */
       /* Create the table, with cells as input areas  */
 
     print 'Table Title: ';
@@ -419,7 +426,7 @@ class akTable
     print '<table>';
     /* Content rows */
     for ($r = 0; $r < $this->height; $r++) {
-      print "<tr>\n";
+      print '<tr id="table-row-'.$this->dom_tag.'_'.$r.'">'."\n";
         for ($c =0; $c < $this->width; $c++) {
           if (null != $this->cells[$c][$r]) {
             $this->cells[$c][$r]->emit(TABLE_OPERATION_EDIT);
