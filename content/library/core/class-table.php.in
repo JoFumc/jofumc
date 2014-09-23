@@ -453,7 +453,7 @@ class akTable
     print '</td>'."\n"; /* End form cell */
     print '<td id="table-form-add-column" align="center" valign="middle">'."\n";
     print '<input type="button" value="Add Column"/><br/>'."\n";
-    print '<input type="button" value="Add Row"/><br/>'."\n";
+    print '<input type="button" value="Add Row" onClick=\'akTable_appendRow("'.$this->dom_tag.'");\'/><br/>'."\n";
     print '<input type="submit" value="Save"/>'."\n";
     print '<input type="button" value="Cancel" onClick=\'window.location="'.$this->refpage.'"\' />'."\n";
     print '</td>'."\n";

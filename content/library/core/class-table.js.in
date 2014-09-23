@@ -44,6 +44,75 @@ function AK_Table_Cell(contents, format_simple, format_class)
 // height -- Number of rows in this table
 // backing -- Path to file backing store
 // rows -- Array of row objects
+//
+// ////////////////////////////////////////////////////////////////////////
+// AK_Table_Label -- object class for table labels, names, IDs, etc.
+//
+// Attributes:
+// prefix -- Basic table nameinfo
+// tag -- tag identifier for DOM ids related to this table
+// column -- Column number
+// row -- Row number
+//
+// For example, "table-meta-t54682_0-0"
+//    prefix = "table-meta"
+//    tag = "t54682"
+//    column = 0
+//    row = 0
+//
+// Prefix is optional.  If only one of column/row is present, it's row.
+function AK_Table_Label(label)
+{
+    this.prefix="";
+    this.tag="";
+    this.column=-1;
+    this.row=-1;
+    // Actually parse the label into the members
+    this.parse(label);
+}
+
+AK_Table_Label.prototype.parse = function(label) {
+    var tmpArray;
+    var textArray;
+    var geomArray;
+
+    try {
+        tmpArray = label.split('_');
+
+        textArray = tmpArray[0].split('-');
+        geomArray = tmpArray[1].split('-');
+
+        this.tag = textArray[textArray.length-1];
+        if (textArray.length > 1) {
+            textArray.length--;
+            this.prefix = textArray[0];
+            for (var i = 1; i < textArray.length; i++) {
+                this.prefix += '-' + textArray[i];
+            }
+        }
+        if (geomArray.length > 1) {
+            this.column = parseInt(geomArray.shift());
+        }
+        this.row = parseInt(geomArray.shift());
+    } catch (err) {}
+}
+
+AK_Table_Label.prototype.toString = function() {
+    var ret = "" ;
+
+    if (this.prefix.length > 0) ret += this.prefix + '-';
+    ret += this.tag;
+    // Only add geometry if we have _something_
+    if (this.row >= 0 ) {
+        ret += "_";
+        if (this.column >= 0)  {
+            ret += this.column + '-';
+        }
+        ret += this.row;
+    }
+
+    return ret;
+}
 
 
 
@@ -59,4 +128,22 @@ function AK_Table_Cell(contents, format_simple, format_class)
 function akTable_scan(domtag)
 {
     var editableTables = document.getElementById(domtag);
+}
+
+
+function akTable_appendRow(domtag)
+{
+    var heightEle;
+    var height;
+    var lbl;
+    /* Step 1: Update the table height */
+    heightEle = document.getElementById("table-height-"+domtag);
+    height = parseInt(heightEle.value); 
+    height++;
+    heightEle.value = "" + height;
+}
+
+function akTable_renumberRow(domtag,pos,newpos) 
+{
+    /* Step 1:  */
 }
