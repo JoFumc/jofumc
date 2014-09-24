@@ -13,12 +13,23 @@
 var ak_module='class-table';
 var ak_cookiePrefix='jof-';
 
+// Define a 'undefined' geometry marker
+var AK_TABLE_UNDEFINED = -1;
+
 // ////////////////////////////////////////////////////////////////////////
 //
 // NOTE: A document may contain multiple simultaneously editable tables,
 //       with each one triggering a call to akTable_scan() at the end of
 //       its form div.
 // ////////////////////////////////////////////////////////////////////////
+
+function AK_Table_Exception(msg) {
+    this.tag="AK_Table_Exception";
+    this.msg = msg;
+}
+AK_Table_Exception.prototype.toString = function () {
+    return this.tag + ":" + this.msg;
+}
 
 // ////////////////////////////////////////////////////////////////////////
 // AK_Table_Cell -- object class for a table cell
@@ -35,17 +46,6 @@ function AK_Table_Cell(contents, format_simple, format_class)
 }
 
 // ////////////////////////////////////////////////////////////////////////
-// AK_Class_Table -- object class for editable data tables
-//
-// Attributes:
-// title -- Basic table title
-// tag -- tag prefix for DOM ids related to this table
-// width -- Number of columns in this table
-// height -- Number of rows in this table
-// backing -- Path to file backing store
-// rows -- Array of row objects
-//
-// ////////////////////////////////////////////////////////////////////////
 // AK_Table_Label -- object class for table labels, names, IDs, etc.
 //
 // Attributes:
@@ -54,21 +54,34 @@ function AK_Table_Cell(contents, format_simple, format_class)
 // column -- Column number
 // row -- Row number
 //
+// If only one argument is given, try to parse it out.
+//
 // For example, "table-meta-t54682_0-0"
 //    prefix = "table-meta"
 //    tag = "t54682"
 //    column = 0
 //    row = 0
 //
-// Prefix is optional.  If only one of column/row is present, it's row.
-function AK_Table_Label(label)
+function AK_Table_Label(prefix,tag,column,row)
 {
-    this.prefix="";
-    this.tag="";
-    this.column=-1;
-    this.row=-1;
-    // Actually parse the label into the members
-    this.parse(label);
+    switch (AK_Table_Label.arguments.length) {
+        case 1:  {
+            // First arg is maybe the whole label?
+            this.parse(prefix); 
+            break;
+        }
+        case 4:  {
+            // All args specified 
+            this.prefix="" + prefix;
+            this.tag="" + tag;
+            this.column=column;
+            this.row=row;
+            break;
+        }
+        default: {
+            throw new AK_Table_Exception("Invalid label constructor.");
+        }
+    }
 }
 
 AK_Table_Label.prototype.parse = function(label) {
@@ -114,6 +127,22 @@ AK_Table_Label.prototype.toString = function() {
     return ret;
 }
 
+AK_Table_Label.prototype.geomSet = function (col,row) {
+    if (col != AK_TABLE_UNDEFINED) this.col = col;
+    if (row != AK_TABLE_UNDEFINED) this.row = row;
+    return this;
+}
+
+AK_Table_Label.prototype.geomMatch  = function(col,row) {
+    if ((col != AK_TABLE_UNDEFINED) && (col != this.column)) {
+        return false;
+    }
+    if ((row != AK_TABLE_UNDEFINED) && (row != this.row)) {
+        return false;
+    }
+    return true;
+}
+
 
 
 // ////////////////////////////////////////////////////////////////////////
@@ -131,19 +160,150 @@ function akTable_scan(domtag)
 }
 
 
-function akTable_appendRow(domtag)
-{
+function akTable_appendRow(domtag) {
     var heightEle;
     var height;
-    var lbl;
-    /* Step 1: Update the table height */
-    heightEle = document.getElementById("table-height-"+domtag);
-    height = parseInt(heightEle.value); 
-    height++;
-    heightEle.value = "" + height;
+
+    try {
+        // Get current height
+        heightEle = document.getElementById("table-height-"+domtag);
+        height = parseInt(heightEle.value); 
+        // Rows are zero-based, so current height is new slot
+        akTable_insertRow(domtag,height);
+    } catch (err) {}
 }
 
+function akTable_insertRow(domtag,newpos)
+{
+    var oldRowEle;
+    var newRowEle;
+    var heightEle;
+    var height;
+    var oldmax;
+    var lbl;
+
+    // Step 1: Clone first row
+    oldRowEle = document.getElementById("table-row-" + domtag + "_0");
+    newRowEle = oldRowEle.cloneNode(true);
+
+    // Step 2: get current info 
+    heightEle = document.getElementById("table-height-"+domtag);
+    height = parseInt(heightEle.value); 
+    if (newpos > height) {
+        // We can place the new row anywehere from zero to one
+        // after the current end.  Any more than that is 
+        // not allowed.
+        throw new AK_Table_Exception("Bad row position for insert.");
+    }
+
+    // Step 3: Shift any following rows down
+    for (var i = height-1; i >= newpos ; i--) {
+        akTable_renumberRow(domtag,i,i+1);
+    }
+
+    // Step 4: Update metadata 
+    height++;
+    heightEle.value = "" + height;
+
+    // Step 5: Clear and prep new row
+    akTable_renumberEle(newRowEle,domtag,
+                        AK_TABLE_UNDEFINED,AK_TABLE_UNDEFINED,
+                        AK_TABLE_UNDEFINED,newpos); 
+
+    // Step 6: Add row to table
+    if (newpos >= (height-1)) {
+        // Insert after everybody
+        oldRowEle.parentNode.appendChild(newRowEle);
+    } else {
+        var beforeSlot = 1 + newpos;
+        var beforeEle;
+
+        // Insert before the one we just moved up...
+        beforeEle = document.getElementById("table-row-" + domtag + "_" + beforeSlot);
+        oldRowEle.parentNode.insertBefore(newRowEle,beforeEle);
+    }
+}
+
+// ////////////////////////////////////////////////////////////////////////
+// akTable_renumberEle - Renumber geometry for an element and all child 
+// elements (recursive)
+//
+// @param ele -- The element to update
+// @param tag -- The tag associated with the element's table (sanity check)
+// @param oldcol -- The old column number
+// @param newcol -- The new column number
+// @param oldrow -- The old row number
+// @param newrow -- The new row number
+//
+// We'll examine the 'name' and 'id' attributes.  If they parse successfully
+// and match the oldcol, oldrow values, we'll apply the new ones.
+// When testing for a match, AK_TABLE_UNDEFINED matches all values.
+// When applying new values, AK_TABLE_UNDEFINED means to not update that element.
+// (see AK_Table_Label.geomMatch() for the code.)
+function akTable_renumberEle(ele,tag,oldcol,oldrow,newcol,newrow)
+{
+    var lbl;
+    var kid;
+
+    /* Step 1: attrs of the current element */
+    try {
+        lbl = new AK_Table_Label(ele.name);
+        if ((lbl.tag == tag) && (lbl.geomMatch(oldcol,oldrow))) {
+            lbl.geomSet(newcol,newrow);
+            ele.name = lbl.toString();
+        }
+    } catch (err) {} 
+    try {
+        lbl = new AK_Table_Label(ele.id);
+        if ((lbl.tag == tag) && (lbl.geomMatch(oldcol,oldrow))) {
+            lbl.geomSet(newcol,newrow);
+            ele.id = lbl.toString();
+        }
+    } catch (err) {}
+
+    /* Step 2: Recurse */
+    try {
+        if (false == ele.hasChildNodes()) return;
+    } catch (err) {}
+
+    for (var i=0; i < ele.childNodes.length; i++) {
+        try {
+            kid = ele.childNodes[i];
+            if (kid.nodeType == 1) { // Only renumber elements
+                akTable_renumberEle(kid,tag,oldcol,oldrow,newcol,newrow);
+            }
+        } catch (err) {}
+    }
+    return;
+}
+
+// ////////////////////////////////////////////////////////////////////////
+// akTable_renumberRow - Renumber all elements in an editable table row 
+//
+// @param domtag -- The tag identifying a particular table.
+// @param pos -- Which row to renumber
+// @param newpos -- New row number
+//
+//
 function akTable_renumberRow(domtag,pos,newpos) 
 {
-    /* Step 1:  */
+    var rowLabel;
+    var rowTxt;
+    var rowEle;
+    var kidEle;
+
+    /* Step 1: find the containing row element */
+    rowLabel = new AK_Table_Label("table-row",domtag,AK_TABLE_UNDEFINED,pos);
+    rowTxt = rowLabel.toString();
+    rowEle = document.getElementById(rowTxt);
+    if (null == rowEle) {
+        // Not found?  Bail out.
+        throw new AK_Table_Exception("Can't renumber rows I can't find.");
+    }
+
+    /* Step 2: Update element (recurses) */
+    akTable_renumberEle(rowEle,domtag,
+                        AK_TABLE_UNDEFINED,pos,  // Leave column undefined
+                        AK_TABLE_UNDEFINED,newpos); // Don't update column
+
 }

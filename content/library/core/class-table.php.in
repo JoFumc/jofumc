@@ -310,17 +310,34 @@ class akTable
         break;
       }
       case TABLE_OPERATION_CREATE: {
-        /* The file doesn't have to exist, but we need to fake some data if it isn't there */
-          /* Default is an empty 2x2 table */
-        $instance->backing = $backingPath;
-        $instance->title = 'Table';
-        $instance->width = 2;
-        $instance->height = 2;
-        $instance->cells = array(array());
-        $instance->cells[0][0] = akTableCell::createEmptyCell(0,0);
-        $instance->cells[0][1] = akTableCell::createEmptyCell(0,1);
-        $instance->cells[1][0] = akTableCell::createEmptyCell(1,0);
-        $instance->cells[1][1] = akTableCell::createEmptyCell(1,1);
+        if (!is_authenticated() || !is_editor()) {
+          /* Want to make a table? */
+          $instance->error = "[[Not authorized to create a table, my friend.]]";
+        } else {
+          /* Authorized.  Create it? */
+          $instance->backing = $backingPath;
+          /* If the file exists, this devolves into a plain display;
+             if not, create a small dummy table and save it (and _then_
+             devolve into a plain display!) 
+           */
+          if (!file_exists($backingPath)) {
+            /* Doesn't exist yet.  Create and save a temp table */
+            $instance->title = 'Table';
+            $instance->width = 2;
+            $instance->height = 2;
+            $instance->cells = array(array());
+            $instance->cells[0][0] = akTableCell::createEmptyCell(0,0);
+            $instance->cells[0][1] = akTableCell::createEmptyCell(0,1);
+            $instance->cells[1][0] = akTableCell::createEmptyCell(1,0);
+            $instance->cells[1][1] = akTableCell::createEmptyCell(1,1);
+
+            $instance->save(false);
+          }
+          /* Switch mode */
+          $instance->operation = TABLE_OPERATION_DISPLAY;
+          /* Open, but don't parse yet */
+          $store = new akTableFile($backingPath);
+        }
         break;
       }
       default: {
@@ -360,8 +377,8 @@ class akTable
   /******************************************************
     * Save a table 
     */
-  public function save() {
-    if ((null == $this->backing) || (!is_writable($this->backing))) {
+  public function save($do_redirect=true) {
+    if ((null == $this->backing) || (file_exists($this->backing) && !is_writable($this->backing))) {
       /* Can't save.  This is an error */
       $this->error .= '[[Cannot write to backing store ('.$this->backing.'), save FAILURE]]';
       return;
@@ -391,7 +408,9 @@ class akTable
     unset($tableFile);
 
     /* Rewritten! Now redirect to original */
-    core_redirect($this->refpage);
+    if ($do_redirect) {
+      core_redirect($this->refpage);
+    }
     return;
   }
 
@@ -437,7 +456,7 @@ class akTable
 
     print 'Table Title: ';
     print $this->makeInput("text","table-title",$this->title);
-    print '<table>';
+    print '<table id="table-'.$this->dom_tag.'">';
     /* Content rows */
     for ($r = 0; $r < $this->height; $r++) {
       print '<tr id="table-row-'.$this->dom_tag.'_'.$r.'">'."\n";
