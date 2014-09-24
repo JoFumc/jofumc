@@ -4,7 +4,13 @@ require_once("library/core/util-skin.php");
 skin_include("finance-pre.php");
 ?>
 <?php
+require_once("library/core/class-story.php");
 require_once("library/core/class-table.php");
+// Create the header for our story
+$fs = new akStory();
+$fs->createSimpleChunk(STORY_CHUNK_HEADLINE,"JOFUMC Financial Reports:");
+$fs->createSimpleChunk(STORY_CHUNK_SECTION,"Profit and Loss");
+// Load the table with the current data
 switch ($_GET["mode"]) {
   case TABLE_OPERATION_SAVE:
     $financials = akTable::fromFormData();
@@ -14,7 +20,8 @@ switch ($_GET["mode"]) {
     $financials = akTable::fromFile('assets/text/pages/finance/current.aktbl');
     break;
 }
-$financials->emit();
+$fs->createSimpleChunk(STORY_CHUNK_OBJECT,"current-financials",$financials);
+$fs->emit();
 
 ?>
 <div class="closure-div"></div>
