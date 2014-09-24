@@ -135,7 +135,7 @@ class akTableCell
 
     switch($mode) {
       case TABLE_OPERATION_EDIT:  {
-        print '<td class="table-area-edit">';
+        print '<td>';
         $this->render_edit();
         break;
       }
@@ -414,12 +414,15 @@ class akTable
     return;
   }
 
-  private function makeInput($type="text",$label,$value) {
+  private function makeInput($type="text",$label,$value,$extra=null) {
     $ret = '<input ';
     $ret .= 'type="'.$type.'" ';
     $ret .= 'name="'.$label.'-'.$this->dom_tag.'" ';
     $ret .= 'id="'.$label.'-'.$this->dom_tag.'" ';
     $ret .= 'value="'.$value.'" ';
+    if (null != $extra) {
+      $ret .= ' '.$extra.' ';
+    }
     $ret .= '/>'."\n";
     return $ret;
 
@@ -456,23 +459,30 @@ class akTable
 
     print 'Table Title: ';
     print $this->makeInput("text","table-title",$this->title);
-    print '<table id="table-'.$this->dom_tag.'">';
+    print '<table id="table-'.$this->dom_tag.'">'."\n";
     /* Content rows */
     for ($r = 0; $r < $this->height; $r++) {
-      print '<tr id="table-row-'.$this->dom_tag.'_'.$r.'">'."\n";
+      print '<tr class="table-area-edit" id="table-row-'.$this->dom_tag.'_'.$r.'">'."\n";
         for ($c =0; $c < $this->width; $c++) {
           if (null != $this->cells[$c][$r]) {
             $this->cells[$c][$r]->emit(TABLE_OPERATION_EDIT);
           }
         }
+        print '<td>';
+        print $this->makeInput("button","table-insrow","+^",'onclick="akTable_insRow(this);"');
+        print $this->makeInput("button","table-addrow","+v",'onclick="akTable_addRow(this);"');
+        print $this->makeInput("button","table-delrow","-",'onclick="akTable_delRow(this);"');
+        print '</td>';
       print "</tr>\n";
     }
     print '</table>'; /* Actual editable table */
 
     print '</td>'."\n"; /* End form cell */
     print '<td id="table-form-add-column" align="center" valign="middle">'."\n";
+    /*
     print '<input type="button" value="Add Column"/><br/>'."\n";
     print '<input type="button" value="Add Row" onClick=\'akTable_appendRow("'.$this->dom_tag.'");\'/><br/>'."\n";
+    */
     print '<input type="submit" value="Save"/>'."\n";
     print '<input type="button" value="Cancel" onClick=\'window.location="'.$this->refpage.'"\' />'."\n";
     print '</td>'."\n";

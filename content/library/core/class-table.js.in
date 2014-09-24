@@ -159,6 +159,48 @@ function akTable_scan(domtag)
     var editableTables = document.getElementById(domtag);
 }
 
+// Insert row before current
+function akTable_insRow(buttonEle) {
+    var rowEle = buttonEle.parentNode.parentNode;
+    var rowLabel = new AK_Table_Label(rowEle.id);
+
+    akTable_insertRow(rowLabel.tag,rowLabel.row);
+}
+
+// Insert row after current
+function akTable_addRow(buttonEle) {
+    var rowEle = buttonEle.parentNode.parentNode;
+    var rowLabel = new AK_Table_Label(rowEle.id);
+
+    akTable_insertRow(rowLabel.tag,rowLabel.row +1);
+}
+
+function akTable_delRow(buttonEle) {
+    var rowEle = buttonEle.parentNode.parentNode;
+    var rowLabel = new AK_Table_Label(rowEle.id);
+    var parentEle;
+    var heightEle;
+    var height;
+
+    /* Get overall height */
+    heightEle = document.getElementById("table-height-"+rowLabel.tag);
+
+    /* Renumber (down) any rows following... */
+    height = parseInt(heightEle.value);
+    for (var i = rowLabel.row+1; i < height ; i++) {
+        akTable_renumberRow(rowLabel.tag,i,i-1);
+    }
+
+    /* Delete this child */
+    parentEle = rowEle.parentNode;
+    parentEle.removeChild(rowEle);
+
+    /* Update metadata */
+    height--;
+    heightEle.value = "" + height;
+
+}
+
 
 function akTable_appendRow(domtag) {
     var heightEle;
